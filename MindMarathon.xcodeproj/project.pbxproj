@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
+		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
+		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
+		D826CF132A10C69200263CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D826CF122A10C69200263CEB /* Assets.xcassets */; };
+		D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D826CF142A10C69200263CEB /* LaunchScreen.storyboard */; };
+		D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF1E2A10C6DA00263CEB /* Extension.swift */; };
+		D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF252A10C7DA00263CEB /* MenuViewController.swift */; };
+		D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF262A10C7DA00263CEB /* MenuViewController.xib */; };
+		D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF292A10CAA000263CEB /* BullCowViewController.swift */; };
+		D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */; };
+		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
+		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
+		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D826CF092A10C69000263CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D826CF0B2A10C69000263CEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D826CF122A10C69200263CEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D826CF152A10C69200263CEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D826CF172A10C69200263CEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D826CF1E2A10C6DA00263CEB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		D826CF252A10C7DA00263CEB /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		D826CF262A10C7DA00263CEB /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		D826CF292A10CAA000263CEB /* BullCowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewController.swift; sourceTree = "<group>"; };
+		D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowViewController.xib; sourceTree = "<group>"; };
+		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
+		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D826CF032A10C69000263CEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85A08474662A9AD57EA6C5D7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */,
+				5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D826CEFD2A10C69000263CEB = {
+			isa = PBXGroup;
+			children = (
+				D826CF2D2A10F84300263CEB /* Podfile */,
+				D826CF082A10C69000263CEB /* MindMarathon */,
+				D826CF072A10C69000263CEB /* Products */,
+				85A08474662A9AD57EA6C5D7 /* Pods */,
+				E003456EF9BDDAF33D197310 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D826CF072A10C69000263CEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF062A10C69000263CEB /* MindMarathon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D826CF082A10C69000263CEB /* MindMarathon */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF242A10C7A600263CEB /* Controllers */,
+				D826CF2F2A11281300263CEB /* ViewModel */,
+				D826CF202A10C71700263CEB /* View */,
+				D826CF1D2A10C6B500263CEB /* Extensions */,
+				D826CF092A10C69000263CEB /* AppDelegate.swift */,
+				D826CF0B2A10C69000263CEB /* SceneDelegate.swift */,
+				D826CF122A10C69200263CEB /* Assets.xcassets */,
+				D826CF172A10C69200263CEB /* Info.plist */,
+			);
+			path = MindMarathon;
+			sourceTree = "<group>";
+		};
+		D826CF1D2A10C6B500263CEB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF1E2A10C6DA00263CEB /* Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D826CF202A10C71700263CEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF232A10C73B00263CEB /* Cells */,
+				D826CF222A10C73100263CEB /* Xibs */,
+				D826CF212A10C71F00263CEB /* Storyboards */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D826CF212A10C71F00263CEB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF142A10C69200263CEB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D826CF222A10C73100263CEB /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF262A10C7DA00263CEB /* MenuViewController.xib */,
+				D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		D826CF232A10C73B00263CEB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D826CF242A10C7A600263CEB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
+				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D826CF2F2A11281300263CEB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF302A11282F00263CEB /* BullCowViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E003456EF9BDDAF33D197310 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D826CF052A10C69000263CEB /* MindMarathon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D826CF1A2A10C69200263CEB /* Build configuration list for PBXNativeTarget "MindMarathon" */;
+			buildPhases = (
+				A6B3E98E1476DADBB3BF43DA /* [CP] Check Pods Manifest.lock */,
+				D826CF022A10C69000263CEB /* Sources */,
+				D826CF032A10C69000263CEB /* Frameworks */,
+				D826CF042A10C69000263CEB /* Resources */,
+				A87028C03F1BF83348252077 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MindMarathon;
+			productName = MindMarathon;
+			productReference = D826CF062A10C69000263CEB /* MindMarathon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D826CEFE2A10C69000263CEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D826CF052A10C69000263CEB = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = D826CF012A10C69000263CEB /* Build configuration list for PBXProject "MindMarathon" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D826CEFD2A10C69000263CEB;
+			productRefGroup = D826CF072A10C69000263CEB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D826CF052A10C69000263CEB /* MindMarathon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D826CF042A10C69000263CEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
+				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
+				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
+				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
+				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A6B3E98E1476DADBB3BF43DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MindMarathon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A87028C03F1BF83348252077 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MindMarathon/Pods-MindMarathon-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MindMarathon/Pods-MindMarathon-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MindMarathon/Pods-MindMarathon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D826CF022A10C69000263CEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
+				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
+				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
+				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
+				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
+				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D826CF142A10C69200263CEB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D826CF152A10C69200263CEB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D826CF182A10C69200263CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D826CF192A10C69200263CEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D826CF1B2A10C69200263CEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 285RFT4HL7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindMarathon/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexshamrey.MindMarathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D826CF1C2A10C69200263CEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 285RFT4HL7;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MindMarathon/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = alexshamrey.MindMarathon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D826CF012A10C69000263CEB /* Build configuration list for PBXProject "MindMarathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D826CF182A10C69200263CEB /* Debug */,
+				D826CF192A10C69200263CEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D826CF1A2A10C69200263CEB /* Build configuration list for PBXNativeTarget "MindMarathon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D826CF1B2A10C69200263CEB /* Debug */,
+				D826CF1C2A10C69200263CEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D826CEFE2A10C69000263CEB /* Project object */;
+}
