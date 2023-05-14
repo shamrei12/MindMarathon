@@ -1,6 +1,0 @@
-framework module Pods_MindMarathon {
-  umbrella header "Pods-MindMarathon-umbrella.h"
-
-  export *
-  module * { export * }
-}
