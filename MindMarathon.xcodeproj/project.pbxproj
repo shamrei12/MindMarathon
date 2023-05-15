@@ -19,6 +19,10 @@
 		D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */; };
 		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
 		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
+		D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF332A115A2400263CEB /* ResultAlertView.xib */; };
+		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
+		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
+		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowViewController.xib; sourceTree = "<group>"; };
 		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
+		D826CF332A115A2400263CEB /* ResultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
+		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
+		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +91,8 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
+				D882215F2A12A81800531EED /* Manager */,
+				D826CF372A115F1500263CEB /* Protocols */,
 				D826CF242A10C7A600263CEB /* Controllers */,
 				D826CF2F2A11281300263CEB /* ViewModel */,
 				D826CF202A10C71700263CEB /* View */,
@@ -106,6 +116,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
 				D826CF222A10C73100263CEB /* Xibs */,
 				D826CF212A10C71F00263CEB /* Storyboards */,
@@ -152,6 +163,31 @@
 				D826CF302A11282F00263CEB /* BullCowViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D826CF322A1157B900263CEB /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF332A115A2400263CEB /* ResultAlertView.xib */,
+				D826CF352A115A3300263CEB /* ResultAlertView.swift */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		D826CF372A115F1500263CEB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF382A11600300263CEB /* Protocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D882215F2A12A81800531EED /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D88221602A12A83800531EED /* TimeManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
@@ -222,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
@@ -284,7 +321,10 @@
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
+				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
+				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
+				D826CF392A11600300263CEB /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

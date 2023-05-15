@@ -15,3 +15,15 @@ extension UIViewController {
         return nib.instantiate(withOwner: self, options: nil)[0] as! Self
     }
 }
+
+extension UIView {
+    static func loadFromNib() -> ResultAlertView {
+        let nibName = String(describing: self)
+        let nib = UINib(nibName: nibName, bundle: nil)
+        guard let view = nib.instantiate(withOwner: self, options: nil).first as? ResultAlertView else {
+            fatalError("Could not load view from nib file.")
+        }
+        return view
+    }
+
+}

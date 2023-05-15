@@ -15,6 +15,19 @@ class BullCowViewModel {
         return instance
     }()
     
+    
+    func selectMaxLenght(maxLenght: String) -> String {
+        var newLenght: Int = Int(maxLenght)!
+        
+        if newLenght == 6 {
+            newLenght = 2
+        } else {
+            newLenght += 1
+        }
+        return String(newLenght)
+    }
+    
+    
     func makeNumber(maxLenght: Int) -> [Int] { //создание числа для игры
         var result: [Int] = []
         while result.count < maxLenght {
@@ -23,6 +36,7 @@ class BullCowViewModel {
                 result.append(randomDiggit)
             }
         }
+        print(result)
         return result
     }
     

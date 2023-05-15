@@ -28,18 +28,15 @@
                                         <color key="tintColor" systemColor="labelColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="4"/>
+                                        <connections>
+                                            <action selector="selectMaxLenghtTapped:" destination="fXa-tb-BoH" eventType="touchUpInside" id="TX6-Nu-xC2"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3V-ra-e0Z">
                                         <rect key="frame" x="107.66666666666669" y="0.0" width="72.333333333333314" height="34.333333333333336"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain">
-                                            <imageReference key="image" image="play.fill" catalog="system" renderingMode="hierarchical-single">
-                                                <hierarchicalColors>
-                                                    <color systemColor="labelColor"/>
-                                                    <color systemColor="secondaryLabelColor"/>
-                                                    <color systemColor="tertiaryLabelColor"/>
-                                                </hierarchicalColors>
-                                            </imageReference>
+                                            <imageReference key="image" image="play.fill" catalog="system" symbolScale="large" renderingMode="template"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="startGameButton:" destination="fXa-tb-BoH" eventType="touchUpInside" id="Jei-3K-q1k"/>
@@ -279,7 +276,9 @@
             </view>
             <connections>
                 <outlet property="dashBoardTextView" destination="dvn-py-NeM" id="5wS-Cv-4EZ"/>
+                <outlet property="diggitsPudView" destination="c6H-nX-Ve1" id="Dxb-TY-X3a"/>
                 <outlet property="maxLenghtButton" destination="M7B-nC-Ak2" id="go6-M6-49r"/>
+                <outlet property="timerLabel" destination="z28-mj-4HM" id="HsS-H3-QDe"/>
                 <outlet property="userDiggitLabel" destination="O25-Z3-D7v" id="4e8-yI-xoN"/>
             </connections>
             <point key="canvasLocation" x="194.6564885496183" y="-19.014084507042256"/>
