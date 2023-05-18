@@ -23,6 +23,8 @@
 		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
 		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
+		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
+		D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88221672A16042B00531EED /* ListGamesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
 		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
+		D88221672A16042B00531EED /* ListGamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGamesViewController.xib; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +141,7 @@
 			children = (
 				D826CF262A10C7DA00263CEB /* MenuViewController.xib */,
 				D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */,
+				D88221672A16042B00531EED /* ListGamesViewController.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 			children = (
 				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
+				D88221662A16042B00531EED /* ListGamesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +266,7 @@
 			files = (
 				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
+				D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
 				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
@@ -316,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,

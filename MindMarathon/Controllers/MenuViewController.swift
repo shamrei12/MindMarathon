@@ -31,11 +31,11 @@ class MenuViewController: UIViewController {
         view.addSubview(labelSecond)
         
         let startMarathon = UIButton()
-        startMarathon.setTitle("Начать марафон", for: .normal)
+        startMarathon.setTitle("Список игр", for: .normal)
         startMarathon.tintColor = UIColor.label
         startMarathon.backgroundColor = UIColor.tertiaryLabel
         startMarathon.layer.cornerRadius = 10
-//        startMarathon.addTarget(self, action: #selector(startMarathonTapped), for: .touchUpInside)
+        startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
         
         let bullCowGame = UIButton()
@@ -68,6 +68,14 @@ class MenuViewController: UIViewController {
         }
     }
     
+    
+    @objc
+    func listGameTapped() {
+        let listGame = ListGamesViewController.instantiate()
+        let navigationController = UINavigationController(rootViewController: listGame)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
     @objc
     func bullCowGameTapped () {
         let bullCowGame = BullCowViewController.instantiate()

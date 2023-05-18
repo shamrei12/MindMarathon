@@ -25,7 +25,7 @@ class ResultAlertView: UIView {
     }
     
     func createUI() {
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = UIColor.systemBackground
         firstLabel.text = "Конец игры"
         firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         firstLabel.numberOfLines = 0

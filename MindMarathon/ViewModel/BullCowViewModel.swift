@@ -31,7 +31,7 @@ class BullCowViewModel {
     func makeNumber(maxLenght: Int) -> [Int] { //создание числа для игры
         var result: [Int] = []
         while result.count < maxLenght {
-            var randomDiggit = Int.random(in: 0...9)
+            let randomDiggit = Int.random(in: 0...9)
             if !result.contains(randomDiggit) {
                 result.append(randomDiggit)
             }
