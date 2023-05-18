@@ -39,7 +39,7 @@ class MenuViewController: UIViewController {
         view.addSubview(startMarathon)
         
         let bullCowGame = UIButton()
-        bullCowGame.setTitle("Быки и Коровы", for: .normal)
+        bullCowGame.setTitle("Случайная игра", for: .normal)
         bullCowGame.tintColor = UIColor.label
         bullCowGame.backgroundColor = UIColor.tertiaryLabel
         bullCowGame.layer.cornerRadius = 10
@@ -52,7 +52,7 @@ class MenuViewController: UIViewController {
         }
         
         labelSecond.snp.makeConstraints { maker in
-            maker.bottom.equalTo(labelFirst).inset(60)
+            maker.top.equalTo(labelFirst).inset(60)
             maker.left.right.equalToSuperview().inset(100)
         }
         startMarathon.snp.makeConstraints { maker in
@@ -68,7 +68,6 @@ class MenuViewController: UIViewController {
         }
     }
     
-    
     @objc
     func listGameTapped() {
         let listGame = ListGamesViewController.instantiate()
@@ -78,9 +77,6 @@ class MenuViewController: UIViewController {
     }
     @objc
     func bullCowGameTapped () {
-        let bullCowGame = BullCowViewController.instantiate()
-        let navigationController = UINavigationController(rootViewController: bullCowGame)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        
     }
 }

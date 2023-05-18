@@ -80,7 +80,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         countButton.tintColor = UIColor.label
         countButton.backgroundColor = UIColor.tertiaryLabel
         countButton.layer.cornerRadius = 10
-        countButton.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         view.addSubview(countButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -223,7 +222,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     @objc func diggitsTapped(_ sender: UIButton) {
-        if startGame {
+        if startGame && continuePlaying {
             if userDiggitLabel.text!.count < maxLenght {
                 userDiggitLabel.text! += "\(sender.tag)"
             }
