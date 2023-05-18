@@ -30,6 +30,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .secondarySystemBackground
         //        diggitsPudView.isUserInteractionEnabled = false
         game = BullCowViewModel()
         //        dashBoardTextView.isEditable = false
@@ -39,13 +40,13 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         navigationItem.title = "Быки и Коровы"
         userDiggitLabel.text = ""
-        userDiggitLabel.textAlignment = .center
+
         createUIElements()
     }
     
     func createUIElements() {
         let playButton = UIButton()
-        let panelContollStackView = UIStackView()
+        let panelControllStackView = UIStackView()
         let panelInputContollStackView = UIStackView()
         let twiceInputLayerStackView = UIStackView()
         let firstLayerStackView = UIStackView()
@@ -93,11 +94,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
         timerLabel.textAlignment = .center
         view.addSubview(timerLabel)
         
-        panelContollStackView.addArrangedSubview(countButton)
-        panelContollStackView.addArrangedSubview(playButton)
-        panelContollStackView.addArrangedSubview(timerLabel)
-        panelContollStackView.distribution = .equalCentering
-        view.addSubview(panelContollStackView)
+        panelControllStackView.addArrangedSubview(countButton)
+        panelControllStackView.addArrangedSubview(playButton)
+        panelControllStackView.addArrangedSubview(timerLabel)
+        panelControllStackView.distribution = .equalCentering
+        view.addSubview(panelControllStackView)
         
         dashBoardTextView.isEditable = false
         dashBoardTextView.isSelectable = false
@@ -118,7 +119,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             button.tag = massDiggit[index] // присваиваем tag кнопке
             button.backgroundColor = .tertiaryLabel
             button.setTitle(String(massDiggit[index]), for: .normal) // присваиваем title кнопке
-            button.setTitleColor(.label, for: .normal)
+            button.tintColor = UIColor.label
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: 45).isActive = true
             button.heightAnchor.constraint(equalToConstant: 45).isActive = true
@@ -131,8 +132,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 firstLayerStackView.addArrangedSubview(button)
             }
         }
+       
+        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 35.0)
+        userDiggitLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         userDiggitLabel.textAlignment = .right
-        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+
         
         userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
         userLabelPanelStackView.addArrangedSubview(deleteLastButton)
@@ -158,7 +162,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         sendDiggitsButton.setTitle("ОТПРАВИТЬ", for: .normal)
         sendDiggitsButton.backgroundColor = .tertiaryLabel
-        sendDiggitsButton.setTitleColor(.label, for: .normal)
+        sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
         sendDiggitsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
@@ -181,7 +185,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.left.right.equalToSuperview().inset(10)
         }
         
-        panelContollStackView.snp.makeConstraints { maker in
+        panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
         

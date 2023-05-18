@@ -8,15 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BullCowViewController" customModule="MindMarathon" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SlovusGameViewController" customModule="MindMarathon" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="fXa-tb-BoH" customClass="BullCowViewController" customModule="MindMarathon" customModuleProvider="target">
-            <view key="view" contentMode="scaleToFill" id="lHV-Jh-CZQ">
+        <viewController id="i2N-qH-bxM" customClass="SlovusGameViewController" customModule="MindMarathon" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="cK6-mF-aF8">
                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <viewLayoutGuide key="safeArea" id="6fQ-cl-ncr"/>
+                <viewLayoutGuide key="safeArea" id="kvK-R8-llE"/>
             </view>
-            <point key="canvasLocation" x="194.6564885496183" y="-19.014084507042256"/>
+            <point key="canvasLocation" x="114" y="24"/>
         </viewController>
     </objects>
 </document>
