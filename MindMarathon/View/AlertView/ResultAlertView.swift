@@ -21,11 +21,17 @@ class ResultAlertView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.backgroundColor = .clear
         createUI()
     }
     
     func createUI() {
-        self.backgroundColor = UIColor.systemBackground
+        let mainView = UIView()
+        
+        mainView.backgroundColor = .systemBackground
+        mainView.layer.cornerRadius = 10
+        
+        self.addSubview(mainView)
         firstLabel.text = "Конец игры"
         firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         firstLabel.numberOfLines = 0
@@ -54,24 +60,29 @@ class ResultAlertView: UIView {
         
         self.addSubview(exitGame)
         
+        mainView.snp.makeConstraints { maker in
+            maker.left.right.equalToSuperview().inset(20)
+            maker.bottom.top.equalToSuperview()
+        }
+        
         firstLabel.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(10)
-            maker.left.right.equalTo(self).inset(10)
+            maker.top.equalTo(mainView).inset(10)
+            maker.left.right.equalTo(mainView).inset(10)
         }
         
         descriptionLabel.snp.makeConstraints { maker in
             maker.top.equalTo(firstLabel).inset(50)
-            maker.left.right.equalTo(self).inset(20)
+            maker.left.right.equalTo(mainView).inset(20)
         }
         
         restartGame.snp.makeConstraints { maker in
             maker.top.equalTo(descriptionLabel).inset(70)
-            maker.left.right.equalTo(self).inset(10)
+            maker.left.right.equalTo(mainView).inset(10)
         }
         
         exitGame.snp.makeConstraints { maker in
             maker.top.equalTo(restartGame).inset(50)
-            maker.left.right.equalTo(self).inset(10)
+            maker.left.right.equalTo(mainView).inset(10)
         }
         
     }

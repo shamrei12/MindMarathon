@@ -64,7 +64,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(sizeWordButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-                playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         
         view.addSubview(playButton)
         
@@ -107,7 +107,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         for i in massLayer {
             i.axis = .horizontal
             i.distribution = .fillEqually
-            i.spacing = 5
+            i.spacing = 1
         }
         
         containerView.snp.makeConstraints { maker in
@@ -137,7 +137,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(contentViewStackView)
         contentViewStackView.axis = .vertical
         contentViewStackView.distribution = .fillEqually
-        contentViewStackView.spacing = 10
+        contentViewStackView.spacing = 1
         
         contentViewStackView.snp.makeConstraints { maker in
             maker.left.equalTo(containerView).inset(10)
@@ -236,6 +236,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func statGame() {
+        controllerTextField = 0
+        firstWordIndex = 0
+        lastWordIndex = maxLenght
         step = 0
         seconds = 0
         createTimer()
@@ -271,9 +274,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }
-
+    
     @objc func deleteLastWord() {
-        for i in massTextField[firstWordIndex...lastWordIndex].reversed() {
+        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() {
             if !i.text!.isEmpty {
                 i.text = ""
                 break
@@ -294,7 +297,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func checkTextField(letter: String) {
-        if controllerTextField < lastWordIndex{
+        if controllerTextField < lastWordIndex {
             if massTextField[controllerTextField].text?.count == 0 {
                 massTextField[controllerTextField].text = letter
                 controllerTextField += 1
@@ -313,18 +316,17 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     @objc func sendWordsTupped() {
         makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkResult(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
-        print(puzzleWord)
-            if firstWordIndex < 30 && lastWordIndex < 30 {
-                controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
-                firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
-                lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
-            }
+        if firstWordIndex < 30 && lastWordIndex < 30 {
+            controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
+            firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
+            lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
+        }
         
     }
     
     func makeColorTextField(massiveAnswer: [Int], startIndex: Int, lastIndex: Int) {
         let massiveIndex = Array(startIndex..<lastIndex)
-
+        
         for i in 0..<massiveAnswer.count {
             if massiveAnswer[i] == 0 {
                 massTextField[massiveIndex[i]].textColor = .gray
@@ -366,10 +368,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
-        firstWordIndex = 0
-        lastWordIndex = maxLenght
         for i in massTextField {
-            i.tintColor = UIColor.label
+            i.textColor = UIColor.label
             i.backgroundColor = UIColor.tertiaryLabel
             i.text = ""
         }
