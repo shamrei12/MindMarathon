@@ -30,6 +30,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     var maxLenght = 5
     private var stopwatch = Timer()
     private var alertView: ResultAlertView!
+    private var messegeView: UserMistakeView!
     var step = 0
     
     override func viewDidLoad() {
@@ -147,7 +148,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
         
         //keyBoardView
-        
         let keyBoardView = UIView()
         let sendWordsButton = UIButton()
         let keyBoardStacView = UIStackView()
@@ -176,7 +176,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                    keyboarButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                    keyboarButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchUpInside)
                 } else {
                     keyboarButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
@@ -213,7 +213,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         keyBoardStacView.addArrangedSubview(sendWordsButton)
         keyBoardStacView.axis = .vertical
-        keyBoardStacView.distribution = .fillEqually
+        keyBoardStacView.distribution = .fill
         keyBoardStacView.spacing = 5
         view.addSubview(keyBoardStacView)
         
@@ -315,13 +315,19 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func sendWordsTupped() {
-        makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkResult(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
-        if firstWordIndex < 30 && lastWordIndex < 30 {
-            controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
-            firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
-            lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
-        }
         
+        if !userWords.isEmpty {
+            if CheckUserWord.shared.checkWord(wordToCheck: userWords) {
+                makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkResult(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
+                if firstWordIndex < 30 && lastWordIndex < 30 {
+                    controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
+                    firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
+                    lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
+                }
+            } else {
+                createAlertMessage()
+            }
+        }
     }
     
     func makeColorTextField(massiveAnswer: [Int], startIndex: Int, lastIndex: Int) {
@@ -355,13 +361,46 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             self.view.isUserInteractionEnabled = false
         }
         stopwatch.invalidate()
-        alertView = ResultAlertView.loadFromNib()
+        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
         alertView.delegate = self
         alertView.descriptionLabel.text = description
         UIApplication.shared.keyWindow?.addSubview(alertView)
         alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
                                    y: self.view.frame.size.height / 2)
     }
+
+    func createAlertMessage() {
+        messegeView = UserMistakeView.loadFromNib() as? UserMistakeView
+        
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let topPadding = window?.safeAreaInsets.top ?? 0
+        let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1
+        let alertViewHeight: CGFloat = 100
+        
+        messegeView.frame = CGRect(x: (window!.frame.width - alertViewWidth) / 2,
+                                   y: -alertViewHeight,
+                                   width: alertViewWidth,
+                                   height: alertViewHeight)
+        
+        messegeView.layer.cornerRadius = 10
+        messegeView.layer.shadowOpacity = 0.2
+        messegeView.layer.shadowRadius = 5
+        messegeView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        
+        UIApplication.shared.keyWindow?.addSubview(messegeView)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.messegeView.frame.origin.y = topPadding // конечное положение
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 5, options: .curveEaseOut, animations: {
+                self.messegeView.frame.origin.y = -alertViewHeight // начальное положение
+            }, completion: { _ in
+                self.messegeView.removeFromSuperview()
+            })
+        }
+    }
+
+
     
     func restartGame() {
         UIView.animate(withDuration: 0.1) {

@@ -144,10 +144,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
         userLabelPanelStackView.axis = .horizontal
         
         
-        firstLayerStackView.distribution = .equalCentering
-        secondLayerStackView.distribution = .equalSpacing
-        firstLayerStackView.spacing = 20
-        firstLayerStackView.spacing = 20
+        firstLayerStackView.distribution = .fillEqually
+        secondLayerStackView.distribution = .fillEqually
+        firstLayerStackView.spacing = 10
+        secondLayerStackView.spacing = 10
         
         
         twiceInputLayerStackView.addArrangedSubview(firstLayerStackView)
@@ -287,7 +287,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.isUserInteractionEnabled = false
         }
         
-        alertView = ResultAlertView.loadFromNib()
+        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
         alertView.delegate = self
         alertView.descriptionLabel.text = description
         UIApplication.shared.keyWindow?.addSubview(alertView)

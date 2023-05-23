@@ -19,24 +19,36 @@ class SlovusViewModel {
         return words[Int.random(in: 0..<words.count)]
     }
     
+    
+    func replaceLetter(userString: String) -> String {
+        var newWord = String()
+        for i in userString {
+            if !newWord.contains(i) {
+                newWord.append(i)
+            }
+        }
+        return newWord
+    }
+
     func checkResult(puzzleWord: String, userWord: String) -> [Int] {
-        var resultMass = [0, 0, 0, 0, 0]
+        var resultMass = Array(repeating: 0, count: puzzleWord.count)
+        let newUser = replaceLetter(userString: userWord)
+        print(puzzleWord)
         if userWord == puzzleWord {
-            return [2, 2, 2, 2, 2]
+            return Array(repeating: 2, count: puzzleWord.count)
         } else {
-            for (i, valueUser) in userWord.enumerated() {
+            for (i, valueUser) in newUser.enumerated() {
                 for (j, valuePuzzle) in puzzleWord.enumerated() {
                     if i == j && valuePuzzle == valueUser {
-                        resultMass[i] = 2
+                        resultMass[j] = 2
                         break
-                    } else if i != j && valuePuzzle == valueUser && resultMass[i] == 0 {
+                    } else if i != j && valuePuzzle == valueUser && resultMass[j] == 0 {
                         resultMass[i] = 1
                         break
                     }
-                    
                 }
             }
-            return resultMass
         }
+        return resultMass
     }
 }

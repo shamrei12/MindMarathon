@@ -22,6 +22,10 @@
 		D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF332A115A2400263CEB /* ResultAlertView.xib */; };
 		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
 		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
+		D83161942A1A55E100087769 /* CheckUserWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161932A1A55E100087769 /* CheckUserWord.swift */; };
+		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
+		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
+		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88221672A16042B00531EED /* ListGamesViewController.xib */; };
@@ -49,6 +53,10 @@
 		D826CF332A115A2400263CEB /* ResultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
 		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
 		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		D83161932A1A55E100087769 /* CheckUserWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserWord.swift; sourceTree = "<group>"; };
+		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
+		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
+		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
 		D88221672A16042B00531EED /* ListGamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGamesViewController.xib; sourceTree = "<group>"; };
@@ -101,6 +109,8 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
+				D83161A12A1CD29300087769 /* Dictionary */,
+				D83161922A1A55C100087769 /* Helpers */,
 				D882215F2A12A81800531EED /* Manager */,
 				D826CF372A115F1500263CEB /* Protocols */,
 				D826CF242A10C7A600263CEB /* Controllers */,
@@ -185,6 +195,8 @@
 			children = (
 				D826CF332A115A2400263CEB /* ResultAlertView.xib */,
 				D826CF352A115A3300263CEB /* ResultAlertView.swift */,
+				D83161952A1A583400087769 /* UserMistakeView.swift */,
+				D83161972A1A584F00087769 /* UserMistakeView.xib */,
 			);
 			path = AlertView;
 			sourceTree = "<group>";
@@ -195,6 +207,22 @@
 				D826CF382A11600300263CEB /* Protocols.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D83161922A1A55C100087769 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D83161932A1A55E100087769 /* CheckUserWord.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D83161A12A1CD29300087769 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				D831619A2A1B5A4600087769 /* ru_RU */,
+			);
+			path = Dictionary;
 			sourceTree = "<group>";
 		};
 		D882215F2A12A81800531EED /* Manager */ = {
@@ -274,10 +302,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
+				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D882216D2A162A1E00531EED /* SlovusGameViewController.xib in Resources */,
 				D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
+				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
 				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
 				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
@@ -339,8 +369,10 @@
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
+				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
+				D83161942A1A55E100087769 /* CheckUserWord.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
@@ -505,7 +537,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -538,7 +570,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

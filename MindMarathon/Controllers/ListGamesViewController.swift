@@ -22,7 +22,6 @@ class ListGamesViewController: UIViewController {
     func createUI() {
         
         let bullCowButton = UIButton()
-        let infoBullCowGameLabel = UILabel()
         let bullCowStackView = UIStackView()
         
         bullCowButton.setTitle("Быки и Коровы", for: .normal)
@@ -33,15 +32,7 @@ class ListGamesViewController: UIViewController {
         bullCowButton.addTarget(self, action: #selector(bullCowButtonTapped), for: .touchUpInside)
         view.addSubview(bullCowButton)
         
-        infoBullCowGameLabel.text = "время: -- | кодичество ходов: --"
-        infoBullCowGameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        infoBullCowGameLabel.textColor = .label
-        infoBullCowGameLabel.numberOfLines = 0
-        infoBullCowGameLabel.textAlignment = .center
-        view.addSubview(infoBullCowGameLabel)
-        
         bullCowStackView.addArrangedSubview(bullCowButton)
-        bullCowStackView.addArrangedSubview(infoBullCowGameLabel)
         bullCowStackView.distribution = .fill
         bullCowStackView.axis = .vertical
         bullCowStackView.spacing = 5
@@ -53,7 +44,6 @@ class ListGamesViewController: UIViewController {
         }
         
         let slovusButton = UIButton()
-        let infoSlovusGamelabel = UILabel()
         let slovusStackView = UIStackView()
         
         
@@ -65,15 +55,7 @@ class ListGamesViewController: UIViewController {
         slovusButton.addTarget(self, action: #selector(slovusButtonTapped), for: .touchUpInside)
         view.addSubview(slovusButton)
         
-        infoSlovusGamelabel.text = "время: -- | кодичество ходов: --"
-        infoSlovusGamelabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        infoSlovusGamelabel.textColor = .label
-        infoSlovusGamelabel.numberOfLines = 0
-        infoSlovusGamelabel.textAlignment = .center
-        view.addSubview(infoSlovusGamelabel)
-        
         slovusStackView.addArrangedSubview(slovusButton)
-        slovusStackView.addArrangedSubview(infoSlovusGamelabel)
         slovusStackView.distribution = .fill
         slovusStackView.axis = .vertical
         slovusStackView.spacing = 5
@@ -81,10 +63,9 @@ class ListGamesViewController: UIViewController {
         view.addSubview(slovusStackView)
         
         slovusStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(bullCowStackView).inset(100)
+            maker.top.equalTo(bullCowStackView).inset(70)
             maker.left.right.equalToSuperview().inset(10)
         }
-        
     }
     
     @objc
