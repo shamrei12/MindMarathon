@@ -37,14 +37,6 @@ class MenuViewController: UIViewController {
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
-        
-        let bullCowGame = UIButton()
-        bullCowGame.setTitle("Случайная игра", for: .normal)
-        bullCowGame.tintColor = UIColor.label
-        bullCowGame.backgroundColor = UIColor.tertiaryLabel
-        bullCowGame.layer.cornerRadius = 10
-        bullCowGame.addTarget(self, action: #selector(bullCowGameTapped), for: .touchUpInside)
-        view.addSubview(bullCowGame)
     
         labelFirst.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(100)
@@ -58,12 +50,6 @@ class MenuViewController: UIViewController {
         startMarathon.snp.makeConstraints { maker in
             maker.left.right.equalToSuperview().inset(10)
             maker.top.equalTo(labelSecond).inset(250)
-            maker.height.equalTo(50)
-        }
-        
-        bullCowGame.snp.makeConstraints { maker in
-            maker.left.right.equalToSuperview().inset(10)
-            maker.top.equalTo(startMarathon).inset(70)
             maker.height.equalTo(50)
         }
     }

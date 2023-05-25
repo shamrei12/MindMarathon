@@ -99,12 +99,13 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllStackView.addArrangedSubview(timerLabel)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
-        
         dashBoardTextView.isEditable = false
         dashBoardTextView.isSelectable = false
         dashBoardTextView.backgroundColor = .systemBackground
         dashBoardTextView.layer.cornerRadius = 10
         dashBoardTextView.font = UIFont(name: "HelveticaNeue-Thin", size: 25.0)
+        dashBoardTextView.tintColor = .label
+        dashBoardTextView.textColor = .label
         dashBoardTextView.textAlignment = .center
         dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
         view.addSubview(dashBoardTextView)
@@ -134,6 +135,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
        
         userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 35.0)
+        userDiggitLabel.tintColor = .label
         userDiggitLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         userDiggitLabel.textAlignment = .right
 
@@ -317,7 +319,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func rulesTapped() {
-        
+        let rulesVC = RulesViewController.instantiate()
+        rulesVC.modalPresentationStyle = .formSheet
+        rulesVC.rulesGame(numberGame: 1)
+        present(rulesVC, animated: true)
     }
     
     func restartGame() {
@@ -353,6 +358,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         mutableAttributedString.append(resultString)
         // Устанавливаем изменяемую атрибутированную строку в TextView
         dashBoardTextView.attributedText = mutableAttributedString
+        dashBoardTextView.tintColor = .label
+        dashBoardTextView.textColor = .label
     }
     
     func makeResultText(result: (Int, Int), userMove: String) {
@@ -402,6 +409,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         mutableAttributedString.append(resultString)
         // Устанавливаем изменяемую атрибутированную строку в TextView
         dashBoardTextView.attributedText = mutableAttributedString
+        dashBoardTextView.tintColor = .label
+        dashBoardTextView.textColor = .label
     }
     
 }

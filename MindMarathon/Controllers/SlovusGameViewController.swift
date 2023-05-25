@@ -8,6 +8,7 @@
 import UIKit
 
 class SlovusGameViewController: UIViewController, AlertDelegate {
+    private var isshowMessageAlert: Bool = false
     private var puzzleWord = ""
     private var userWords = ""
     let playButton = UIButton()
@@ -25,8 +26,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     var controllerTextField = 0
     var game: SlovusViewModel!
     var seconds = 0
-    var startGame = false
-    var continuePlaying = false
+    var isstartGame = false
+    var iscontinuePlaying = false
     var maxLenght = 5
     private var stopwatch = Timer()
     private var alertView: ResultAlertView!
@@ -176,7 +177,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                    keyboarButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+                    keyboarButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchUpInside)
                 } else {
                     keyboarButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
@@ -257,19 +258,19 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     @objc func startGameTapped(_ sender: UIButton) {
         
-        let chekPartGame = (startGame, continuePlaying)
+        let chekPartGame = (isstartGame, iscontinuePlaying)
         
         if chekPartGame == (false, false) {
-            startGame = true
-            continuePlaying = true
+            isstartGame = true
+            iscontinuePlaying = true
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             statGame()
         } else if chekPartGame == (true, true) {
-            continuePlaying = false
+            iscontinuePlaying = false
             sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
             pauseGame()
         } else {
-            continuePlaying = true
+           iscontinuePlaying = true
             continueGame()
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
@@ -290,7 +291,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func letterinputTapped(sender: UIButton) {
-        if (startGame, continuePlaying) == (true, true) {
+        if (isstartGame, iscontinuePlaying) == (true, true) {
             let letter = sender.titleLabel?.text ?? ""
             checkTextField(letter: letter.uppercased())
         }
@@ -311,21 +312,28 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        print("rules")
+        let rulesVC = RulesViewController.instantiate()
+        rulesVC.modalPresentationStyle = .formSheet
+        rulesVC.rulesGame(numberGame: 2)
+        present(rulesVC, animated: true)
     }
     
     @objc func sendWordsTupped() {
         
-        if !userWords.isEmpty {
+        if userWords.count == maxLenght {
             if CheckUserWord.shared.checkWord(wordToCheck: userWords) {
-                makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkResult(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
+                makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < 30 && lastWordIndex < 30 {
                     controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
                     firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
                     lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
                 }
             } else {
-                createAlertMessage()
+                if !isshowMessageAlert {
+                    isshowMessageAlert = true
+                    createAlertMessage()
+                }
+                
             }
         }
     }
@@ -396,6 +404,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 self.messegeView.frame.origin.y = -alertViewHeight // начальное положение
             }, completion: { _ in
                 self.messegeView.removeFromSuperview()
+                self.isshowMessageAlert = false
             })
         }
     }

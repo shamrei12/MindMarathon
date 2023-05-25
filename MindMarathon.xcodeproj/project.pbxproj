@@ -32,6 +32,8 @@
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216D2A162A1E00531EED /* SlovusGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D882216B2A162A1E00531EED /* SlovusGameViewController.xib */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
+		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
+		D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216B2A162A1E00531EED /* SlovusGameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlovusGameViewController.xib; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
+		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulesViewController.xib; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +163,7 @@
 				D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */,
 				D88221672A16042B00531EED /* ListGamesViewController.xib */,
 				D882216B2A162A1E00531EED /* SlovusGameViewController.xib */,
+				D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -173,10 +178,11 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
-				D88221662A16042B00531EED /* ListGamesViewController.swift */,
 				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
+				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
+				D88221662A16042B00531EED /* ListGamesViewController.swift */,
+				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
 				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
+				D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */,
 				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +380,7 @@
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
 				D83161942A1A55E100087769 /* CheckUserWord.swift in Sources */,
+				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
@@ -515,15 +523,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 285RFT4HL7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindMarathon/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_CFBundleDisplayName = MindMarathon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,15 +556,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 285RFT4HL7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MindMarathon/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
+				INFOPLIST_KEY_CFBundleDisplayName = MindMarathon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.board-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
