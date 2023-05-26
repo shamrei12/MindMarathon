@@ -78,7 +78,6 @@ class SlovusViewModel {
     func checkWord(puzzleWord: String, userWord: String) -> [Int] {
         var result = Array(repeating: 0, count: puzzleWord.count)
         var newUser = userWord
-        print(puzzleWord)
         var usedIndexes = Set<Int>()
         
         // Проверяем буквы на своем месте (2)

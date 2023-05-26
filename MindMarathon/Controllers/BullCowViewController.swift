@@ -247,7 +247,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         createTimer()
         dashBoardTextView.text = ""
         maxLenght = Int((countButton.titleLabel?.text)!)!
-        print(maxLenght)
         countButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
     }

@@ -55,7 +55,6 @@ class BullCowViewModel {
                 result.append(randomDiggit)
             }
         }
-        print(result)
         return result
     }
     

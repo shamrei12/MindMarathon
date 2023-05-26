@@ -88,8 +88,4 @@ class ListGamesViewController: UIViewController {
         present(navigationController, animated: true)
     }
     
-    @objc
-    func rulesTapped() {
-        print("RULES Not")
-    }
 }
