@@ -26,6 +26,8 @@
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
+		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
+		D86D0A702A2155F900AB6789 /* FloodFillViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88221672A16042B00531EED /* ListGamesViewController.xib */; };
@@ -59,6 +61,8 @@
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
+		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
+		D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloodFillViewController.xib; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
 		D88221672A16042B00531EED /* ListGamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGamesViewController.xib; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				D88221672A16042B00531EED /* ListGamesViewController.xib */,
 				D882216B2A162A1E00531EED /* SlovusGameViewController.xib */,
 				D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */,
+				D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
 				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
 				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
@@ -313,6 +319,7 @@
 				D882216D2A162A1E00531EED /* SlovusGameViewController.xib in Resources */,
 				D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
+				D86D0A702A2155F900AB6789 /* FloodFillViewController.xib in Resources */,
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
 				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
@@ -372,6 +379,7 @@
 			files = (
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
+				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
