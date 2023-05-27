@@ -53,28 +53,7 @@ class SlovusViewModel {
         }
         return newWord
     }
-    //
-    //    func checkResult(puzzleWord: String, userWord: String) -> [Int] {
-    //        var resultMass = Array(repeating: 0, count: puzzleWord.count)
-    //        print(puzzleWord)
-    ////        let newUser = replaceLetter(userString: userWord)
-    //        if userWord == puzzleWord {
-    //            return Array(repeating: 2, count: puzzleWord.count)
-    //        } else {
-    //            for (i, valueUser) in userWord.enumerated() {
-    //                for (j, valuePuzzle) in puzzleWord.enumerated() {
-    //                    if i == j && valuePuzzle == valueUser {
-    //                        resultMass[j] = 2
-    //                        break
-    //                    } else if i != j && valuePuzzle == valueUser && resultMass[j] == 0 {
-    //                        resultMass[i] = 1
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        return resultMass
-    //    }
-    //
+
     func checkWord(puzzleWord: String, userWord: String) -> [Int] {
         var result = Array(repeating: 0, count: puzzleWord.count)
         var newUser = userWord
@@ -107,27 +86,3 @@ class SlovusViewModel {
     }
 }
 
-//        // Проверяем буквы не на своем месте (1)
-//        for (index, letter) in userWord.enumerated() {
-//            if result[index] == 0 {
-//                var puzzleIndexes = [Int]()
-//                for (puzzleIndex, puzzleLetter) in puzzleWord.enumerated() {
-//                    if puzzleIndex != index && puzzleLetter == letter && !puzzleIndexes.contains(puzzleIndex) {
-//                        result[index] = 1
-//                        puzzleIndexes.append(puzzleIndex)
-//                    }
-//                }
-//                for puzzleIndex in puzzleIndexes {
-//                    if result[puzzleIndex] == 0 {
-//                        result[puzzleIndex] = 1
-//                    }
-//                }
-//            }
-//        }
-////        return result
-//    }
-//
-//
-//
-//
-//}

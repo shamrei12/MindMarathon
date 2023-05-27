@@ -342,7 +342,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             self.view.isUserInteractionEnabled = true
         }
         alertView.removeFromSuperview()
-
+        countStep = 0
         startNewGame()
     }
     
