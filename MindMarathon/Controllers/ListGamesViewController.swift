@@ -66,6 +66,23 @@ class ListGamesViewController: UIViewController {
             maker.top.equalTo(bullCowStackView).inset(70)
             maker.left.right.equalToSuperview().inset(10)
         }
+        
+        let floodFillButton = UIButton()
+        
+        floodFillButton.setTitle("Заливка", for: .normal)
+        floodFillButton.titleLabel?.font = UIFont (name: "HelveticaNeue-Bold", size: 20.0)
+        floodFillButton.backgroundColor = UIColor.tertiaryLabel
+        floodFillButton.layer.cornerRadius = 10
+        floodFillButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        floodFillButton.addTarget(self, action: #selector(floodFillTapped), for: .touchUpInside)
+        view.addSubview(floodFillButton)
+        
+        floodFillButton.snp.makeConstraints { maker in
+            maker.top.equalTo(slovusStackView).inset(70)
+            maker.left.right.equalToSuperview().inset(10)
+        }
+        
+        
     }
     
     @objc
@@ -84,6 +101,13 @@ class ListGamesViewController: UIViewController {
     @objc func slovusButtonTapped() {
         let slovusGame = SlovusGameViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: slovusGame)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    
+    @objc func floodFillTapped() {
+        let floodFillGame = FloodFillViewController.instantiate()
+        let navigationController = UINavigationController(rootViewController: floodFillGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }

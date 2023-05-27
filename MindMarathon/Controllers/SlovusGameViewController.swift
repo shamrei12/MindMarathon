@@ -236,7 +236,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
-    func statGame() {
+    func startNewGame() {
         controllerTextField = 0
         firstWordIndex = 0
         lastWordIndex = maxLenght
@@ -264,7 +264,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             isstartGame = true
             iscontinuePlaying = true
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            statGame()
+            startNewGame()
         } else if chekPartGame == (true, true) {
             iscontinuePlaying = false
             sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
@@ -422,7 +422,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             i.text = ""
         }
         alertView.removeFromSuperview()
-        statGame()
+        startNewGame()
     }
     
     func exitGame() {
