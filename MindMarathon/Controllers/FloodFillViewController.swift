@@ -8,11 +8,13 @@
 import UIKit
 
 class FloodFillViewController: UIViewController, AlertDelegate {
-    let gridButton = UIButton()
+    var gridButton = UIButton()
     let timerLabel = UILabel()
     let gameView = UIView()
     let colorView = UIView()
-    private let gridSize = 5
+    let contentViewStackView = UIStackView()
+    var massLayer = [UIStackView]()
+    private var gridSize = 5
     private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
     private var seconds = 0
@@ -55,6 +57,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         gridButton.tintColor = UIColor.label
         gridButton.backgroundColor = UIColor.tertiaryLabel
         gridButton.layer.cornerRadius = 10
+        gridButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
         view.addSubview(gridButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -89,50 +92,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         gameView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
-        }
-        
-        let contentViewStackView = UIStackView()
-        let firstLayerStackView = UIStackView()
-        let secondLayerStackView = UIStackView()
-        let thirdLayerStackView = UIStackView()
-        let fourthLayerStackView = UIStackView()
-        let fifthLayerStackView = UIStackView()
-        let massLayer = [firstLayerStackView, secondLayerStackView, thirdLayerStackView, fourthLayerStackView, fifthLayerStackView]
-        
-        for i in massLayer {
-            i.axis = .horizontal
-            i.distribution = .fillEqually
-            i.spacing = 0
-        }
-        
-        for i in 0..<gridSize {
-            for _ in 0..<gridSize {
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-                let cell = UIView()
-                cell.tag = index
-                index += 1
-                cell.addGestureRecognizer(tapRecognizer)
-                cell.backgroundColor = UIColor.tertiaryLabel
-                cell.layer.borderColor = UIColor.black.cgColor
-                massLayer[i].addArrangedSubview(cell)
-                row.append(cell)
-            }
-            view.addSubview(massLayer[i])
-            contentViewStackView.addArrangedSubview(massLayer[i])
-            cells.append(row)
-            row.removeAll()
-        }
-        
-        view.addSubview(contentViewStackView)
-        contentViewStackView.axis = .vertical
-        contentViewStackView.distribution = .fillEqually
-        contentViewStackView.spacing = 0
-        
-        contentViewStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(gameView).inset(10)
-            maker.top.equalTo(gameView).inset(10)
-            maker.right.equalTo(gameView).inset(10)
-            maker.bottom.equalTo(gameView).inset(10)
         }
         
         let colorStackView = UIStackView()
@@ -197,6 +156,53 @@ class FloodFillViewController: UIViewController, AlertDelegate {
                 stopwatch.invalidate()
                 createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(countStep) ходов.")
             }
+        }
+    }
+    
+    func createGamePlace(sizePlace: Int) {
+        
+        for i in 0..<gridSize {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+            stackView.spacing = 0
+            massLayer.append(stackView)
+        }
+        for i in massLayer {
+            i.axis = .horizontal
+            i.distribution = .fillEqually
+            i.spacing = 0
+        }
+        
+        for i in 0..<gridSize {
+            for _ in 0..<gridSize {
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+                let cell = UIView()
+                cell.tag = index
+                index += 1
+                cell.addGestureRecognizer(tapRecognizer)
+                cell.backgroundColor = UIColor.tertiaryLabel
+                cell.layer.borderColor = UIColor.black.cgColor
+                massLayer[i].addArrangedSubview(cell)
+                row.append(cell)
+            }
+            view.addSubview(massLayer[i])
+            contentViewStackView.addArrangedSubview(massLayer[i])
+            cells.append(row)
+            row.removeAll()
+        }
+        
+        view.addSubview(contentViewStackView)
+        contentViewStackView.axis = .vertical
+        contentViewStackView.distribution = .fillEqually
+        contentViewStackView.spacing = 0
+        
+        
+        contentViewStackView.snp.makeConstraints { maker in
+            maker.left.equalTo(gameView).inset(10)
+            maker.top.equalTo(gameView).inset(10)
+            maker.right.equalTo(gameView).inset(10)
+            maker.bottom.equalTo(gameView).inset(10)
         }
     }
     
@@ -296,6 +302,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
+        let size = gridButton.titleLabel?.text ?? ""
+        gridSize = Int(size)!
+        createGamePlace(sizePlace: gridSize)
         gameView.isUserInteractionEnabled = false
         colorView.isUserInteractionEnabled = false
         for i in 0..<gridSize {
@@ -349,5 +358,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     func exitGame() {
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
+    }
+    
+    @objc func selectMaxSizeTapped(_ sender: UIButton) {
+        sender.setTitle( FloodFillViewModel.shared.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
     }
 }
