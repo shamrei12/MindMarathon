@@ -12,7 +12,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     let timerLabel = UILabel()
     let gameView = UIView()
     let colorView = UIView()
-    private let gridSize = 5
+    private let gridSize = 10
     private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
     private var seconds = 0
@@ -55,6 +55,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         gridButton.tintColor = UIColor.label
         gridButton.backgroundColor = UIColor.tertiaryLabel
         gridButton.layer.cornerRadius = 10
+        gridButton.addTarget(self, action: #selector(selectGridSize), for: .touchUpInside)
         view.addSubview(gridButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -97,16 +98,22 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         let thirdLayerStackView = UIStackView()
         let fourthLayerStackView = UIStackView()
         let fifthLayerStackView = UIStackView()
-        let massLayer = [firstLayerStackView, secondLayerStackView, thirdLayerStackView, fourthLayerStackView, fifthLayerStackView]
-        
-        for i in massLayer {
-            i.axis = .horizontal
-            i.distribution = .fillEqually
-            i.spacing = 0
-        }
+        //        let massLayer = [firstLayerStackView, secondLayerStackView, thirdLayerStackView, fourthLayerStackView, fifthLayerStackView]
+        var massLayer = [UIStackView]()
         
         for i in 0..<gridSize {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+            stackView.spacing = 0
+            massLayer.append(stackView)
+            
+        }
+
+        for i in 0..<gridSize {
             for _ in 0..<gridSize {
+                //                var layer = UIStackView()
+                //                massLayer.append(layer)
                 let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                 let cell = UIView()
                 cell.tag = index
@@ -349,5 +356,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     func exitGame() {
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
+    }
+    
+    @objc func selectGridSize() {
+        
     }
 }
