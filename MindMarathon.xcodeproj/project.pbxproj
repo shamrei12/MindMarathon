@@ -28,6 +28,7 @@
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A702A2155F900AB6789 /* FloodFillViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */; };
+		D86D0A722A234A5400AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A712A234A5400AB6789 /* FloodFillViewModel.swift */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88221672A16042B00531EED /* ListGamesViewController.xib */; };
@@ -63,6 +64,7 @@
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloodFillViewController.xib; sourceTree = "<group>"; };
+		D86D0A712A234A5400AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
 		D88221672A16042B00531EED /* ListGamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGamesViewController.xib; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				D826CF302A11282F00263CEB /* BullCowViewModel.swift */,
 				D882216E2A162DA700531EED /* SlovusViewModel.swift */,
+				D86D0A712A234A5400AB6789 /* FloodFillViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
+				D86D0A722A234A5400AB6789 /* FloodFillViewModel.swift in Sources */,
 				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
 				D83161942A1A55E100087769 /* CheckUserWord.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
