@@ -8,7 +8,6 @@
 import Foundation
 
 class FloodFillViewModel {
-    
     static var shared: FloodFillViewModel = {
         let instance = FloodFillViewModel()
         return instance
