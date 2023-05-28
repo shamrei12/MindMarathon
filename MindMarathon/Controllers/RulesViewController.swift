@@ -25,6 +25,8 @@ class RulesViewController: UIViewController {
             gameRules.text = BullCowViewModel.shared.getRulesGame()
         case 2:
             gameRules.text = SlovusViewModel.shared.getRulesGame()
+        case 3:
+            gameRules.text = FloodFillViewModel.shared.getRulesGame()
         default:
             print("error")
         }

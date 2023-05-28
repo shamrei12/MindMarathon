@@ -122,7 +122,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         colorView.snp.makeConstraints { maker in
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.left.right.bottom.equalToSuperview().inset(10)
-            maker.height.equalTo(150)
+            maker.height.equalTo(100)
             
         }
         
@@ -136,7 +136,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        
+        let rulesVC = RulesViewController.instantiate()
+        rulesVC.modalPresentationStyle = .formSheet
+        rulesVC.rulesGame(numberGame: 3)
+        present(rulesVC, animated: true)
     }
     
     @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
