@@ -161,7 +161,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createGamePlace(sizePlace: Int) {
-        
         for i in 0..<gridSize {
             let stackView = UIStackView()
             stackView.axis = .horizontal
@@ -173,8 +172,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
 
         for i in 0..<gridSize {
             for _ in 0..<gridSize {
-                //                var layer = UIStackView()
-                //                massLayer.append(layer)
                 let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                 let cell = UIView()
                 cell.tag = index
@@ -208,10 +205,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
                 let color = colorMass[Int.random(in: 0...2)]
                 cells[i][j].backgroundColor = UIColor(cgColor: color.cgColor)
             }
-            
         }
     }
-    
     
     @objc func selectedColorTapped(sender: UIButton) {
         let chekPartGame = (startGame, continuePlaying)
