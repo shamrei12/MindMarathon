@@ -308,6 +308,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func cancelTapped() {
+        if alertView != nil {
+            alertView.removeFromSuperview()
+        }
         self.dismiss(animated: true)
     }
     

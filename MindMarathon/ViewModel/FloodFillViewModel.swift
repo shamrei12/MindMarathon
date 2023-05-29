@@ -13,6 +13,7 @@ class FloodFillViewModel {
         return instance
     }()
     
+    var countStep = 0
     
     func getRulesGame() -> String {
         let gameRules = """

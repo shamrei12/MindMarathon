@@ -298,6 +298,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func cancelTapped() {
+        if alertView != nil {
+            alertView.removeFromSuperview()
+        }
         self.dismiss(animated: true)
     }
     
@@ -334,7 +337,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     func exitGame() {
-        
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
