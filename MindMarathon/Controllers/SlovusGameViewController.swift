@@ -59,7 +59,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         sizeWordButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         sizeWordButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        //        sizeWord.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
+        sizeWordButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         sizeWordButton.setTitle("5", for: .normal)
         sizeWordButton.tintColor = UIColor.label
         sizeWordButton.backgroundColor = UIColor.tertiaryLabel
@@ -247,6 +247,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         maxLenght = Int((sizeWordButton.titleLabel?.text)!)!
         sizeWordButton.isEnabled = false
         puzzleWord = SlovusViewModel.shared.choiceRandomWord()
+        print(puzzleWord)
     }
     
     func continueGame() {
@@ -325,7 +326,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     @objc func sendWordsTupped() {
         
         if userWords.count == maxLenght {
-            if CheckUserWord.shared.checkWord(wordToCheck: userWords) {
+            if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < 30 && lastWordIndex < 30 {
                     controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
@@ -379,6 +380,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         UIApplication.shared.keyWindow?.addSubview(alertView)
         alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
                                    y: self.view.frame.size.height / 2)
+    }
+    
+    @objc func selectMaxLenghtTapped() {
+        
     }
 
     func createAlertMessage() {

@@ -13,6 +13,8 @@ class SlovusViewModel {
         return instance
     }()
     
+    
+    
     func getRulesGame() -> String {
         let gameRules = """
         1. Вы должны угадать загаданное компьютером слово. Слово может содержать повторяющиеся буквы. Вы делаете попытку, вводя слово.
@@ -35,10 +37,50 @@ class SlovusViewModel {
         return gameRules
     }
     
-    let words = [ "карта", "кухня", "книга", "кровь", "кость", "город", "фильм", "птица", "комод",  "цветы", "чайка", "талия",  "леска", "ручка", "крыша", "дурак", "трава", "глаза", "крест", "свеча", "купец",  "полет", "рюмка", "робот", "котел", "шахта", "берег", "барон", "шпага", "голос", "сосна", "трава", "камин", "пряжа", "шарик", "мужик", "сапог", "факел", "музей", "труба", "сетка", "ворот"]
+    let dictionary = loadDictionary()
+    
+    func checkWord(wordToCheck: String) -> Bool {
+        let cleanWord = wordToCheck.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        if !cleanWord.isEmpty && dictionary.contains(cleanWord) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private static func loadDictionary() -> Set<String> {
+        if let path = Bundle.main.path(forResource: "ru_RU", ofType: ""),
+            let contents = try? String(contentsOfFile: path) {
+            let words = contents.components(separatedBy: .newlines)
+                .compactMap { $0.lowercased() }
+            return Set(words)
+        }
+        return Set()
+    }
+    
+//    func selectMaxLenght(maxLenght: String) -> String {
+//        var newLenght: Int = Int(maxLenght)!
+//        
+//        if newLenght == 6 {
+//            newLenght = 2
+//        } else {
+//            newLenght += 1
+//        }
+//        return String(newLenght)
+//    }
+    
+//    let words = [ "карта", "кухня", "книга", "кровь", "кость", "город", "фильм", "птица", "комод",  "цветы", "чайка", "талия",  "леска", "ручка", "крыша", "дурак", "трава", "глаза", "крест", "свеча", "купец",  "полет", "рюмка", "робот", "котел", "шахта", "берег", "барон", "шпага", "голос", "сосна", "трава", "камин", "пряжа", "шарик", "мужик", "сапог", "факел", "музей", "труба", "сетка", "ворот"]
     
     func choiceRandomWord() -> String {
-        return words[Int.random(in: 0..<words.count)]
+        var wordArray = [String]()
+        for i in dictionary {
+            if i.count == 5 {
+                wordArray.append(i)
+            }
+        }
+        var randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
+        return randomWord.count == 5 ? randomWord : choiceRandomWord()
+        
     }
     
     //
