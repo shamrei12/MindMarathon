@@ -8,6 +8,10 @@
 import UIKit
 
 class SlovusGameViewController: UIViewController, AlertDelegate {
+   
+    private var alertView: ResultAlertView!
+    private var messegeView: UserMistakeView!
+    private var stopwatch = Timer()
     private var isshowMessageAlert: Bool = false
     private var puzzleWord = ""
     private var userWords = ""
@@ -29,9 +33,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     var isstartGame = false
     var iscontinuePlaying = false
     var maxLenght = 5
-    private var stopwatch = Timer()
-    private var alertView: ResultAlertView!
-    private var messegeView: UserMistakeView!
     var step = 0
     
     override func viewDidLoad() {

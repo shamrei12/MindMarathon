@@ -31,11 +31,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
-        //        diggitsPudView.isUserInteractionEnabled = false
         game = BullCowViewModel()
-        //        dashBoardTextView.isEditable = false
-        //        dashBoardTextView.isSelectable = false
-        //        userDiggitLabel.text = ""
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         navigationItem.title = "Быки и Коровы"
@@ -202,8 +198,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalToSuperview().inset(20)
             maker.top.equalTo(dashBoardTextView.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
         }
-        
-        
+
         panelInputContollStackView.snp.makeConstraints { maker in
             maker.left.right.top.bottom.equalTo(panelIntputControlView).inset(10)
         }
@@ -235,7 +230,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    
     @objc func deleteLastTapped(_ sender: UIButton) {
         if !userDiggitLabel.text!.isEmpty {
             userDiggitLabel.text = String(userDiggitLabel.text!.dropLast())
@@ -263,7 +257,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     @objc func startGameButton(_ sender: UIButton) {
-        
         let chekPartGame = (startGame, continuePlaying)
         
         if chekPartGame == (false, false) {

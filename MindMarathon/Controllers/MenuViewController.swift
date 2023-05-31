@@ -61,8 +61,4 @@ class MenuViewController: UIViewController {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-    @objc
-    func bullCowGameTapped () {
-        
-    }
 }
