@@ -61,7 +61,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(gridButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        //        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         view.addSubview(playButton)
         
         timerLabel.text = "0"
@@ -150,7 +149,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             guard let selectedCell = recognizer.view else {
                 return
             }
-            
             // Получаем текущий цвет ячейки
             let currentColor = selectedCell.backgroundColor ?? UIColor.clear
             
@@ -243,22 +241,18 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         guard row >= 0 && row < gridSize && col >= 0 && col < gridSize else {
             return
         }
-        
         let cell = cells[row][col]
         
         // Проверяем, что ячейка еще не закрашена выбранным цветом
         guard cell.backgroundColor != color else {
             return
         }
-        
         // Проверяем, что цвет ячейки совпадает с текущим цветом
         guard cell.backgroundColor == currentColor else {
             return
         }
-        
         // Закрашиваем ячейку выбранным цветом
         cell.backgroundColor = color
-        
         // Рекурсивно закрашиваем соседние ячейки выбранным цветом
         fillCell(row: row + 1, col: col, color: color, currentColor: currentColor)
         fillCell(row: row - 1, col: col, color: color, currentColor: currentColor)
