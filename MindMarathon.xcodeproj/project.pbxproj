@@ -118,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				D83161A12A1CD29300087769 /* Dictionary */,
-				D83161922A1A55C100087769 /* Helpers */,
 				D882215F2A12A81800531EED /* Manager */,
 				D826CF372A115F1500263CEB /* Protocols */,
 				D826CF242A10C7A600263CEB /* Controllers */,
@@ -220,13 +219,6 @@
 				D826CF382A11600300263CEB /* Protocols.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		D83161922A1A55C100087769 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		D83161A12A1CD29300087769 /* Dictionary */ = {
