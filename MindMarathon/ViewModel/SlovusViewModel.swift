@@ -38,6 +38,18 @@ class SlovusViewModel {
     }
     
     let dictionary = loadDictionary()
+    let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+    
+    
+    private static func loadDictionaryPuzzleWord() -> Set<String> {
+        if let path = Bundle.main.path(forResource: "singular", ofType: ""),
+            let contents = try? String(contentsOfFile: path) {
+            let words = contents.components(separatedBy: .newlines)
+                .compactMap { $0.lowercased() }
+            return Set(words)
+        }
+        return Set()
+    }
     
     func checkWord(wordToCheck: String) -> Bool {
         let cleanWord = wordToCheck.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
@@ -58,28 +70,28 @@ class SlovusViewModel {
         return Set()
     }
     
-//    func selectMaxLenght(maxLenght: String) -> String {
-//        var newLenght: Int = Int(maxLenght)!
-//        
-//        if newLenght == 6 {
-//            newLenght = 2
-//        } else {
-//            newLenght += 1
-//        }
-//        return String(newLenght)
-//    }
+    func selectMaxLenght(maxLenght: String) -> String {
+        var newLenght: Int = Int(maxLenght)!
+        
+        if newLenght == 9 {
+            newLenght = 5
+        } else {
+            newLenght += 1
+        }
+        return String(newLenght)
+    }
     
 //    let words = [ "карта", "кухня", "книга", "кровь", "кость", "город", "фильм", "птица", "комод",  "цветы", "чайка", "талия",  "леска", "ручка", "крыша", "дурак", "трава", "глаза", "крест", "свеча", "купец",  "полет", "рюмка", "робот", "котел", "шахта", "берег", "барон", "шпага", "голос", "сосна", "трава", "камин", "пряжа", "шарик", "мужик", "сапог", "факел", "музей", "труба", "сетка", "ворот"]
     
-    func choiceRandomWord() -> String {
+    func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()
-        for i in dictionary {
-            if i.count == 5 {
+        for i in dictionaryPuzzleWord {
+            if i.count == size {
                 wordArray.append(i)
             }
         }
         var randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
-        return randomWord.count == 5 ? randomWord : choiceRandomWord()
+        return randomWord.count == size ? randomWord : choiceRandomWord(size: size)
         
     }
     
