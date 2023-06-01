@@ -11,6 +11,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
    
     private var alertView: ResultAlertView!
     private var messegeView: UserMistakeView!
+    var massLayer = [UIStackView]()
+    let panelControllView = UIView()
+    let panelControllStackView = UIStackView()
     private var stopwatch = Timer()
     private var isshowMessageAlert: Bool = false
     private var puzzleWord = ""
@@ -19,7 +22,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     let sizeWordButton = UIButton()
     let timerLabel = UILabel()
     let numberOfRows = 6
-    let numberOfColumns = 5
+    var numberOfColumns = 5
     let containerView = UIView()
     let textFieldHeight: CGFloat = 50
     let textFieldWidth: CGFloat = 40
@@ -42,16 +45,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         createUI()
         sizeWordButton.setTitle("5", for: .normal)
-        lastWordIndex = Int(sizeWordButton.titleLabel?.text ?? "")!
-        
     }
     
     func createUI() {
         
         //panelControllView
         let playButton = UIButton()
-        let panelControllView = UIView()
-        let panelControllStackView = UIStackView()
         
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .systemBackground
@@ -98,57 +97,11 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         containerView.isUserInteractionEnabled = false
         view.addSubview(containerView)
         
-        let contentViewStackView = UIStackView()
-        let firstLayerStackView = UIStackView()
-        let secondLayerStackView = UIStackView()
-        let thirdLayerStackView = UIStackView()
-        let fourthLayerStackView = UIStackView()
-        let fifthLayerStackView = UIStackView()
-        let sixthLayerStackView = UIStackView()
-        let massLayer = [firstLayerStackView, secondLayerStackView, thirdLayerStackView, fourthLayerStackView, fifthLayerStackView, sixthLayerStackView]
-        
-        for i in massLayer {
-            i.axis = .horizontal
-            i.distribution = .fillEqually
-            i.spacing = 1
-        }
-        
         containerView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
         }
-        
-        for i in 0..<numberOfRows {
-            for _ in 0..<numberOfColumns {
-                let textFieldWindow = UITextField()
-                textFieldWindow.isEnabled = false
-                textFieldWindow.tintColor = UIColor.label
-                textFieldWindow.backgroundColor = UIColor.tertiaryLabel
-                textFieldWindow.layer.cornerRadius = 5
-                textFieldWindow.layer.borderColor = UIColor.gray.cgColor
-                textFieldWindow.layer.borderWidth = 0.1
-                textFieldWindow.font = UIFont(name: "HelveticaNeue-Medium", size: 30.0)
-                textFieldWindow.textAlignment = .center
-                massTextField.append(textFieldWindow)
-                view.addSubview(textFieldWindow)
-                massLayer[i].addArrangedSubview(textFieldWindow)
-            }
-            view.addSubview(massLayer[i])
-            contentViewStackView.addArrangedSubview(massLayer[i])
-        }
-        
-        view.addSubview(contentViewStackView)
-        contentViewStackView.axis = .vertical
-        contentViewStackView.distribution = .fillEqually
-        contentViewStackView.spacing = 1
-        
-        contentViewStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(containerView).inset(10)
-            maker.top.equalTo(containerView).inset(10)
-            maker.right.equalTo(containerView).inset(10)
-            maker.bottom.equalTo(containerView).inset(10)
-        }
-        
+
         //keyBoardView
         let keyBoardView = UIView()
         let sendWordsButton = UIButton()
@@ -224,6 +177,52 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func createPlaceGame() {
+        let contentViewStackView = UIStackView()
+        
+        for i in massLayer {
+            i.axis = .horizontal
+            i.distribution = .fillEqually
+            i.spacing = 1
+        }
+        
+        for i in 0..<numberOfRows {
+            for _ in 0..<numberOfColumns {
+                let stackView = UIStackView()
+                stackView.axis = .horizontal
+                stackView.distribution = .fillEqually
+                stackView.spacing = 1
+                massLayer.append(stackView)
+                let textFieldWindow = UITextField()
+                textFieldWindow.isEnabled = false
+                textFieldWindow.tintColor = UIColor.label
+                textFieldWindow.backgroundColor = UIColor.tertiaryLabel
+                textFieldWindow.layer.cornerRadius = 5
+                textFieldWindow.layer.borderColor = UIColor.gray.cgColor
+                textFieldWindow.layer.borderWidth = 0.1
+                textFieldWindow.font = UIFont(name: "HelveticaNeue-Medium", size: 30.0)
+                textFieldWindow.textAlignment = .center
+                massTextField.append(textFieldWindow)
+                view.addSubview(textFieldWindow)
+                massLayer[i].addArrangedSubview(textFieldWindow)
+            }
+            view.addSubview(massLayer[i])
+            contentViewStackView.addArrangedSubview(massLayer[i])
+        }
+        
+        view.addSubview(contentViewStackView)
+        contentViewStackView.axis = .vertical
+        contentViewStackView.distribution = .fillEqually
+        contentViewStackView.spacing = 1
+        
+        contentViewStackView.snp.makeConstraints { maker in
+            maker.left.equalTo(containerView).inset(10)
+            maker.top.equalTo(containerView).inset(10)
+            maker.right.equalTo(containerView).inset(10)
+            maker.bottom.equalTo(containerView).inset(10)
+        }
+    }
+    
     func createTimer() {
         stopwatch = Timer.scheduledTimer(timeInterval: 1,
                                          target: self,
@@ -238,15 +237,16 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
+        lastWordIndex = Int(sizeWordButton.titleLabel?.text ?? "")!
+        maxLenght = Int((sizeWordButton.titleLabel?.text)!)!
         controllerTextField = 0
         firstWordIndex = 0
         lastWordIndex = maxLenght
         step = 0
         seconds = 0
         createTimer()
-        maxLenght = Int((sizeWordButton.titleLabel?.text)!)!
         sizeWordButton.isEnabled = false
-        puzzleWord = SlovusViewModel.shared.choiceRandomWord()
+        puzzleWord = SlovusViewModel.shared.choiceRandomWord(size: maxLenght)
         print(puzzleWord)
     }
     
@@ -265,6 +265,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         if chekPartGame == (false, false) {
             isstartGame = true
             iscontinuePlaying = true
+            numberOfColumns = Int(sizeWordButton.titleLabel?.text ?? "")!
+            createPlaceGame()
             sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             startNewGame()
         } else if chekPartGame == (true, true) {
@@ -300,7 +302,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func checkTextField(letter: String) {
-        if controllerTextField < lastWordIndex {
+        print(controllerTextField)
+        if controllerTextField <= lastWordIndex {
             if massTextField[controllerTextField].text?.count == 0 {
                 massTextField[controllerTextField].text = letter
                 controllerTextField += 1
@@ -324,7 +327,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func sendWordsTupped() {
-        
         if userWords.count == maxLenght {
             if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
@@ -343,6 +345,15 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func checkCorrctAnswer(massiveAnswer: [Int]) -> Bool {
+        for i in massiveAnswer {
+            if i != 2 {
+                return false
+            }
+        }
+        return true
+    }
+    
     func makeColorTextField(massiveAnswer: [Int], startIndex: Int, lastIndex: Int) {
         let massiveIndex = Array(startIndex..<lastIndex)
         
@@ -359,9 +370,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
         step += 1
         
-        if massiveAnswer == [2, 2, 2, 2, 2] {
+        if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             createAlertMessage(description: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
-        } else if massiveAnswer != [2, 2, 2, 2, 2] && step == 6 {
+        } else if checkCorrctAnswer(massiveAnswer: massiveAnswer) && step == 6 {
             createAlertMessage(description: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
         }
         
@@ -383,7 +394,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxLenghtTapped() {
-        
+        sizeWordButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: sizeWordButton.titleLabel?.text ?? ""), for: .normal)
     }
 
     func createAlertMessage() {
@@ -417,8 +428,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             })
         }
     }
-
-
     
     func restartGame() {
         UIView.animate(withDuration: 0.1) {
