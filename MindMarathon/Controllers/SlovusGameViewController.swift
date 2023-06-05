@@ -372,7 +372,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             createAlertMessage(description: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
-        } else if checkCorrctAnswer(massiveAnswer: massiveAnswer) && step == 6 {
+        } else if step == 6 {
             createAlertMessage(description: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
         }
         

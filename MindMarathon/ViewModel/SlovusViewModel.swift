@@ -135,7 +135,6 @@ class SlovusViewModel {
                 }
             }
         }
-        
         return result
     }
 }
