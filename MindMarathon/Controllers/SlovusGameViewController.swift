@@ -67,6 +67,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
+        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         view.addSubview(playButton)
         
