@@ -154,7 +154,12 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             
             // Вызываем функцию fillCell для закрашивания ячеек
             fillCell(row: selectedCell.tag / gridSize, col: selectedCell.tag % gridSize, color: selectedColor, currentColor: currentColor)
-            FloodFillViewModel.shared.countStep += 1
+            
+            
+            if currentColor != selectedColor {
+                FloodFillViewModel.shared.countStep += 1
+            }
+            print(FloodFillViewModel.shared.countStep)
             // Проверяем, достигнута ли цель
             if checkResult() {
                 stopwatch.invalidate()

@@ -302,8 +302,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func checkTextField(letter: String) {
-        print(controllerTextField)
-        if controllerTextField <= lastWordIndex {
+        if controllerTextField < lastWordIndex {
             if massTextField[controllerTextField].text?.count == 0 {
                 massTextField[controllerTextField].text = letter
                 controllerTextField += 1
