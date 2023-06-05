@@ -70,8 +70,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllView.backgroundColor = .systemBackground
         view.addSubview(panelControllView)
         
-        countButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        countButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        countButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        countButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         countButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         countButton.setTitle("4", for: .normal)
         countButton.tintColor = UIColor.label
@@ -81,6 +81,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameButton), for: .touchUpInside)
+        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         view.addSubview(countButton)
         

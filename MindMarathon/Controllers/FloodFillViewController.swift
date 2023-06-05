@@ -46,6 +46,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         let panelControllStackView = UIStackView()
         
         playButton.addTarget(self, action: #selector(startGameButton), for: .touchUpInside)
+        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .systemBackground
