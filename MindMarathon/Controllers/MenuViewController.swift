@@ -37,6 +37,14 @@ class MenuViewController: UIViewController {
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
+        
+        let whiteBoard = UIButton()
+        whiteBoard.setTitle("Статистика игр", for: .normal)
+        whiteBoard.tintColor = UIColor.label
+        whiteBoard.backgroundColor = UIColor.tertiaryLabel
+        whiteBoard.layer.cornerRadius = 10
+        whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
+        view.addSubview(whiteBoard)
     
         labelFirst.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(100)
@@ -52,12 +60,26 @@ class MenuViewController: UIViewController {
             maker.top.equalTo(labelSecond).inset(250)
             maker.height.equalTo(50)
         }
+        
+        whiteBoard.snp.makeConstraints { maker in
+            maker.left.right.equalToSuperview().inset(10)
+            maker.top.equalTo(startMarathon).inset(80)
+            maker.height.equalTo(50)
+        }
     }
     
     @objc
     func listGameTapped() {
         let listGame = ListGamesViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: listGame)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    
+    @objc
+    func whiteBoardTapped() {
+        let whiteBoard = WhiteboardViewController.instantiate()
+        let navigationController = UINavigationController(rootViewController: whiteBoard)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }

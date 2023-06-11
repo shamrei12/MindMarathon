@@ -372,8 +372,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             createAlertMessage(description: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
+            let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            RealmManager.shared.saveResult(result: resultGame)
+            
         } else if step == 6 {
             createAlertMessage(description: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
+            let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Поражение", countStep: "\(step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            RealmManager.shared.saveResult(result: resultGame)
         }
         
         userWords = ""
