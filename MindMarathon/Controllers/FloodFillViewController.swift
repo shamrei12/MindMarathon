@@ -165,6 +165,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             if checkResult() {
                 stopwatch.invalidate()
                 createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(FloodFillViewModel.shared.countStep) ходов.")
+                let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                RealmManager.shared.saveResult(result: resultGame)
             }
         }
     }
