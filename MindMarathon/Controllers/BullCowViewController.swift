@@ -10,12 +10,12 @@ import SnapKit
 
 class BullCowViewController: UIViewController, AlertDelegate {
     
-    let countButton = UIButton()
-    let userDiggitLabel = UILabel()
-    let dashBoardTextView = UITextView()
-    let timerLabel = UILabel()
-    let deleteLastButton = UIButton()
-    let sendDiggits = UIButton()
+    private let countButton = UIButton()
+    private let userDiggitLabel = UILabel()
+    private let dashBoardTextView = UITextView()
+    private let timerLabel = UILabel()
+    private let deleteLastButton = UIButton()
+    private let sendDiggits = UIButton()
     
     private var stopwatch = Timer()
     private var seconds: Int = 0

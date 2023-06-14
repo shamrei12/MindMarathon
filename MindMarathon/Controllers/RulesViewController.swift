@@ -37,7 +37,7 @@ class RulesViewController: UIViewController {
         view.addSubview(rulesLabel)
         
         
-        gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 15.0)
+        gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         gameRules.textAlignment = .left
         gameRules.numberOfLines = 0
         gameRules.textColor = .label
@@ -49,7 +49,7 @@ class RulesViewController: UIViewController {
         }
         
         gameRules.snp.makeConstraints { maker in
-            maker.top.equalTo(rulesLabel).inset(40)
+            maker.top.equalTo(rulesLabel).inset(20)
             maker.left.right.bottom.equalToSuperview().inset(20)
         }
         

@@ -12,7 +12,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     let timerLabel = UILabel()
     let gameView = UIView()
     let colorView = UIView()
-    
     let contentViewStackView = UIStackView()
     var massLayer = [UIStackView]()
     private var gridSize = 5
@@ -26,7 +25,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var startGame: Bool = false
     private var continuePlaying: Bool = false
     private var colorMassiveButton = [UIButton]()
-    var colorMass = [UIColor.blue, UIColor.cyan, UIColor.green]
+    var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
     private var index = 0
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
@@ -101,16 +100,18 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(colorStackView)
         colorStackView.axis = .horizontal
         colorStackView.distribution = .fillEqually
-        colorStackView.spacing = 50
+        colorStackView.spacing = 10
         
         for i in 0..<colorMass.count {
             let colorButton = UIButton()
             colorButton.backgroundColor = UIColor(cgColor: colorMass[i].cgColor)
+            print(colorMass[i])
             colorButton.layer.cornerRadius = 10
             colorButton.tag = i
+            
             if i == 0 {
-                colorButton.layer.borderColor = UIColor.black.cgColor
-                colorButton.layer.borderWidth = 3
+                colorButton.layer.borderColor = UIColor.label.cgColor
+                colorButton.layer.borderWidth = 2
             }
             colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
             view.addSubview(colorButton)
@@ -121,7 +122,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         colorView.snp.makeConstraints { maker in
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.left.right.bottom.equalToSuperview().inset(10)
-            maker.height.equalTo(100)
+            maker.height.equalTo(80)
             
         }
         
@@ -165,7 +166,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             if checkResult() {
                 stopwatch.invalidate()
                 createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(FloodFillViewModel.shared.countStep) ходов.")
-                let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
@@ -218,7 +219,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     func coloringView() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {
-                let color = colorMass[Int.random(in: 0...2)]
+                let color = colorMass[Int.random(in: 0...colorMass.count - 1)]
                 cells[i][j].backgroundColor = UIColor(cgColor: color.cgColor)
             }
         }
@@ -231,15 +232,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
                 i.layer.borderColor = .none
                 i.layer.borderWidth = 0
             }
-            if sender.tag == 0 {
-                selectedColor = colorMass[0]
-            } else if sender.tag == 1 {
-                selectedColor = colorMass[1]
-            } else if sender.tag == 2 {
-                selectedColor = colorMass[2]
-            }
-            sender.layer.borderColor = UIColor.black.cgColor
-            sender.layer.borderWidth = 3
+            
+            selectedColor = colorMass[sender.tag]
+            sender.layer.borderColor = UIColor.label.cgColor
+            sender.layer.borderWidth = 2
         }
     }
     
@@ -321,6 +317,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         colorView.isUserInteractionEnabled = false
         seconds = 0
         createTimer()
+        gridButton.isEnabled = false
     }
     
     func continueGame() {

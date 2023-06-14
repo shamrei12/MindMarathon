@@ -30,19 +30,23 @@ class GameTableViewCell: UITableViewCell {
         }
         
         gameName.textColor = UIColor.black
-        gameName.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+        gameName.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        gameName.textAlignment = .center
         self.addSubview(gameName)
         
         gameResult.textColor = UIColor.black
-        gameResult.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+        gameResult.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        gameResult.textAlignment = .center
         self.addSubview(gameResult)
         
         gameCount.textColor = UIColor.black
-        gameCount.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+        gameCount.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        gameCount.textAlignment = .center
         self.addSubview(gameCount)
         
         gameTimer.textColor = UIColor.black
-        gameTimer.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+        gameTimer.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        gameTimer.textAlignment = .center
         self.addSubview(gameTimer)
         
         stackView.addArrangedSubview(gameName)
@@ -51,8 +55,8 @@ class GameTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(gameTimer)
         
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
         self.addSubview(stackView)
         
         stackView.snp.makeConstraints { maker in

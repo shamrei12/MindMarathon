@@ -33,11 +33,49 @@ class WhiteboardViewController: UIViewController {
     
     
     func createUI() {
+        let gameNameLabel = UILabel()
+        gameNameLabel.text = "Игра"
+        gameNameLabel.textAlignment = .center
+        gameNameLabel.numberOfLines = 0
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        view.addSubview(gameNameLabel)
+
+        let gameResultLabel = UILabel()
+        gameResultLabel.text = "Статус"
+        gameResultLabel.textAlignment = .center
+        gameResultLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        view.addSubview(gameResultLabel)
+
+        let gameCountLabel = UILabel()
+        gameCountLabel.text = "Ходы"
+        gameCountLabel.textAlignment = .center
+        gameCountLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        view.addSubview(gameCountLabel)
+
+        let gameTimerLabel = UILabel()
+        gameTimerLabel.text = "Время"
+        gameTimerLabel.textAlignment = .center
+        gameTimerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        view.addSubview(gameTimerLabel)
+
+        let labelStackView = UIStackView(arrangedSubviews: [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel])
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.spacing = 5
+        view.addSubview(labelStackView)
+
+        labelStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            maker.left.right.equalToSuperview().inset(25)
+        }
+
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalToSuperview().inset(10)
+            maker.top.equalTo(labelStackView).inset(20)
+            maker.left.right.bottom.equalToSuperview().inset(10)
         }
     }
+
     
     @objc
     func cancelTapped() {
@@ -68,17 +106,16 @@ extension WhiteboardViewController: UITableViewDataSource {
     
     private func configure(cell: GameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let item = gameList[indexPath.row]
-        
-        cell.gameName.text = item.nameGame
-        cell.gameResult.text = item.resultGame
-        cell.gameCount.text = item.countStep
-        cell.gameTimer.text = item.timerGame
-        
-        if item.resultGame == "Победа" {
-            cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        } else {
-            cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
-        }
+            cell.gameName.text = item.nameGame
+            cell.gameResult.text = item.resultGame
+            cell.gameCount.text = item.countStep
+            cell.gameTimer.text = item.timerGame
+            
+            if item.resultGame == "Победа" {
+                cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+            } else {
+                cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
+            }
         return cell
     }
 }
