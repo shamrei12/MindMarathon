@@ -8,7 +8,6 @@
 import UIKit
 
 class SlovusGameViewController: UIViewController, AlertDelegate {
-   
     private var alertView: ResultAlertView!
     private var messegeView: UserMistakeView!
     var massLayer = [UIStackView]()

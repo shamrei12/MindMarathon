@@ -33,9 +33,44 @@ class WhiteboardViewController: UIViewController {
     
     
     func createUI() {
+        let gameNameLabel = UILabel()
+        gameNameLabel.text = "Игра"
+        gameNameLabel.textAlignment = .center
+        view.addSubview(gameNameLabel)
+        let gameResultLabel = UILabel()
+        gameResultLabel.text = "Статус"
+        gameResultLabel.textAlignment = .center
+        view.addSubview(gameResultLabel)
+        let gameCountLabel = UILabel()
+        gameCountLabel.text = "Ходы"
+        gameCountLabel.textAlignment = .center
+        view.addSubview(gameCountLabel)
+        let gameTimerLabel = UILabel()
+        gameTimerLabel.text = "Время"
+        gameTimerLabel.textAlignment = .center
+        view.addSubview(gameTimerLabel)
+        
+        let labelMass = [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel]
+        
+        let labelStackView = UIStackView()
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.spacing = 20
+        
+        for i in labelMass {
+            labelStackView.addArrangedSubview(i)
+        }
+        view.addSubview(labelStackView)
+        
+        labelStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            maker.left.right.equalToSuperview().inset(25)
+        }
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalToSuperview().inset(10)
+            maker.top.equalTo(labelStackView).inset(20)
+            maker.left.right.bottom.equalToSuperview().inset(10)
         }
     }
     
@@ -68,17 +103,16 @@ extension WhiteboardViewController: UITableViewDataSource {
     
     private func configure(cell: GameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let item = gameList[indexPath.row]
-        
-        cell.gameName.text = item.nameGame
-        cell.gameResult.text = item.resultGame
-        cell.gameCount.text = item.countStep
-        cell.gameTimer.text = item.timerGame
-        
-        if item.resultGame == "Победа" {
-            cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        } else {
-            cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
-        }
+            cell.gameName.text = item.nameGame
+            cell.gameResult.text = item.resultGame
+            cell.gameCount.text = item.countStep
+            cell.gameTimer.text = item.timerGame
+            
+            if item.resultGame == "Победа" {
+                cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+            } else {
+                cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
+            }
         return cell
     }
 }
