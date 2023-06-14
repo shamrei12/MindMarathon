@@ -36,43 +36,46 @@ class WhiteboardViewController: UIViewController {
         let gameNameLabel = UILabel()
         gameNameLabel.text = "Игра"
         gameNameLabel.textAlignment = .center
+        gameNameLabel.numberOfLines = 0
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
         view.addSubview(gameNameLabel)
+
         let gameResultLabel = UILabel()
         gameResultLabel.text = "Статус"
         gameResultLabel.textAlignment = .center
+        gameResultLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
         view.addSubview(gameResultLabel)
+
         let gameCountLabel = UILabel()
         gameCountLabel.text = "Ходы"
         gameCountLabel.textAlignment = .center
+        gameCountLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
         view.addSubview(gameCountLabel)
+
         let gameTimerLabel = UILabel()
         gameTimerLabel.text = "Время"
         gameTimerLabel.textAlignment = .center
+        gameTimerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
         view.addSubview(gameTimerLabel)
-        
-        let labelMass = [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel]
-        
-        let labelStackView = UIStackView()
+
+        let labelStackView = UIStackView(arrangedSubviews: [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel])
         labelStackView.axis = .horizontal
         labelStackView.distribution = .fillEqually
-        labelStackView.spacing = 20
-        
-        for i in labelMass {
-            labelStackView.addArrangedSubview(i)
-        }
+        labelStackView.spacing = 5
         view.addSubview(labelStackView)
-        
+
         labelStackView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
             maker.left.right.equalToSuperview().inset(25)
         }
-        
+
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(labelStackView).inset(20)
             maker.left.right.bottom.equalToSuperview().inset(10)
         }
     }
+
     
     @objc
     func cancelTapped() {
