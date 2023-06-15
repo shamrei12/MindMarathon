@@ -40,7 +40,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        selectedColor = .systemBlue
+        guard let firstColor = colorMass.first else {return}
+        selectedColor = firstColor
         let panelControllView = UIView()
         let panelControllStackView = UIStackView()
         
