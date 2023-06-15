@@ -32,6 +32,7 @@ class GameTableViewCell: UITableViewCell {
         gameName.textColor = UIColor.black
         gameName.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         gameName.textAlignment = .center
+        gameName.numberOfLines = 0 
         self.addSubview(gameName)
         
         gameResult.textColor = UIColor.black
@@ -47,6 +48,7 @@ class GameTableViewCell: UITableViewCell {
         gameTimer.textColor = UIColor.black
         gameTimer.font = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         gameTimer.textAlignment = .center
+        gameTimer.numberOfLines = 0
         self.addSubview(gameTimer)
         
         stackView.addArrangedSubview(gameName)
