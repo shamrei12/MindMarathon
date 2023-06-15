@@ -22,13 +22,14 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var messegeView: UserMistakeView!
     private var cells = [[UIView]]()
     private var row = [UIView]()
-    private var startGame: Bool = false
-    private var continuePlaying: Bool = false
+    private var isStartGame: Bool = false
+    private var isContinuePlaying: Bool = false
     private var colorMassiveButton = [UIButton]()
     var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
     private var index = 0
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
+    let playButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     func createUI() {
         selectedColor = .systemBlue
-        let playButton = UIButton()
         let panelControllView = UIView()
         let panelControllStackView = UIStackView()
         
@@ -146,7 +146,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-        let chekPartGame = (startGame, continuePlaying)
+        let chekPartGame = (isStartGame, isContinuePlaying)
         if chekPartGame == (true, true) {
             guard let selectedCell = recognizer.view else {
                 return
@@ -173,6 +173,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createGamePlace(sizePlace: Int) {
+        for view in contentViewStackView.arrangedSubviews {
+            contentViewStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         
         for i in 0..<gridSize {
             let stackView = UIStackView()
@@ -180,7 +184,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             stackView.distribution = .fillEqually
             stackView.spacing = 0
             massLayer.append(stackView)
-            
         }
         
         for i in 0..<gridSize {
@@ -226,7 +229,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectedColorTapped(sender: UIButton) {
-        let chekPartGame = (startGame, continuePlaying)
+        let chekPartGame = (isStartGame, isContinuePlaying)
         if chekPartGame == (true, true) {
             for i in colorMassiveButton {
                 i.layer.borderColor = .none
@@ -291,21 +294,18 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     @objc func startGameButton(_ sender: UIButton) {
         
-        let chekPartGame = (startGame, continuePlaying)
+        let chekPartGame = (isStartGame, isContinuePlaying)
         
         if chekPartGame == (false, false) {
-            startGame = true
-            continuePlaying = true
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            isStartGame = true
+            isContinuePlaying = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            continuePlaying = false
-            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            isContinuePlaying = false
             pauseGame()
         } else {
-            continuePlaying = true
+            isContinuePlaying = true
             continueGame()
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }
     
@@ -318,18 +318,21 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         seconds = 0
         createTimer()
         gridButton.isEnabled = false
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func continueGame() {
         gameView.isUserInteractionEnabled = true
         colorView.isUserInteractionEnabled = true
         createTimer()
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func pauseGame() {
         gameView.isUserInteractionEnabled = false
         colorView.isUserInteractionEnabled = false
         stopwatch.invalidate()
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
     
@@ -352,11 +355,13 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
-        alertView.removeFromSuperview()
+        pauseGame()
+        timerLabel.text = "0"
+        gridButton.isEnabled = true
+        isContinuePlaying = false
+        isStartGame = false
         FloodFillViewModel.shared.countStep = 0
-        coloringView()
-        seconds = 0
-        createTimer()
+        alertView.removeFromSuperview()
     }
     
     func exitGame() {

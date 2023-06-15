@@ -16,11 +16,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
     private let sendDiggits = UIButton()
+    private let playButton = UIButton()
     
     private var stopwatch = Timer()
     private var seconds: Int = 0
-    private var startGame: Bool = false
-    private var continuePlaying: Bool = false
+    private var isStartGame: Bool = false
+    private var isContinueGame: Bool = false
     private var game: BullCowViewModel!
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
@@ -41,7 +42,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     func createUIElements() {
-        let playButton = UIButton()
         let panelControllStackView = UIStackView()
         let panelInputContollStackView = UIStackView()
         let twiceInputLayerStackView = UIStackView()
@@ -224,7 +224,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     @objc func diggitsTapped(_ sender: UIButton) {
-        if startGame && continuePlaying {
+        if isStartGame && isContinueGame {
             if userDiggitLabel.text!.count < maxLenght {
                 userDiggitLabel.text! += "\(sender.tag)"
             }
@@ -237,42 +237,41 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func statGame() {
+    func startNewGame() {
         seconds = 0
         createTimer()
         dashBoardTextView.text = ""
         maxLenght = Int((countButton.titleLabel?.text)!)!
         countButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func continueGame() {
         createTimer()
         makeResultText(partGame: "Игра возобновлена \n")
-        
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func pauseGame() {
         stopwatch.invalidate()
         makeResultText(partGame: "Игра приостановлена\n")
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
     @objc func startGameButton(_ sender: UIButton) {
-        let chekPartGame = (startGame, continuePlaying)
+        let chekPartGame = (isStartGame, isContinueGame)
         
         if chekPartGame == (false, false) {
-            startGame = true
-            continuePlaying = true
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            statGame()
+            isStartGame = true
+            isContinueGame = true
+            startNewGame()
         } else if chekPartGame == (true, true) {
-            continuePlaying = false
-            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            isContinueGame = false
             pauseGame()
         } else {
-            continuePlaying = true
+            isContinueGame = true
             continueGame()
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
     }
     
@@ -299,7 +298,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     @objc func sendDiggitTapped(_ sender: UIButton) {
-        if startGame && userDiggitLabel.text?.count == maxLenght {
+        if isStartGame && userDiggitLabel.text?.count == maxLenght {
             countStep += 1
             let (bull, cow) = game.comparisonNumber( game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
             makeResultText(result: (bull, cow), userMove: userDiggitLabel.text!)
@@ -329,8 +328,13 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
+        pauseGame()
+        timerLabel.text = "0"
+        countButton.isEnabled = true
+        isStartGame = false
+        isContinueGame = false
+        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
         alertView.removeFromSuperview()
-        statGame()
     }
     
     func exitGame() {
