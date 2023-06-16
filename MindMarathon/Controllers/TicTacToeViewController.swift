@@ -7,7 +7,11 @@
 
 import UIKit
 
-class TicTacToeViewController: UIViewController {
+class TicTacToeViewController: UIViewController, AlertDelegate {
+    
+    
+   
+    
     
     private var alertView: ResultAlertView!
     var vStackView: UIStackView!
@@ -20,6 +24,8 @@ class TicTacToeViewController: UIViewController {
     var playButton: UIButton!
     var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
+    var seconds = 0
+    private var stopwatch = Timer()
     
     var isstartGame = false
     var iscontinuePlaying = false
@@ -40,6 +46,7 @@ class TicTacToeViewController: UIViewController {
         setupNavigationBar()
         createUI()
         createConstraints()
+        createTimer()
     }
     
     func setupNavigationBar() {
@@ -261,9 +268,13 @@ class TicTacToeViewController: UIViewController {
         
         if isUserWon {
             print("user won")
+            createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
         }
         else {
-            guard let position = computerMove(board: board) else {return}
+            guard let position = computerMove(board: board) else {
+                createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                return
+             }
             print(position)
             setComputerTurn(row: position.0, col: position.1)
         }
@@ -277,6 +288,7 @@ class TicTacToeViewController: UIViewController {
         
         if isComputerWon {
             print("computer won")
+            createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
         }
         print(board)
     }
@@ -299,21 +311,22 @@ class TicTacToeViewController: UIViewController {
             return position
         }
         
-        // Проверяем, есть ли у игрока возможность выиграть и блокируем его ход, если есть
+        // Проверяем, есть ли у пользователя возможность выиграть и блокируем его ход, если есть
         if let position = findWinningMove(board: board, symbol: "X") {
             return position
         }
         
-        // Если нет возможности выиграть и блокировать игрока, выбираем случайную пустую клетку
+        // Выбираем случайную пустую клетку
         let emptyPositions = findEmptyPositions(board: board)
         if emptyPositions.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emptyPositions.count)))
             return emptyPositions[randomIndex]
         }
         
-        // Если все клетки заняты и никто не выиграл, возвращаем nil
+        // Если все клетки заняты и никто не выиграл, возвращаем nil, что означает ничью
         return nil
     }
+
 
     // Функция для поиска пустых клеток на доске
     func findEmptyPositions(board: [[String]]) -> [(Int, Int)] {
@@ -374,6 +387,35 @@ class TicTacToeViewController: UIViewController {
         // Если нет победителя, возвращаем false
         return false
     }
+    
+    func createTimer() {
+        stopwatch = Timer.scheduledTimer(timeInterval: 1,
+                                         target: self,
+                                         selector: #selector(updateTimer),
+                                         userInfo: nil,
+                                         repeats: true)
+    }
+    
+    
+    @objc func updateTimer() {
+        seconds += 1
+        timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+    }
+    
+    
+    func createAlertMessage(description: String) {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 0.6
+            self.view.isUserInteractionEnabled = false
+        }
+        
+        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
+        alertView.delegate = self
+        alertView.descriptionLabel.text = description
+        UIApplication.shared.keyWindow?.addSubview(alertView)
+        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
+                                   y: self.view.frame.size.height / 2)
+    }
 
     
     
@@ -392,6 +434,14 @@ class TicTacToeViewController: UIViewController {
             iscontinuePlaying = true
             continueGame()
         }
+    }
+    
+    func restartGame() {
+        print("restart")
+    }
+    
+    func exitGame() {
+        print("exit")
     }
     
     func startNewGame() {
