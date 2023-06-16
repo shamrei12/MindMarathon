@@ -16,6 +16,7 @@ class TicTacToeViewController: UIViewController {
     var hStackViewThird: UIStackView!
     var gameContainerView: UIView!
     var gameControllerView: UIView!
+    var gameStatusBarView: UIView!
     var playButton: UIButton!
     var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
@@ -24,9 +25,9 @@ class TicTacToeViewController: UIViewController {
     var iscontinuePlaying = false
     
     var board: [[String]] =
-       [["","",""],
-        ["","",""],
-        ["","",""]]
+    [["","",""],
+     ["","",""],
+     ["","",""]]
     
     var buttonBoard: [[UIButton]] = [
         [UIButton(), UIButton(), UIButton()],
@@ -79,6 +80,11 @@ class TicTacToeViewController: UIViewController {
         gameContainerView.backgroundColor = .systemBackground
         view.addSubview(gameContainerView)
         
+        gameStatusBarView = UIView()
+        gameStatusBarView.layer.cornerRadius = 10
+        gameStatusBarView.backgroundColor = .systemBackground
+        view.addSubview(gameStatusBarView)
+        
         hStackViewFirst = UIStackView()
         hStackViewFirst.axis = .horizontal
         hStackViewFirst.distribution = .fillEqually
@@ -112,8 +118,8 @@ class TicTacToeViewController: UIViewController {
         self.view.addSubview(vStackView)
         fillStackViews()
     }
-
-
+    
+    
     func createConstraints() {
         vStackView.snp.makeConstraints { make in
             make.width.height.equalTo(350)
@@ -135,6 +141,13 @@ class TicTacToeViewController: UIViewController {
             make.height.equalToSuperview().multipliedBy(0.6)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+        
+        gameStatusBarView.snp.makeConstraints { make in
+            make.width.equalTo(gameControllerView)
+            make.height.equalTo(gameControllerView).multipliedBy(2)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(self.view.snp.bottom).offset(-50)
         }
     }
     
@@ -244,6 +257,27 @@ class TicTacToeViewController: UIViewController {
     func setUserTurn(row: Int, col: Int) {
         drawUserTurn(row: row, col: col)
         board[row][col] = "X"
+        let isUserWon = checkForWinner(board: board, symbol: "X")
+        
+        if isUserWon {
+            print("user won")
+        }
+        else {
+            guard let position = computerMove(board: board) else {return}
+            print(position)
+            setComputerTurn(row: position.0, col: position.1)
+        }
+        print(board)
+    }
+    
+    func setComputerTurn(row: Int, col: Int) {
+        drawComputerTurn(row: row, col: col)
+        board[row][col] = "O"
+        let isComputerWon = checkForWinner(board: board, symbol: "O")
+        
+        if isComputerWon {
+            print("computer won")
+        }
         print(board)
     }
     
@@ -251,11 +285,97 @@ class TicTacToeViewController: UIViewController {
         buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
         buttonBoard[row][col].setTitle("X", for: .normal)
     }
+   
     
     func drawComputerTurn(row: Int, col: Int) {
         buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
         buttonBoard[row][col].setTitle("O", for: .normal)
     }
+    
+    // Функция для определения хода компьютера
+    func computerMove(board: [[String]]) -> (Int, Int)? {
+        // Проверяем, есть ли у компьютера возможность выиграть
+        if let position = findWinningMove(board: board, symbol: "O") {
+            return position
+        }
+        
+        // Проверяем, есть ли у игрока возможность выиграть и блокируем его ход, если есть
+        if let position = findWinningMove(board: board, symbol: "X") {
+            return position
+        }
+        
+        // Если нет возможности выиграть и блокировать игрока, выбираем случайную пустую клетку
+        let emptyPositions = findEmptyPositions(board: board)
+        if emptyPositions.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(emptyPositions.count)))
+            return emptyPositions[randomIndex]
+        }
+        
+        // Если все клетки заняты и никто не выиграл, возвращаем nil
+        return nil
+    }
+
+    // Функция для поиска пустых клеток на доске
+    func findEmptyPositions(board: [[String]]) -> [(Int, Int)] {
+        var emptyPositions = [(Int, Int)]()
+        for row in 0..<board.count {
+            for col in 0..<board[row].count {
+                if board[row][col] == "" {
+                    emptyPositions.append((row, col))
+                }
+            }
+        }
+        return emptyPositions
+    }
+    
+    // Функция для поиска выигрышного хода
+    func findWinningMove(board: [[String]], symbol: String) -> (Int, Int)? {
+        for row in 0..<board.count {
+            for col in 0..<board[row].count {
+                if board[row][col] == "" {
+                    // Проверяем, выиграет ли игрок, если он поставит свой символ на эту клетку
+                    var newBoard = board
+                    newBoard[row][col] = symbol
+                    if checkForWinner(board: newBoard, symbol: symbol) {
+                        return (row, col)
+                    }
+                }
+            }
+        }
+        return nil
+    }
+
+
+    
+    
+    func checkForWinner(board: [[String]], symbol: String) -> Bool {
+        // Проверяем горизонтали
+        for row in 0..<board.count {
+            if board[row][0] == symbol && board[row][1] == symbol && board[row][2] == symbol {
+                return true
+            }
+        }
+        
+        // Проверяем вертикали
+        for col in 0..<board[0].count {
+            if board[0][col] == symbol && board[1][col] == symbol && board[2][col] == symbol {
+                return true
+            }
+        }
+        
+        // Проверяем диагонали
+        if board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol {
+            return true
+        }
+        if board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol {
+            return true
+        }
+        
+        // Если нет победителя, возвращаем false
+        return false
+    }
+
+    
     
     @objc func startGameTapped(_ sender: UIButton) {
         
@@ -269,7 +389,7 @@ class TicTacToeViewController: UIViewController {
             iscontinuePlaying = false
             pauseGame()
         } else {
-           iscontinuePlaying = true
+            iscontinuePlaying = true
             continueGame()
         }
     }
