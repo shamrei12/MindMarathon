@@ -10,6 +10,7 @@
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D22A3BB1A000913E01 /* TicTacToeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1122D9D12A3BB1A000913E01 /* TicTacToeViewController.xib */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
+		1122D9D62A3C5AA700913E01 /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D52A3C5AA700913E01 /* TicTacToeModel.swift */; };
 		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
 		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
@@ -54,6 +55,7 @@
 		1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		1122D9D12A3BB1A000913E01 /* TicTacToeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicTacToeViewController.xib; sourceTree = "<group>"; };
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
+		1122D9D52A3C5AA700913E01 /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
 		5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,11 +217,11 @@
 				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
 				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
+				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
 				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
 				D88221662A16042B00531EED /* ListGamesViewController.swift */,
 				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
 				D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */,
-				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */,
+				1122D9D52A3C5AA700913E01 /* TicTacToeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
+				1122D9D62A3C5AA700913E01 /* TicTacToeModel.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
