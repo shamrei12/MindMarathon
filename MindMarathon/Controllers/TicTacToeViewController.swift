@@ -46,7 +46,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         setupNavigationBar()
         createUI()
         createConstraints()
-        createTimer()
     }
     
     func setupNavigationBar() {
@@ -167,6 +166,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             button.tag = tag
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             button.backgroundColor = .systemBackground
+            button.isUserInteractionEnabled = false
             
             hStackViewFirst.addArrangedSubview(button)
             buttonBoard[0][tag] = button
@@ -179,6 +179,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
             button.backgroundColor = .systemBackground
+            button.isUserInteractionEnabled = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             
             hStackViewSecond.addArrangedSubview(button)
@@ -192,6 +193,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
             button.backgroundColor = .systemBackground
+            button.isUserInteractionEnabled = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             
             hStackViewThird.addArrangedSubview(button)
@@ -199,6 +201,34 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             counter += 1
             tag += 1
         }
+    }
+    
+    func openGameField() {
+        for row in buttonBoard {
+            for button in row {
+                button.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    func closeGameField() {
+            for row in buttonBoard {
+                for button in row {
+                    button.isUserInteractionEnabled = false
+                }
+            }
+    }
+    
+    func clearGameField() {
+
+        for row in buttonBoard {
+            for button in row {
+                button.isUserInteractionEnabled = false
+                button.setTitle("", for: .normal)
+            }
+        }
+        board = [["","",""], ["","",""], ["","",""]]
+       
     }
     
     @objc func cancelTapped() {
@@ -296,12 +326,14 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     func drawUserTurn(row: Int, col: Int) {
         buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
         buttonBoard[row][col].setTitle("X", for: .normal)
+        buttonBoard[row][col].isUserInteractionEnabled = false
     }
    
     
     func drawComputerTurn(row: Int, col: Int) {
         buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
         buttonBoard[row][col].setTitle("O", for: .normal)
+        buttonBoard[row][col].isUserInteractionEnabled = false
     }
     
     // Функция для определения хода компьютера
@@ -408,7 +440,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             self.view.alpha = 0.6
             self.view.isUserInteractionEnabled = false
         }
-        
+        stopwatch.invalidate()
         alertView = ResultAlertView.loadFromNib() as? ResultAlertView
         alertView.delegate = self
         alertView.descriptionLabel.text = description
@@ -420,7 +452,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     
     @objc func startGameTapped(_ sender: UIButton) {
-        
         let chekPartGame = (isstartGame, iscontinuePlaying)
         
         if chekPartGame == (false, false) {
@@ -436,23 +467,44 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func restartGame() {
-        print("restart")
-    }
-    
-    func exitGame() {
-        print("exit")
-    }
-    
     func startNewGame() {
-        
-    }
-    
-    func pauseGame() {
-        
+        seconds = 0
+        createTimer()
+        openGameField()
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func continueGame() {
-        
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        createTimer()
+        openGameField()
+    }
+    
+    func pauseGame() {
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        stopwatch.invalidate()
+        closeGameField()
+    }
+    
+    func restartGame() {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1.0
+            self.view.isUserInteractionEnabled = true
+        }
+        clearGameField()
+        alertView.removeFromSuperview()
+        startNewGame()
+        timerLabel.text = "0"
+        isstartGame = true
+        iscontinuePlaying = true
+    }
+    
+    func exitGame() {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1.0
+            self.view.isUserInteractionEnabled = true
+        }
+        alertView.removeFromSuperview()
+        self.dismiss(animated: true)
     }
 }
