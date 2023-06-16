@@ -102,14 +102,13 @@ class TicTacToeViewController: UIViewController {
         vStackView.addArrangedSubview(hStackViewThird)
         vStackView.spacing = 5
         vStackView.distribution = .fillEqually
-        vStackView.backgroundColor = .gray
+        vStackView.backgroundColor = .systemGray2
         
         self.view.addSubview(vStackView)
         fillStackViews()
     }
-    
-   
-    
+
+
     func createConstraints() {
         vStackView.snp.makeConstraints { make in
             make.width.height.equalTo(350)
@@ -127,8 +126,10 @@ class TicTacToeViewController: UIViewController {
         }
         
         gameContainerView.snp.makeConstraints { make in
-            make.top.equalTo(gameControllerView.snp.bottom).inset(-10)
-            make.left.right.equalToSuperview().inset(10)
+            make.width.equalTo(gameControllerView)
+            make.height.equalToSuperview().multipliedBy(0.65)
+            make.centerX.equalTo(self.view)
+            make.top.equalTo(gameControllerView.snp.bottom).offset(20)
         }
     }
     
@@ -137,21 +138,21 @@ class TicTacToeViewController: UIViewController {
         
         for _ in counter...3{
             let button = UIButton()
-            button.backgroundColor = .secondarySystemBackground
+            button.backgroundColor = .systemBackground
             hStackViewFirst.addArrangedSubview(button)
             counter += 1
         }
         counter = 1
         for _ in counter...3{
             let button = UIButton()
-            button.backgroundColor = .secondarySystemBackground
+            button.backgroundColor = .systemBackground
             hStackViewSecond.addArrangedSubview(button)
             counter += 1
         }
         counter = 1
         for _ in counter...3{
             let button = UIButton()
-            button.backgroundColor = .secondarySystemBackground
+            button.backgroundColor = .systemBackground
             hStackViewThird.addArrangedSubview(button)
             counter += 1
         }
