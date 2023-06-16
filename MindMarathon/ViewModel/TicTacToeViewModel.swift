@@ -9,6 +9,7 @@ import Foundation
 
 
 class TicTacToeViewModel {
+    
     static var shared: TicTacToeViewModel = {
         let instance = TicTacToeViewModel()
         return instance
@@ -28,4 +29,11 @@ class TicTacToeViewModel {
         
         return gameRules
     }
+    
+    
+    
+    
+    
+    
+    
 }
