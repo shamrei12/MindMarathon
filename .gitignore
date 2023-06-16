@@ -93,3 +93,4 @@ iOSInjectionProject/
 *.resolve
 xcuserdata
 Pods/
+Package.resolved

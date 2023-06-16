@@ -83,6 +83,21 @@ class ListGamesViewController: UIViewController {
         }
         
         
+        let ticTacToeButton = UIButton()
+        
+        ticTacToeButton.setTitle("Крестики Нолики", for: .normal)
+        ticTacToeButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        ticTacToeButton.backgroundColor = UIColor.tertiaryLabel
+        ticTacToeButton.layer.cornerRadius = 10
+        ticTacToeButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        ticTacToeButton.addTarget(self, action: #selector(ticTacToeTapped), for: .touchUpInside)
+        view.addSubview(ticTacToeButton)
+        
+        ticTacToeButton.snp.makeConstraints { make in
+            make.top.equalTo(floodFillButton).inset(70)
+            make.left.right.equalToSuperview().inset(10)
+        }
+        
     }
     
     @objc
@@ -108,6 +123,13 @@ class ListGamesViewController: UIViewController {
     @objc func floodFillTapped() {
         let floodFillGame = FloodFillViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: floodFillGame)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
+    
+    @objc func ticTacToeTapped() {
+        let ticTacToeGame = TicTacToeViewController.instantiate()
+        let navigationController = UINavigationController(rootViewController: ticTacToeGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
