@@ -23,10 +23,15 @@ class TicTacToeViewController: UIViewController {
     var isstartGame = false
     var iscontinuePlaying = false
     
-    var board: [TicTacToeCell] = [
-        TicTacToeCell(),  TicTacToeCell(),  TicTacToeCell(),
-        TicTacToeCell(),  TicTacToeCell(),  TicTacToeCell(),
-        TicTacToeCell(),  TicTacToeCell(),  TicTacToeCell()]
+    var board: [[String]] =
+       [["","",""],
+        ["","",""],
+        ["","",""]]
+    
+    var buttonBoard: [[UIButton]] = [
+        [UIButton(), UIButton(), UIButton()],
+        [ UIButton(), UIButton(), UIButton()],
+        [ UIButton(), UIButton(), UIButton()]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,34 +132,52 @@ class TicTacToeViewController: UIViewController {
         
         gameContainerView.snp.makeConstraints { make in
             make.width.equalTo(gameControllerView)
-            make.height.equalToSuperview().multipliedBy(0.65)
-            make.centerX.equalTo(self.view)
-            make.top.equalTo(gameControllerView.snp.bottom).offset(20)
+            make.height.equalToSuperview().multipliedBy(0.6)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
     }
     
     func fillStackViews() {
         var counter = 1
-        
+        var tag = 0
         for _ in counter...3{
             let button = UIButton()
+            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
+            button.tag = tag
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             button.backgroundColor = .systemBackground
+            
             hStackViewFirst.addArrangedSubview(button)
+            buttonBoard[0][tag] = button
             counter += 1
+            tag += 1
         }
         counter = 1
         for _ in counter...3{
             let button = UIButton()
+            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
+            button.tag = tag
             button.backgroundColor = .systemBackground
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
+            
             hStackViewSecond.addArrangedSubview(button)
+            buttonBoard[1][tag-3] = button
             counter += 1
+            tag += 1
         }
         counter = 1
         for _ in counter...3{
             let button = UIButton()
+            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
+            button.tag = tag
             button.backgroundColor = .systemBackground
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
+            
             hStackViewThird.addArrangedSubview(button)
+            buttonBoard[2][tag-6] = button
             counter += 1
+            tag += 1
         }
     }
     
@@ -172,6 +195,67 @@ class TicTacToeViewController: UIViewController {
         present(rulesVC, animated: true)
     }
     
+    
+    @objc func playerMove(_ sender: UIButton) {
+        print(sender.tag)
+        var row = 0
+        var col = 0
+        switch sender.tag {
+        case 0:
+            row = 0
+            col = 0
+            setUserTurn(row: row, col: col)
+        case 1:
+            row = 0
+            col = 1
+            setUserTurn(row: row, col: col)
+        case 2:
+            row = 0
+            col = 2
+            setUserTurn(row: row, col: col)
+        case 3:
+            row = 1
+            col = 0
+            setUserTurn(row: row, col: col)
+        case 4:
+            row = 1
+            col = 1
+            setUserTurn(row: row, col: col)
+        case 5:
+            row = 1
+            col = 2
+            setUserTurn(row: row, col: col)
+        case 6:
+            row = 2
+            col = 0
+            setUserTurn(row: row, col: col)
+        case 7:
+            row = 2
+            col = 1
+            setUserTurn(row: row, col: col)
+        case 8:
+            row = 2
+            col = 2
+            setUserTurn(row: row, col: col)
+        default: return
+        }
+    }
+    
+    func setUserTurn(row: Int, col: Int) {
+        drawUserTurn(row: row, col: col)
+        board[row][col] = "X"
+        print(board)
+    }
+    
+    func drawUserTurn(row: Int, col: Int) {
+        buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
+        buttonBoard[row][col].setTitle("X", for: .normal)
+    }
+    
+    func drawComputerTurn(row: Int, col: Int) {
+        buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
+        buttonBoard[row][col].setTitle("O", for: .normal)
+    }
     
     @objc func startGameTapped(_ sender: UIButton) {
         
