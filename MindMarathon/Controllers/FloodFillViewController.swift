@@ -164,7 +164,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             if currentColor != selectedColor {
                 FloodFillViewModel.shared.countStep += 1
             }
-            print(FloodFillViewModel.shared.countStep)
             // Проверяем, достигнута ли цель
             if checkResult() {
                 stopwatch.invalidate()
