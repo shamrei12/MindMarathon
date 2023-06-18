@@ -48,6 +48,8 @@
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
 		D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */; };
+		D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */; };
+		D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,8 @@
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulesViewController.xib; sourceTree = "<group>"; };
+		D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameTableViewCell.swift; sourceTree = "<group>"; };
+		D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGameTableViewCell.xib; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +209,8 @@
 			children = (
 				D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */,
 				D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */,
+				D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */,
+				D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -375,6 +381,7 @@
 				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
 				1122D9D22A3BB1A000913E01 /* TicTacToeViewController.xib in Resources */,
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
+				D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */,
 				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
 				D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */,
 				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
@@ -451,6 +458,7 @@
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
+				D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */,
 				D826CF392A11600300263CEB /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

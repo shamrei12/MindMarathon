@@ -9,10 +9,6 @@ import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
     
-    
-   
-    
-    
     private var alertView: ResultAlertView!
     var vStackView: UIStackView!
     var hStackViewFirst: UIStackView!
@@ -541,8 +537,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
                                    y: self.view.frame.size.height / 2)
     }
-
-    
     
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isstartGame, iscontinuePlaying)

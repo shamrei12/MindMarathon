@@ -30,10 +30,4 @@ class TicTacToeViewModel {
         return gameRules
     }
     
-    
-    
-    
-    
-    
-    
 }

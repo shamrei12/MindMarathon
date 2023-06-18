@@ -25,7 +25,7 @@ struct WhiteBoardModel: WhiteBoardProtocol {
     var resultGame: String
     var countStep: String
     var timerGame: String
-   
+
 }
 
 class WhiteBoardManager: Object {
@@ -41,5 +41,4 @@ class WhiteBoardManager: Object {
         self.countStep = countStep
         self.timerGame = timerGame
     }
-
 }

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class MenuViewController: UIViewController {
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,3 +85,4 @@ class MenuViewController: UIViewController {
         present(navigationController, animated: true)
     }
 }
+
