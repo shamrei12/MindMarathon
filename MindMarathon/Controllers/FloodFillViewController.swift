@@ -174,6 +174,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createGamePlace(sizePlace: Int) {
+        cells.removeAll()
+//         Удаляем все элементы из contentViewStackView
         for view in contentViewStackView.arrangedSubviews {
             contentViewStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
@@ -217,8 +219,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(gameView).inset(10)
         }
         
+        // Переносим вызов функции сюда
         coloringView()
     }
+    
     
     func coloringView() {
         for i in 0..<gridSize {
@@ -312,10 +316,11 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     func startNewGame() {
         let size = gridButton.titleLabel?.text ?? ""
-        gridSize = Int(size) ?? 5
+        gridSize = Int(size)!
+        print(gridSize)
         createGamePlace(sizePlace: gridSize)
-        gameView.isUserInteractionEnabled = false
-        colorView.isUserInteractionEnabled = false
+//        gameView.isUserInteractionEnabled = false
+//        colorView.isUserInteractionEnabled = false
         seconds = 0
         createTimer()
         gridButton.isEnabled = false
@@ -357,6 +362,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             self.view.isUserInteractionEnabled = true
         }
         pauseGame()
+        index = 0
         timerLabel.text = "0"
         gridButton.isEnabled = true
         isContinuePlaying = false

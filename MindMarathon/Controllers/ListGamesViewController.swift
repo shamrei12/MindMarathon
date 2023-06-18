@@ -10,94 +10,28 @@ import SnapKit
 
 
 class ListGamesViewController: UIViewController {
+    let tableView = UITableView()
+    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.title = "Список игр"
+        tableView.register(UINib(nibName: "ListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "ListGameTableViewCell")
+        tableView.separatorColor = .none
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
         createUI()
     }
     
     func createUI() {
-        
-        let bullCowButton = UIButton()
-        let bullCowStackView = UIStackView()
-        
-        bullCowButton.setTitle("Быки и Коровы", for: .normal)
-        bullCowButton.titleLabel?.font = UIFont (name: "HelveticaNeue-Bold", size: 20.0)
-        bullCowButton.backgroundColor = UIColor.tertiaryLabel
-        bullCowButton.layer.cornerRadius = 10
-        bullCowButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        bullCowButton.addTarget(self, action: #selector(bullCowButtonTapped), for: .touchUpInside)
-        view.addSubview(bullCowButton)
-        
-        bullCowStackView.addArrangedSubview(bullCowButton)
-        bullCowStackView.distribution = .fill
-        bullCowStackView.axis = .vertical
-        bullCowStackView.spacing = 5
-        view.addSubview(bullCowStackView)
-        
-        bullCowStackView.snp.makeConstraints { maker in
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            maker.left.right.equalToSuperview().inset(10)
+            maker.left.right.bottom.equalToSuperview().inset(10)
         }
-        
-        let slovusButton = UIButton()
-        let slovusStackView = UIStackView()
-        
-        
-        slovusButton.setTitle("Словус", for: .normal)
-        slovusButton.titleLabel?.font = UIFont (name: "HelveticaNeue-Bold", size: 20.0)
-        slovusButton.backgroundColor = UIColor.tertiaryLabel
-        slovusButton.layer.cornerRadius = 10
-        slovusButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        slovusButton.addTarget(self, action: #selector(slovusButtonTapped), for: .touchUpInside)
-        view.addSubview(slovusButton)
-        
-        slovusStackView.addArrangedSubview(slovusButton)
-        slovusStackView.distribution = .fill
-        slovusStackView.axis = .vertical
-        slovusStackView.spacing = 5
-        
-        view.addSubview(slovusStackView)
-        
-        slovusStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(bullCowStackView).inset(70)
-            maker.left.right.equalToSuperview().inset(10)
-        }
-        
-        let floodFillButton = UIButton()
-        
-        floodFillButton.setTitle("Заливка", for: .normal)
-        floodFillButton.titleLabel?.font = UIFont (name: "HelveticaNeue-Bold", size: 20.0)
-        floodFillButton.backgroundColor = UIColor.tertiaryLabel
-        floodFillButton.layer.cornerRadius = 10
-        floodFillButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        floodFillButton.addTarget(self, action: #selector(floodFillTapped), for: .touchUpInside)
-        view.addSubview(floodFillButton)
-        
-        floodFillButton.snp.makeConstraints { maker in
-            maker.top.equalTo(slovusStackView).inset(70)
-            maker.left.right.equalToSuperview().inset(10)
-        }
-        
-        
-        let ticTacToeButton = UIButton()
-        
-        ticTacToeButton.setTitle("Крестики Нолики", for: .normal)
-        ticTacToeButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
-        ticTacToeButton.backgroundColor = UIColor.tertiaryLabel
-        ticTacToeButton.layer.cornerRadius = 10
-        ticTacToeButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        ticTacToeButton.addTarget(self, action: #selector(ticTacToeTapped), for: .touchUpInside)
-        view.addSubview(ticTacToeButton)
-        
-        ticTacToeButton.snp.makeConstraints { make in
-            make.top.equalTo(floodFillButton).inset(70)
-            make.left.right.equalToSuperview().inset(10)
-        }
-        
     }
     
     @objc
@@ -113,25 +47,69 @@ class ListGamesViewController: UIViewController {
         present(navigationController, animated: true)
     }
     
-    @objc func slovusButtonTapped() {
+    @objc
+    func slovusButtonTapped() {
         let slovusGame = SlovusGameViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: slovusGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
     
-    @objc func floodFillTapped() {
+    @objc
+    func floodFillTapped() {
         let floodFillGame = FloodFillViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: floodFillGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
     
-    @objc func ticTacToeTapped() {
+    @objc
+    func ticTacToeTapped() {
         let ticTacToeGame = TicTacToeViewController.instantiate()
         let navigationController = UINavigationController(rootViewController: ticTacToeGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+}
+
+extension ListGamesViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        gameList.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: ListGameTableViewCell
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "ListGameTableViewCell") as? ListGameTableViewCell {
+            cell = reuseCell
+        } else {
+            cell = ListGameTableViewCell()
+        }
+        
+        return configure(cell: cell, for: indexPath)
+    }
+    
+    private func configure(cell: ListGameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        let index = Int(indexPath.row)
+        let countGame = gameList[index]
+        cell.gameButton.tag = index
+        cell.gameButton.setTitle(countGame.first?.key, for: .normal)
+        cell.createBy.text = "created by \(String(describing: countGame.first!.value))"
+        
+        if indexPath.row == 0 {
+            cell.gameButton.addTarget(self, action: #selector(bullCowButtonTapped), for: .touchUpInside)
+        } else if indexPath.row == 1 {
+            cell.gameButton.addTarget(self, action: #selector(slovusButtonTapped), for: .touchUpInside)
+        } else if indexPath.row == 2 {
+            cell.gameButton.addTarget(self, action: #selector(floodFillTapped), for: .touchUpInside)
+        } else if indexPath.row == 3 {
+            cell.gameButton.addTarget(self, action: #selector(ticTacToeTapped), for: .touchUpInside)
+        }
+        return cell
+    }
+}
+
+extension ListGamesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }
