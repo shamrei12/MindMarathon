@@ -23,6 +23,8 @@ class ListGamesViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        self.view.backgroundColor = UIColor(named: "viewColor")
+        tableView.backgroundColor = UIColor.clear
         createUI()
     }
     

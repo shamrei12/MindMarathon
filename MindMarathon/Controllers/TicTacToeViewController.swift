@@ -49,6 +49,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
+        self.view.backgroundColor = UIColor(named: "viewColor")
         setupNavigationBar()
         createUI()
         createConstraints()
@@ -63,7 +64,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameControllerView = UIView()
         gameControllerView.layer.cornerRadius = 10
-        gameControllerView.backgroundColor = .systemBackground
+        gameControllerView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameControllerView)
         
         playButton = UIButton()
@@ -86,20 +87,19 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameControllerStackView.distribution = .equalCentering
         view.addSubview(gameControllerStackView)
         
-        
         gameContainerView = UIView()
         gameContainerView.layer.cornerRadius = 10
-        gameContainerView.backgroundColor = .systemBackground
+        gameContainerView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameContainerView)
         
         gameStatusBarView = UIView()
         gameStatusBarView.layer.cornerRadius = 10
-        gameStatusBarView.backgroundColor = .systemBackground
+        gameStatusBarView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameStatusBarView)
         
         gameStatusBarComputerLabel = UILabel()
         gameStatusBarComputerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        gameStatusBarComputerLabel.textColor = .black
+        gameStatusBarComputerLabel.textColor = .label
         gameStatusBarComputerLabel.textAlignment = .center
         gameStatusBarComputerLabel.text = "Компьютер думает..."
         gameStatusBarComputerLabel.alpha = 0
@@ -108,14 +108,14 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameStatusPlayerLabel = UILabel()
         gameStatusPlayerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        gameStatusPlayerLabel.textColor = .black
+        gameStatusPlayerLabel.textColor = .label
         gameStatusPlayerLabel.textAlignment = .center
         gameStatusPlayerLabel.text = "Ваш ход!"
         gameStatusBarView.addSubview(gameStatusPlayerLabel)
         
         
         gameStatusSpinner = UIActivityIndicatorView()
-        gameStatusSpinner.color = .black
+        gameStatusSpinner.color = .label
         gameStatusSpinner.startAnimating()
         gameStatusSpinner.alpha = 0
         self.gameStatusBarView.addSubview(gameStatusSpinner)
@@ -124,6 +124,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         hStackViewFirst.axis = .horizontal
         hStackViewFirst.distribution = .fillEqually
         hStackViewFirst.spacing = 5
+        hStackViewFirst.layer.cornerRadius = 10
         hStackViewFirst.heightAnchor.constraint(equalToConstant: 100).isActive = true
         self.view.addSubview(hStackViewFirst)
         
@@ -131,6 +132,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         hStackViewSecond.axis = .horizontal
         hStackViewSecond.distribution = .fillEqually
         hStackViewSecond.spacing = 5
+        hStackViewSecond.layer.cornerRadius = 10
         hStackViewSecond.heightAnchor.constraint(equalToConstant: 100).isActive = true
         self.view.addSubview(hStackViewSecond)
         
@@ -148,7 +150,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         vStackView.addArrangedSubview(hStackViewThird)
         vStackView.spacing = 5
         vStackView.distribution = .fillEqually
-        vStackView.backgroundColor = .systemGray2
+        vStackView.backgroundColor = UIColor(hex: 0x8c9197)
         
         self.view.addSubview(vStackView)
         fillStackViews()
@@ -182,7 +184,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             make.width.equalTo(gameControllerView)
             make.height.equalTo(gameControllerView).multipliedBy(2)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.view.snp.bottom).offset(-50)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-40)
         }
         
         gameStatusBarComputerLabel.snp.makeConstraints { make in
@@ -211,7 +213,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
-            button.backgroundColor = .systemBackground
+            button.backgroundColor = UIColor(named: "gameElementColor")
             button.isUserInteractionEnabled = false
             
             hStackViewFirst.addArrangedSubview(button)
@@ -224,7 +226,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             let button = UIButton()
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
-            button.backgroundColor = .systemBackground
+            button.backgroundColor = UIColor(named: "gameElementColor")
             button.isUserInteractionEnabled = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             
@@ -238,7 +240,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             let button = UIButton()
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
-            button.backgroundColor = .systemBackground
+            button.backgroundColor = UIColor(named: "gameElementColor")
             button.isUserInteractionEnabled = false
             button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
             

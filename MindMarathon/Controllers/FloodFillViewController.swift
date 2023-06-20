@@ -36,6 +36,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         self.view.backgroundColor = .secondarySystemBackground
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
     }
     
@@ -49,7 +50,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .systemBackground
+        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
         
         gridButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -86,7 +87,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
         
         gameView.layer.cornerRadius = 10
-        gameView.backgroundColor = .systemBackground
+        gameView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameView)
         
         gameView.snp.makeConstraints { maker in
@@ -96,7 +97,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         
         let colorStackView = UIStackView()
         
-        colorView.backgroundColor = .systemBackground
+        colorView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(colorView)
         view.addSubview(colorStackView)
         colorStackView.axis = .horizontal
@@ -122,8 +123,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         
         colorView.snp.makeConstraints { maker in
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
-            maker.left.right.bottom.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
+            maker.bottom.equalToSuperview().inset(30)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(70)
             
         }
         

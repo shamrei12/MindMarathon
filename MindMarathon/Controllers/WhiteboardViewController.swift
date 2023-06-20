@@ -18,8 +18,11 @@ class WhiteboardViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.clear
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(UINib(nibName: "GameTableViewCell", bundle: nil), forCellReuseIdentifier: "GameTableViewCell")
-        
+        self.view.backgroundColor = UIColor(named: "viewColor")
+       
         navigationItem.title = "Статистика игр"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         loadGameList()

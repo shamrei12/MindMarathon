@@ -37,6 +37,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         navigationItem.title = "Быки и Коровы"
         userDiggitLabel.text = ""
+        self.view.backgroundColor = UIColor(named: "viewColor")
 
         createUIElements()
     }
@@ -67,7 +68,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let massButton = [oneTapped, twoTapped, threeTapped, fourTapped, fiveTapped, sixTapped, sevenTapped, eightTapped, nineTapped, zeroTapped]
         
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .systemBackground
+        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
         
         countButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
@@ -98,7 +99,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         dashBoardTextView.isEditable = false
         dashBoardTextView.isSelectable = false
-        dashBoardTextView.backgroundColor = .systemBackground
+        dashBoardTextView.backgroundColor = UIColor(named: "gameElementColor")
         dashBoardTextView.layer.cornerRadius = 10
         dashBoardTextView.font = UIFont(name: "HelveticaNeue-Thin", size: 25.0)
         dashBoardTextView.tintColor = .label
@@ -176,7 +177,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         view.addSubview(panelIntputControlView)
         
         panelIntputControlView.layer.cornerRadius = 10
-        panelIntputControlView.backgroundColor = .systemBackground
+        panelIntputControlView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelIntputControlView)
         
         panelControllView.snp.makeConstraints { maker in
@@ -201,7 +202,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
 
         panelInputContollStackView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalTo(panelIntputControlView).inset(10)
+            maker.bottom.equalTo(panelIntputControlView).inset(20)
+            maker.left.right.top.equalTo(panelIntputControlView).inset(10)
         }
         
     }

@@ -43,6 +43,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         self.view.backgroundColor = .secondarySystemBackground
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
         sizeWordButton.setTitle("5", for: .normal)
     }
@@ -52,7 +53,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         //panelControllView
         
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .systemBackground
+        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
         
         sizeWordButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -92,7 +93,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
         
         //gameBoardView
-        containerView.backgroundColor = .systemBackground
+        containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
         view.addSubview(containerView)

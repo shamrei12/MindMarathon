@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         creatingUI()
+        self.view.backgroundColor = UIColor(named: "viewColor")
     }
     
     func creatingUI() {
