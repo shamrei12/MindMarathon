@@ -9,6 +9,7 @@ import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
     
+    private var ticTacToeManager: TicTacToeViewModel!
     private var alertView: ResultAlertView!
     var vStackView: UIStackView!
     var hStackViewFirst: UIStackView!
@@ -52,6 +53,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
         self.view.backgroundColor = UIColor(named: "viewColor")
+        self.ticTacToeManager = TicTacToeViewModel()
         setupNavigationBar()
         createUI()
         createConstraints()
@@ -344,7 +346,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         thinkingTimeElapsed = 0
         drawUserTurn(row: row, col: col)
         board[row][col] = "X"
-        let isUserWon = checkForWinner(board: board, symbol: "X")
+        let isUserWon = ticTacToeManager.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
             print("user won")
@@ -352,7 +354,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         }
         else {
-            guard let position = computerMove(board: board) else {
+            guard let position = ticTacToeManager.computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
@@ -390,7 +392,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
        if thinkingTimeElapsed == computerThinkingTime {
             drawComputerTurn(row: computerRow, col: computerCol)
-           let isComputerWon = checkForWinner(board: board, symbol: "O")
+           let isComputerWon = ticTacToeManager.checkForWinner(board: board, symbol: "O")
            if isComputerWon {
                print("computer won")
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
@@ -413,87 +415,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
         buttonBoard[row][col].setTitle("O", for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
-    }
-    
-    // Функция для определения хода компьютера
-    func computerMove(board: [[String]]) -> (Int, Int)? {
-        // Проверяем, есть ли у компьютера возможность выиграть
-        if let position = findWinningMove(board: board, symbol: "O") {
-            return position
-        }
-        
-        // Проверяем, есть ли у пользователя возможность выиграть и блокируем его ход, если есть
-        if let position = findWinningMove(board: board, symbol: "X") {
-            return position
-        }
-        
-        // Выбираем случайную пустую клетку
-        let emptyPositions = findEmptyPositions(board: board)
-        if emptyPositions.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emptyPositions.count)))
-            return emptyPositions[randomIndex]
-        }
-        
-        // Если все клетки заняты и никто не выиграл, возвращаем nil, что означает ничью
-        return nil
-    }
-
-
-    // Функция для поиска пустых клеток на доске
-    func findEmptyPositions(board: [[String]]) -> [(Int, Int)] {
-        var emptyPositions = [(Int, Int)]()
-        for row in 0..<board.count {
-            for col in 0..<board[row].count {
-                if board[row][col] == "" {
-                    emptyPositions.append((row, col))
-                }
-            }
-        }
-        return emptyPositions
-    }
-    
-    // Функция для поиска выигрышного хода
-    func findWinningMove(board: [[String]], symbol: String) -> (Int, Int)? {
-        for row in 0..<board.count {
-            for col in 0..<board[row].count {
-                if board[row][col] == "" {
-                    // Проверяем, выиграет ли игрок, если он поставит свой символ на эту клетку
-                    var newBoard = board
-                    newBoard[row][col] = symbol
-                    if checkForWinner(board: newBoard, symbol: symbol) {
-                        return (row, col)
-                    }
-                }
-            }
-        }
-        return nil
-    }
-    
-    func checkForWinner(board: [[String]], symbol: String) -> Bool {
-        // Проверяем горизонтали
-        for row in 0..<board.count {
-            if board[row][0] == symbol && board[row][1] == symbol && board[row][2] == symbol {
-                return true
-            }
-        }
-        
-        // Проверяем вертикали
-        for col in 0..<board[0].count {
-            if board[0][col] == symbol && board[1][col] == symbol && board[2][col] == symbol {
-                return true
-            }
-        }
-        
-        // Проверяем диагонали
-        if board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol {
-            return true
-        }
-        if board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol {
-            return true
-        }
-        
-        // Если нет победителя, возвращаем false
-        return false
     }
     
     func createTimer() {
