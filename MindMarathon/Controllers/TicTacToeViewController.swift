@@ -25,6 +25,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
     var seconds = 0
+    var stepCount = 0
     private var stopwatch = Timer()
     
     private var computerThinkingTime = 0
@@ -348,10 +349,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         if isUserWon {
             print("user won")
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         }
         else {
             guard let position = computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
              }
             print(position)
@@ -391,6 +394,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
            if isComputerWon {
                print("computer won")
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+               saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
            }
             computerThinkingTimer?.invalidate()
             playerTurn()
@@ -399,11 +403,11 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     func drawUserTurn(row: Int, col: Int) {
+        stepCount += 1
         buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
         buttonBoard[row][col].setTitle("X", for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
-   
     
     func drawComputerTurn(row: Int, col: Int) {
         buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
@@ -519,6 +523,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         UIApplication.shared.keyWindow?.addSubview(alertView)
         alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
                                    y: self.view.frame.size.height / 2)
+        
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
@@ -570,6 +575,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         timerLabel.text = "0"
         isstartGame = true
         iscontinuePlaying = true
+    }
+    
+    func saveResult(result: WhiteBoardModel) {
+        RealmManager.shared.saveResult(result: result)
     }
     
     func exitGame() {

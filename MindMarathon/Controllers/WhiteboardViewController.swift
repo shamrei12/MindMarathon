@@ -12,6 +12,7 @@ import RealmSwift
 class WhiteboardViewController: UIViewController {
     private let tableView = UITableView()
     private var gameList: Results<WhiteBoardManager>!
+    private var gameListArray = [WhiteBoardManager]()
     let game = WhiteBoardManager()
     
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ class WhiteboardViewController: UIViewController {
     func loadGameList() {
         let realm = try! Realm()
         gameList = realm.objects(WhiteBoardManager.self)
+        gameListArray = Array(gameList).reversed()
     }
     
     
@@ -108,7 +110,7 @@ extension WhiteboardViewController: UITableViewDataSource {
     }
     
     private func configure(cell: GameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let item = gameList[indexPath.row]
+        let item = gameListArray[indexPath.row]
             cell.gameName.text = item.nameGame
             cell.gameResult.text = item.resultGame
             cell.gameCount.text = item.countStep
@@ -116,9 +118,13 @@ extension WhiteboardViewController: UITableViewDataSource {
             
             if item.resultGame == "Победа" {
                 cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-            } else {
-                cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
-            }
+                }
+            else if item.resultGame == "Ничья" {
+                    cell.mainView.backgroundColor = UIColor.systemYellow
+                }
+            else {
+                    cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
+                }
         return cell
     }
 }
