@@ -20,6 +20,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var gameStatusBarComputerLabel: UILabel!
     var gameStatusSpinner: UIActivityIndicatorView!
     var gameStatusPlayerLabel: UILabel!
+    var gameStatusStackView: UIStackView!
     var playButton: UIButton!
     var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
@@ -97,13 +98,11 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusBarView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameStatusBarView)
         
-        gameStatusBarComputerLabel = UILabel()
-        gameStatusBarComputerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        gameStatusBarComputerLabel.textColor = .label
-        gameStatusBarComputerLabel.textAlignment = .center
-        gameStatusBarComputerLabel.text = "Компьютер думает..."
-        gameStatusBarComputerLabel.alpha = 0
-        gameStatusBarView.addSubview(gameStatusBarComputerLabel)
+       
+        gameStatusStackView = UIStackView()
+        gameStatusStackView.axis = .vertical
+        gameStatusStackView.spacing = 5
+        gameStatusBarView.addSubview(gameStatusStackView)
         
         
         gameStatusPlayerLabel = UILabel()
@@ -111,14 +110,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusPlayerLabel.textColor = .label
         gameStatusPlayerLabel.textAlignment = .center
         gameStatusPlayerLabel.text = "Ваш ход!"
-        gameStatusBarView.addSubview(gameStatusPlayerLabel)
+        gameStatusStackView.addArrangedSubview(gameStatusPlayerLabel)
         
         
         gameStatusSpinner = UIActivityIndicatorView()
         gameStatusSpinner.color = .label
         gameStatusSpinner.startAnimating()
-        gameStatusSpinner.alpha = 0
-        self.gameStatusBarView.addSubview(gameStatusSpinner)
         
         hStackViewFirst = UIStackView()
         hStackViewFirst.axis = .horizontal
@@ -187,21 +184,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             make.bottom.equalTo(self.view.snp.bottom).offset(-40)
         }
         
-        gameStatusBarComputerLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.centerY.equalTo(gameStatusBarView).offset(-15)
-            make.centerX.equalToSuperview()
-        }
-        
-        gameStatusSpinner.snp.makeConstraints { make in
-            make.centerX.equalTo(gameStatusBarComputerLabel)
-            make.top.equalTo(gameStatusBarComputerLabel).offset(30)
-        }
-        
-        gameStatusPlayerLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
+        gameStatusStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
     
@@ -295,22 +281,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     
     func playerTurn() {
-        self.view.isUserInteractionEnabled = true 
-        gameStatusPlayerLabel.alpha = 1
-        
-        gameStatusBarComputerLabel.alpha = 0
-        gameStatusSpinner.stopAnimating()
-        gameStatusBarComputerLabel.alpha = 0
+        self.view.isUserInteractionEnabled = true
+        self.gameStatusStackView.removeArrangedSubview(gameStatusSpinner)
+        self.gameStatusSpinner.removeFromSuperview()
+        self.gameStatusPlayerLabel.text = "Ваш ход!"
     }
     
     func computerTurn() {
         self.view.isUserInteractionEnabled = false
-        
-        gameStatusPlayerLabel.alpha = 0
-        
-        gameStatusBarComputerLabel.alpha = 1
-        gameStatusSpinner.alpha = 1
-        gameStatusSpinner.startAnimating()
+        self.gameStatusStackView.addArrangedSubview(gameStatusSpinner)
+        self.gameStatusPlayerLabel.text = "Компьютер думает..."
+        self.gameStatusSpinner.startAnimating()
     }
     
     @objc func playerMove(_ sender: UIButton) {
