@@ -175,7 +175,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameContainerView.snp.makeConstraints { make in
             make.width.equalTo(gameControllerView)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -261,7 +261,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         for row in buttonBoard {
             for button in row {
                 button.isUserInteractionEnabled = false
-                button.setTitle("", for: .normal)
+                button.setImage(UIImage(), for: .normal)
             }
         }
         board = [["","",""], ["","",""], ["","",""]]
@@ -406,14 +406,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     func drawUserTurn(row: Int, col: Int) {
         stepCount += 1
-        buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
-        buttonBoard[row][col].setTitle("X", for: .normal)
+        buttonBoard[row][col].setImage(UIImage(named: "X"), for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
     
     func drawComputerTurn(row: Int, col: Int) {
-        buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
-        buttonBoard[row][col].setTitle("O", for: .normal)
+        buttonBoard[row][col].setImage(UIImage(named: "O"), for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
     
