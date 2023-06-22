@@ -9,6 +9,7 @@ import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
     
+    private var ticTacToeManager: TicTacToeViewModel!
     private var alertView: ResultAlertView!
     var vStackView: UIStackView!
     var hStackViewFirst: UIStackView!
@@ -20,10 +21,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var gameStatusBarComputerLabel: UILabel!
     var gameStatusSpinner: UIActivityIndicatorView!
     var gameStatusPlayerLabel: UILabel!
+    var gameStatusStackView: UIStackView!
     var playButton: UIButton!
     var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
     var seconds = 0
+    var stepCount = 0
     private var stopwatch = Timer()
     
     private var computerThinkingTime = 0
@@ -50,6 +53,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
         self.view.backgroundColor = UIColor(named: "viewColor")
+        self.ticTacToeManager = TicTacToeViewModel()
         setupNavigationBar()
         createUI()
         createConstraints()
@@ -97,13 +101,11 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusBarView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameStatusBarView)
         
-        gameStatusBarComputerLabel = UILabel()
-        gameStatusBarComputerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        gameStatusBarComputerLabel.textColor = .label
-        gameStatusBarComputerLabel.textAlignment = .center
-        gameStatusBarComputerLabel.text = "Компьютер думает..."
-        gameStatusBarComputerLabel.alpha = 0
-        gameStatusBarView.addSubview(gameStatusBarComputerLabel)
+       
+        gameStatusStackView = UIStackView()
+        gameStatusStackView.axis = .vertical
+        gameStatusStackView.spacing = 5
+        gameStatusBarView.addSubview(gameStatusStackView)
         
         
         gameStatusPlayerLabel = UILabel()
@@ -111,14 +113,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusPlayerLabel.textColor = .label
         gameStatusPlayerLabel.textAlignment = .center
         gameStatusPlayerLabel.text = "Ваш ход!"
-        gameStatusBarView.addSubview(gameStatusPlayerLabel)
+        gameStatusStackView.addArrangedSubview(gameStatusPlayerLabel)
         
         
         gameStatusSpinner = UIActivityIndicatorView()
         gameStatusSpinner.color = .label
         gameStatusSpinner.startAnimating()
-        gameStatusSpinner.alpha = 0
-        self.gameStatusBarView.addSubview(gameStatusSpinner)
         
         hStackViewFirst = UIStackView()
         hStackViewFirst.axis = .horizontal
@@ -175,7 +175,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameContainerView.snp.makeConstraints { make in
             make.width.equalTo(gameControllerView)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.5)
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
@@ -187,21 +187,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             make.bottom.equalTo(self.view.snp.bottom).offset(-40)
         }
         
-        gameStatusBarComputerLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.centerY.equalTo(gameStatusBarView).offset(-15)
-            make.centerX.equalToSuperview()
-        }
-        
-        gameStatusSpinner.snp.makeConstraints { make in
-            make.centerX.equalTo(gameStatusBarComputerLabel)
-            make.top.equalTo(gameStatusBarComputerLabel).offset(30)
-        }
-        
-        gameStatusPlayerLabel.snp.makeConstraints { make in
-            make.height.equalTo(20)
+        gameStatusStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
     
@@ -272,7 +261,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         for row in buttonBoard {
             for button in row {
                 button.isUserInteractionEnabled = false
-                button.setTitle("", for: .normal)
+                button.setImage(UIImage(), for: .normal)
             }
         }
         board = [["","",""], ["","",""], ["","",""]]
@@ -295,22 +284,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     
     func playerTurn() {
-        self.view.isUserInteractionEnabled = true 
-        gameStatusPlayerLabel.alpha = 1
-        
-        gameStatusBarComputerLabel.alpha = 0
-        gameStatusSpinner.stopAnimating()
-        gameStatusBarComputerLabel.alpha = 0
+        self.view.isUserInteractionEnabled = true
+        self.gameStatusStackView.removeArrangedSubview(gameStatusSpinner)
+        self.gameStatusSpinner.removeFromSuperview()
+        self.gameStatusPlayerLabel.text = "Ваш ход!"
     }
     
     func computerTurn() {
         self.view.isUserInteractionEnabled = false
-        
-        gameStatusPlayerLabel.alpha = 0
-        
-        gameStatusBarComputerLabel.alpha = 1
-        gameStatusSpinner.alpha = 1
-        gameStatusSpinner.startAnimating()
+        self.gameStatusStackView.addArrangedSubview(gameStatusSpinner)
+        self.gameStatusPlayerLabel.text = "Компьютер думает..."
+        self.gameStatusSpinner.startAnimating()
     }
     
     @objc func playerMove(_ sender: UIButton) {
@@ -362,15 +346,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         thinkingTimeElapsed = 0
         drawUserTurn(row: row, col: col)
         board[row][col] = "X"
-        let isUserWon = checkForWinner(board: board, symbol: "X")
+        let isUserWon = ticTacToeManager.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
             print("user won")
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         }
         else {
-            guard let position = computerMove(board: board) else {
+            guard let position = ticTacToeManager.computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
              }
             print(position)
@@ -406,10 +392,11 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
        if thinkingTimeElapsed == computerThinkingTime {
             drawComputerTurn(row: computerRow, col: computerCol)
-           let isComputerWon = checkForWinner(board: board, symbol: "O")
+           let isComputerWon = ticTacToeManager.checkForWinner(board: board, symbol: "O")
            if isComputerWon {
                print("computer won")
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+               saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
            }
             computerThinkingTimer?.invalidate()
             playerTurn()
@@ -418,97 +405,14 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     func drawUserTurn(row: Int, col: Int) {
-        buttonBoard[row][col].setTitleColor(.systemRed, for: .normal)
-        buttonBoard[row][col].setTitle("X", for: .normal)
+        stepCount += 1
+        buttonBoard[row][col].setImage(UIImage(named: "X"), for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
-   
     
     func drawComputerTurn(row: Int, col: Int) {
-        buttonBoard[row][col].setTitleColor(.systemBlue, for: .normal)
-        buttonBoard[row][col].setTitle("O", for: .normal)
+        buttonBoard[row][col].setImage(UIImage(named: "O"), for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
-    }
-    
-    // Функция для определения хода компьютера
-    func computerMove(board: [[String]]) -> (Int, Int)? {
-        // Проверяем, есть ли у компьютера возможность выиграть
-        if let position = findWinningMove(board: board, symbol: "O") {
-            return position
-        }
-        
-        // Проверяем, есть ли у пользователя возможность выиграть и блокируем его ход, если есть
-        if let position = findWinningMove(board: board, symbol: "X") {
-            return position
-        }
-        
-        // Выбираем случайную пустую клетку
-        let emptyPositions = findEmptyPositions(board: board)
-        if emptyPositions.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emptyPositions.count)))
-            return emptyPositions[randomIndex]
-        }
-        
-        // Если все клетки заняты и никто не выиграл, возвращаем nil, что означает ничью
-        return nil
-    }
-
-
-    // Функция для поиска пустых клеток на доске
-    func findEmptyPositions(board: [[String]]) -> [(Int, Int)] {
-        var emptyPositions = [(Int, Int)]()
-        for row in 0..<board.count {
-            for col in 0..<board[row].count {
-                if board[row][col] == "" {
-                    emptyPositions.append((row, col))
-                }
-            }
-        }
-        return emptyPositions
-    }
-    
-    // Функция для поиска выигрышного хода
-    func findWinningMove(board: [[String]], symbol: String) -> (Int, Int)? {
-        for row in 0..<board.count {
-            for col in 0..<board[row].count {
-                if board[row][col] == "" {
-                    // Проверяем, выиграет ли игрок, если он поставит свой символ на эту клетку
-                    var newBoard = board
-                    newBoard[row][col] = symbol
-                    if checkForWinner(board: newBoard, symbol: symbol) {
-                        return (row, col)
-                    }
-                }
-            }
-        }
-        return nil
-    }
-    
-    func checkForWinner(board: [[String]], symbol: String) -> Bool {
-        // Проверяем горизонтали
-        for row in 0..<board.count {
-            if board[row][0] == symbol && board[row][1] == symbol && board[row][2] == symbol {
-                return true
-            }
-        }
-        
-        // Проверяем вертикали
-        for col in 0..<board[0].count {
-            if board[0][col] == symbol && board[1][col] == symbol && board[2][col] == symbol {
-                return true
-            }
-        }
-        
-        // Проверяем диагонали
-        if board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol {
-            return true
-        }
-        if board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol {
-            return true
-        }
-        
-        // Если нет победителя, возвращаем false
-        return false
     }
     
     func createTimer() {
@@ -538,6 +442,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         UIApplication.shared.keyWindow?.addSubview(alertView)
         alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
                                    y: self.view.frame.size.height / 2)
+        
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
@@ -589,6 +494,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         timerLabel.text = "0"
         isstartGame = true
         iscontinuePlaying = true
+    }
+    
+    func saveResult(result: WhiteBoardModel) {
+        RealmManager.shared.saveResult(result: result)
     }
     
     func exitGame() {
