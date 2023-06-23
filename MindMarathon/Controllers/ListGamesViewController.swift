@@ -93,18 +93,25 @@ extension ListGamesViewController: UITableViewDataSource {
     private func configure(cell: ListGameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let index = Int(indexPath.row)
         let countGame = gameList[index]
-        cell.gameButton.tag = index
-        cell.gameButton.setTitle(countGame.first?.key, for: .normal)
-        cell.createBy.text = "created by \(String(describing: countGame.first!.value))"
-        
+//        cell.gameButton.tag = index
+//        cell.gameButton.setTitle(countGame.first?.key, for: .normal)
+//        cell.createBy.text = "created by \(String(describing: countGame.first!.value))"
+        cell.layer.borderColor = UIColor.clear.cgColor
+        cell.layer.borderWidth = 10
         if indexPath.row == 0 {
-            cell.gameButton.addTarget(self, action: #selector(bullCowButtonTapped), for: .touchUpInside)
+            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
         } else if indexPath.row == 1 {
-            cell.gameButton.addTarget(self, action: #selector(slovusButtonTapped), for: .touchUpInside)
+            cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
+
+           
         } else if indexPath.row == 2 {
-            cell.gameButton.addTarget(self, action: #selector(floodFillTapped), for: .touchUpInside)
+            cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
+
+          
         } else if indexPath.row == 3 {
-            cell.gameButton.addTarget(self, action: #selector(ticTacToeTapped), for: .touchUpInside)
+            cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
+
+           
         }
         return cell
     }
@@ -112,6 +119,19 @@ extension ListGamesViewController: UITableViewDataSource {
 
 extension ListGamesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        let tableViewWidth = tableView.frame.width
+        print(tableViewWidth)
+        let height = tableViewWidth / 3.308641975308642
+        print(height)
+        return height
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: bullCowButtonTapped()
+        case 1: slovusButtonTapped()
+        case 2: floodFillTapped()
+        case 3: ticTacToeTapped()
+        default: print("Default")
+        }
     }
 }
