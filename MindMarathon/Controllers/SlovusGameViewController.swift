@@ -132,7 +132,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                    keyboarButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+                    keyboarButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchUpInside)
                 } else {
                     keyboarButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
