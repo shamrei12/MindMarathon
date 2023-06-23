@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BullsAndCowsCell.pdf",
+      "filename" : "Group 10.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Group 2.pdf",
       "idiom" : "universal"
     }
   ],

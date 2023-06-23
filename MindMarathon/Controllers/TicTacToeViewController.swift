@@ -18,7 +18,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var gameContainerView: UIView!
     var gameControllerView: UIView!
     var gameStatusBarView: UIView!
-    var gameStatusBarComputerLabel: UILabel!
     var gameStatusSpinner: UIActivityIndicatorView!
     var gameStatusPlayerLabel: UILabel!
     var gameStatusStackView: UIStackView!
@@ -104,7 +103,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
        
         gameStatusStackView = UIStackView()
         gameStatusStackView.axis = .vertical
-        gameStatusStackView.spacing = 5
+        gameStatusStackView.spacing = 6
         gameStatusBarView.addSubview(gameStatusStackView)
         
         
@@ -112,7 +111,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusPlayerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         gameStatusPlayerLabel.textColor = .label
         gameStatusPlayerLabel.textAlignment = .center
-        gameStatusPlayerLabel.text = "Ваш ход!"
+        gameStatusPlayerLabel.text = ""
         gameStatusStackView.addArrangedSubview(gameStatusPlayerLabel)
         
         
@@ -447,7 +446,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isstartGame, iscontinuePlaying)
-        
+        gameStatusPlayerLabel.text = "Ваш ход!"
         if chekPartGame == (false, false) {
             isstartGame = true
             iscontinuePlaying = true

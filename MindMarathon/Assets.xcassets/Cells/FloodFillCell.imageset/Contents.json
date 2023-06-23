@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "FloodFillCell.pdf",
+      "filename" : "Group 8.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Group 4.pdf",
       "idiom" : "universal"
     }
   ],

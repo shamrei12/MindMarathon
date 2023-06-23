@@ -1,7 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "SlovusCell.pdf",
+      "filename" : "Group 9.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Group 7.pdf",
       "idiom" : "universal"
     }
   ],
