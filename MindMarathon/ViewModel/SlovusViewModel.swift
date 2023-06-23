@@ -112,6 +112,12 @@ class SlovusViewModel {
         var result = Array(repeating: 0, count: puzzleWord.count)
         var newUser = userWord
         var usedIndexes = Set<Int>()
+        var userLetterCounts = [Character: Int]()
+        
+        // Подсчитываем количество упоминаний каждой буквы в слове пользователя
+        for letter in newUser {
+            userLetterCounts[letter, default: 0] += 1
+        }
         
         // Проверяем буквы на своем месте (2)
         for (index, letter) in userWord.enumerated() {
@@ -120,22 +126,29 @@ class SlovusViewModel {
                 let index = newUser.index(newUser.startIndex, offsetBy: index)
                 newUser.replaceSubrange(index..<newUser.index(after: index), with: " ")
                 usedIndexes.insert(index.encodedOffset)
+                userLetterCounts[letter, default: 0] -= 1
             }
         }
         
         // Проверяем буквы не на своем месте (1)
         for (index, letter) in newUser.enumerated() {
             if result[index] == 0 {
-                for (puzzleIndex, puzzleLetter) in puzzleWord.enumerated() {
-                    if puzzleIndex != index && puzzleLetter == letter && !usedIndexes.contains(puzzleIndex) {
-                        result[index] = 1
-                        usedIndexes.insert(puzzleIndex)
-                        break
+                // Ищем первое упоминание буквы в загаданном слове
+                if let puzzleIndex = puzzleWord.firstIndex(of: letter)?.encodedOffset, !usedIndexes.contains(puzzleIndex) {
+                    result[index] = 1
+                    usedIndexes.insert(puzzleIndex)
+                    userLetterCounts[letter, default: 0] -= 1
+                    
+                    // Если буква уже использовалась, учитываем ее только один раз
+                    if userLetterCounts[letter, default: 0] == 0 {
+                        userLetterCounts.removeValue(forKey: letter)
                     }
                 }
             }
         }
+        
         return result
     }
+
 }
 

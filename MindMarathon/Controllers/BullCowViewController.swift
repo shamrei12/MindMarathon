@@ -371,7 +371,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let imageBull = UIImage(named: "bull")
         let imageCow = UIImage(named: "cow")
         
-        let imageSize = CGSize(width: 25.0, height: 30.0)
+        let imageSize = CGSize(width: 40.0, height: 40.0)
         // Создаем рендерер изображения
         let renderer = UIGraphicsImageRenderer(size: imageSize)
         
