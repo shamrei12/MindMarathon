@@ -34,17 +34,19 @@ class MenuViewController: UIViewController {
         
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр", for: .normal)
-        startMarathon.tintColor = UIColor.label
-        startMarathon.backgroundColor = UIColor.tertiaryLabel
+        startMarathon.setTitleColor(.label, for: .normal)
+        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
+        startMarathon.backgroundColor = UIColor(named: "gameElementColor")
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
         
         let whiteBoard = UIButton()
         whiteBoard.setTitle("Статистика игр", for: .normal)
-        whiteBoard.tintColor = UIColor.label
-        whiteBoard.backgroundColor = UIColor.tertiaryLabel
+        whiteBoard.setTitleColor(.label, for: .normal)
+        whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
         whiteBoard.layer.cornerRadius = 10
+        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         view.addSubview(whiteBoard)
     
