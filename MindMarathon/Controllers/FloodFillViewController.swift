@@ -12,7 +12,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     let timerLabel = UILabel()
     let gameView = UIView()
     let colorView = UIView()
-    let contentViewStackView = UIStackView()
+    var contentViewStackView = UIStackView()
     var massLayer = [UIStackView]()
     private var gridSize = 5
     private let cellSize: CGFloat = 40 // Размер ячейки
@@ -176,12 +176,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createGamePlace(sizePlace: Int) {
-        cells.removeAll()
-//         Удаляем все элементы из contentViewStackView
-        for view in contentViewStackView.arrangedSubviews {
-            contentViewStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
+        index = 0
+        var row = [UIView]() // Инициализируем переменную row
         
         for i in 0..<gridSize {
             let stackView = UIStackView()
@@ -221,11 +217,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(gameView).inset(10)
         }
         
-        // Переносим вызов функции сюда
-        coloringView()
+        coloringView() // Вызываем функцию расскрашивания ячеек
     }
-    
-    
+
     func coloringView() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {
@@ -319,7 +313,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     func startNewGame() {
         let size = gridButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
-        print(gridSize)
         createGamePlace(sizePlace: gridSize)
 //        gameView.isUserInteractionEnabled = false
 //        colorView.isUserInteractionEnabled = false
@@ -363,6 +356,16 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
+        
+        for view in contentViewStackView.arrangedSubviews {
+            contentViewStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        contentViewStackView.removeFromSuperview()
+        
+        massLayer.removeAll()
+        cells.removeAll()
         pauseGame()
         index = 0
         timerLabel.text = "0"
