@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
-		1122D9D22A3BB1A000913E01 /* TicTacToeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1122D9D12A3BB1A000913E01 /* TicTacToeViewController.xib */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
 		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
@@ -17,9 +16,7 @@
 		D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D826CF142A10C69200263CEB /* LaunchScreen.storyboard */; };
 		D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF1E2A10C6DA00263CEB /* Extension.swift */; };
 		D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF252A10C7DA00263CEB /* MenuViewController.swift */; };
-		D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF262A10C7DA00263CEB /* MenuViewController.xib */; };
 		D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF292A10CAA000263CEB /* BullCowViewController.swift */; };
-		D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */; };
 		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
 		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
 		D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF332A115A2400263CEB /* ResultAlertView.xib */; };
@@ -29,7 +26,6 @@
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
 		D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */; };
-		D848359C2A35B542008D2AB4 /* WhiteboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D848359A2A35B542008D2AB4 /* WhiteboardViewController.xib */; };
 		D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */; };
 		D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */; };
 		D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */; };
@@ -37,24 +33,19 @@
 		D84835A82A35C88E008D2AB4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D84835A72A35C88E008D2AB4 /* RealmSwift */; };
 		D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
-		D86D0A702A2155F900AB6789 /* FloodFillViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
-		D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88221672A16042B00531EED /* ListGamesViewController.xib */; };
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
-		D882216D2A162A1E00531EED /* SlovusGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D882216B2A162A1E00531EED /* SlovusGameViewController.xib */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
-		D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */; };
 		D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */; };
 		D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
-		1122D9D12A3BB1A000913E01 /* TicTacToeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicTacToeViewController.xib; sourceTree = "<group>"; };
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,9 +57,7 @@
 		D826CF172A10C69200263CEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D826CF1E2A10C6DA00263CEB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		D826CF252A10C7DA00263CEB /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		D826CF262A10C7DA00263CEB /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		D826CF292A10CAA000263CEB /* BullCowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewController.swift; sourceTree = "<group>"; };
-		D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowViewController.xib; sourceTree = "<group>"; };
 		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
 		D826CF332A115A2400263CEB /* ResultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
@@ -78,23 +67,18 @@
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
 		D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardViewController.swift; sourceTree = "<group>"; };
-		D848359A2A35B542008D2AB4 /* WhiteboardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WhiteboardViewController.xib; sourceTree = "<group>"; };
 		D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBoardModel.swift; sourceTree = "<group>"; };
 		D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableViewCell.xib; sourceTree = "<group>"; };
 		D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
-		D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloodFillViewController.xib; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
-		D88221672A16042B00531EED /* ListGamesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGamesViewController.xib; sourceTree = "<group>"; };
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
-		D882216B2A162A1E00531EED /* SlovusGameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlovusGameViewController.xib; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
-		D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RulesViewController.xib; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameTableViewCell.swift; sourceTree = "<group>"; };
 		D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGameTableViewCell.xib; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,14 +176,6 @@
 		D826CF222A10C73100263CEB /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				D826CF262A10C7DA00263CEB /* MenuViewController.xib */,
-				D826CF2A2A10CAA000263CEB /* BullCowViewController.xib */,
-				D88221672A16042B00531EED /* ListGamesViewController.xib */,
-				D882216B2A162A1E00531EED /* SlovusGameViewController.xib */,
-				D8C167AC2A1DF19D00FC887D /* RulesViewController.xib */,
-				D848359A2A35B542008D2AB4 /* WhiteboardViewController.xib */,
-				D86D0A6E2A2155F900AB6789 /* FloodFillViewController.xib */,
-				1122D9D12A3BB1A000913E01 /* TicTacToeViewController.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -371,19 +347,11 @@
 				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
-				D882216D2A162A1E00531EED /* SlovusGameViewController.xib in Resources */,
-				D88221692A16042B00531EED /* ListGamesViewController.xib in Resources */,
-				D848359C2A35B542008D2AB4 /* WhiteboardViewController.xib in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
-				D86D0A702A2155F900AB6789 /* FloodFillViewController.xib in Resources */,
 				D86D0A792A28A62800AB6789 /* singular in Resources */,
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
-				D826CF2C2A10CAA000263CEB /* BullCowViewController.xib in Resources */,
-				1122D9D22A3BB1A000913E01 /* TicTacToeViewController.xib in Resources */,
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
 				D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */,
-				D826CF282A10C7DA00263CEB /* MenuViewController.xib in Resources */,
-				D8C167AE2A1DF19D00FC887D /* RulesViewController.xib in Resources */,
 				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

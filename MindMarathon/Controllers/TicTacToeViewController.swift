@@ -275,7 +275,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController.instantiate()
+        let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .formSheet
         rulesVC.rulesGame(numberGame: 4)
         present(rulesVC, animated: true)

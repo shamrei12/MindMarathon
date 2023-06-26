@@ -25,7 +25,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var isStartGame: Bool = false
     private var isContinuePlaying: Bool = false
     private var colorMassiveButton = [UIButton]()
-    var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
+    private var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
     private var index = 0
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
@@ -133,7 +133,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.left.right.bottom.top.equalTo(colorView).inset(10)
         }
     }
-    
+    //MARK: Выход и правила
     @objc func cancelTapped() {
         if alertView != nil {
             alertView.removeFromSuperview()
@@ -142,11 +142,13 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController.instantiate()
+        let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .formSheet
         rulesVC.rulesGame(numberGame: 3)
         present(rulesVC, animated: true)
     }
+    
+    
     
     @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         let chekPartGame = (isStartGame, isContinuePlaying)
@@ -160,7 +162,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             // Вызываем функцию fillCell для закрашивания ячеек
             fillCell(row: selectedCell.tag / gridSize, col: selectedCell.tag % gridSize, color: selectedColor, currentColor: currentColor)
             
-            
             if currentColor != selectedColor {
                 FloodFillViewModel.shared.countStep += 1
             }
@@ -173,7 +174,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
         }
     }
-    
+    //MARK: создание поля с игрой
     func createGamePlace(sizePlace: Int) {
         index = 0
         var row = [UIView]() // Инициализируем переменную row
@@ -227,7 +228,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
         }
     }
-    
     @objc func selectedColorTapped(sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
         if chekPartGame == (true, true) {

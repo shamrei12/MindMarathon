@@ -131,7 +131,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 firstLayerStackView.addArrangedSubview(button)
             }
         }
-       
+        
         userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 35.0)
         userDiggitLabel.tintColor = .label
         userDiggitLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
@@ -319,7 +319,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func rulesTapped() {
-        let rulesVC = RulesViewController.instantiate()
+        let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .formSheet
         rulesVC.rulesGame(numberGame: 1)
         present(rulesVC, animated: true)

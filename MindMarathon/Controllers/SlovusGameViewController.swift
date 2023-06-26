@@ -49,9 +49,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        
         //panelControllView
-        
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
@@ -68,7 +66,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        
         view.addSubview(playButton)
         
         timerLabel.text = "0"
@@ -102,7 +99,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
         }
-
+        
         //keyBoardView
         let keyBoardView = UIView()
         let sendWordsButton = UIButton()
@@ -156,7 +153,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         sendWordsButton.backgroundColor = UIColor.systemBackground
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
-        sendWordsButton.addTarget(self, action: #selector(sendWordsTupped), for: .touchUpInside)
+        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
         sendWordsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         view.addSubview(sendWordsButton)
@@ -236,7 +233,11 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(containerView).inset(10)
         }
     }
-
+    
+    //MARK: Таймер и управление игрой
+    @objc func selectMaxLenghtTapped() {
+        sizeWordButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: sizeWordButton.titleLabel?.text ?? ""), for: .normal)
+    }
     
     func createTimer() {
         stopwatch = Timer.scheduledTimer(timeInterval: 1,
@@ -246,19 +247,35 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                                          repeats: true)
     }
     
-    
     @objc func updateTimer() {
-        seconds += 1
+        seconds += 30
         timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+        navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
+    }
+    
+    //MARK: Статус игры
+    @objc func startGameTapped(_ sender: UIButton) {
+        let chekPartGame = (isstartGame, iscontinuePlaying)
+        
+        if chekPartGame == (false, false) {
+            isstartGame = true
+            iscontinuePlaying = true
+            startNewGame()
+        } else if chekPartGame == (true, true) {
+            iscontinuePlaying = false
+            pauseGame()
+        } else {
+            iscontinuePlaying = true
+            continueGame()
+        }
     }
     
     func startNewGame() {
-        lastWordIndex = Int(sizeWordButton.titleLabel?.text ?? "")!
         maxLenght = Int((sizeWordButton.titleLabel?.text)!)!
+        lastWordIndex = maxLenght
         numberOfColumns = maxLenght
         controllerTextField = 0
         firstWordIndex = 0
-        lastWordIndex = maxLenght
         step = 0
         seconds = 0
         createTimer()
@@ -277,25 +294,37 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     func pauseGame() {
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         stopwatch.invalidate()
+        
     }
     
-    @objc func startGameTapped(_ sender: UIButton) {
-        
-        let chekPartGame = (isstartGame, iscontinuePlaying)
-        
-        if chekPartGame == (false, false) {
-            isstartGame = true
-            iscontinuePlaying = true
-            startNewGame()
-        } else if chekPartGame == (true, true) {
-            iscontinuePlaying = false
-            pauseGame()
-        } else {
-           iscontinuePlaying = true
-            continueGame()
+    func restartGame() {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1.0
+            self.view.isUserInteractionEnabled = true
         }
+        for i in massTextField {
+            i.textColor = UIColor.label
+            i.backgroundColor = UIColor.tertiaryLabel
+            i.text = ""
+        }
+        pauseGame()
+        sizeWordButton.isEnabled = true
+        timerLabel.text = "0"
+        isstartGame = false
+        iscontinuePlaying = false
+        alertView.removeFromSuperview()
     }
     
+    func exitGame() {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1.0
+            self.view.isUserInteractionEnabled = true
+        }
+        alertView.removeFromSuperview()
+        self.dismiss(animated: true)
+    }
+    
+    //MARK: Этапы работы клавиатуры
     @objc func deleteLastWord() {
         for i in massTextField[firstWordIndex..<lastWordIndex].reversed() {
             if !i.text!.isEmpty {
@@ -335,13 +364,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController.instantiate()
+        let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .formSheet
         rulesVC.rulesGame(numberGame: 2)
         present(rulesVC, animated: true)
     }
     
-    @objc func sendWordsTupped() {
+    @objc func sendWordsTapped() {
         if userWords.count == maxLenght {
             if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
@@ -359,7 +388,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             }
         }
     }
-    
+    //MARK: Проверка ответа и вывод результата
     func checkCorrctAnswer(massiveAnswer: [Int]) -> Bool {
         for i in massiveAnswer {
             if i != 2 {
@@ -399,6 +428,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         userWords = ""
     }
     
+    //MARK: Alerts
     func createAlertMessage(description: String) {
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 0.6
@@ -413,10 +443,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                                    y: self.view.frame.size.height / 2)
     }
     
-    @objc func selectMaxLenghtTapped() {
-        sizeWordButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: sizeWordButton.titleLabel?.text ?? ""), for: .normal)
-    }
-
     func createAlertMessage() {
         messegeView = UserMistakeView.loadFromNib() as? UserMistakeView
         
@@ -448,34 +474,4 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             })
         }
     }
-    
-    func restartGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
-        for i in massTextField {
-            i.textColor = UIColor.label
-            i.backgroundColor = UIColor.tertiaryLabel
-            i.text = ""
-        }
-        pauseGame()
-        sizeWordButton.isEnabled = true
-        timerLabel.text = "0"
-        isstartGame = false
-        iscontinuePlaying = false
-        
-        alertView.removeFromSuperview()
-
-    }
-    
-    func exitGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
-        alertView.removeFromSuperview()
-        self.dismiss(animated: true)
-    }
-    
 }

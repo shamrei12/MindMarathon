@@ -15,7 +15,6 @@ class ListGamesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.title = "Список игр"
         tableView.register(UINib(nibName: "ListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "ListGameTableViewCell")
@@ -43,7 +42,7 @@ class ListGamesViewController: UIViewController {
     
     @objc
     func bullCowButtonTapped() {
-        let bullCowGame = BullCowViewController.instantiate()
+        let bullCowGame = BullCowViewController()
         let navigationController = UINavigationController(rootViewController: bullCowGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -51,7 +50,7 @@ class ListGamesViewController: UIViewController {
     
     @objc
     func slovusButtonTapped() {
-        let slovusGame = SlovusGameViewController.instantiate()
+        let slovusGame = SlovusGameViewController()
         let navigationController = UINavigationController(rootViewController: slovusGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -59,7 +58,7 @@ class ListGamesViewController: UIViewController {
     
     @objc
     func floodFillTapped() {
-        let floodFillGame = FloodFillViewController.instantiate()
+        let floodFillGame = FloodFillViewController()
         let navigationController = UINavigationController(rootViewController: floodFillGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -67,7 +66,7 @@ class ListGamesViewController: UIViewController {
     
     @objc
     func ticTacToeTapped() {
-        let ticTacToeGame = TicTacToeViewController.instantiate()
+        let ticTacToeGame = TicTacToeViewController()
         let navigationController = UINavigationController(rootViewController: ticTacToeGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -110,8 +109,6 @@ extension ListGamesViewController: UITableViewDataSource {
           
         } else if indexPath.row == 3 {
             cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
-
-           
         }
         return cell
     }
@@ -125,6 +122,7 @@ extension ListGamesViewController: UITableViewDelegate {
         print(height)
         return height
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0: bullCowButtonTapped()

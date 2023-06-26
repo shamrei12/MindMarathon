@@ -74,7 +74,7 @@ class MenuViewController: UIViewController {
     
     @objc
     func listGameTapped() {
-        let listGame = ListGamesViewController.instantiate()
+        let listGame = ListGamesViewController()
         let navigationController = UINavigationController(rootViewController: listGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -82,7 +82,7 @@ class MenuViewController: UIViewController {
     
     @objc
     func whiteBoardTapped() {
-        let whiteBoard = WhiteboardViewController.instantiate()
+        let whiteBoard = WhiteboardViewController()
         let navigationController = UINavigationController(rootViewController: whiteBoard)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
