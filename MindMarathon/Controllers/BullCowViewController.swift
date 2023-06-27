@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 class BullCowViewController: UIViewController, AlertDelegate {
-    
+    private let tableview = UITableView()
     private let countButton = UIButton()
     private let userDiggitLabel = UILabel()
-    private let dashBoardTextView = UITextView()
+//    private let dashBoardTextView = UITextView()
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
     private let sendDiggits = UIButton()
@@ -38,7 +38,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.title = "Быки и Коровы"
         userDiggitLabel.text = ""
         self.view.backgroundColor = UIColor(named: "viewColor")
-
+        tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
+        tableview.register(UINib(nibName: "BullCowAlertTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowAlertTableViewCell")
         createUIElements()
     }
     
@@ -97,16 +98,17 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllStackView.addArrangedSubview(timerLabel)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
-        dashBoardTextView.isEditable = false
-        dashBoardTextView.isSelectable = false
-        dashBoardTextView.backgroundColor = UIColor(named: "gameElementColor")
-        dashBoardTextView.layer.cornerRadius = 10
-        dashBoardTextView.font = UIFont(name: "HelveticaNeue-Thin", size: 25.0)
-        dashBoardTextView.tintColor = .label
-        dashBoardTextView.textColor = .label
-        dashBoardTextView.textAlignment = .center
-        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
-        view.addSubview(dashBoardTextView)
+        
+//        dashBoardTextView.isEditable = false
+//        dashBoardTextView.isSelectable = false
+//        dashBoardTextView.backgroundColor = UIColor(named: "gameElementColor")
+//        dashBoardTextView.layer.cornerRadius = 10
+//        dashBoardTextView.font = UIFont(name: "HelveticaNeue-Thin", size: 25.0)
+//        dashBoardTextView.tintColor = .label
+//        dashBoardTextView.textColor = .label
+//        dashBoardTextView.textAlignment = .center
+//        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
+//        view.addSubview(dashBoardTextView)
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
         deleteLastButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
@@ -189,16 +191,16 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
         
-        dashBoardTextView.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView).inset(70)
-            maker.left.right.equalToSuperview().inset(10)
-        }
+//        dashBoardTextView.snp.makeConstraints { maker in
+//            maker.top.equalTo(panelControllView).inset(70)
+//            maker.left.right.equalToSuperview().inset(10)
+//        }
         
         panelIntputControlView.snp.makeConstraints { maker in
             maker.height.equalTo(250)
             maker.left.right.equalToSuperview().inset(10)
             maker.bottom.equalToSuperview().inset(20)
-            maker.top.equalTo(dashBoardTextView.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
+            maker.top.equalTo(tableview.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
         }
 
         panelInputContollStackView.snp.makeConstraints { maker in
@@ -242,7 +244,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func startNewGame() {
         seconds = 0
         createTimer()
-        dashBoardTextView.text = ""
+//        dashBoardTextView.text = ""
         maxLenght = Int((countButton.titleLabel?.text)!)!
         countButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
@@ -251,13 +253,13 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     func continueGame() {
         createTimer()
-        makeResultText(partGame: "Игра возобновлена \n")
+//        makeResultText(partGame: "Игра возобновлена \n")
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func pauseGame() {
         stopwatch.invalidate()
-        makeResultText(partGame: "Игра приостановлена\n")
+//        makeResultText(partGame: "Игра приостановлена\n")
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
@@ -303,7 +305,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         if isStartGame && userDiggitLabel.text?.count == maxLenght {
             countStep += 1
             let (bull, cow) = game.comparisonNumber( game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
-            makeResultText(result: (bull, cow), userMove: userDiggitLabel.text!)
+//            makeResultText(result: (bull, cow), userMove: userDiggitLabel.text!)
             userDiggitLabel.text = ""
             
             if bull == maxLenght {
@@ -335,7 +337,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         countButton.isEnabled = true
         isStartGame = false
         isContinueGame = false
-        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
+//        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
         alertView.removeFromSuperview()
     }
     
@@ -348,73 +350,73 @@ class BullCowViewController: UIViewController, AlertDelegate {
         self.dismiss(animated: true)
     }
     
-    func makeResultText (partGame: String) {
-        
-        let resultString = NSMutableAttributedString(string: partGame)
-        
-        // Устанавливаем шрифт для атрибутов
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
-        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
-        
-        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
-        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
-        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
-        mutableAttributedString.append(resultString)
-        // Устанавливаем изменяемую атрибутированную строку в TextView
-        dashBoardTextView.attributedText = mutableAttributedString
-        dashBoardTextView.tintColor = .label
-        dashBoardTextView.textColor = .label
-    }
+//    func makeResultText (partGame: String) {
+//
+//        let resultString = NSMutableAttributedString(string: partGame)
+//
+//        // Устанавливаем шрифт для атрибутов
+//        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
+//        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
+//
+//        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
+//        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
+//        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
+//        mutableAttributedString.append(resultString)
+//        // Устанавливаем изменяемую атрибутированную строку в TextView
+//        dashBoardTextView.attributedText = mutableAttributedString
+//        dashBoardTextView.tintColor = .label
+//        dashBoardTextView.textColor = .label
+//    }
     
-    func makeResultText(result: (Int, Int), userMove: String) {
-        // Создаем изображение быка и коровы
-        let imageBull = UIImage(named: "bull")
-        let imageCow = UIImage(named: "cow")
-        
-        let imageSize = CGSize(width: 40.0, height: 40.0)
-        // Создаем рендерер изображения
-        let renderer = UIGraphicsImageRenderer(size: imageSize)
-        
-        // Рисуем изображение в новом размере
-        let newImageBull = renderer.image { _ in
-            imageBull?.draw(in: CGRect(origin: .zero, size: imageSize))
-        }
-        
-        let newImageCow = renderer.image { _ in
-            imageCow?.draw(in: CGRect(origin: .zero, size: imageSize))
-        }
-        
-        // Создаем текстовый атрибут с изображением быка
-        let bullAttachment = NSTextAttachment()
-        bullAttachment.image = newImageBull
-        let bullAttachmentString = NSAttributedString(attachment: bullAttachment)
-        
-        
-        // Создаем текстовый атрибут с изображением коровы
-        let cowAttachment = NSTextAttachment()
-        cowAttachment.image = newImageCow
-        let cowAttachmentString = NSAttributedString(attachment: cowAttachment)
-        
-        // Создаем атрибутированную строку с результатом
-        let resultString = NSMutableAttributedString(string: "Ваш ход: \(userMove) | ")
-        resultString.append(NSAttributedString(string: "\(result.0) "))
-        resultString.append(bullAttachmentString)
-        resultString.append(NSAttributedString(string: " - \(result.1) "))
-        resultString.append(cowAttachmentString)
-        resultString.append(NSAttributedString(string: "\n")) // добавляем символ перевода строки
-        
-        // Устанавливаем шрифт для атрибутов
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
-        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
-        
-        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
-        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
-        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
-        mutableAttributedString.append(resultString)
-        // Устанавливаем изменяемую атрибутированную строку в TextView
-        dashBoardTextView.attributedText = mutableAttributedString
-        dashBoardTextView.tintColor = .label
-        dashBoardTextView.textColor = .label
-    }
+//    func makeResultText(result: (Int, Int), userMove: String) {
+//        // Создаем изображение быка и коровы
+//        let imageBull = UIImage(named: "bull")
+//        let imageCow = UIImage(named: "cow")
+//
+//        let imageSize = CGSize(width: 40.0, height: 40.0)
+//        // Создаем рендерер изображения
+//        let renderer = UIGraphicsImageRenderer(size: imageSize)
+//
+//        // Рисуем изображение в новом размере
+//        let newImageBull = renderer.image { _ in
+//            imageBull?.draw(in: CGRect(origin: .zero, size: imageSize))
+//        }
+//
+//        let newImageCow = renderer.image { _ in
+//            imageCow?.draw(in: CGRect(origin: .zero, size: imageSize))
+//        }
+//
+//        // Создаем текстовый атрибут с изображением быка
+//        let bullAttachment = NSTextAttachment()
+//        bullAttachment.image = newImageBull
+//        let bullAttachmentString = NSAttributedString(attachment: bullAttachment)
+//
+//
+//        // Создаем текстовый атрибут с изображением коровы
+//        let cowAttachment = NSTextAttachment()
+//        cowAttachment.image = newImageCow
+//        let cowAttachmentString = NSAttributedString(attachment: cowAttachment)
+//
+//        // Создаем атрибутированную строку с результатом
+//        let resultString = NSMutableAttributedString(string: "Ваш ход: \(userMove) | ")
+//        resultString.append(NSAttributedString(string: "\(result.0) "))
+//        resultString.append(bullAttachmentString)
+//        resultString.append(NSAttributedString(string: " - \(result.1) "))
+//        resultString.append(cowAttachmentString)
+//        resultString.append(NSAttributedString(string: "\n")) // добавляем символ перевода строки
+//
+//        // Устанавливаем шрифт для атрибутов
+//        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
+//        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
+//
+//        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
+//        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
+//        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
+//        mutableAttributedString.append(resultString)
+//        // Устанавливаем изменяемую атрибутированную строку в TextView
+//        dashBoardTextView.attributedText = mutableAttributedString
+//        dashBoardTextView.tintColor = .label
+//        dashBoardTextView.textColor = .label
+//    }
     
 }
