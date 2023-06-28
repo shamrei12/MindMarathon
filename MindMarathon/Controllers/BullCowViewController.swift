@@ -12,7 +12,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private let tableview = UITableView()
     private let countButton = UIButton()
     private let userDiggitLabel = UILabel()
-//    private let dashBoardTextView = UITextView()
+    //    private let dashBoardTextView = UITextView()
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
     private let sendDiggits = UIButton()
@@ -26,6 +26,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
     private var countStep: Int = 0
+    private var indexMass: Int = 0
     
     private var alertView: ResultAlertView!
     
@@ -40,7 +41,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
         self.view.backgroundColor = UIColor(named: "viewColor")
         tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
         tableview.register(UINib(nibName: "BullCowAlertTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowAlertTableViewCell")
+        tableview.backgroundColor = .clear
+        tableview.dataSource = self
+        tableview.delegate = self
+        tableview.separatorStyle = .none
         createUIElements()
+        //        tableview.reloadData()
     }
     
     func createUIElements() {
@@ -99,16 +105,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
         
-//        dashBoardTextView.isEditable = false
-//        dashBoardTextView.isSelectable = false
-//        dashBoardTextView.backgroundColor = UIColor(named: "gameElementColor")
-//        dashBoardTextView.layer.cornerRadius = 10
-//        dashBoardTextView.font = UIFont(name: "HelveticaNeue-Thin", size: 25.0)
-//        dashBoardTextView.tintColor = .label
-//        dashBoardTextView.textColor = .label
-//        dashBoardTextView.textAlignment = .center
-//        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
-//        view.addSubview(dashBoardTextView)
+        view.addSubview(tableview)
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
         deleteLastButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
@@ -138,7 +135,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         userDiggitLabel.tintColor = .label
         userDiggitLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         userDiggitLabel.textAlignment = .right
-
+        
         
         userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
         userLabelPanelStackView.addArrangedSubview(deleteLastButton)
@@ -191,10 +188,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
         
-//        dashBoardTextView.snp.makeConstraints { maker in
-//            maker.top.equalTo(panelControllView).inset(70)
-//            maker.left.right.equalToSuperview().inset(10)
-//        }
+        tableview.snp.makeConstraints { maker in
+            maker.top.equalTo(panelControllView).inset(70)
+            maker.left.right.equalToSuperview().inset(10)
+        }
         
         panelIntputControlView.snp.makeConstraints { maker in
             maker.height.equalTo(250)
@@ -202,7 +199,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalToSuperview().inset(20)
             maker.top.equalTo(tableview.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
         }
-
+        
         panelInputContollStackView.snp.makeConstraints { maker in
             maker.bottom.equalTo(panelIntputControlView).inset(20)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
@@ -244,7 +241,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func startNewGame() {
         seconds = 0
         createTimer()
-//        dashBoardTextView.text = ""
+        //        dashBoardTextView.text = ""
         maxLenght = Int((countButton.titleLabel?.text)!)!
         countButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
@@ -253,13 +250,13 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     func continueGame() {
         createTimer()
-//        makeResultText(partGame: "Игра возобновлена \n")
+        //        makeResultText(partGame: "Игра возобновлена \n")
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func pauseGame() {
         stopwatch.invalidate()
-//        makeResultText(partGame: "Игра приостановлена\n")
+        //        makeResultText(partGame: "Игра приостановлена\n")
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
     }
     
@@ -303,22 +300,27 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc func sendDiggitTapped(_ sender: UIButton) {
         if isStartGame && userDiggitLabel.text?.count == maxLenght {
-            countStep += 1
-            let (bull, cow) = game.comparisonNumber( game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
-//            makeResultText(result: (bull, cow), userMove: userDiggitLabel.text!)
+            let (bull, cow) = game.comparisonNumber(game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
+            
+            BullCowViewModel.shared.stepList.append(BullCowModel(size: maxLenght, bull: bull, cow: cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
             userDiggitLabel.text = ""
+            
+            let lastIndexPath = IndexPath(row: BullCowViewModel.shared.stepList.count - 1, section: 0)
+            tableview.insertRows(at: [lastIndexPath], with: .automatic)
+            tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+            
+            countStep += 1
             
             if bull == maxLenght {
                 stopwatch.invalidate()
                 createAlertMessage(description: "Ура! Мы загадали число \(computerDiggit). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
                 let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-
+                
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
-        
     }
-    
+
     @objc
     func rulesTapped() {
         let rulesVC = RulesViewController()
@@ -337,7 +339,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         countButton.isEnabled = true
         isStartGame = false
         isContinueGame = false
-//        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
+        //        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
+        BullCowViewModel.shared.stepList.removeAll()
+        tableview.reloadData()
         alertView.removeFromSuperview()
     }
     
@@ -346,77 +350,67 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
+        BullCowViewModel.shared.stepList.removeAll()
+        tableview.reloadData()
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
-    
-//    func makeResultText (partGame: String) {
-//
-//        let resultString = NSMutableAttributedString(string: partGame)
-//
-//        // Устанавливаем шрифт для атрибутов
-//        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
-//        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
-//
-//        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
-//        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
-//        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
-//        mutableAttributedString.append(resultString)
-//        // Устанавливаем изменяемую атрибутированную строку в TextView
-//        dashBoardTextView.attributedText = mutableAttributedString
-//        dashBoardTextView.tintColor = .label
-//        dashBoardTextView.textColor = .label
-//    }
-    
-//    func makeResultText(result: (Int, Int), userMove: String) {
-//        // Создаем изображение быка и коровы
-//        let imageBull = UIImage(named: "bull")
-//        let imageCow = UIImage(named: "cow")
-//
-//        let imageSize = CGSize(width: 40.0, height: 40.0)
-//        // Создаем рендерер изображения
-//        let renderer = UIGraphicsImageRenderer(size: imageSize)
-//
-//        // Рисуем изображение в новом размере
-//        let newImageBull = renderer.image { _ in
-//            imageBull?.draw(in: CGRect(origin: .zero, size: imageSize))
-//        }
-//
-//        let newImageCow = renderer.image { _ in
-//            imageCow?.draw(in: CGRect(origin: .zero, size: imageSize))
-//        }
-//
-//        // Создаем текстовый атрибут с изображением быка
-//        let bullAttachment = NSTextAttachment()
-//        bullAttachment.image = newImageBull
-//        let bullAttachmentString = NSAttributedString(attachment: bullAttachment)
-//
-//
-//        // Создаем текстовый атрибут с изображением коровы
-//        let cowAttachment = NSTextAttachment()
-//        cowAttachment.image = newImageCow
-//        let cowAttachmentString = NSAttributedString(attachment: cowAttachment)
-//
-//        // Создаем атрибутированную строку с результатом
-//        let resultString = NSMutableAttributedString(string: "Ваш ход: \(userMove) | ")
-//        resultString.append(NSAttributedString(string: "\(result.0) "))
-//        resultString.append(bullAttachmentString)
-//        resultString.append(NSAttributedString(string: " - \(result.1) "))
-//        resultString.append(cowAttachmentString)
-//        resultString.append(NSAttributedString(string: "\n")) // добавляем символ перевода строки
-//
-//        // Устанавливаем шрифт для атрибутов
-//        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "HelveticaNeue-Thin", size: 25) ?? UIFont.systemFont(ofSize: 25)]
-//        resultString.addAttributes(attributes, range: NSRange(location: 0, length: resultString.length))
-//
-//        // Создаем изменяемый NSMutableAttributedString на основе существующей атрибутированной строки
-//        let mutableAttributedString = NSMutableAttributedString(attributedString: dashBoardTextView.attributedText)
-//        // Добавляем новую атрибутированную строку к изменяемой атрибутированной строке
-//        mutableAttributedString.append(resultString)
-//        // Устанавливаем изменяемую атрибутированную строку в TextView
-//        dashBoardTextView.attributedText = mutableAttributedString
-//        dashBoardTextView.tintColor = .label
-//        dashBoardTextView.textColor = .label
-//    }
-    
 }
+
+extension BullCowViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let count = BullCowViewModel.shared.stepList.count
+        if count == 0 {
+            return count
+        } else {
+            return count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if BullCowViewModel.shared.stepList.count == 0 {
+//            let cell: BullCowAlertTableViewCell
+//            if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowAlertTableViewCell", for: indexPath) as? BullCowAlertTableViewCell {
+//                cell = reuseCell
+//            } else {
+//                cell = BullCowAlertTableViewCell(style: .default, reuseIdentifier: "BullCowAlertTableViewCell")
+//            }
+//            return configure(cell: cell, for: indexPath)
+//        } else {
+            let cell: BullCowTableViewCell
+            if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
+                cell = reuseCell
+            } else {
+                cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
+            }
+            return configure(cell: cell, for: indexPath)
+//        }
+    }
+    
+    private func configure(cell: BullCowAlertTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        // Настройте BullCowAlertTableViewCell здесь, если необходимо
+        return cell
+    }
+    
+    private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        let step = BullCowViewModel.shared.stepList[indexPath.row]
+        cell.gameData = [step]
+        cell.createUI()
+        return cell
+    }
+}
+
+extension BullCowViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let count = BullCowViewModel.shared.stepList.count
+        if count == 0 {
+            return 150
+        } else {
+            return 70
+        }
+        
+    }
+}
+

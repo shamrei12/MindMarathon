@@ -46,6 +46,7 @@
 		D8D788472A4B3FE00013FECC /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */; };
 		D8D7884A2A4B3FF50013FECC /* BullCowAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788482A4B3FF50013FECC /* BullCowAlertTableViewCell.swift */; };
 		D8D7884B2A4B3FF50013FECC /* BullCowAlertTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788492A4B3FF50013FECC /* BullCowAlertTableViewCell.xib */; };
+		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
 		D8D788482A4B3FF50013FECC /* BullCowAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowAlertTableViewCell.swift; sourceTree = "<group>"; };
 		D8D788492A4B3FF50013FECC /* BullCowAlertTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowAlertTableViewCell.xib; sourceTree = "<group>"; };
+		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,7 +167,6 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D8D788432A4B3EDD0013FECC /* Xibs */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
 				D826CF212A10C71F00263CEB /* Storyboards */,
@@ -254,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */,
+				D8D7884C2A4B49E80013FECC /* BullCowModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,13 +274,6 @@
 				D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		D8D788432A4B3EDD0013FECC /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Xibs;
 			sourceTree = "<group>";
 		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
@@ -419,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,

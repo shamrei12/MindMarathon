@@ -15,6 +15,7 @@ class BullCowViewModel {
         return instance
     }()
     
+    var stepList = [BullCowProtocol]()
     
     func getRulesGame() -> String {
         let gameRules = """
