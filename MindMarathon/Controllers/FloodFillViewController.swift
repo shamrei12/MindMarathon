@@ -65,15 +65,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         view.addSubview(playButton)
         
-        timerLabel.text = "0"
-        timerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        timerLabel.numberOfLines = 0
-        timerLabel.textAlignment = .center
-        view.addSubview(timerLabel)
-        
         panelControllStackView.addArrangedSubview(gridButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.addArrangedSubview(timerLabel)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
         
@@ -289,11 +282,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     @objc func updateTimer() {
         seconds += 1
-        timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+        navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
     @objc func startGameButton(_ sender: UIButton) {
-        
         let chekPartGame = (isStartGame, isContinuePlaying)
         
         if chekPartGame == (false, false) {
@@ -313,8 +305,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         let size = gridButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
         createGamePlace(sizePlace: gridSize)
-//        gameView.isUserInteractionEnabled = false
-//        colorView.isUserInteractionEnabled = false
         seconds = 0
         createTimer()
         gridButton.isEnabled = false
@@ -333,6 +323,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         colorView.isUserInteractionEnabled = false
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        navigationItem.title = "PAUSE"
     }
     
     

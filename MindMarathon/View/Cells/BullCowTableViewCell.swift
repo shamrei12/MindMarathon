@@ -53,7 +53,7 @@ class BullCowTableViewCell: UITableViewCell {
         userMoveStackView.distribution = .fillEqually
         userMoveStackView.spacing = 5
         let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.6)
-                   widthConstraint.isActive = true
+        widthConstraint.isActive = true
         
         // Создание stack с ответом алгоритма
         resultStepStacvkView.axis = .vertical
@@ -92,7 +92,7 @@ class BullCowTableViewCell: UITableViewCell {
             }
             userMoveStackView.addArrangedSubview(viewElement)
         }
-               
+        
         let imageStackView = UIStackView()
         imageStackView.distribution = .fill
         imageStackView.axis = .horizontal
@@ -119,39 +119,41 @@ class BullCowTableViewCell: UITableViewCell {
         guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
             return
         }
-//
-            let cowImage = UIImageView(image: UIImage(named: "cow"))
-            cowImage.translatesAutoresizingMaskIntoConstraints = false
-            cowImage.snp.makeConstraints { make in
-                make.width.equalTo(40)
-                make.height.equalTo(20)
-            }
-            mainView.addSubview(cowImage)
-            imageStackView.addArrangedSubview(cowImage)
-            
-            let bullImage = UIImageView(image: UIImage(named: "bull"))
-            bullImage.translatesAutoresizingMaskIntoConstraints = false
-            bullImage.snp.makeConstraints { make in
-                make.width.equalTo(40)
-                make.height.equalTo(20)
-            }
-            mainView.addSubview(bullImage)
-            imageStackView.addArrangedSubview(bullImage)
-            
-            let cowLabel = UILabel()
-            cowLabel.textAlignment = .center
-            cowLabel.text = "\(gameData.first!.cow)"
-            self.addSubview(cowLabel)
-            numberStackView.addArrangedSubview(cowLabel)
-            
-            let bullLabel = UILabel()
-            bullLabel.text = "\(gameData.first!.bull)"
-            bullLabel.textAlignment = .center
-            self.addSubview(bullLabel)
-            numberStackView.addArrangedSubview(bullLabel)
-            
-            resultStepStacvkView.addArrangedSubview(imageStackView)
-            resultStepStacvkView.addArrangedSubview(numberStackView)
+        //
+        let cowImage = UIImageView(image: UIImage(named: "cow"))
+        cowImage.translatesAutoresizingMaskIntoConstraints = false
+        cowImage.snp.makeConstraints { make in
+            make.width.equalTo(40)
+            make.height.equalTo(20)
+        }
+        mainView.addSubview(cowImage)
+        imageStackView.addArrangedSubview(cowImage)
+        
+        let bullImage = UIImageView(image: UIImage(named: "bull"))
+        bullImage.translatesAutoresizingMaskIntoConstraints = false
+        bullImage.snp.makeConstraints { make in
+            make.width.equalTo(40)
+            make.height.equalTo(20)
+        }
+        mainView.addSubview(bullImage)
+        imageStackView.addArrangedSubview(bullImage)
+        
+        let cowLabel = UILabel()
+        cowLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
+        cowLabel.textAlignment = .center
+        cowLabel.text = "\(gameData.first!.cow)"
+        self.addSubview(cowLabel)
+        numberStackView.addArrangedSubview(cowLabel)
+        
+        let bullLabel = UILabel()
+        bullLabel.text = "\(gameData.first!.bull)"
+        bullLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
+        bullLabel.textAlignment = .center
+        self.addSubview(bullLabel)
+        numberStackView.addArrangedSubview(bullLabel)
+        
+        resultStepStacvkView.addArrangedSubview(imageStackView)
+        resultStepStacvkView.addArrangedSubview(numberStackView)
     }
     
 }

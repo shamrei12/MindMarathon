@@ -22,7 +22,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var gameStatusPlayerLabel: UILabel!
     var gameStatusStackView: UIStackView!
     var playButton: UIButton!
-    var timerLabel: UILabel!
     var gameControllerStackView: UIStackView!
     var seconds = 0
     var stepCount = 0
@@ -74,19 +73,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        
         view.addSubview(playButton)
-        
-        timerLabel = UILabel()
-        timerLabel.text = "0"
-        timerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        timerLabel.numberOfLines = 0
-        timerLabel.textAlignment = .center
-        view.addSubview(timerLabel)
         
         gameControllerStackView = UIStackView()
         gameControllerStackView.addArrangedSubview(playButton)
-        gameControllerStackView.addArrangedSubview(timerLabel)
         gameControllerStackView.distribution = .equalCentering
         view.addSubview(gameControllerStackView)
         
@@ -425,7 +415,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     @objc func updateTimer() {
         seconds += 1
-        timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+        navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
     
@@ -476,6 +466,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     func pauseGame() {
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        navigationItem.title = "PAUSE"
         stopwatch.invalidate()
         closeGameField()
     }
@@ -490,7 +481,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         computerThinkingTimer?.invalidate()
         alertView.removeFromSuperview()
         startNewGame()
-        timerLabel.text = "0"
         isstartGame = true
         iscontinuePlaying = true
     }

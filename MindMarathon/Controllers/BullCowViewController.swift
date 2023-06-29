@@ -36,7 +36,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         game = BullCowViewModel()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
-        navigationItem.title = "Быки и Коровы"
         userDiggitLabel.text = ""
         self.view.backgroundColor = UIColor(named: "viewColor")
         tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
@@ -93,15 +92,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         view.addSubview(countButton)
         
-        timerLabel.text = "0"
-        timerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        timerLabel.numberOfLines = 0
-        timerLabel.textAlignment = .center
-        view.addSubview(timerLabel)
-        
         panelControllStackView.addArrangedSubview(countButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.addArrangedSubview(timerLabel)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
         
@@ -221,7 +213,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc func updateTimer() {
         seconds += 1
-        timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+        navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
     @objc func diggitsTapped(_ sender: UIButton) {
@@ -258,6 +250,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         stopwatch.invalidate()
         //        makeResultText(partGame: "Игра приостановлена\n")
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        navigationItem.title = "PAUSE"
     }
     
     @objc func startGameButton(_ sender: UIButton) {

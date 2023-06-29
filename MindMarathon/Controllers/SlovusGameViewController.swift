@@ -20,7 +20,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     private var userWords = ""
     let playButton = UIButton()
     let sizeWordButton = UIButton()
-    let timerLabel = UILabel()
     let numberOfRows = 6
     var numberOfColumns = 5
     let containerView = UIView()
@@ -68,15 +67,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         view.addSubview(playButton)
         
-        timerLabel.text = "0"
-        timerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        timerLabel.numberOfLines = 0
-        timerLabel.textAlignment = .center
-        view.addSubview(timerLabel)
-        
         panelControllStackView.addArrangedSubview(sizeWordButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.addArrangedSubview(timerLabel)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
         
@@ -248,8 +240,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func updateTimer() {
-        seconds += 30
-        timerLabel.text = TimeManager.shared.convertToMinutes(seconds: seconds)
+        seconds += 1
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
@@ -294,6 +285,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     func pauseGame() {
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         stopwatch.invalidate()
+        navigationItem.title = "PAUSE"
         
     }
     
@@ -309,7 +301,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
         pauseGame()
         sizeWordButton.isEnabled = true
-        timerLabel.text = "0"
         isstartGame = false
         iscontinuePlaying = false
         alertView.removeFromSuperview()
