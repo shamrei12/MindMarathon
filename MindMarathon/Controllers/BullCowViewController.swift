@@ -295,6 +295,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         if alertView != nil {
             alertView.removeFromSuperview()
         }
+        BullCowViewModel.shared.stepList.removeAll()
+        tableview.reloadData()
         self.dismiss(animated: true)
     }
     
@@ -378,11 +380,6 @@ extension BullCowViewController: UITableViewDataSource {
             return configure(cell: cell, for: indexPath)
     }
     
-    private func configure(cell: BullCowAlertTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        // Настройте BullCowAlertTableViewCell здесь, если необходимо
-        return cell
-    }
-    
     private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let step = BullCowViewModel.shared.stepList[indexPath.row]
         cell.gameData = [step]
@@ -392,15 +389,10 @@ extension BullCowViewController: UITableViewDataSource {
 }
 
 extension BullCowViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let count = BullCowViewModel.shared.stepList.count
-        if count == 0 {
-            return 150
-        } else {
-            return 70
-        }
         
+        return 60
+            
     }
 }
 

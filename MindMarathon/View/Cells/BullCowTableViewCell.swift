@@ -29,7 +29,7 @@ class BullCowTableViewCell: UITableViewCell {
         self.addSubview(mainView)
         
         mainView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalToSuperview().inset(10)
+            maker.left.right.top.bottom.equalToSuperview().inset(5)
         }
         
         // Создание главного Stackview и двух в него входящих Stackview
@@ -37,12 +37,13 @@ class BullCowTableViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(userMoveStackView)
         mainStackView.addArrangedSubview(resultStepStacvkView)
         mainStackView.axis = .horizontal
-        mainStackView.distribution = .fill
-        mainStackView.spacing = 1
+        mainStackView.distribution = .equalSpacing
+        mainStackView.spacing = 10
         mainView.addSubview(mainStackView)
         
         mainStackView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalTo(mainView).inset(5)
+            maker.top.bottom.equalTo(mainView).inset(5)
+            maker.left.right.equalTo(mainView).inset(10)
         }
         
         
@@ -51,6 +52,16 @@ class BullCowTableViewCell: UITableViewCell {
         userMoveStackView.backgroundColor = .clear
         userMoveStackView.distribution = .fillEqually
         userMoveStackView.spacing = 5
+        if gameData.first!.size <= 4 {
+            let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.6)
+            widthConstraint.isActive = true
+        } else {
+            let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.5)
+            widthConstraint.isActive = true
+        }
+        
+       
+
         
         // Создание stack с ответом алгоритма
         resultStepStacvkView.axis = .horizontal
@@ -71,12 +82,27 @@ class BullCowTableViewCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
-        let label = UILabel()
-        label.text = "\(gameData.first!.userStep)"
-        label.textAlignment = .center
-        userMoveStackView.addArrangedSubview(label)
-        
-                
+        for i in 0..<gameData.first!.size {
+            let viewElement = UIView()
+            let userDiggitLabel = UILabel()
+            viewElement.widthAnchor.constraint(equalToConstant: 5).isActive = true
+            viewElement.heightAnchor.constraint(equalToConstant: 5).isActive = true
+            viewElement.backgroundColor = .tertiaryLabel
+            viewElement.layer.cornerRadius = 10
+            userDiggitLabel.text = String(gameData.first!.userStep[i])
+            userDiggitLabel.font =  UIFont(name: "HelveticaNeue-Medium", size: 25.0)
+            userDiggitLabel.textAlignment = .center
+            userDiggitLabel.textColor = .white
+            self.addSubview(viewElement)
+            self.addSubview(userDiggitLabel)
+            userDiggitLabel.snp.makeConstraints { maker in
+                maker.left.right.bottom.top.equalTo(viewElement).inset(0)
+            }
+            userMoveStackView.addArrangedSubview(viewElement)
+        }
+               
+        let bullStackView = UIStackView()
+        let cowStackView = UIStackView()
         guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
             return
         }
@@ -95,9 +121,10 @@ class BullCowTableViewCell: UITableViewCell {
             let imageView = UIImageView(image: UIImage(named: "cow"))
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.snp.makeConstraints { make in
-                make.width.equalTo(30)
-                make.height.equalTo(20)
+                make.width.equalTo(20)
+                make.height.equalTo(10)
             }
+            mainView.addSubview(imageView)
 
             resultStepStacvkView.addArrangedSubview(imageView)
         }
@@ -106,9 +133,10 @@ class BullCowTableViewCell: UITableViewCell {
             let imageView = UIImageView(image: UIImage(named: "bull"))
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.snp.makeConstraints { make in
-                make.width.equalTo(30)
-                make.height.equalTo(20)
+                make.width.equalTo(20)
+                make.height.equalTo(10)
             }
+            mainView.addSubview(imageView)
             resultStepStacvkView.addArrangedSubview(imageView)
         }
     }

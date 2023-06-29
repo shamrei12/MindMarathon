@@ -44,8 +44,6 @@
 		D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D788472A4B3FE00013FECC /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */; };
-		D8D7884A2A4B3FF50013FECC /* BullCowAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788482A4B3FF50013FECC /* BullCowAlertTableViewCell.swift */; };
-		D8D7884B2A4B3FF50013FECC /* BullCowAlertTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788492A4B3FF50013FECC /* BullCowAlertTableViewCell.xib */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,8 +86,6 @@
 		D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGameTableViewCell.xib; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
-		D8D788482A4B3FF50013FECC /* BullCowAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowAlertTableViewCell.swift; sourceTree = "<group>"; };
-		D8D788492A4B3FF50013FECC /* BullCowAlertTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowAlertTableViewCell.xib; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,8 +187,6 @@
 				D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */,
 				D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */,
 				D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */,
-				D8D788482A4B3FF50013FECC /* BullCowAlertTableViewCell.swift */,
-				D8D788492A4B3FF50013FECC /* BullCowAlertTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -356,7 +350,6 @@
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
-				D8D7884B2A4B3FF50013FECC /* BullCowAlertTableViewCell.xib in Resources */,
 				D86D0A792A28A62800AB6789 /* singular in Resources */,
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
@@ -423,7 +416,6 @@
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
-				D8D7884A2A4B3FF50013FECC /* BullCowAlertTableViewCell.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
