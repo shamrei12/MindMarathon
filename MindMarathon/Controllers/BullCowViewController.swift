@@ -369,15 +369,6 @@ extension BullCowViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if BullCowViewModel.shared.stepList.count == 0 {
-//            let cell: BullCowAlertTableViewCell
-//            if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowAlertTableViewCell", for: indexPath) as? BullCowAlertTableViewCell {
-//                cell = reuseCell
-//            } else {
-//                cell = BullCowAlertTableViewCell(style: .default, reuseIdentifier: "BullCowAlertTableViewCell")
-//            }
-//            return configure(cell: cell, for: indexPath)
-//        } else {
             let cell: BullCowTableViewCell
             if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
                 cell = reuseCell
@@ -385,7 +376,6 @@ extension BullCowViewController: UITableViewDataSource {
                 cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
             }
             return configure(cell: cell, for: indexPath)
-//        }
     }
     
     private func configure(cell: BullCowAlertTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
