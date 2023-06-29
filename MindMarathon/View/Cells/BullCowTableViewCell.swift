@@ -38,7 +38,7 @@ class BullCowTableViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(resultStepStacvkView)
         mainStackView.axis = .horizontal
         mainStackView.distribution = .equalSpacing
-        mainStackView.spacing = 10
+        mainStackView.spacing = 5
         mainView.addSubview(mainStackView)
         
         mainStackView.snp.makeConstraints { maker in
@@ -52,19 +52,11 @@ class BullCowTableViewCell: UITableViewCell {
         userMoveStackView.backgroundColor = .clear
         userMoveStackView.distribution = .fillEqually
         userMoveStackView.spacing = 5
-        if gameData.first!.size <= 4 {
-            let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.6)
-            widthConstraint.isActive = true
-        } else {
-            let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.5)
-            widthConstraint.isActive = true
-        }
-        
-       
-
+        let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.6)
+                   widthConstraint.isActive = true
         
         // Создание stack с ответом алгоритма
-        resultStepStacvkView.axis = .horizontal
+        resultStepStacvkView.axis = .vertical
         resultStepStacvkView.backgroundColor = .clear
         resultStepStacvkView.distribution = .fillEqually
         resultStepStacvkView.spacing = 5
@@ -101,44 +93,65 @@ class BullCowTableViewCell: UITableViewCell {
             userMoveStackView.addArrangedSubview(viewElement)
         }
                
-        let bullStackView = UIStackView()
-        let cowStackView = UIStackView()
+        let imageStackView = UIStackView()
+        imageStackView.distribution = .fill
+        imageStackView.axis = .horizontal
+        imageStackView.spacing = 20
+        mainView.addSubview(imageStackView)
+        let numberStackView = UIStackView()
+        numberStackView.distribution = .fillEqually
+        numberStackView.axis = .horizontal
+        numberStackView.spacing = 20
+        mainView.addSubview(numberStackView)
+        
+        for view in imageStackView.arrangedSubviews {
+            imageStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        for view in numberStackView.arrangedSubviews {
+            numberStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        
+        
         guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
             return
         }
 //
-        if countCow == 0 && countBull == 0 {
-            let imageView = UIImageView(image: UIImage(named: "empty"))
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.snp.makeConstraints { make in
+            let cowImage = UIImageView(image: UIImage(named: "cow"))
+            cowImage.translatesAutoresizingMaskIntoConstraints = false
+            cowImage.snp.makeConstraints { make in
                 make.width.equalTo(40)
-                make.height.equalTo(40)
+                make.height.equalTo(20)
             }
-            resultStepStacvkView.addArrangedSubview(imageView)
-        }
-        
-        for _ in 0..<countCow {
-            let imageView = UIImageView(image: UIImage(named: "cow"))
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.snp.makeConstraints { make in
-                make.width.equalTo(20)
-                make.height.equalTo(10)
+            mainView.addSubview(cowImage)
+            imageStackView.addArrangedSubview(cowImage)
+            
+            let bullImage = UIImageView(image: UIImage(named: "bull"))
+            bullImage.translatesAutoresizingMaskIntoConstraints = false
+            bullImage.snp.makeConstraints { make in
+                make.width.equalTo(40)
+                make.height.equalTo(20)
             }
-            mainView.addSubview(imageView)
-
-            resultStepStacvkView.addArrangedSubview(imageView)
-        }
-
-        for _ in 0..<countBull {
-            let imageView = UIImageView(image: UIImage(named: "bull"))
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.snp.makeConstraints { make in
-                make.width.equalTo(20)
-                make.height.equalTo(10)
-            }
-            mainView.addSubview(imageView)
-            resultStepStacvkView.addArrangedSubview(imageView)
-        }
+            mainView.addSubview(bullImage)
+            imageStackView.addArrangedSubview(bullImage)
+            
+            let cowLabel = UILabel()
+            cowLabel.textAlignment = .center
+            cowLabel.text = "\(gameData.first!.cow)"
+            self.addSubview(cowLabel)
+            numberStackView.addArrangedSubview(cowLabel)
+            
+            let bullLabel = UILabel()
+            bullLabel.text = "\(gameData.first!.bull)"
+            bullLabel.textAlignment = .center
+            self.addSubview(bullLabel)
+            numberStackView.addArrangedSubview(bullLabel)
+            
+            resultStepStacvkView.addArrangedSubview(imageStackView)
+            resultStepStacvkView.addArrangedSubview(numberStackView)
     }
     
 }
