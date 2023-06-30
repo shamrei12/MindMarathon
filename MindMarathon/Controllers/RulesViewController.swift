@@ -12,8 +12,7 @@ class RulesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor(named: "viewColor")
     }
 
     func rulesGame(numberGame: Int) {
@@ -38,7 +37,6 @@ class RulesViewController: UIViewController {
         rulesLabel.textColor = .label
         view.addSubview(rulesLabel)
         
-        
         gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
         gameRules.textAlignment = .left
         gameRules.numberOfLines = 0
@@ -54,8 +52,6 @@ class RulesViewController: UIViewController {
             maker.top.equalTo(rulesLabel).inset(20)
             maker.left.right.bottom.equalToSuperview().inset(20)
         }
-        
-        
         
     }
 

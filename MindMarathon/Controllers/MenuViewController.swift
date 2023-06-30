@@ -37,6 +37,7 @@ class MenuViewController: UIViewController {
         startMarathon.setTitleColor(.label, for: .normal)
         startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
+        
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)

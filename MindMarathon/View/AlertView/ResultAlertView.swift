@@ -46,6 +46,7 @@ class ResultAlertView: UIView {
         
         let restartGame = UIButton()
         restartGame.setTitle("Начать сначала", for: .normal)
+        restartGame.heightAnchor.constraint(equalToConstant: 60).isActive = true
         restartGame.tintColor = UIColor.label
         restartGame.backgroundColor = UIColor.tertiaryLabel
         restartGame.layer.cornerRadius = 10
@@ -54,6 +55,7 @@ class ResultAlertView: UIView {
         
         let exitGame = UIButton()
         exitGame.setTitle("Выход в меню", for: .normal)
+        exitGame.heightAnchor.constraint(equalToConstant: 60).isActive = true
         exitGame.tintColor = UIColor.label
         exitGame.backgroundColor = UIColor.tertiaryLabel
         exitGame.layer.cornerRadius = 10
