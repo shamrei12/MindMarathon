@@ -28,19 +28,20 @@ class ResultAlertView: UIView {
     func createUI() {
         let mainView = UIView()
         
+        
         mainView.backgroundColor = .systemBackground
         mainView.layer.cornerRadius = 10
-        
         self.addSubview(mainView)
+        
         firstLabel.text = "Конец игры"
-        firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
         firstLabel.numberOfLines = 0
         firstLabel.textAlignment = .center
         self.addSubview(firstLabel)
         
-        descriptionLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15.0)
+        descriptionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .natural
+        descriptionLabel.textAlignment = .center
         self.addSubview(descriptionLabel)
         
         let restartGame = UIButton()
@@ -57,8 +58,15 @@ class ResultAlertView: UIView {
         exitGame.backgroundColor = UIColor.tertiaryLabel
         exitGame.layer.cornerRadius = 10
         exitGame.addTarget(self, action: #selector(exitGameTapped), for: .touchUpInside)
-        
         self.addSubview(exitGame)
+        
+        let buttonStackView = UIStackView()
+        buttonStackView.distribution = .fillEqually
+        buttonStackView.spacing = 10
+        buttonStackView.axis = .horizontal
+        buttonStackView.addArrangedSubview(restartGame)
+        buttonStackView.addArrangedSubview(exitGame)
+        self.addSubview(buttonStackView)
         
         mainView.snp.makeConstraints { maker in
             maker.left.right.equalToSuperview().inset(20)
@@ -75,16 +83,10 @@ class ResultAlertView: UIView {
             maker.left.right.equalTo(mainView).inset(20)
         }
         
-        restartGame.snp.makeConstraints { maker in
-            maker.top.equalTo(descriptionLabel).inset(70)
-            maker.left.right.equalTo(mainView).inset(10)
+        buttonStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(descriptionLabel.snp.bottom).inset(-10)
+            maker.left.right.bottom.equalTo(mainView).inset(20)
         }
-        
-        exitGame.snp.makeConstraints { maker in
-            maker.top.equalTo(restartGame).inset(50)
-            maker.left.right.equalTo(mainView).inset(10)
-        }
-        
     }
     
     

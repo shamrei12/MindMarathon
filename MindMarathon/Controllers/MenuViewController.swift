@@ -35,7 +35,7 @@ class MenuViewController: UIViewController {
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр", for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
-        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
+        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
@@ -46,7 +46,7 @@ class MenuViewController: UIViewController {
         whiteBoard.setTitleColor(.label, for: .normal)
         whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
         whiteBoard.layer.cornerRadius = 10
-        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
+        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         view.addSubview(whiteBoard)
     
@@ -62,13 +62,13 @@ class MenuViewController: UIViewController {
         startMarathon.snp.makeConstraints { maker in
             maker.left.right.equalToSuperview().inset(10)
             maker.top.equalTo(labelSecond).inset(250)
-            maker.height.equalTo(50)
+            maker.height.equalTo(80)
         }
         
         whiteBoard.snp.makeConstraints { maker in
             maker.left.right.equalToSuperview().inset(10)
-            maker.top.equalTo(startMarathon).inset(80)
-            maker.height.equalTo(50)
+            maker.top.equalTo(startMarathon.snp.bottom).inset(-10)
+            maker.height.equalTo(80)
         }
     }
     
