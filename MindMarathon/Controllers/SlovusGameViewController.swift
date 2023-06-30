@@ -435,6 +435,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func createAlertMessage() {
+        guard messegeView == nil else {
+            return
+        }
+        
         messegeView = UserMistakeView.loadFromNib() as? UserMistakeView
         
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
@@ -442,6 +446,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1
         let alertViewHeight: CGFloat = 100
         
+        messegeView.createUI(messages: "Данного слова не существует в словаре. Проверьте написание и повторите попытку")
         messegeView.frame = CGRect(x: (window!.frame.width - alertViewWidth) / 2,
                                    y: -alertViewHeight,
                                    width: alertViewWidth,
@@ -462,6 +467,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             }, completion: { _ in
                 self.messegeView.removeFromSuperview()
                 self.isshowMessageAlert = false
+                self.messegeView = nil
             })
         }
     }

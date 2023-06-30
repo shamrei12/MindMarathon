@@ -13,6 +13,8 @@ class BullCowTableViewCell: UITableViewCell {
     let mainStackView = UIStackView()
     let userMoveStackView = UIStackView()
     let resultStepStacvkView = UIStackView()
+    let imageStackView = UIStackView()
+    let numberStackView = UIStackView()
     var gameData = [BullCowProtocol]()
     
     
@@ -46,13 +48,16 @@ class BullCowTableViewCell: UITableViewCell {
             maker.left.right.equalTo(mainView).inset(10)
         }
         
+        guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
+            return
+        }
         
         // Создание stack с ответом пользователя
         userMoveStackView.axis = .horizontal
         userMoveStackView.backgroundColor = .clear
         userMoveStackView.distribution = .fillEqually
         userMoveStackView.spacing = 5
-        let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.6)
+        let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.7)
         widthConstraint.isActive = true
         
         // Создание stack с ответом алгоритма
@@ -74,6 +79,9 @@ class BullCowTableViewCell: UITableViewCell {
             view.removeFromSuperview()
         }
         
+        createImageResult()
+        createLabelResult()
+        
         for i in 0..<gameData.first!.size {
             let viewElement = UIView()
             let userDiggitLabel = UILabel()
@@ -92,38 +100,23 @@ class BullCowTableViewCell: UITableViewCell {
             }
             userMoveStackView.addArrangedSubview(viewElement)
         }
-        
-        let imageStackView = UIStackView()
-        imageStackView.distribution = .fill
-        imageStackView.axis = .horizontal
-        imageStackView.spacing = 20
-        mainView.addSubview(imageStackView)
-        let numberStackView = UIStackView()
-        numberStackView.distribution = .fillEqually
-        numberStackView.axis = .horizontal
-        numberStackView.spacing = 20
-        mainView.addSubview(numberStackView)
-        
+    }
+    
+    func createImageResult() {
         for view in imageStackView.arrangedSubviews {
             imageStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
         
-        for view in numberStackView.arrangedSubviews {
-            numberStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
+        imageStackView.distribution = .fill
+        imageStackView.axis = .horizontal
+        imageStackView.spacing = 15
+        mainView.addSubview(imageStackView)
         
-        
-        
-        guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
-            return
-        }
-        //
         let cowImage = UIImageView(image: UIImage(named: "cow"))
         cowImage.translatesAutoresizingMaskIntoConstraints = false
         cowImage.snp.makeConstraints { make in
-            make.width.equalTo(40)
+            make.width.equalTo(35)
             make.height.equalTo(20)
         }
         mainView.addSubview(cowImage)
@@ -132,11 +125,23 @@ class BullCowTableViewCell: UITableViewCell {
         let bullImage = UIImageView(image: UIImage(named: "bull"))
         bullImage.translatesAutoresizingMaskIntoConstraints = false
         bullImage.snp.makeConstraints { make in
-            make.width.equalTo(40)
+            make.width.equalTo(35)
             make.height.equalTo(20)
         }
         mainView.addSubview(bullImage)
         imageStackView.addArrangedSubview(bullImage)
+    }
+    
+    func createLabelResult() {
+        for view in numberStackView.arrangedSubviews {
+            numberStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        numberStackView.distribution = .fillEqually
+        numberStackView.axis = .horizontal
+        numberStackView.spacing = 20
+        mainView.addSubview(numberStackView)
         
         let cowLabel = UILabel()
         cowLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)

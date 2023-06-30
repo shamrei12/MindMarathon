@@ -9,17 +9,14 @@ import UIKit
 import SnapKit
 
 class UserMistakeView: UIView {
-    
-   
+    var message = UILabel()
     
     override func awakeFromNib() {
-        createUI()
     }
     
-    func createUI() {
-        let message = UILabel()
+    func createUI(messages: String) {
         let contentView = UIView()
-        message.text = "Данного слова не существует в словаре. Проверьте написание и повторите попытку"
+        message.text = messages
         message.numberOfLines = 0
         message.textAlignment = .center
         message.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)

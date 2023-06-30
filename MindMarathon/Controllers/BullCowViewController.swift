@@ -12,12 +12,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private let tableview = UITableView()
     private let countButton = UIButton()
     private let userDiggitLabel = UILabel()
-    //    private let dashBoardTextView = UITextView()
+    private var messegeView: UserMistakeView!
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
     private let sendDiggits = UIButton()
     private let playButton = UIButton()
-    
+    private var isshowMessageAlert: Bool = false
     private var stopwatch = Timer()
     private var seconds: Int = 0
     private var isStartGame: Bool = false
@@ -45,7 +45,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         tableview.delegate = self
         tableview.separatorStyle = .none
         createUIElements()
-        //        tableview.reloadData()
     }
     
     func createUIElements() {
@@ -196,7 +195,24 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(panelIntputControlView).inset(20)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
         }
-        
+    }
+    
+    @objc
+    func cancelTapped() {
+        if alertView != nil {
+            alertView.removeFromSuperview()
+        }
+        BullCowViewModel.shared.stepList.removeAll()
+        tableview.reloadData()
+        self.dismiss(animated: true)
+    }
+    
+    @objc
+    func rulesTapped() {
+        let rulesVC = RulesViewController()
+        rulesVC.modalPresentationStyle = .formSheet
+        rulesVC.rulesGame(numberGame: 1)
+        present(rulesVC, animated: true)
     }
     
     @objc func selectMaxLenghtTapped(_ sender: UIButton) {
@@ -233,7 +249,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func startNewGame() {
         seconds = 0
         createTimer()
-        //        dashBoardTextView.text = ""
         maxLenght = Int((countButton.titleLabel?.text)!)!
         countButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
@@ -242,13 +257,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     func continueGame() {
         createTimer()
-        //        makeResultText(partGame: "Игра возобновлена \n")
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
     func pauseGame() {
         stopwatch.invalidate()
-        //        makeResultText(partGame: "Игра приостановлена\n")
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
     }
@@ -274,7 +287,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.alpha = 0.6
             self.view.isUserInteractionEnabled = false
         }
-        
         alertView = ResultAlertView.loadFromNib() as? ResultAlertView
         alertView.delegate = self
         alertView.descriptionLabel.text = description
@@ -283,45 +295,37 @@ class BullCowViewController: UIViewController, AlertDelegate {
                                    y: self.view.frame.size.height / 2)
     }
     
-    @objc
-    func cancelTapped() {
-        if alertView != nil {
-            alertView.removeFromSuperview()
-        }
-        BullCowViewModel.shared.stepList.removeAll()
-        tableview.reloadData()
-        self.dismiss(animated: true)
-    }
-    
     @objc func sendDiggitTapped(_ sender: UIButton) {
-        if isStartGame && userDiggitLabel.text?.count == maxLenght {
-            let (bull, cow) = game.comparisonNumber(game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
-            
-            BullCowViewModel.shared.stepList.append(BullCowModel(size: maxLenght, bull: bull, cow: cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
-            userDiggitLabel.text = ""
-            
-            let lastIndexPath = IndexPath(row: BullCowViewModel.shared.stepList.count - 1, section: 0)
-            tableview.insertRows(at: [lastIndexPath], with: .automatic)
-            tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-            
-            countStep += 1
-            
-            if bull == maxLenght {
-                stopwatch.invalidate()
-                createAlertMessage(description: "Ура! Мы загадали число \(computerDiggit). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
-                let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+        guard game.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
+            createAlertMessage(messages: "В вашем числе есть повторяющиеся цифры")
+            return
+        }
+        
+        if isStartGame {
+            if userDiggitLabel.text?.count == maxLenght {
+                let (bull, cow) = game.comparisonNumber(game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
                 
-                RealmManager.shared.saveResult(result: resultGame)
+                BullCowViewModel.shared.stepList.append(BullCowModel(size: maxLenght, bull: bull, cow: cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
+                userDiggitLabel.text = ""
+                
+                let lastIndexPath = IndexPath(row: BullCowViewModel.shared.stepList.count - 1, section: 0)
+                tableview.insertRows(at: [lastIndexPath], with: .automatic)
+                tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+                countStep += 1
+                checkResult(bull: bull)
+            } else {
+                createAlertMessage(messages: "Введенному Вами числу не хватает цирф")
             }
         }
     }
-
-    @objc
-    func rulesTapped() {
-        let rulesVC = RulesViewController()
-        rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 1)
-        present(rulesVC, animated: true)
+    
+    func checkResult(bull: Int) {
+        if bull == maxLenght {
+            stopwatch.invalidate()
+            createAlertMessage(description: "Ура! Мы загадали число \(computerDiggit). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
+            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            RealmManager.shared.saveResult(result: resultGame)
+        }
     }
     
     func restartGame() {
@@ -334,7 +338,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         countButton.isEnabled = true
         isStartGame = false
         isContinueGame = false
-        //        dashBoardTextView.text = "Для начала игры выберите размер загаданного числа и нажмите СТАРТ \n"
         BullCowViewModel.shared.stepList.removeAll()
         tableview.reloadData()
         alertView.removeFromSuperview()
@@ -350,11 +353,47 @@ class BullCowViewController: UIViewController, AlertDelegate {
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
+    
+    func createAlertMessage(messages: String) {
+        guard messegeView == nil else {
+            return
+        }
+        messegeView = UserMistakeView.loadFromNib() as? UserMistakeView
+        
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let topPadding = window?.safeAreaInsets.top ?? 0
+        let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1
+        let alertViewHeight: CGFloat = 70
+        
+        messegeView.createUI(messages: messages)
+        messegeView.frame = CGRect(x: (window!.frame.width - alertViewWidth) / 2,
+                                   y: -alertViewHeight,
+                                   width: alertViewWidth,
+                                   height: alertViewHeight)
+        
+        messegeView.layer.cornerRadius = 10
+        messegeView.layer.shadowOpacity = 0.2
+        messegeView.layer.shadowRadius = 5
+        messegeView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        
+        UIApplication.shared.keyWindow?.addSubview(messegeView)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            self.messegeView.frame.origin.y = topPadding // конечное положение
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 5, options: .curveEaseOut, animations: {
+                self.messegeView.frame.origin.y = -alertViewHeight // начальное положение
+            }, completion: { _ in
+                self.messegeView.removeFromSuperview()
+                self.isshowMessageAlert = false
+                self.messegeView = nil
+            })
+        }
+    }
 }
 
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let count = BullCowViewModel.shared.stepList.count
         if count == 0 {
             return count
@@ -383,7 +422,6 @@ extension BullCowViewController: UITableViewDataSource {
 
 extension BullCowViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 80
             
     }

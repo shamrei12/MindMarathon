@@ -16,6 +16,7 @@ class BullCowViewModel {
     }()
     
     var stepList = [BullCowProtocol]()
+    var countStep = 0
     
     func getRulesGame() -> String {
         let gameRules = """
@@ -60,21 +61,33 @@ class BullCowViewModel {
     }
     
     func  comparisonNumber(_ userDigg: [Int],_ computerNumber: [Int]) -> (Int, Int) {
-           var bull = 0
-           var cow = 0
-           for (i, _) in userDigg.enumerated() {
-               for (j, _) in computerNumber.enumerated() {
-                   if userDigg[i] == computerNumber[j] && i == j {
-                       bull += 1
-                   }
-                   else if userDigg[i] == computerNumber[j] && i != j {
-                       cow += 1
-                   }
-               }
-           }
-           return (bull,cow)
-       }
+        var bull = 0
+        var cow = 0
+        for (i, _) in userDigg.enumerated() {
+            for (j, _) in computerNumber.enumerated() {
+                if userDigg[i] == computerNumber[j] && i == j {
+                    bull += 1
+                }
+                else if userDigg[i] == computerNumber[j] && i != j {
+                    cow += 1
+                }
+            }
+        }
+        return (bull,cow)
+    }
     
+    
+    func checkRepeatDiggits(userDiggit: String) -> Bool {
+        let numbers = createMassive(userDiggit: userDiggit)
+        let uniqueNumbers = Set(numbers)
+        
+        if numbers.count != uniqueNumbers.count {
+            return false
+        } else {
+            return true
+        }
+        
+    }
     func createMassive(userDiggit: String) -> [Int] {
         var result = [Int]()
         for i in userDiggit {
