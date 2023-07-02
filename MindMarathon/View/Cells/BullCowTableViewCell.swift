@@ -25,6 +25,7 @@ class BullCowTableViewCell: UITableViewCell {
     }
     
     func createUI() {
+        mainView.removeFromSuperview()
         // Создание главного View
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
@@ -35,7 +36,6 @@ class BullCowTableViewCell: UITableViewCell {
         }
         
         // Создание главного Stackview и двух в него входящих Stackview
-        
         for view in mainStackView.arrangedSubviews {
             imageStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
@@ -85,8 +85,8 @@ class BullCowTableViewCell: UITableViewCell {
             userDiggitLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 30.0)
             userDiggitLabel.textAlignment = .center
             userDiggitLabel.textColor = .white
-            self.addSubview(viewElement)
-            self.addSubview(userDiggitLabel)
+            mainView.addSubview(viewElement)
+            mainView.addSubview(userDiggitLabel)
             userDiggitLabel.snp.makeConstraints { maker in
                 maker.left.right.bottom.top.equalTo(viewElement).inset(0)
             }
