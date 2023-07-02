@@ -14,9 +14,12 @@ class BullCowViewModel {
         let instance = BullCowViewModel()
         return instance
     }()
-    
+    var isStartGame = false
+    var isContinueGame = false
     var stepList = [BullCowProtocol]()
     var countStep = 0
+    var bull = 0
+    var cow = 0
     
     func getRulesGame() -> String {
         let gameRules = """
@@ -60,20 +63,21 @@ class BullCowViewModel {
         return result
     }
     
-    func  comparisonNumber(_ userDigg: [Int],_ computerNumber: [Int]) -> (Int, Int) {
-        var bull = 0
-        var cow = 0
+    func  comparisonNumber(_ userDigg: [Int],_ computerNumber: [Int]) {
+        var bullCount = 0
+        var cowCount = 0
         for (i, _) in userDigg.enumerated() {
             for (j, _) in computerNumber.enumerated() {
                 if userDigg[i] == computerNumber[j] && i == j {
-                    bull += 1
+                    bullCount += 1
                 }
                 else if userDigg[i] == computerNumber[j] && i != j {
-                    cow += 1
+                    cowCount += 1
                 }
             }
         }
-        return (bull,cow)
+        bull = bullCount
+        cow = cowCount
     }
     
     
@@ -94,5 +98,14 @@ class BullCowViewModel {
             result.append(Int(String(i))!)
         }
         return result
+    }
+    
+    func restartGame() {
+        bull = 0
+        cow = 0
+        stepList.removeAll()
+        countStep = 0
+        isStartGame = false
+        isContinueGame = false
     }
 }

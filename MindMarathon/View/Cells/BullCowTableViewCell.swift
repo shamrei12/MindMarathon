@@ -9,7 +9,7 @@ import UIKit
 
 class BullCowTableViewCell: UITableViewCell {
     
-    let mainView = UIView()
+    var mainView = UIView()
     let mainStackView = UIStackView()
     let userMoveStackView = UIStackView()
     let resultStepStacvkView = UIStackView()
@@ -21,7 +21,7 @@ class BullCowTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.backgroundColor = .clear
+        self.isSelected = false
     }
     
     func createUI() {
@@ -35,7 +35,12 @@ class BullCowTableViewCell: UITableViewCell {
         }
         
         // Создание главного Stackview и двух в него входящих Stackview
-        let mainStackView = UIStackView()
+        
+        for view in mainStackView.arrangedSubviews {
+            imageStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
         mainStackView.addArrangedSubview(userMoveStackView)
         mainStackView.addArrangedSubview(resultStepStacvkView)
         mainStackView.axis = .horizontal
@@ -52,6 +57,11 @@ class BullCowTableViewCell: UITableViewCell {
             return
         }
         
+        for view in userMoveStackView.arrangedSubviews {
+            userMoveStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    
         // Создание stack с ответом пользователя
         userMoveStackView.axis = .horizontal
         userMoveStackView.backgroundColor = .clear
@@ -65,32 +75,14 @@ class BullCowTableViewCell: UITableViewCell {
         resultStepStacvkView.backgroundColor = .clear
         resultStepStacvkView.distribution = .fillEqually
         resultStepStacvkView.spacing = 5
-        
-        
-        
-        for view in userMoveStackView.arrangedSubviews {
-            userMoveStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-        
-        
-        for view in resultStepStacvkView.arrangedSubviews {
-            resultStepStacvkView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-        
-        createImageResult()
-        createLabelResult()
-        
+
         for i in 0..<gameData.first!.size {
             let viewElement = UIView()
             let userDiggitLabel = UILabel()
-            viewElement.widthAnchor.constraint(equalToConstant: 5).isActive = true
-            viewElement.heightAnchor.constraint(equalToConstant: 5).isActive = true
             viewElement.backgroundColor = .tertiaryLabel
             viewElement.layer.cornerRadius = 10
             userDiggitLabel.text = String(gameData.first!.userStep[i])
-            userDiggitLabel.font =  UIFont(name: "HelveticaNeue-Medium", size: 25.0)
+            userDiggitLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 30.0)
             userDiggitLabel.textAlignment = .center
             userDiggitLabel.textColor = .white
             self.addSubview(viewElement)
@@ -100,6 +92,9 @@ class BullCowTableViewCell: UITableViewCell {
             }
             userMoveStackView.addArrangedSubview(viewElement)
         }
+        
+        createImageResult()
+        createLabelResult()
     }
     
     func createImageResult() {
@@ -112,6 +107,8 @@ class BullCowTableViewCell: UITableViewCell {
         imageStackView.axis = .horizontal
         imageStackView.spacing = 15
         mainView.addSubview(imageStackView)
+        
+        
         
         let cowImage = UIImageView(image: UIImage(named: "cow"))
         cowImage.translatesAutoresizingMaskIntoConstraints = false
@@ -130,6 +127,7 @@ class BullCowTableViewCell: UITableViewCell {
         }
         mainView.addSubview(bullImage)
         imageStackView.addArrangedSubview(bullImage)
+        resultStepStacvkView.addArrangedSubview(imageStackView)
     }
     
     func createLabelResult() {
@@ -156,9 +154,6 @@ class BullCowTableViewCell: UITableViewCell {
         bullLabel.textAlignment = .center
         self.addSubview(bullLabel)
         numberStackView.addArrangedSubview(bullLabel)
-        
-        resultStepStacvkView.addArrangedSubview(imageStackView)
         resultStepStacvkView.addArrangedSubview(numberStackView)
     }
-    
 }

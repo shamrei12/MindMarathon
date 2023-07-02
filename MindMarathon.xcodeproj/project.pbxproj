@@ -40,10 +40,10 @@
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
+		D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */; };
 		D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */; };
 		D8D788422A3F57A50013FECC /* ListGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
-		D8D788472A4B3FE00013FECC /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,10 +82,10 @@
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameTableViewCell.swift; sourceTree = "<group>"; };
 		D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGameTableViewCell.xib; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
-		D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +186,7 @@
 				D8D7883F2A3F57A50013FECC /* ListGameTableViewCell.swift */,
 				D8D788402A3F57A50013FECC /* ListGameTableViewCell.xib */,
 				D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */,
-				D8D788452A4B3FE00013FECC /* BullCowTableViewCell.xib */,
+				D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -345,7 +345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8D788472A4B3FE00013FECC /* BullCowTableViewCell.xib in Resources */,
+				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
 				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
