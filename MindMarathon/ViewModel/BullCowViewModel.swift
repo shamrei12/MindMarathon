@@ -90,7 +90,6 @@ class BullCowViewModel {
         } else {
             return true
         }
-        
     }
     func createMassive(userDiggit: String) -> [Int] {
         var result = [Int]()

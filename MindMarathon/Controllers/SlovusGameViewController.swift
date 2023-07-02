@@ -19,7 +19,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     private var puzzleWord = ""
     private var userWords = ""
     let playButton = UIButton()
-    let sizeWordButton = UIButton()
+    let levelButton = UIButton()
     let numberOfRows = 6
     var numberOfColumns = 5
     let containerView = UIView()
@@ -44,7 +44,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
-        sizeWordButton.setTitle("5", for: .normal)
+        levelButton.setTitle("5", for: .normal)
     }
     
     func createUI() {
@@ -53,21 +53,21 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
         
-        sizeWordButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        sizeWordButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        sizeWordButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
-        sizeWordButton.setTitle("5", for: .normal)
-        sizeWordButton.tintColor = UIColor.label
-        sizeWordButton.backgroundColor = UIColor.tertiaryLabel
-        sizeWordButton.layer.cornerRadius = 10
-        view.addSubview(sizeWordButton)
+        levelButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        levelButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
+        levelButton.setTitle("5", for: .normal)
+        levelButton.tintColor = UIColor.label
+        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.layer.cornerRadius = 10
+        view.addSubview(levelButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         view.addSubview(playButton)
         
-        panelControllStackView.addArrangedSubview(sizeWordButton)
+        panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.distribution = .equalCentering
         view.addSubview(panelControllStackView)
@@ -228,7 +228,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     //MARK: Таймер и управление игрой
     @objc func selectMaxLenghtTapped() {
-        sizeWordButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: sizeWordButton.titleLabel?.text ?? ""), for: .normal)
+        levelButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
     }
     
     func createTimer() {
@@ -262,7 +262,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
-        maxLenght = Int((sizeWordButton.titleLabel?.text)!)!
+        maxLenght = Int((levelButton.titleLabel?.text)!)!
         lastWordIndex = maxLenght
         numberOfColumns = maxLenght
         controllerTextField = 0
@@ -270,7 +270,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         step = 0
         seconds = 0
         createTimer()
-        sizeWordButton.isEnabled = false
+        levelButton.isEnabled = false
         puzzleWord = SlovusViewModel.shared.choiceRandomWord(size: maxLenght)
         print(puzzleWord)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
@@ -300,7 +300,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             i.text = ""
         }
         pauseGame()
-        sizeWordButton.isEnabled = true
+        levelButton.isEnabled = true
         isstartGame = false
         iscontinuePlaying = false
         alertView.removeFromSuperview()
@@ -366,9 +366,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < 30 && lastWordIndex < 30 {
-                    controllerTextField = firstWordIndex + Int(sizeWordButton.titleLabel?.text ?? "")!
-                    firstWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
-                    lastWordIndex += Int(sizeWordButton.titleLabel?.text ?? "")!
+                    controllerTextField = firstWordIndex + Int(levelButton.titleLabel?.text ?? "")!
+                    firstWordIndex += Int(levelButton.titleLabel?.text ?? "")!
+                    lastWordIndex += Int(levelButton.titleLabel?.text ?? "")!
                 }
             } else {
                 if !isshowMessageAlert {

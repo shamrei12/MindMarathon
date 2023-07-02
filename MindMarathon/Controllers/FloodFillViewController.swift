@@ -172,7 +172,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         index = 0
         var row = [UIView]() // Инициализируем переменную row
         
-        for i in 0..<gridSize {
+        for _ in 0..<gridSize {
             let stackView = UIStackView()
             stackView.axis = .horizontal
             stackView.distribution = .fillEqually
@@ -221,6 +221,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
         }
     }
+    
     @objc func selectedColorTapped(sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
         if chekPartGame == (true, true) {

@@ -11,7 +11,7 @@ import SnapKit
 
 class ListGamesViewController: UIViewController {
     let tableView = UITableView()
-    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"]]
+    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +71,13 @@ class ListGamesViewController: UIViewController {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
+    @objc
+    func zeroOneTapped() {
+        let zeroOneGame = ZeroOneViewController()
+        let navigationController = UINavigationController(rootViewController: zeroOneGame)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
 }
 
 extension ListGamesViewController: UITableViewDataSource {
@@ -92,23 +99,20 @@ extension ListGamesViewController: UITableViewDataSource {
     private func configure(cell: ListGameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let index = Int(indexPath.row)
         let countGame = gameList[index]
-//        cell.gameButton.tag = index
-//        cell.gameButton.setTitle(countGame.first?.key, for: .normal)
-//        cell.createBy.text = "created by \(String(describing: countGame.first!.value))"
         cell.layer.borderColor = UIColor.clear.cgColor
         cell.layer.borderWidth = 10
         if indexPath.row == 0 {
             cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
         } else if indexPath.row == 1 {
             cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
-
-           
+            
         } else if indexPath.row == 2 {
             cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
-
-          
+            
         } else if indexPath.row == 3 {
             cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
+        } else if indexPath.row == 4 {
+            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
         }
         return cell
     }
@@ -129,6 +133,7 @@ extension ListGamesViewController: UITableViewDelegate {
         case 1: slovusButtonTapped()
         case 2: floodFillTapped()
         case 3: ticTacToeTapped()
+        case 4: zeroOneTapped()
         default: print("Default")
         }
     }
