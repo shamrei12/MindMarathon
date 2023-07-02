@@ -9,16 +9,6 @@ import UIKit
 
 class ZeroOneViewController: UIViewController, AlertDelegate {
     
-    func restartGame() {
-       
-    }
-    
-    func exitGame() {
-        alertView.removeFromSuperview()
-        self.dismiss(animated: true)
-    }
-    
-    
     let panelControllView = UIView()
     let panelControllStackView = UIStackView()
     let sendClearStackView = UIStackView()
@@ -38,6 +28,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
     private var cells = [[UIView]]()
     private var row = [UIView]()
     private var messegeView: UserMistakeView!
+    private var game = ZeroOneViewModel()
     
     private var colorMass = [UIColor(hex: 0xb5b5b5),UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
     let checkResultButton = UIButton()
@@ -45,6 +36,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor(named: "viewColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
@@ -57,7 +49,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelControllView)
-        //        levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
+        levelButton.addTarget(self, action: #selector(selectedGridSize), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
@@ -65,7 +57,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         view.addSubview(levelButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        //        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
@@ -134,7 +126,6 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             maker.right.equalTo(view.safeAreaLayoutGuide.snp.right).inset(10)
             maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
         }
-        createGamePlace(size: gridSize)
     }
     
     func createGamePlace(size: Int) {
@@ -192,6 +183,62 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
         coloringView()
     }
+    
+    func createTimer() {
+        stopwatch = Timer.scheduledTimer(timeInterval: 1,
+                                         target: self,
+                                         selector: #selector(updateTimer),
+                                         userInfo: nil,
+                                         repeats: true)
+    }
+    
+    @objc func updateTimer() {
+        seconds += 1
+        navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
+    }
+    
+    @objc
+    func selectedGridSize(sender: UIButton) {
+        sender.setTitle( game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+    }
+    
+    //MARK: управление статусом игры
+    func startNewGame() {
+        seconds = 0
+        createTimer()
+        gridSize = Int((levelButton.titleLabel?.text)!)!
+        levelButton.isEnabled = false
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        createGamePlace(size: gridSize)
+    }
+    
+    func continueGame() {
+        createTimer()
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+    }
+    
+    func pauseGame() {
+        stopwatch.invalidate()
+        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        navigationItem.title = "PAUSE"
+    }
+    
+    @objc func startGameTapped(_ sender: UIButton) {
+        let chekPartGame = (game.isStartGame, game.isContinueGame)
+        
+        if chekPartGame == (false, false) {
+            game.isStartGame = true
+            game.isContinueGame = true
+            startNewGame()
+        } else if chekPartGame == (true, true) {
+            game.isContinueGame = false
+            pauseGame()
+        } else {
+            game.isContinueGame = true
+            continueGame()
+        }
+    }
+    
     //раскраская каждого view в зависимости от tag
     func coloringView() {
         for i in 0..<gridSize {
@@ -200,6 +247,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             }
         }
     }
+    
     
     //функция случайного числа
     func makeRandomDiggit(min: Int, max: Int) -> Int {
@@ -215,8 +263,8 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             viewElement.layer.shadowOpacity = 0.8
             viewElement.layer.shadowOffset = CGSize(width: 1, height: 1)
             viewElement.layer.shadowRadius = 5
-
-
+            
+            
         case 2:
             viewElement.backgroundColor = UIColor(cgColor: colorMass[2].cgColor)
             viewElement.layer.shadowColor = UIColor.black.cgColor
@@ -261,6 +309,18 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func clearGame() {
+        for view in contentStackView.arrangedSubviews {
+            contentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+  
+        
+        contentStackView.removeFromSuperview()
+        cells.removeAll()
+        row.removeAll()
+        massLayer.removeAll()
+    }
     
     @objc
     func checkResultTapped() {
@@ -271,7 +331,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
         
         if makeAnswer(mass: mass) {
-            createAlertMessage(description: "Пока поздравляем, но все же нет")
+            createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
         }
     }
     
@@ -300,13 +360,12 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             return false
         }
         
-        
         return true
     }
     
     func uniqueLines(line: [[Int]]) -> Bool {
         for i in 0..<gridSize {
-            if line[i].reduce(0, ^) != 0 {
+            if !equalCountOfOnesAndTwos(array: line[i]) {
                 return false
             }
         }
@@ -336,6 +395,14 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         return array.flatMap { $0 }.contains(0)
     }
     
+    func equalCountOfOnesAndTwos(array: [Int]) -> Bool {
+        let onesCount = array.reduce(0) { $1 == 1 ? $0 + 1 : $0 }
+        let twosCount = array.reduce(0) { $1 == 2 ? $0 + 1 : $0 }
+        
+        return onesCount == twosCount
+    }
+
+    
     func createMassiveTag() -> [[Int]] {
         var resultMass = [[Int]]()
         for i in 0..<gridSize {
@@ -347,7 +414,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
         return resultMass
     }
-
+    
     
     @objc
     func clearColor() {
@@ -370,7 +437,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
         let topPadding = window?.safeAreaInsets.top ?? 0
         let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1
-        let alertViewHeight: CGFloat = 70
+        let alertViewHeight: CGFloat = 90
         
         messegeView.createUI(messages: messages)
         messegeView.frame = CGRect(x: (window!.frame.width - alertViewWidth) / 2,
@@ -395,6 +462,26 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
                 self.messegeView = nil
             })
         }
+    }
+    
+    func restartGame() {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1.0
+            self.view.isUserInteractionEnabled = true
+        }
+        pauseGame()
+        levelButton.isEnabled = true
+        game.isContinueGame = false
+        game.isStartGame = false
+        stopwatch.invalidate()
+        seconds = 0
+        clearGame()
+        alertView.removeFromSuperview()
+    }
+    
+    func exitGame() {
+        alertView.removeFromSuperview()
+        self.dismiss(animated: true)
     }
     
 }

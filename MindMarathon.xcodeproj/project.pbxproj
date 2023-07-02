@@ -39,6 +39,7 @@
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
+		D8BB84742A51C46700166091 /* ZeroOneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* ZeroOneViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
 		D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */; };
 		D8C224502A5187F600F1E01A /* ZeroOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* ZeroOneViewController.swift */; };
@@ -82,6 +83,7 @@
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
+		D8BB84732A51C46700166091 /* ZeroOneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
 		D8C2244F2A5187F600F1E01A /* ZeroOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOneViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				D882216E2A162DA700531EED /* SlovusViewModel.swift */,
 				D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */,
 				1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */,
+				D8BB84732A51C46700166091 /* ZeroOneViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
+				D8BB84742A51C46700166091 /* ZeroOneViewModel.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
 				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
