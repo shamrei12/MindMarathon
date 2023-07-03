@@ -84,12 +84,14 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
+
         view.addSubview(containerView)
         
         containerView.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView.snp.bottom).inset(-30)
+            maker.top.equalTo(panelControllView.snp.bottom).inset(-50)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(350)
+            maker.height.equalTo(view.snp.height).multipliedBy(0.42)
+
         }
         
         
@@ -176,9 +178,10 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             }
         }
         
+        let tagMassive = [1,2,1,2,1,2,1,2]
         for i in 0..<gridSize {
-            let random = makeRandomDiggit(min: 1, max: 2)
-            cells[i][random].tag = makeRandomDiggit(min: 1, max: 2)
+            let random = game.makeRandomDiggit(min: 1, max: gridSize - 1)
+            cells[i][random].tag = tagMassive[i]
             cells[i][random].isUserInteractionEnabled = false
         }
         coloringView()
@@ -210,6 +213,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = false
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createGamePlace(size: gridSize)
+        game.size = gridSize
     }
     
     func continueGame() {
@@ -246,12 +250,6 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
                 makeColor(viewElement: cells[i][j])
             }
         }
-    }
-    
-    
-    //функция случайного числа
-    func makeRandomDiggit(min: Int, max: Int) -> Int {
-        return Int.random(in: min...max)
     }
     
     //функция раскраски view
@@ -309,99 +307,35 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func clearGame() {
-        for view in contentStackView.arrangedSubviews {
-            contentStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-  
-        
-        contentStackView.removeFromSuperview()
-        cells.removeAll()
-        row.removeAll()
-        massLayer.removeAll()
-    }
-    
     @objc
     func checkResultTapped() {
         let mass = createMassiveTag()
         
-        guard !checkForZero(array: mass) else {
+        guard !game.checkForZero(array: mass) else {
             return
         }
         
         if makeAnswer(mass: mass) {
             createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
+            let resultGame = WhiteBoardModel(nameGame: "01", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            RealmManager.shared.saveResult(result: resultGame)
         }
-    }
-    
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
     }
     
     func makeAnswer(mass: [[Int]]) -> Bool {
         
-        guard uniqueLines(line: mass) else {
+        guard game.uniqueLines(line: mass) else {
             createMistakeMessage(messages: "В одной из строк у Вас ошибка. Проверьте и повторите попытку")
             return false
         }
         
-        guard uniqueRows(mass: mass) else {
+        guard game.uniqueRows(mass: mass) else {
             createMistakeMessage(messages: "В одном из столбцов у Вас ошибка. Проверьте и повторите попытку")
             return false
         }
         
         return true
     }
-    
-    func uniqueLines(line: [[Int]]) -> Bool {
-        for i in 0..<gridSize {
-            if !equalCountOfOnesAndTwos(array: line[i]) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func uniqueRows(mass: [[Int]]) -> Bool {
-        
-        var newMass = [[Int]]()
-        
-        for i in 0..<gridSize {
-            var newLine = [Int]()
-            for j in 0..<gridSize {
-                newLine.append(mass[j][i])
-            }
-            newMass.append(newLine)
-        }
-        
-        if uniqueLines(line: newMass) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func checkForZero(array: [[Int]]) -> Bool {
-        return array.flatMap { $0 }.contains(0)
-    }
-    
-    func equalCountOfOnesAndTwos(array: [Int]) -> Bool {
-        let onesCount = array.reduce(0) { $1 == 1 ? $0 + 1 : $0 }
-        let twosCount = array.reduce(0) { $1 == 2 ? $0 + 1 : $0 }
-        
-        return onesCount == twosCount
-    }
-
     
     func createMassiveTag() -> [[Int]] {
         var resultMass = [[Int]]()
@@ -464,6 +398,19 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func createAlertMessage(description: String) {
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 0.6
+            self.view.isUserInteractionEnabled = false
+        }
+        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
+        alertView.delegate = self
+        alertView.descriptionLabel.text = description
+        UIApplication.shared.keyWindow?.addSubview(alertView)
+        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
+                                   y: self.view.frame.size.height / 2)
+    }
+    
     func restartGame() {
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 1.0
@@ -477,6 +424,19 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         seconds = 0
         clearGame()
         alertView.removeFromSuperview()
+    }
+    
+    func clearGame() {
+        for view in contentStackView.arrangedSubviews {
+            contentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+  
+        
+        contentStackView.removeFromSuperview()
+        cells.removeAll()
+        row.removeAll()
+        massLayer.removeAll()
     }
     
     func exitGame() {
