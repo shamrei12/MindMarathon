@@ -7,10 +7,10 @@
 
 import Foundation
 
-class ZeroOneViewModel {
+class BinarioViewModel {
     
-    static var shared: ZeroOneViewModel = {
-        let instance = ZeroOneViewModel()
+    static var shared: BinarioViewModel = {
+        let instance = BinarioViewModel()
         return instance
     }()
     

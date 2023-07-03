@@ -72,8 +72,8 @@ class ListGamesViewController: UIViewController {
         present(navigationController, animated: true)
     }
     @objc
-    func zeroOneTapped() {
-        let zeroOneGame = ZeroOneViewController()
+    func binarioTapped() {
+        let zeroOneGame = BinarioViewController()
         let navigationController = UINavigationController(rootViewController: zeroOneGame)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -133,7 +133,7 @@ extension ListGamesViewController: UITableViewDelegate {
         case 1: slovusButtonTapped()
         case 2: floodFillTapped()
         case 3: ticTacToeTapped()
-        case 4: zeroOneTapped()
+        case 4: binarioTapped()
         default: print("Default")
         }
     }

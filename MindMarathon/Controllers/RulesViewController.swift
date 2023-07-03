@@ -29,7 +29,7 @@ class RulesViewController: UIViewController {
         case 4:
             gameRules.text = TicTacToeViewModel.shared.getRulesGame()
         case 5:
-            gameRules.text = ZeroOneViewModel.shared.getRulesGame()
+            gameRules.text = BinarioViewModel.shared.getRulesGame()
         default:
             print("error")
         }

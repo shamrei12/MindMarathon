@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ZeroOneViewController: UIViewController, AlertDelegate {
+class BinarioViewController: UIViewController, AlertDelegate {
     
     let panelControllView = UIView()
     let panelControllStackView = UIStackView()
@@ -28,7 +28,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
     private var cells = [[UIView]]()
     private var row = [UIView]()
     private var messegeView: UserMistakeView!
-    private var game = ZeroOneViewModel()
+    private var game = BinarioViewModel()
     
     private var colorMass = [UIColor(hex: 0xb5b5b5),UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
     let checkResultButton = UIButton()
@@ -320,7 +320,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             }
             if makeAnswer(mass: mass) {
                 createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
-                let resultGame = WhiteBoardModel(nameGame: "01", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
