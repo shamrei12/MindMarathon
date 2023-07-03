@@ -288,6 +288,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         let rulesVC = RulesViewController()
         rulesVC.modalPresentationStyle = .formSheet
         rulesVC.rulesGame(numberGame: 5)
+        present(rulesVC, animated: true)
     }
     
     @objc
