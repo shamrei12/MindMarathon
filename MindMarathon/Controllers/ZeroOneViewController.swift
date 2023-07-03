@@ -84,14 +84,14 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
-
+        
         view.addSubview(containerView)
         
         containerView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-50)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.snp.height).multipliedBy(0.42)
-
+            
         }
         
         
@@ -297,6 +297,9 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
         guard let selectedCell = recognizer.view else {
             return
         }
+        guard game.isContinueGame == true else {
+            return
+        }
         
         if selectedCell.isUserInteractionEnabled {
             if selectedCell.tag + 1 > 2 {
@@ -310,17 +313,19 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
     
     @objc
     func checkResultTapped() {
-        let mass = createMassiveTag()
-        
-        guard !game.checkForZero(array: mass) else {
-            return
+        if game.isStartGame && game.isContinueGame {
+            let mass = createMassiveTag()
+            guard !game.checkForZero(array: mass) else {
+                return
+            }
+            if makeAnswer(mass: mass) {
+                createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
+                let resultGame = WhiteBoardModel(nameGame: "01", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                RealmManager.shared.saveResult(result: resultGame)
+            }
         }
         
-        if makeAnswer(mass: mass) {
-            createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
-            let resultGame = WhiteBoardModel(nameGame: "01", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            RealmManager.shared.saveResult(result: resultGame)
-        }
+        
     }
     
     func makeAnswer(mass: [[Int]]) -> Bool {
@@ -353,11 +358,13 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
     
     @objc
     func clearColor() {
-        for i in 0..<gridSize {
-            for j in 0..<gridSize {
-                if cells[i][j].isUserInteractionEnabled {
-                    cells[i][j].tag = 0
-                    makeColor(viewElement: cells[i][j])
+        if game.isStartGame && game.isContinueGame {
+            for i in 0..<gridSize {
+                for j in 0..<gridSize {
+                    if cells[i][j].isUserInteractionEnabled {
+                        cells[i][j].tag = 0
+                        makeColor(viewElement: cells[i][j])
+                    }
                 }
             }
         }
@@ -432,7 +439,7 @@ class ZeroOneViewController: UIViewController, AlertDelegate {
             contentStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-  
+        
         
         contentStackView.removeFromSuperview()
         cells.removeAll()
