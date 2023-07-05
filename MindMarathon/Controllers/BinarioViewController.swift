@@ -188,7 +188,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
             cells[i][random].addSubview(imageBlock)
             
             imageBlock.snp.makeConstraints { maker in
-                maker.left.top.right.bottom.equalToSuperview().inset(5)
+                maker.left.top.right.bottom.equalToSuperview().inset(10)
             }
         }
         coloringView()
