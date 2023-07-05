@@ -14,7 +14,6 @@
             <rect key="frame" x="0.0" y="0.0" width="390" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.92128556969999997" green="0.37571785800000002" blue="0.1755918353" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="120.61068702290076" y="-224.29577464788733"/>
         </view>

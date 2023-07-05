@@ -42,6 +42,7 @@ class MenuViewController: UIViewController {
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
         
+        
         let whiteBoard = UIButton()
         whiteBoard.setTitle("Статистика игр", for: .normal)
         whiteBoard.setTitleColor(.label, for: .normal)
@@ -50,7 +51,15 @@ class MenuViewController: UIViewController {
         whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         view.addSubview(whiteBoard)
-    
+        
+        let buttonStackView = UIStackView()
+        buttonStackView.axis = .vertical
+        buttonStackView.spacing = 20
+        buttonStackView.distribution = .fillEqually
+        buttonStackView.addArrangedSubview(startMarathon)
+        buttonStackView.addArrangedSubview(whiteBoard)
+        view.addSubview(buttonStackView)
+        
         labelFirst.snp.makeConstraints { maker in
             maker.top.equalToSuperview().inset(100)
             maker.left.right.equalToSuperview().inset(100)
@@ -60,16 +69,11 @@ class MenuViewController: UIViewController {
             maker.top.equalTo(labelFirst).inset(60)
             maker.left.right.equalToSuperview().inset(100)
         }
-        startMarathon.snp.makeConstraints { maker in
-            maker.left.right.equalToSuperview().inset(10)
-            maker.top.equalTo(labelSecond).inset(250)
-            maker.height.equalTo(80)
-        }
         
-        whiteBoard.snp.makeConstraints { maker in
-            maker.left.right.equalToSuperview().inset(10)
-            maker.top.equalTo(startMarathon.snp.bottom).inset(-10)
-            maker.height.equalTo(80)
+        buttonStackView.snp.makeConstraints { maker in
+            maker.centerX.centerY.equalToSuperview()
+            maker.width.equalToSuperview().multipliedBy(0.90)
+            maker.height.equalToSuperview().multipliedBy(0.20)
         }
     }
     

@@ -20,6 +20,7 @@ class ListGamesViewController: UIViewController {
         tableView.register(UINib(nibName: "ListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "ListGameTableViewCell")
         tableView.separatorColor = .none
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         self.view.backgroundColor = UIColor(named: "viewColor")
@@ -30,8 +31,9 @@ class ListGamesViewController: UIViewController {
     func createUI() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            maker.left.right.bottom.equalToSuperview().inset(10)
+            maker.centerX.centerY.equalToSuperview()
+            maker.width.equalToSuperview().multipliedBy(0.90)
+            maker.height.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
