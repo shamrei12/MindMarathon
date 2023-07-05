@@ -8,12 +8,14 @@
 import UIKit
 
 class FloodFillViewController: UIViewController, AlertDelegate {
-    var gridButton = UIButton()
+    var levelButton = UIButton()
     let timerLabel = UILabel()
     let gameView = UIView()
     let colorView = UIView()
     var contentViewStackView = UIStackView()
     var massLayer = [UIStackView]()
+    let panelControllView = UIView()
+    let panelControllStackView = UIStackView()
     private var gridSize = 5
     private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
@@ -43,36 +45,35 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     func createUI() {
         guard let firstColor = colorMass.first else {return}
         selectedColor = firstColor
-        let panelControllView = UIView()
-        let panelControllStackView = UIStackView()
-        
-        playButton.addTarget(self, action: #selector(startGameButton), for: .touchUpInside)
-        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
         
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
+        panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-        
-        gridButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        gridButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        gridButton.setTitle("5", for: .normal)
-        gridButton.tintColor = UIColor.label
-        gridButton.backgroundColor = UIColor.tertiaryLabel
-        gridButton.layer.cornerRadius = 10
-        gridButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
-        view.addSubview(gridButton)
+        levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
+        levelButton.setTitle("4", for: .normal)
+        levelButton.tintColor = UIColor.label
+        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.layer.cornerRadius = 10
+        view.addSubview(levelButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
+        playButton.backgroundColor = .systemBlue
+        playButton.layer.cornerRadius = 10
+        playButton.tintColor = UIColor.white
         view.addSubview(playButton)
         
-        panelControllStackView.addArrangedSubview(gridButton)
+        panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.distribution = .equalCentering
+        panelControllStackView.axis = .horizontal
+        panelControllStackView.spacing = 10
+        panelControllStackView.distribution = .fillEqually
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
             maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(80)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -286,7 +287,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
-    @objc func startGameButton(_ sender: UIButton) {
+    @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
         
         if chekPartGame == (false, false) {
@@ -303,12 +304,12 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
-        let size = gridButton.titleLabel?.text ?? ""
+        let size = levelButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
         createGamePlace(sizePlace: gridSize)
         seconds = 0
         createTimer()
-        gridButton.isEnabled = false
+        levelButton.isEnabled = false
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
@@ -360,7 +361,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         pauseGame()
         index = 0
         timerLabel.text = "0"
-        gridButton.isEnabled = true
+        levelButton.isEnabled = true
         isContinuePlaying = false
         isStartGame = false
         FloodFillViewModel.shared.countStep = 0

@@ -47,7 +47,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     func createUI() {
         //ControlStatusGame
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
+        panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
         levelButton.addTarget(self, action: #selector(selectedGridSize), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)

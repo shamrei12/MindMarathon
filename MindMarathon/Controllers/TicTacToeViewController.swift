@@ -66,18 +66,20 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameControllerView = UIView()
         gameControllerView.layer.cornerRadius = 10
-        gameControllerView.backgroundColor = UIColor(named: "gameElementColor")
+        gameControllerView.backgroundColor = .clear
         view.addSubview(gameControllerView)
         
         playButton = UIButton()
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
-        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        playButton.backgroundColor = .systemBlue
+        playButton.layer.cornerRadius = 10
+        playButton.tintColor = UIColor.white
         view.addSubview(playButton)
         
         gameControllerStackView = UIStackView()
         gameControllerStackView.addArrangedSubview(playButton)
-        gameControllerStackView.distribution = .equalCentering
+        gameControllerStackView.distribution = .equalSpacing
         view.addSubview(gameControllerStackView)
         
         gameContainerView = UIView()
@@ -156,17 +158,19 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameControllerView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
             maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(80)
         }
         
         gameControllerStackView.snp.makeConstraints { maker in
-            maker.left.top.right.bottom.equalTo(gameControllerView).inset(10)
+            maker.top.bottom.equalTo(gameControllerView).inset(10)
+            maker.left.right.equalTo(gameControllerView).inset(50)
         }
         
         gameContainerView.snp.makeConstraints { make in
             make.width.equalTo(gameControllerView)
-            make.height.equalToSuperview().multipliedBy(0.5)
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+//            make.height.equalTo(80)
+//            make.centerX.equalToSuperview()
+//            make.centerY.equalToSuperview()
         }
         
         gameStatusBarView.snp.makeConstraints { make in

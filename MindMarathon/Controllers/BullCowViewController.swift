@@ -9,8 +9,10 @@ import UIKit
 import SnapKit
 
 class BullCowViewController: UIViewController, AlertDelegate {
+    let panelControllView = UIView()
+    let panelControllStackView = UIStackView()
     private let tableview = UITableView()
-    private let countButton = UIButton()
+    private let levelButton = UIButton()
     private let userDiggitLabel = UILabel()
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
@@ -45,12 +47,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     func createUIElements() {
-        let panelControllStackView = UIStackView()
         let panelInputContollStackView = UIStackView()
         let twiceInputLayerStackView = UIStackView()
         let firstLayerStackView = UIStackView()
         let secondLayerStackView = UIStackView()
-        let panelControllView = UIView()
         let panelIntputControlView = UIView()
         let userLabelPanelStackView = UIStackView()
         
@@ -69,29 +69,40 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let massDiggit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         let massButton = [oneTapped, twoTapped, threeTapped, fourTapped, fiveTapped, sixTapped, sevenTapped, eightTapped, nineTapped, zeroTapped]
         
+
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
+        panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-        
-        countButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        countButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
-        countButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
-        countButton.setTitle("4", for: .normal)
-        countButton.tintColor = UIColor.label
-        countButton.backgroundColor = UIColor.tertiaryLabel
-        countButton.layer.cornerRadius = 10
-        view.addSubview(countButton)
+        levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
+        levelButton.setTitle("4", for: .normal)
+        levelButton.tintColor = UIColor.label
+        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.layer.cornerRadius = 10
+        view.addSubview(levelButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        playButton.addTarget(self, action: #selector(startGameButton), for: .touchUpInside)
-        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
+        playButton.backgroundColor = .systemBlue
+        playButton.layer.cornerRadius = 10
+        playButton.tintColor = UIColor.white
+        view.addSubview(playButton)
         
-        view.addSubview(countButton)
-        
-        panelControllStackView.addArrangedSubview(countButton)
+        panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.distribution = .equalCentering
+        panelControllStackView.axis = .horizontal
+        panelControllStackView.spacing = 10
+        panelControllStackView.distribution = .fillEqually
         view.addSubview(panelControllStackView)
+        
+        panelControllView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(80)
+        }
+        
+        panelControllStackView.snp.makeConstraints { maker in
+            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
+        }
         
         view.addSubview(tableview)
         
@@ -251,8 +262,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func startNewGame() {
         seconds = 0
         createTimer()
-        maxLenght = Int((countButton.titleLabel?.text)!)!
-        countButton.isEnabled = false
+        maxLenght = Int((levelButton.titleLabel?.text)!)!
+        levelButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
@@ -268,7 +279,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.title = "PAUSE"
     }
     
-    @objc func startGameButton(_ sender: UIButton) {
+    @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (game.isStartGame, game.isContinueGame)
         
         if chekPartGame == (false, false) {
@@ -326,7 +337,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         game.restartGame()
         pauseGame()
         timerLabel.text = "0"
-        countButton.isEnabled = true
+        levelButton.isEnabled = true
         BullCowViewModel.shared.stepList.removeAll()
         tableview.reloadData()
         alertView.removeFromSuperview()

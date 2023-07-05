@@ -50,13 +50,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     func createUI() {
         //panelControllView
         panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = UIColor(named: "gameElementColor")
+        panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-        
-        levelButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        levelButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
-        levelButton.setTitle("5", for: .normal)
+        levelButton.setTitle("4", for: .normal)
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
@@ -64,17 +61,22 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
-        playButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+        playButton.backgroundColor = .systemBlue
+        playButton.layer.cornerRadius = 10
+        playButton.tintColor = UIColor.white
         view.addSubview(playButton)
         
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.distribution = .equalCentering
+        panelControllStackView.axis = .horizontal
+        panelControllStackView.spacing = 10
+        panelControllStackView.distribution = .fillEqually
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
             maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(80)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
