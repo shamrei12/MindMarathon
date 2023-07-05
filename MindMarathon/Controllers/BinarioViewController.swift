@@ -183,6 +183,13 @@ class BinarioViewController: UIViewController, AlertDelegate {
             let random = game.makeRandomDiggit(min: 1, max: gridSize - 1)
             cells[i][random].tag = tagMassive[i]
             cells[i][random].isUserInteractionEnabled = false
+            var imageBlock = UIImageView()
+            imageBlock.image = UIImage(named: "padlock")
+            cells[i][random].addSubview(imageBlock)
+            
+            imageBlock.snp.makeConstraints { maker in
+                maker.left.top.right.bottom.equalToSuperview().inset(5)
+            }
         }
         coloringView()
     }
