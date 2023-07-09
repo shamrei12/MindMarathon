@@ -50,7 +50,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
         levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
-        levelButton.setTitle("4", for: .normal)
+        levelButton.setTitle("5", for: .normal)
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
