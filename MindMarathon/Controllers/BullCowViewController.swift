@@ -10,6 +10,7 @@ import SnapKit
 
 class BullCowViewController: UIViewController, AlertDelegate {
     let panelControllView = UIView()
+    let combinationCountLabel = UILabel()
     let panelControllStackView = UIStackView()
     private let tableview = UITableView()
     private let levelButton = UIButton()
@@ -107,8 +108,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         view.addSubview(tableview)
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-        deleteLastButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
-        deleteLastButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
         
         
@@ -130,12 +129,47 @@ class BullCowViewController: UIViewController, AlertDelegate {
             }
         }
         
-        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 35.0)
+        
+        let combinationsView = UIView()
+        combinationsView.layer.cornerRadius = 10
+        combinationsView.layer.borderWidth = 0.5
+        combinationsView.layer.borderColor = UIColor.black.cgColor
+        view.addSubview(combinationsView)
+        
+        let labelCombination = UILabel()
+        labelCombination.text = "Комбинации"
+        labelCombination.textAlignment = .center
+        labelCombination.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
+        labelCombination.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        labelCombination.minimumScaleFactor = 0.5
+        combinationsView.addSubview(labelCombination)
+
+        
+        combinationCountLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
+        combinationCountLabel.text = "5040"
+        combinationCountLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        combinationCountLabel.minimumScaleFactor = 0.5
+        combinationCountLabel.textAlignment = .center
+        combinationsView.addSubview(combinationCountLabel)
+        
+        let combinationStackView = UIStackView()
+        combinationsView.addSubview(combinationStackView)
+        combinationStackView.axis = .vertical
+        combinationStackView.distribution = .fillEqually
+        combinationStackView.alignment = .center
+        combinationStackView.spacing = 5
+        combinationStackView.addArrangedSubview(labelCombination)
+        combinationStackView.addArrangedSubview(combinationCountLabel)
+        
+        combinationStackView.snp.makeConstraints { maker in
+            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
+        }
+        
+        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         userDiggitLabel.tintColor = .label
-        userDiggitLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        userDiggitLabel.textAlignment = .right
+        userDiggitLabel.textAlignment = .center
         
-        
+        userLabelPanelStackView.addArrangedSubview(combinationsView)
         userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
         userLabelPanelStackView.addArrangedSubview(deleteLastButton)
         userLabelPanelStackView.distribution = .equalSpacing
@@ -150,9 +184,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         twiceInputLayerStackView.addArrangedSubview(firstLayerStackView)
         twiceInputLayerStackView.addArrangedSubview(secondLayerStackView)
-        twiceInputLayerStackView.distribution = .equalCentering
+        twiceInputLayerStackView.distribution = .fillEqually
         twiceInputLayerStackView.axis = .vertical
-        twiceInputLayerStackView.spacing = 10
+        twiceInputLayerStackView.spacing = 5
         
         panelInputContollStackView.addArrangedSubview(userLabelPanelStackView)
         panelInputContollStackView.addArrangedSubview(twiceInputLayerStackView)
@@ -162,25 +196,23 @@ class BullCowViewController: UIViewController, AlertDelegate {
         sendDiggitsButton.backgroundColor = .tertiaryLabel
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
-        sendDiggitsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
+        view.addSubview(sendDiggitsButton)
         
         panelInputContollStackView.addArrangedSubview(sendDiggitsButton)
         
         panelInputContollStackView.axis = .vertical
-        panelInputContollStackView.distribution = .equalCentering
-        panelInputContollStackView.spacing = 20
+        panelInputContollStackView.distribution = .fill
+        panelInputContollStackView.spacing = 15
         panelIntputControlView.addSubview(panelInputContollStackView)
-        
-        view.addSubview(panelIntputControlView)
-        
         panelIntputControlView.layer.cornerRadius = 10
         panelIntputControlView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelIntputControlView)
         
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            maker.left.right.equalToSuperview().inset(10)
+            maker.left.right.equalTo(view.safeAreaLayoutGuide).inset(10)
+//            maker.left.equalTo(view.safeAreaLayoutGuide.snp.left).multipliedBy(0.1)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -188,20 +220,35 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
         
         tableview.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView).inset(70)
+            maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
         }
         
         panelIntputControlView.snp.makeConstraints { maker in
-            maker.height.equalTo(250)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.35)
             maker.left.right.equalToSuperview().inset(10)
             maker.bottom.equalToSuperview().inset(20)
             maker.top.equalTo(tableview.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
         }
         
         panelInputContollStackView.snp.makeConstraints { maker in
-            maker.bottom.equalTo(panelIntputControlView).inset(20)
+            maker.bottom.equalTo(panelIntputControlView).inset(10)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
+        }
+        
+        sendDiggitsButton.snp.makeConstraints { maker in
+            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.15)
+        }
+        
+        userLabelPanelStackView.snp.makeConstraints { maker in
+            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.2)
+        }
+        twiceInputLayerStackView.snp.makeConstraints { maker in
+            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.45)
+        }
+        
+        deleteLastButton.snp.makeConstraints { maker in
+            maker.width.equalTo(userLabelPanelStackView.snp.width).multipliedBy(0.1)
         }
     }
     //MARK: Navigation Bar
@@ -225,7 +272,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(_ sender: UIButton) {
-        sender.setTitle( game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+        maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
+        sender.setTitle(String(maxLenght), for: .normal)
+        combinationCountLabel.text = game.firstShowCountCombination(lenght: maxLenght)
+        
+        
+        
     }
     
     func createTimer() {

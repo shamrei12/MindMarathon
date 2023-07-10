@@ -107,4 +107,16 @@ class BullCowViewModel {
         isStartGame = false
         isContinueGame = false
     }
+    
+    func factorial(n: Int) -> Int {
+        if n <= 0 {
+            return 1
+        }
+        return n * factorial(n: n - 1)
+    }
+    
+    func firstShowCountCombination(lenght: Int) -> String {
+        
+        return String(factorial(n: 10) / factorial(n: 10 - lenght))
+    }
 }
