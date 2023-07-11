@@ -90,14 +90,13 @@ class BinarioViewController: UIViewController, AlertDelegate {
         containerView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-50)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.snp.height).multipliedBy(0.42)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.48)
             
         }
         
-        
         checkResultButton.layer.cornerRadius = 10
         checkResultButton.backgroundColor = UIColor(named: "gameElementColor")
-        checkResultButton.setTitle("ПРОВЕРИТЬ", for: .normal)
+        checkResultButton.setTitle("Проверить", for: .normal)
         checkResultButton.setTitleColor(.label, for: .normal)
         checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
@@ -185,6 +184,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
             cells[i][random].isUserInteractionEnabled = false
             var imageBlock = UIImageView()
             imageBlock.image = UIImage(named: "padlock")
+            imageBlock.alpha = 0.3
             cells[i][random].addSubview(imageBlock)
             
             imageBlock.snp.makeConstraints { maker in

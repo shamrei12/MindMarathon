@@ -35,7 +35,9 @@ class MenuViewController: UIViewController {
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр", for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
-        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
+        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 30)
+        startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        startMarathon.titleLabel!.minimumScaleFactor = 0.5
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
         
         startMarathon.layer.cornerRadius = 10
@@ -48,7 +50,9 @@ class MenuViewController: UIViewController {
         whiteBoard.setTitleColor(.label, for: .normal)
         whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
         whiteBoard.layer.cornerRadius = 10
-        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 25)
+        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 30)
+        whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        whiteBoard.titleLabel!.minimumScaleFactor = 0.5
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         view.addSubview(whiteBoard)
         

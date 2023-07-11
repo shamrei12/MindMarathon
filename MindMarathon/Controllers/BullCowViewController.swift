@@ -115,10 +115,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
             button.tag = massDiggit[index] // присваиваем tag кнопке
             button.backgroundColor = .tertiaryLabel
             button.setTitle(String(massDiggit[index]), for: .normal) // присваиваем title кнопке
+            button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+            button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+            button.titleLabel!.minimumScaleFactor = 0.5
             button.tintColor = UIColor.label
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.widthAnchor.constraint(equalToConstant: 45).isActive = true
-            button.heightAnchor.constraint(equalToConstant: 45).isActive = true
             button.layer.cornerRadius = 10
             button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
             
@@ -128,7 +129,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 firstLayerStackView.addArrangedSubview(button)
             }
         }
-        
         
 //        let combinationsView = UIView()
 //        combinationsView.layer.cornerRadius = 10
@@ -165,9 +165,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
 //            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
 //        }
         
-        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
+        userDiggitLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        userDiggitLabel.minimumScaleFactor = 0.5
 //
 //        userLabelPanelStackView.addArrangedSubview(combinationsView)
         userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
@@ -250,7 +252,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
         deleteLastButton.snp.makeConstraints { maker in
             maker.width.equalTo(userLabelPanelStackView.snp.width).multipliedBy(0.1)
         }
+        userDiggitLabel.snp.makeConstraints { maker in
+            maker.width.equalTo(userLabelPanelStackView.snp.width).multipliedBy(0.6)
+        }
+        
     }
+    
     //MARK: Navigation Bar
     @objc
     func cancelTapped() {
@@ -274,10 +281,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func selectMaxLenghtTapped(_ sender: UIButton) {
         maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
         sender.setTitle(String(maxLenght), for: .normal)
-//        combinationCountLabel.text = game.firstShowCountCombination(lenght: maxLenght)
-        
-        
-        
     }
     
     func createTimer() {

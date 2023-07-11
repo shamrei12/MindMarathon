@@ -92,6 +92,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         let colorStackView = UIStackView()
         
         colorView.backgroundColor = UIColor(named: "gameElementColor")
+        colorView.layer.cornerRadius = 10
         view.addSubview(colorView)
         view.addSubview(colorStackView)
         colorStackView.axis = .horizontal
@@ -119,7 +120,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.bottom.equalToSuperview().inset(30)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(70)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.1)
             
         }
         

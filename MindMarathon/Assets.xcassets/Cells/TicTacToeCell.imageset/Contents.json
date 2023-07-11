@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Group 11.pdf",
+      "filename" : "Group 12.pdf",
       "idiom" : "universal"
     },
     {
@@ -13,6 +13,18 @@
       ],
       "filename" : "Group 5.pdf",
       "idiom" : "universal"
+    },
+    {
+      "idiom" : "iphone"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "idiom" : "iphone"
     }
   ],
   "info" : {
