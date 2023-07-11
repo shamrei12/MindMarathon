@@ -130,46 +130,46 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
         
         
-        let combinationsView = UIView()
-        combinationsView.layer.cornerRadius = 10
-        combinationsView.layer.borderWidth = 0.5
-        combinationsView.layer.borderColor = UIColor.black.cgColor
-        view.addSubview(combinationsView)
-        
-        let labelCombination = UILabel()
-        labelCombination.text = "Комбинации"
-        labelCombination.textAlignment = .center
-        labelCombination.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
-        labelCombination.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        labelCombination.minimumScaleFactor = 0.5
-        combinationsView.addSubview(labelCombination)
-
-        
-        combinationCountLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
-        combinationCountLabel.text = "5040"
-        combinationCountLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        combinationCountLabel.minimumScaleFactor = 0.5
-        combinationCountLabel.textAlignment = .center
-        combinationsView.addSubview(combinationCountLabel)
-        
-        let combinationStackView = UIStackView()
-        combinationsView.addSubview(combinationStackView)
-        combinationStackView.axis = .vertical
-        combinationStackView.distribution = .fillEqually
-        combinationStackView.alignment = .center
-        combinationStackView.spacing = 5
-        combinationStackView.addArrangedSubview(labelCombination)
-        combinationStackView.addArrangedSubview(combinationCountLabel)
-        
-        combinationStackView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
-        }
+//        let combinationsView = UIView()
+//        combinationsView.layer.cornerRadius = 10
+//        combinationsView.layer.borderWidth = 0.5
+//        combinationsView.layer.borderColor = UIColor.black.cgColor
+//        view.addSubview(combinationsView)
+//
+//        let labelCombination = UILabel()
+//        labelCombination.text = "Комбинации"
+//        labelCombination.textAlignment = .center
+//        labelCombination.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
+//        labelCombination.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+//        labelCombination.minimumScaleFactor = 0.5
+//        combinationsView.addSubview(labelCombination)
+//
+//
+//        combinationCountLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
+//        combinationCountLabel.text = "5040"
+//        combinationCountLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+//        combinationCountLabel.minimumScaleFactor = 0.5
+//        combinationCountLabel.textAlignment = .center
+//        combinationsView.addSubview(combinationCountLabel)
+//
+//        let combinationStackView = UIStackView()
+//        combinationsView.addSubview(combinationStackView)
+//        combinationStackView.axis = .vertical
+//        combinationStackView.distribution = .fillEqually
+//        combinationStackView.alignment = .center
+//        combinationStackView.spacing = 5
+//        combinationStackView.addArrangedSubview(labelCombination)
+//        combinationStackView.addArrangedSubview(combinationCountLabel)
+//
+//        combinationStackView.snp.makeConstraints { maker in
+//            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
+//        }
         
         userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
-        
-        userLabelPanelStackView.addArrangedSubview(combinationsView)
+//
+//        userLabelPanelStackView.addArrangedSubview(combinationsView)
         userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
         userLabelPanelStackView.addArrangedSubview(deleteLastButton)
         userLabelPanelStackView.distribution = .equalSpacing
@@ -274,7 +274,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func selectMaxLenghtTapped(_ sender: UIButton) {
         maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
         sender.setTitle(String(maxLenght), for: .normal)
-        combinationCountLabel.text = game.firstShowCountCombination(lenght: maxLenght)
+//        combinationCountLabel.text = game.firstShowCountCombination(lenght: maxLenght)
         
         
         
@@ -490,7 +490,6 @@ extension BullCowViewController: UITableViewDataSource {
 extension BullCowViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-        
     }
 }
 

@@ -139,7 +139,6 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
-				D84835A92A35CA60008D2AB4 /* Realm */,
 				D83161A12A1CD29300087769 /* Dictionary */,
 				D882215F2A12A81800531EED /* Manager */,
 				D826CF372A115F1500263CEB /* Protocols */,
@@ -258,13 +257,6 @@
 				D8D7884C2A4B49E80013FECC /* BullCowModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		D84835A92A35CA60008D2AB4 /* Realm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Realm;
 			sourceTree = "<group>";
 		};
 		D882215F2A12A81800531EED /* Manager */ = {
