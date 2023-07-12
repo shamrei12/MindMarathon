@@ -8,14 +8,14 @@
 import UIKit
 
 class FloodFillViewController: UIViewController, AlertDelegate {
-    var levelButton = UIButton()
-    let timerLabel = UILabel()
-    let gameView = UIView()
-    let colorView = UIView()
-    var contentViewStackView = UIStackView()
-    var massLayer = [UIStackView]()
-    let panelControllView = UIView()
-    let panelControllStackView = UIStackView()
+    private var levelButton = UIButton()
+    private let timerLabel = UILabel()
+    private let gameView = UIView()
+    private let colorView = UIView()
+    private var contentViewStackView = UIStackView()
+    private var massLayer = [UIStackView]()
+    private let panelControllView = UIView()
+    private let panelControllStackView = UIStackView()
     private var gridSize = 5
     private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
@@ -49,6 +49,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
+        
         levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
         levelButton.setTitle("5", for: .normal)
         levelButton.tintColor = UIColor.label
@@ -71,9 +72,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -102,7 +103,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         for i in 0..<colorMass.count {
             let colorButton = UIButton()
             colorButton.backgroundColor = UIColor(cgColor: colorMass[i].cgColor)
-            print(colorMass[i])
             colorButton.layer.cornerRadius = 10
             colorButton.tag = i
             
@@ -121,7 +121,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.bottom.equalToSuperview().inset(30)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.1)
-            
         }
         
         colorStackView.snp.makeConstraints { maker in
@@ -142,8 +141,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         rulesVC.rulesGame(numberGame: 3)
         present(rulesVC, animated: true)
     }
-    
-    
     
     @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         let chekPartGame = (isStartGame, isContinuePlaying)
@@ -169,6 +166,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
         }
     }
+    
     //MARK: создание поля с игрой
     func createGamePlace(sizePlace: Int) {
         index = 0
@@ -214,7 +212,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         
         coloringView() // Вызываем функцию расскрашивания ячеек
     }
-
+    
     func coloringView() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {

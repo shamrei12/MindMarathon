@@ -36,12 +36,10 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = UIColor(named: "viewColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         createUI()
-        
     }
     
     func createUI() {
@@ -71,9 +69,9 @@ class BinarioViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -90,8 +88,10 @@ class BinarioViewController: UIViewController, AlertDelegate {
         containerView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-50)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.48)
-            
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.49)
+            maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+            maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+
         }
         
         checkResultButton.layer.cornerRadius = 10

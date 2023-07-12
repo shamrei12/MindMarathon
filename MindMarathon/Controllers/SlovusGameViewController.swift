@@ -48,10 +48,11 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        //panelControllView
+        // panelControllView
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
+        
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
         levelButton.tintColor = UIColor.label
@@ -74,16 +75,16 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
-            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
+            maker.edges.equalTo(panelControllView).inset(10)
         }
         
-        //gameBoardView
+        // gameBoardView
         containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
@@ -94,53 +95,48 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.left.right.equalToSuperview().inset(10)
         }
         
-        //keyBoardView
+        // keyBoardView
         let keyBoardView = UIView()
         let sendWordsButton = UIButton()
-        let keyBoardStacView = UIStackView()
-        let keyboardFirstLayerStackView = UIStackView()
-        let keyboardSecondLayerStackView = UIStackView()
-        let keyboardThirdLayerStackView = UIStackView()
-        let keyboardLayers = [keyboardFirstLayerStackView, keyboardSecondLayerStackView, keyboardThirdLayerStackView]
+        let keyBoardStackView = UIStackView()
+        let keyboardLayers = [UIStackView(), UIStackView(), UIStackView()]
         let keyboard = [
             ["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ"],
             ["Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э"],
             ["Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "delete"]
         ]
-        
         view.addSubview(keyBoardView)
         
         keyBoardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-10)
-            maker.height.equalTo(200)
             maker.left.equalToSuperview().inset(10)
-            maker.right.equalToSuperview().inset(10)
-            maker.bottom.equalToSuperview().inset(20)
+            maker.right.bottom.equalToSuperview().inset(20)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
         }
         
         for (indexRow, row) in keyboard.enumerated() {
+            let keyboardRowStackView = UIStackView()
+            keyboardRowStackView.axis = .horizontal
+            keyboardRowStackView.spacing = 5
+            keyboardRowStackView.distribution = .fillEqually
+            
             for indexKey in row {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                    keyboarButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchUpInside)
                 } else {
-                    keyboarButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
                     keyboarButton.setTitle(indexKey, for: .normal)
                     keyboarButton.layer.cornerRadius = 5
                     keyboarButton.backgroundColor = UIColor.systemBackground
                     keyboarButton.setTitleColor(UIColor.label, for: .normal)
                     keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchUpInside)
                 }
-                view.addSubview(keyboarButton)
-                keyboardLayers[indexRow].addArrangedSubview(keyboarButton)
-                view.addSubview(keyboardLayers[indexRow])
+                keyboardRowStackView.addArrangedSubview(keyboarButton)
             }
-            keyboardLayers[indexRow].snp.makeConstraints { maker in
-                maker.height.equalTo(40)
-            }
-            keyBoardStacView.addArrangedSubview(keyboardLayers[indexRow])
+            
+            keyboardLayers[indexRow].addArrangedSubview(keyboardRowStackView)
+            keyBoardStackView.addArrangedSubview(keyboardLayers[indexRow])
         }
         
         sendWordsButton.setTitle("ОТПРАВИТЬ", for: .normal)
@@ -148,24 +144,26 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
         sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
-        sendWordsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        view.addSubview(sendWordsButton)
-        
-        for i in keyboardLayers {
-            i.axis = .horizontal
-            i.distribution = .fillEqually
-            i.spacing = 5
+        keyBoardStackView.addArrangedSubview(sendWordsButton)
+
+        sendWordsButton.snp.makeConstraints { maker in
+            maker.height.equalToSuperview().multipliedBy(0.22)
         }
         
-        keyBoardStacView.addArrangedSubview(sendWordsButton)
-        keyBoardStacView.axis = .vertical
-        keyBoardStacView.distribution = .fill
-        keyBoardStacView.spacing = 5
-        view.addSubview(keyBoardStacView)
+        for keyboardLayer in keyboardLayers {
+            keyboardLayer.axis = .horizontal
+            keyboardLayer.distribution = .fillEqually
+            keyboardLayer.spacing = 5
+        }
         
-        keyBoardStacView.snp.makeConstraints { maker in
-            maker.left.right.top.bottom.equalTo(keyBoardView).inset(5)
+        keyBoardStackView.addArrangedSubview(sendWordsButton)
+        keyBoardStackView.axis = .vertical
+        keyBoardStackView.distribution = .fillEqually
+        keyBoardStackView.spacing = 5
+        keyBoardView.addSubview(keyBoardStackView)
+        
+        keyBoardStackView.snp.makeConstraints { maker in
+            maker.edges.equalTo(keyBoardView).inset(5)
         }
     }
     
