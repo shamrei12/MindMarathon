@@ -142,31 +142,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         present(rulesVC, animated: true)
     }
     
-    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-        let chekPartGame = (isStartGame, isContinuePlaying)
-        if chekPartGame == (true, true) {
-            guard let selectedCell = recognizer.view else {
-                return
-            }
-            // Получаем текущий цвет ячейки
-            let currentColor = selectedCell.backgroundColor ?? UIColor.clear
-            
-            // Вызываем функцию fillCell для закрашивания ячеек
-            fillCell(row: selectedCell.tag / gridSize, col: selectedCell.tag % gridSize, color: selectedColor, currentColor: currentColor)
-            
-            if currentColor != selectedColor {
-                FloodFillViewModel.shared.countStep += 1
-            }
-            // Проверяем, достигнута ли цель
-            if checkResult() {
-                stopwatch.invalidate()
-                createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(FloodFillViewModel.shared.countStep) ходов.")
-                let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                RealmManager.shared.saveResult(result: resultGame)
-            }
-        }
-    }
-    
     //MARK: создание поля с игрой
     func createGamePlace(sizePlace: Int) {
         index = 0
@@ -182,11 +157,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         
         for i in 0..<gridSize {
             for _ in 0..<gridSize {
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                 let cell = UIView()
                 cell.tag = index
                 index += 1
-                cell.addGestureRecognizer(tapRecognizer)
                 cell.backgroundColor = UIColor.tertiaryLabel
                 cell.layer.borderColor = UIColor.black.cgColor
                 massLayer[i].addArrangedSubview(cell)
@@ -233,6 +206,20 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             selectedColor = colorMass[sender.tag]
             sender.layer.borderColor = UIColor.label.cgColor
             sender.layer.borderWidth = 2
+            
+            let currentColor = cells[0][0].backgroundColor
+            
+            if currentColor != selectedColor {
+                FloodFillViewModel.shared.countStep += 1
+                fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
+            }
+        }
+        // Проверяем, достигнута ли цель
+        if checkResult() {
+            stopwatch.invalidate()
+            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(FloodFillViewModel.shared.countStep) ходов.")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            RealmManager.shared.saveResult(result: resultGame)
         }
     }
     
@@ -373,6 +360,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle( FloodFillViewModel.shared.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+        sender.setTitle(FloodFillViewModel.shared.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
     }
 }
