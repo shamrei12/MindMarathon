@@ -111,7 +111,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(containerView.snp.bottom).inset(-10)
             maker.left.equalToSuperview().inset(10)
             maker.right.bottom.equalToSuperview().inset(20)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
         }
         
         for (indexRow, row) in keyboard.enumerated() {
