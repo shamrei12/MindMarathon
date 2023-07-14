@@ -17,7 +17,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private let userDiggitLabel = UILabel()
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
-    private let sendDiggits = UIButton()
+    private let sendDiggitsButton = UIButton()
     private let playButton = UIButton()
     private var stopwatch = Timer()
     private var isshowMessageAlert: Bool = false
@@ -74,18 +74,24 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
+        
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
+        levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
         
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+
         view.addSubview(playButton)
         
         panelControllStackView.addArrangedSubview(levelButton)
@@ -115,7 +121,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             button.tag = massDiggit[index] // присваиваем tag кнопке
             button.backgroundColor = .tertiaryLabel
             button.setTitle(String(massDiggit[index]), for: .normal) // присваиваем title кнопке
-            button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+            button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
             button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
             button.titleLabel!.minimumScaleFactor = 0.5
             button.tintColor = UIColor.label
@@ -165,9 +171,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
 //            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
 //        }
         
-        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
+        
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
+        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
         userDiggitLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         userDiggitLabel.minimumScaleFactor = 0.5
 //
@@ -193,8 +200,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelInputContollStackView.addArrangedSubview(userLabelPanelStackView)
         panelInputContollStackView.addArrangedSubview(twiceInputLayerStackView)
         
-        
         sendDiggitsButton.setTitle("ОТПРАВИТЬ", for: .normal)
+        sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+        sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        sendDiggitsButton.titleLabel?.minimumScaleFactor = 0.5
         sendDiggitsButton.backgroundColor = .tertiaryLabel
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10

@@ -86,8 +86,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(gameView)
         
         gameView.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
-            maker.left.right.equalToSuperview().inset(10)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.centerX.equalTo(self.view)
+            maker.centerY.equalTo(self.view)
         }
         
         let colorStackView = UIStackView()
@@ -120,7 +122,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.bottom.equalToSuperview().inset(30)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.1)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.12)
         }
         
         colorStackView.snp.makeConstraints { maker in
