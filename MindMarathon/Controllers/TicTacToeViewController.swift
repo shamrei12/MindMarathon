@@ -292,7 +292,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     @objc func playerMove(_ sender: UIButton) {
-        print(sender.tag)
         var row = 0
         var col = 0
         switch sender.tag {
@@ -343,7 +342,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         let isUserWon = ticTacToeManager.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
-            print("user won")
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         }
@@ -353,10 +351,8 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
              }
-            print(position)
             setComputerTurn(row: position.0, col: position.1)
         }
-        print(board)
     }
     
     func setComputerTurn(row: Int, col: Int) {
@@ -367,8 +363,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
       
         setCountdownTimer()
         board[row][col] = "O"
-      
-        print(board)
     }
     
     func setCountdownTimer() {
@@ -388,7 +382,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             drawComputerTurn(row: computerRow, col: computerCol)
            let isComputerWon = ticTacToeManager.checkForWinner(board: board, symbol: "O")
            if isComputerWon {
-               print("computer won")
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
            }

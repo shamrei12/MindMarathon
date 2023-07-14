@@ -87,7 +87,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         
         containerView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-50)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.49)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.55)
             maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.85)
             maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
