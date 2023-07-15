@@ -28,7 +28,7 @@ class RulesViewController: UIViewController {
         default: print("error")
         }
         
-        rulesLabel.text = "Правила игры"
+        rulesLabel.text = "Правила игры".localized()
         rulesLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
         rulesLabel.textAlignment = .center
         rulesLabel.textColor = .label

@@ -34,7 +34,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         super.viewDidLoad()
         game = BullCowViewModel()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localized(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
         self.view.backgroundColor = UIColor(named: "viewColor")
         tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
@@ -200,7 +200,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelInputContollStackView.addArrangedSubview(userLabelPanelStackView)
         panelInputContollStackView.addArrangedSubview(twiceInputLayerStackView)
         
-        sendDiggitsButton.setTitle("ОТПРАВИТЬ", for: .normal)
+        sendDiggitsButton.setTitle("ОТПРАВИТЬ".localized(), for: .normal)
         sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         sendDiggitsButton.titleLabel?.minimumScaleFactor = 0.5
@@ -340,7 +340,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func pauseGame() {
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        navigationItem.title = "PAUSE"
+        navigationItem.title = "ПАУЗА".localized()
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
@@ -362,7 +362,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc func sendDiggitTapped(_ sender: UIButton) {
         guard game.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
-            createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры")
+            createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры".localized())
             return
         }
         
@@ -379,7 +379,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 countStep += 1
                 checkResult(bull: game.bull)
             } else {
-                createMistakeMessage(messages: "В веденном Вами числу не хватает цирф")
+                createMistakeMessage(messages: "В веденном Вами числу не хватает цирф".localized())
             }
         }
     }

@@ -33,7 +33,7 @@ class MenuViewController: UIViewController {
         view.addSubview(labelSecond)
         
         let startMarathon = UIButton()
-        startMarathon.setTitle("Список игр", for: .normal)
+        startMarathon.setTitle("Список игр".localized(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
         startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
         startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -46,7 +46,7 @@ class MenuViewController: UIViewController {
         
         
         let whiteBoard = UIButton()
-        whiteBoard.setTitle("Статистика игр", for: .normal)
+        whiteBoard.setTitle("Статистика игр".localized(), for: .normal)
         whiteBoard.setTitleColor(.label, for: .normal)
         whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
         whiteBoard.layer.cornerRadius = 10
