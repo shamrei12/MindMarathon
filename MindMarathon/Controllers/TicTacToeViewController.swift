@@ -83,7 +83,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         view.addSubview(gameControllerStackView)
         
         gameContainerView = UIView()
-        gameContainerView.layer.cornerRadius = 10
+        gameContainerView.layer.cornerRadius = 20
         gameContainerView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameContainerView)
         
@@ -169,16 +169,16 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameContainerView.snp.makeConstraints { make in
             make.width.equalTo(gameControllerView)
-//            make.height.equalTo(80)
-//            make.centerX.equalToSuperview()
-//            make.centerY.equalToSuperview()
+            make.height.equalTo(gameControllerView.snp.width)
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
         }
         
         gameStatusBarView.snp.makeConstraints { make in
-            make.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.8)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
+            make.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.15)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.view.snp.bottom).offset(-40)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-70)
         }
         
         gameStatusStackView.snp.makeConstraints { make in
