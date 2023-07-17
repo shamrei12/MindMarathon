@@ -16,7 +16,7 @@ class ListGamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.title = "Список игр"
+        navigationItem.title = "Список игр".localized()
         tableView.register(UINib(nibName: "ListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "ListGameTableViewCell")
         tableView.separatorColor = .none
         tableView.separatorStyle = .none
@@ -123,9 +123,7 @@ extension ListGamesViewController: UITableViewDataSource {
 extension ListGamesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewWidth = tableView.frame.width
-        print(tableViewWidth)
         let height = tableViewWidth / 3.308641975308642
-        print(height)
         return height
     }
     

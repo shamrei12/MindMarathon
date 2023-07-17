@@ -196,7 +196,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 textFieldWindow.layer.cornerRadius = 5
                 textFieldWindow.layer.borderColor = UIColor.gray.cgColor
                 textFieldWindow.layer.borderWidth = 0.1
-                textFieldWindow.font = UIFont(name: "HelveticaNeue-Medium", size: 30.0)
+                textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 50.0)
+                textFieldWindow.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+                textFieldWindow.minimumFontSize = 35
                 textFieldWindow.textAlignment = .center
                 massTextField.append(textFieldWindow)
                 
