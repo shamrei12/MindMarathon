@@ -56,7 +56,6 @@ class BinarioViewModel {
     }
     
     func uniqueRows(mass: [[Int]]) -> Bool {
-        
         var newMass = [[Int]]()
         
         for i in 0..<size {

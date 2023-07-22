@@ -77,6 +77,7 @@ class BullCowViewModel {
             return true
         }
     }
+    
     func createMassive(userDiggit: String) -> [Int] {
         var result = [Int]()
         for i in userDiggit {
@@ -93,15 +94,4 @@ class BullCowViewModel {
         isStartGame = false
         isContinueGame = false
     }
-    
-//    func factorial(n: Int) -> Int {
-//        if n <= 0 {
-//            return 1
-//        }
-//        return n * factorial(n: n - 1)
-//    }
-//    
-//    func firstShowCountCombination(lenght: Int) -> String {
-//        return String(factorial(n: 10) / factorial(n: 10 - lenght))
-//    }
 }

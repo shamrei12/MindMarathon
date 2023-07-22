@@ -32,9 +32,6 @@ class FloodFillViewModel {
         return gameRules
     }
 
-    
-    
-    
     func selectMaxLenght(maxLenght: String) -> String {
         var newLenght: Int = Int(maxLenght)!
         

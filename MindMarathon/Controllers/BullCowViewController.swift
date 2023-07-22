@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 
 class BullCowViewController: UIViewController, AlertDelegate {
-    let panelControllView = UIView()
-    let combinationCountLabel = UILabel()
-    let panelControllStackView = UIStackView()
-    private let tableview = UITableView()
+    private let panelControllView = UIView()
+    private let combinationCountLabel = UILabel()
+    private let panelControllStackView = UIStackView()
     private let levelButton = UIButton()
+    private let tableview = UITableView()
     private let userDiggitLabel = UILabel()
     private let timerLabel = UILabel()
     private let deleteLastButton = UIButton()
@@ -23,9 +23,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var isshowMessageAlert: Bool = false
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
-    private var countStep: Int = 0
-    private var indexMass: Int = 0
-    private var seconds: Int = 0
+    private var countStep: Int = .zero
+    private var indexMass: Int = .zero
+    private var seconds: Int = .zero
     private var messegeView: UserMistakeView!
     private var alertView: ResultAlertView!
     private var game: BullCowViewModel!
@@ -33,10 +33,15 @@ class BullCowViewController: UIViewController, AlertDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         game = BullCowViewModel()
+        settingTableView()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localized(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
         self.view.backgroundColor = UIColor(named: "viewColor")
+        createUIElements()
+    }
+    
+    func settingTableView() {
         tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
         tableview.register(UINib(nibName: "BullCowAlertTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowAlertTableViewCell")
         tableview.backgroundColor = .clear
@@ -44,37 +49,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         tableview.delegate = self
         tableview.separatorStyle = .none
         tableview.allowsSelection = false
-        createUIElements()
     }
     
-    func createUIElements() {
-        let panelInputContollStackView = UIStackView()
-        let twiceInputLayerStackView = UIStackView()
-        let firstLayerStackView = UIStackView()
-        let secondLayerStackView = UIStackView()
-        let panelIntputControlView = UIView()
-        let userLabelPanelStackView = UIStackView()
-        
-        //ButtonsDiggits
-        let zeroTapped = UIButton()
-        let oneTapped = UIButton()
-        let twoTapped = UIButton()
-        let threeTapped = UIButton()
-        let fourTapped = UIButton()
-        let fiveTapped = UIButton()
-        let sixTapped = UIButton()
-        let sevenTapped = UIButton()
-        let eightTapped = UIButton()
-        let nineTapped = UIButton()
-        let sendDiggitsButton = UIButton()
-        let massDiggit = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-        let massButton = [oneTapped, twoTapped, threeTapped, fourTapped, fiveTapped, sixTapped, sevenTapped, eightTapped, nineTapped, zeroTapped]
-        
-
-        panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .clear
-        view.addSubview(panelControllView)
-        
+    func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
         levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
@@ -84,16 +61,26 @@ class BullCowViewController: UIViewController, AlertDelegate {
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
-        
+    }
+    
+    func playButtonCreated() {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-
         view.addSubview(playButton)
+    }
+    
+    func panelControlCreated() {
+        levelButtonCreated()
+        playButtonCreated()
         
+        panelControllView.layer.cornerRadius = 10
+        panelControllView.backgroundColor = .clear
+        view.addSubview(panelControllView)
+
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -106,100 +93,116 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
-        
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
-        
+    }
+    
+    func tableViewCreated() {
         view.addSubview(tableview)
-        
-        deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-        deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
-        
-        
-        for (index, button) in massButton.enumerated() {
-            button.tag = massDiggit[index] // присваиваем tag кнопке
-            button.backgroundColor = .tertiaryLabel
-            button.setTitle(String(massDiggit[index]), for: .normal) // присваиваем title кнопке
-            button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
-            button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-            button.titleLabel!.minimumScaleFactor = 0.5
-            button.tintColor = UIColor.label
-            button.translatesAutoresizingMaskIntoConstraints = false
-            button.layer.cornerRadius = 10
-            button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
-            
-            if index > 4 {
-                secondLayerStackView.addArrangedSubview(button)
-            } else {
-                firstLayerStackView.addArrangedSubview(button)
-            }
+        tableview.snp.makeConstraints { maker in
+            maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
+            maker.left.right.equalToSuperview().inset(10)
         }
-        
-//        let combinationsView = UIView()
-//        combinationsView.layer.cornerRadius = 10
-//        combinationsView.layer.borderWidth = 0.5
-//        combinationsView.layer.borderColor = UIColor.black.cgColor
-//        view.addSubview(combinationsView)
-//
-//        let labelCombination = UILabel()
-//        labelCombination.text = "Комбинации"
-//        labelCombination.textAlignment = .center
-//        labelCombination.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
-//        labelCombination.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-//        labelCombination.minimumScaleFactor = 0.5
-//        combinationsView.addSubview(labelCombination)
-//
-//
-//        combinationCountLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
-//        combinationCountLabel.text = "5040"
-//        combinationCountLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-//        combinationCountLabel.minimumScaleFactor = 0.5
-//        combinationCountLabel.textAlignment = .center
-//        combinationsView.addSubview(combinationCountLabel)
-//
-//        let combinationStackView = UIStackView()
-//        combinationsView.addSubview(combinationStackView)
-//        combinationStackView.axis = .vertical
-//        combinationStackView.distribution = .fillEqually
-//        combinationStackView.alignment = .center
-//        combinationStackView.spacing = 5
-//        combinationStackView.addArrangedSubview(labelCombination)
-//        combinationStackView.addArrangedSubview(combinationCountLabel)
-//
-//        combinationStackView.snp.makeConstraints { maker in
-//            maker.left.right.top.bottom.equalTo(combinationsView).inset(5)
-//        }
-        
-        
+    }
+    
+    func inputFieldCreated() -> UIStackView {
+        let inputFieldStackView = UIStackView()
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
         userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
         userDiggitLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         userDiggitLabel.minimumScaleFactor = 0.5
-//
-//        userLabelPanelStackView.addArrangedSubview(combinationsView)
-        userLabelPanelStackView.addArrangedSubview(userDiggitLabel)
-        userLabelPanelStackView.addArrangedSubview(deleteLastButton)
-        userLabelPanelStackView.distribution = .equalSpacing
-        userLabelPanelStackView.axis = .horizontal
         
+        deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+        deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
         
+        inputFieldStackView.addArrangedSubview(userDiggitLabel)
+        inputFieldStackView.addArrangedSubview(deleteLastButton)
+        inputFieldStackView.distribution = .equalSpacing
+        inputFieldStackView.axis = .horizontal
+        
+        view.addSubview(inputFieldStackView)
+        inputFieldStackView.snp.makeConstraints { maker in
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.001)
+        }
+        
+        deleteLastButton.snp.makeConstraints { maker in
+            maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.1)
+        }
+        userDiggitLabel.snp.makeConstraints { maker in
+            maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.6)
+        }
+        
+        return inputFieldStackView
+    }
+    
+    func buttonForNumpadCreated(index: Int) -> UIButton {
+        let button = UIButton()
+        button.tag = index// присваиваем tag кнопке
+        button.backgroundColor = .tertiaryLabel
+        button.setTitle(String(index), for: .normal) // присваиваем title кнопке
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
+        button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        button.titleLabel!.minimumScaleFactor = 0.5
+        button.tintColor = UIColor.label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
+        
+        return button
+    }
+    
+    func firstLayerNumpadCreated() -> UIStackView {
+        let firstLayerStackView = UIStackView()
         firstLayerStackView.distribution = .fillEqually
-        secondLayerStackView.distribution = .fillEqually
         firstLayerStackView.spacing = 10
+        let massDiggit = [1, 2, 3, 4, 5]
+        var massButton: [UIButton] = []
+        for _ in 0..<massDiggit.count {
+            let button = UIButton()
+            massButton.append(button)
+        }
+        
+        for i in 0..<massButton.count {
+            let button = buttonForNumpadCreated(index: massDiggit[i])
+            firstLayerStackView.addArrangedSubview(button)
+        }
+
+        
+        return firstLayerStackView
+    }
+    
+    func secondLayerNumpadCreated() -> UIStackView{
+        let secondLayerStackView = UIStackView()
+        secondLayerStackView.distribution = .fillEqually
         secondLayerStackView.spacing = 10
+        let massDiggit = [6, 7, 8, 9, 0]
+        var massButton: [UIButton] = []
+        for _ in 0..<massDiggit.count{
+            let button = UIButton()
+            massButton.append(button)
+        }
         
+        for i in 0..<massButton.count {
+            let button = buttonForNumpadCreated(index: massDiggit[i])
+            secondLayerStackView.addArrangedSubview(button)
+        }
         
-        twiceInputLayerStackView.addArrangedSubview(firstLayerStackView)
-        twiceInputLayerStackView.addArrangedSubview(secondLayerStackView)
+        return secondLayerStackView
+    }
+    
+    func numpudCreated() -> UIStackView {
+        let twiceInputLayerStackView = UIStackView()
+        twiceInputLayerStackView.addArrangedSubview(firstLayerNumpadCreated())
+        twiceInputLayerStackView.addArrangedSubview(secondLayerNumpadCreated())
         twiceInputLayerStackView.distribution = .fillEqually
         twiceInputLayerStackView.axis = .vertical
         twiceInputLayerStackView.spacing = 5
-        
-        panelInputContollStackView.addArrangedSubview(userLabelPanelStackView)
-        panelInputContollStackView.addArrangedSubview(twiceInputLayerStackView)
-        
+        return twiceInputLayerStackView
+    }
+    
+    func sendButtonCreated() {
         sendDiggitsButton.setTitle("ОТПРАВИТЬ".localized(), for: .normal)
         sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -209,7 +212,18 @@ class BullCowViewController: UIViewController, AlertDelegate {
         sendDiggitsButton.layer.cornerRadius = 10
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
         view.addSubview(sendDiggitsButton)
+    }
+    
+    func createUIElements() {
+        panelControlCreated()
         
+        let panelInputContollStackView = UIStackView()
+        let panelIntputControlView = UIView()
+        
+        sendButtonCreated()
+        
+        panelInputContollStackView.addArrangedSubview(inputFieldCreated())
+        panelInputContollStackView.addArrangedSubview(numpudCreated())
         panelInputContollStackView.addArrangedSubview(sendDiggitsButton)
         
         panelInputContollStackView.axis = .vertical
@@ -220,23 +234,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelIntputControlView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelIntputControlView)
         
-        panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            maker.left.right.equalTo(view.safeAreaLayoutGuide).inset(10)
-//            maker.left.equalTo(view.safeAreaLayoutGuide.snp.left).multipliedBy(0.1)
-        }
         
-        panelControllStackView.snp.makeConstraints { maker in
-            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
-        }
-        
-        tableview.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
-            maker.left.right.equalToSuperview().inset(10)
-        }
+        tableViewCreated()
         
         panelIntputControlView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.35)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.32)
             maker.left.right.equalToSuperview().inset(10)
             maker.bottom.equalToSuperview().inset(20)
             maker.top.equalTo(tableview.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
@@ -246,25 +248,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(panelIntputControlView).inset(10)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
         }
-        
+    
         sendDiggitsButton.snp.makeConstraints { maker in
             maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.15)
         }
-        
-        userLabelPanelStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.2)
-        }
-        twiceInputLayerStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.45)
-        }
-        
-        deleteLastButton.snp.makeConstraints { maker in
-            maker.width.equalTo(userLabelPanelStackView.snp.width).multipliedBy(0.1)
-        }
-        userDiggitLabel.snp.makeConstraints { maker in
-            maker.width.equalTo(userLabelPanelStackView.snp.width).multipliedBy(0.6)
-        }
-        
     }
     
     //MARK: Navigation Bar
@@ -305,6 +292,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         seconds += 1
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
+    
     //MARK: Keyboard
     @objc
     func diggitsTapped(_ sender: UIButton) {
@@ -343,9 +331,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.title = "ПАУЗА".localized()
     }
     
-    @objc func startGameTapped(_ sender: UIButton) {
+    @objc
+    func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (game.isStartGame, game.isContinueGame)
-        
         if chekPartGame == (false, false) {
             game.isStartGame = true
             game.isContinueGame = true
@@ -359,8 +347,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    
-    @objc func sendDiggitTapped(_ sender: UIButton) {
+    @objc
+    func sendDiggitTapped(_ sender: UIButton) {
         guard game.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
             createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры".localized())
             return
@@ -469,6 +457,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
 }
+
 //MARK: расширение для tableview
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
