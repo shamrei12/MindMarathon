@@ -124,7 +124,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         view.addSubview(inputFieldStackView)
         inputFieldStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.001)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.000001)
         }
         
         deleteLastButton.snp.makeConstraints { maker in
@@ -222,9 +222,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
         
         sendButtonCreated()
         
-        panelInputContollStackView.addArrangedSubview(inputFieldCreated())
+        let inputField = inputFieldCreated()
+        panelInputContollStackView.addArrangedSubview(inputField)
         panelInputContollStackView.addArrangedSubview(numpudCreated())
         panelInputContollStackView.addArrangedSubview(sendDiggitsButton)
+        inputField.heightAnchor.constraint(equalTo: panelInputContollStackView.heightAnchor, multiplier: 0.2).isActive = true
         
         panelInputContollStackView.axis = .vertical
         panelInputContollStackView.distribution = .fill
