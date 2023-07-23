@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 class ListGameTableViewCell: UITableViewCell {
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.clear

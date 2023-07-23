@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 
-
 class ResultAlertView: UIView {
     
     @IBOutlet weak var buttonTapped: UIButton!
@@ -27,7 +26,6 @@ class ResultAlertView: UIView {
     
     func createUI() {
         let mainView = UIView()
-        
         
         mainView.backgroundColor = .systemBackground
         mainView.layer.cornerRadius = 10
@@ -90,7 +88,6 @@ class ResultAlertView: UIView {
             maker.left.right.bottom.equalTo(mainView).inset(20)
         }
     }
-    
     
     @objc func restartGameTapped() {
         delegate.restartGame()

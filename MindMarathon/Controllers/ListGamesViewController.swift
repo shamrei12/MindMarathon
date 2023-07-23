@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-
 class ListGamesViewController: UIViewController {
     let tableView = UITableView()
     let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]

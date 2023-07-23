@@ -63,7 +63,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        
         gameControllerView = UIView()
         gameControllerView.layer.cornerRadius = 10
         gameControllerView.backgroundColor = .clear
@@ -92,12 +91,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusBarView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameStatusBarView)
         
-       
         gameStatusStackView = UIStackView()
         gameStatusStackView.axis = .vertical
         gameStatusStackView.spacing = 6
         gameStatusBarView.addSubview(gameStatusStackView)
-        
         
         gameStatusPlayerLabel = UILabel()
         gameStatusPlayerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -105,7 +102,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameStatusPlayerLabel.textAlignment = .center
         gameStatusPlayerLabel.text = ""
         gameStatusStackView.addArrangedSubview(gameStatusPlayerLabel)
-        
         
         gameStatusSpinner = UIActivityIndicatorView()
         gameStatusSpinner.color = .label
@@ -146,7 +142,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         self.view.addSubview(vStackView)
         fillStackViews()
     }
-    
     
     func createConstraints() {
         vStackView.snp.makeConstraints { make in

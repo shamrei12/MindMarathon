@@ -94,7 +94,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(colorView)
         view.addSubview(colorStackView)
         colorStackView.axis = .horizontal
-        colorStackView.distribution = .fillEqually
+        colorStackView.distribution = .equalSpacing
         colorStackView.spacing = 10
         
         for index in 0..<colorMass.count {
@@ -103,7 +103,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             colorButton.layer.cornerRadius = 10
             colorButton.tag = index
 
-            
             if index == 0 {
                 colorButton.layer.borderColor = UIColor.label.cgColor
                 colorButton.layer.borderWidth = 2
@@ -111,7 +110,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
             view.addSubview(colorButton)
             colorButton.snp.makeConstraints { maker in
-                maker.width.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.2)
+                maker.width.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.15)
             }
             colorStackView.addArrangedSubview(colorButton)
             colorMassiveButton.append(colorButton)

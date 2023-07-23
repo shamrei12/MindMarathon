@@ -47,26 +47,36 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         levelButton.setTitle("5", for: .normal)
     }
     
-    func createUI() {
-        // panelControllView
-        panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .clear
-        view.addSubview(panelControllView)
-        
+    func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
+        levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
-        
+    }
+    
+    func playButtonCreated() {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
         view.addSubview(playButton)
+    }
+    
+    func panelControlCreated() {
+        levelButtonCreated()
+        playButtonCreated()
         
+        panelControllView.layer.cornerRadius = 10
+        panelControllView.backgroundColor = .clear
+        view.addSubview(panelControllView)
+
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -75,16 +85,16 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
-        
         panelControllStackView.snp.makeConstraints { maker in
-            maker.edges.equalTo(panelControllView).inset(10)
+            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
-        
-        // gameBoardView
+    }
+    
+    func continerCreated() {
         containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
@@ -94,10 +104,29 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(panelControllView.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
         }
-        
-        // keyBoardView
-        let keyBoardView = UIView()
+    }
+
+    func sendButtonCreated() -> UIButton {
         let sendWordsButton = UIButton()
+        sendWordsButton.setTitle("ОТПРАВИТЬ", for: .normal)
+        sendWordsButton.backgroundColor = UIColor.systemBackground
+        sendWordsButton.setTitleColor(UIColor.label, for: .normal)
+        sendWordsButton.layer.cornerRadius = 10
+        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
+        view.addSubview(sendWordsButton)
+        
+        sendWordsButton.snp.makeConstraints { maker in
+            maker.height.equalToSuperview().multipliedBy(0.22)
+        }
+        
+        return sendWordsButton
+    }
+    
+    func createUI() {
+        panelControlCreated()
+        continerCreated()
+
+        let keyBoardView = UIView()
         let keyBoardStackView = UIStackView()
         let keyboardLayers = [UIStackView(), UIStackView(), UIStackView()]
         let keyboard = [
@@ -139,16 +168,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             keyBoardStackView.addArrangedSubview(keyboardLayers[indexRow])
         }
         
-        sendWordsButton.setTitle("ОТПРАВИТЬ", for: .normal)
-        sendWordsButton.backgroundColor = UIColor.systemBackground
-        sendWordsButton.setTitleColor(UIColor.label, for: .normal)
-        sendWordsButton.layer.cornerRadius = 10
-        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
-        keyBoardStackView.addArrangedSubview(sendWordsButton)
-
-        sendWordsButton.snp.makeConstraints { maker in
-            maker.height.equalToSuperview().multipliedBy(0.22)
-        }
+        keyBoardStackView.addArrangedSubview(sendButtonCreated())
         
         for keyboardLayer in keyboardLayers {
             keyboardLayer.axis = .horizontal
@@ -156,7 +176,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             keyboardLayer.spacing = 5
         }
         
-        keyBoardStackView.addArrangedSubview(sendWordsButton)
         keyBoardStackView.axis = .vertical
         keyBoardStackView.distribution = .fillEqually
         keyBoardStackView.spacing = 5
@@ -176,7 +195,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             contentViewStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        
         // Добавляем contentViewStackView на view
         view.addSubview(contentViewStackView)
         
@@ -196,7 +214,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 textFieldWindow.layer.cornerRadius = 5
                 textFieldWindow.layer.borderColor = UIColor.gray.cgColor
                 textFieldWindow.layer.borderWidth = 0.1
-                textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 50.0)
+                textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
                 textFieldWindow.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
                 textFieldWindow.minimumFontSize = 35
                 textFieldWindow.textAlignment = .center

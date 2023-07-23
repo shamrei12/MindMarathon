@@ -44,7 +44,6 @@ class MenuViewController: UIViewController {
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         view.addSubview(startMarathon)
         
-        
         let whiteBoard = UIButton()
         whiteBoard.setTitle("Статистика игр".localized(), for: .normal)
         whiteBoard.setTitleColor(.label, for: .normal)
@@ -97,4 +96,3 @@ class MenuViewController: UIViewController {
         present(navigationController, animated: true)
     }
 }
-

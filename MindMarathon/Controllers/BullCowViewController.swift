@@ -169,17 +169,16 @@ class BullCowViewController: UIViewController, AlertDelegate {
             firstLayerStackView.addArrangedSubview(button)
         }
 
-        
         return firstLayerStackView
     }
     
-    func secondLayerNumpadCreated() -> UIStackView{
+    func secondLayerNumpadCreated() -> UIStackView {
         let secondLayerStackView = UIStackView()
         secondLayerStackView.distribution = .fillEqually
         secondLayerStackView.spacing = 10
         let massDiggit = [6, 7, 8, 9, 0]
         var massButton: [UIButton] = []
-        for _ in 0..<massDiggit.count{
+        for _ in 0..<massDiggit.count {
             let button = UIButton()
             massButton.append(button)
         }
@@ -236,7 +235,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelIntputControlView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(panelIntputControlView)
         
-        
         tableViewCreated()
         
         panelIntputControlView.snp.makeConstraints { maker in
@@ -256,7 +254,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //MARK: Navigation Bar
+    // MARK: Navigation Bar
     @objc
     func cancelTapped() {
         if alertView != nil {
@@ -288,14 +286,14 @@ class BullCowViewController: UIViewController, AlertDelegate {
                                          userInfo: nil,
                                          repeats: true)
     }
-    //MARK: Timer
+    // MARK: Timer
     @objc
     func updateTimer() {
         seconds += 1
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
-    //MARK: Keyboard
+    // MARK: Keyboard
     @objc
     func diggitsTapped(_ sender: UIButton) {
         if game.isStartGame && game.isContinueGame {
@@ -312,7 +310,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //MARK: управление статусом игры
+    // MARK: управление статусом игры
     func startNewGame() {
         seconds = 0
         createTimer()
@@ -373,7 +371,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             }
         }
     }
-    //проверка результата
+    // проверка результата
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
@@ -408,7 +406,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         self.dismiss(animated: true)
     }
     
-    //MARK: создание элементов уведомления
+    // MARK: создание элементов уведомления
     func createAlertMessage(description: String) {
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 0.6
@@ -460,7 +458,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
 }
 
-//MARK: расширение для tableview
+// MARK: расширение для tableview
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = BullCowViewModel.shared.stepList.count
@@ -491,4 +489,3 @@ extension BullCowViewController: UITableViewDelegate {
         return 80
     }
 }
-

@@ -41,7 +41,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        //ControlStatusGame
+        // ControlStatusGame
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
@@ -100,7 +100,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
         checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(checkResultButton)
-        
         
         clearMoves.layer.cornerRadius = 10
         clearMoves.backgroundColor = UIColor(named: "gameElementColor")

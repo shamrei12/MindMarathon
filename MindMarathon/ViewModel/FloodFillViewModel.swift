@@ -42,7 +42,6 @@ class FloodFillViewModel {
         } else {
             newLenght += 1
         }
-        
         return String(newLenght)
     }
 }

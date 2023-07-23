@@ -41,7 +41,7 @@ class BinarioViewModel {
         return String(newLenght)
     }
     
-    //функция случайного числа
+    // функция случайного числа
     func makeRandomDiggit(min: Int, max: Int) -> Int {
         return Int.random(in: min...max)
     }

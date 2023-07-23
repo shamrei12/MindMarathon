@@ -8,3 +8,7 @@ opt_in_rules:
 excluded:
     - Carthage
     - Pods
+type_body_length:
+  warning: 400
+  error: 500
+

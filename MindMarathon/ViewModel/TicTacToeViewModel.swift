@@ -52,7 +52,6 @@ class TicTacToeViewModel {
         return nil
     }
 
-
     // Функция для поиска пустых клеток на доске
     func findEmptyPositions(board: [[String]]) -> [(Int, Int)] {
         var emptyPositions = [(Int, Int)]()

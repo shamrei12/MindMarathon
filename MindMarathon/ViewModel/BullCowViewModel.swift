@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class BullCowViewModel {
     
     static var shared: BullCowViewModel = {
@@ -37,8 +36,7 @@ class BullCowViewModel {
         return String(newLenght)
     }
     
-    
-    func makeNumber(maxLenght: Int) -> [Int] { //создание числа для игры
+    func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
         var result: [Int] = []
         while result.count < maxLenght {
             let randomDiggit = Int.random(in: 0...9)
@@ -49,15 +47,14 @@ class BullCowViewModel {
         return result
     }
     
-    func  comparisonNumber(_ userDigg: [Int],_ computerNumber: [Int]) {
+    func  comparisonNumber(_ userDigg: [Int], _ computerNumber: [Int]) {
         var bullCount = 0
         var cowCount = 0
         for (i, _) in userDigg.enumerated() {
             for (j, _) in computerNumber.enumerated() {
                 if userDigg[i] == computerNumber[j] && i == j {
                     bullCount += 1
-                }
-                else if userDigg[i] == computerNumber[j] && i != j {
+                } else if userDigg[i] == computerNumber[j] && i != j {
                     cowCount += 1
                 }
             }
@@ -65,7 +62,6 @@ class BullCowViewModel {
         bull = bullCount
         cow = cowCount
     }
-    
     
     func checkRepeatDiggits(userDiggit: String) -> Bool {
         let numbers = createMassive(userDiggit: userDiggit)

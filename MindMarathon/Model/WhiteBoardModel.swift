@@ -8,7 +8,6 @@
 import Foundation
 import RealmSwift
 
-
 enum ResultGame {
     case win, lose
 }

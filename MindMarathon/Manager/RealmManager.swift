@@ -17,15 +17,21 @@ class RealmManager {
     }()
     
     func saveResult(result: WhiteBoardModel) {
-        let realm = try! Realm() //Доступ к хранилищу
-        let resultGame = WhiteBoardManager()
-        resultGame.nameGame = result.nameGame
-        resultGame.timerGame = result.timerGame
-        resultGame.countStep = result.countStep
-        resultGame.resultGame = result.resultGame
-        
-        try! realm.write {
-            realm.add(resultGame)
+        do {
+            let realm = try Realm() // Доступ к хранилищу
+
+            let resultGame = WhiteBoardManager()
+            resultGame.nameGame = result.nameGame
+            resultGame.timerGame = result.timerGame
+            resultGame.countStep = result.countStep
+            resultGame.resultGame = result.resultGame
+            
+            try realm.write {
+                realm.add(resultGame)
+            }
+        } catch {
+            // Обработка ошибок
+            print("Ошибка при доступе к хранилищу Realm: \(error)")
         }
     }
 }
