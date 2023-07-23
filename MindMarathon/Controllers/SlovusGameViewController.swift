@@ -220,7 +220,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 textFieldWindow.layer.borderWidth = 0.1
                 textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
                 textFieldWindow.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-                textFieldWindow.minimumFontSize = 35
+                textFieldWindow.minimumFontSize = 30
                 textFieldWindow.textAlignment = .center
                 massTextField.append(textFieldWindow)
                 
@@ -271,6 +271,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Статус игры
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isstartGame, iscontinuePlaying)
+        
         if chekPartGame == (false, false) {
             isstartGame = true
             iscontinuePlaying = true
