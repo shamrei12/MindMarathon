@@ -105,6 +105,18 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             maker.left.right.equalToSuperview().inset(10)
         }
     }
+    
+    func keyboardViewCreated() -> UIView {
+        let keyBoardView = UIView()
+        view.addSubview(keyBoardView)
+        keyBoardView.snp.makeConstraints { maker in
+            maker.top.equalTo(containerView.snp.bottom).inset(-10)
+            maker.left.equalToSuperview().inset(10)
+            maker.right.bottom.equalToSuperview().inset(20)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
+        }
+        return keyBoardView
+    }
 
     func sendButtonCreated() -> UIButton {
         let sendWordsButton = UIButton()
@@ -125,8 +137,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     func createUI() {
         panelControlCreated()
         continerCreated()
-
-        let keyBoardView = UIView()
+        let view = keyboardViewCreated()
+        
         let keyBoardStackView = UIStackView()
         let keyboardLayers = [UIStackView(), UIStackView(), UIStackView()]
         let keyboard = [
@@ -134,14 +146,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             ["Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э"],
             ["Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "delete"]
         ]
-        view.addSubview(keyBoardView)
-        
-        keyBoardView.snp.makeConstraints { maker in
-            maker.top.equalTo(containerView.snp.bottom).inset(-10)
-            maker.left.equalToSuperview().inset(10)
-            maker.right.bottom.equalToSuperview().inset(20)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
-        }
         
         for (indexRow, row) in keyboard.enumerated() {
             let keyboardRowStackView = UIStackView()
@@ -179,10 +183,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         keyBoardStackView.axis = .vertical
         keyBoardStackView.distribution = .fillEqually
         keyBoardStackView.spacing = 5
-        keyBoardView.addSubview(keyBoardStackView)
+        view.addSubview(keyBoardStackView)
         
         keyBoardStackView.snp.makeConstraints { maker in
-            maker.edges.equalTo(keyBoardView).inset(5)
+            maker.edges.equalTo(view).inset(5)
         }
     }
     
@@ -267,7 +271,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Статус игры
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isstartGame, iscontinuePlaying)
-        
         if chekPartGame == (false, false) {
             isstartGame = true
             iscontinuePlaying = true
