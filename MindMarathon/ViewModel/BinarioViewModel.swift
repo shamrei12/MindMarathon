@@ -65,12 +65,7 @@ class BinarioViewModel {
             }
             newMass.append(newLine)
         }
-        
-        if uniqueLines(line: newMass) {
-            return true
-        } else {
-            return false
-        }
+        return uniqueLines(line: newMass)
     }
     
     func equalCountOfOnesAndTwos(array: [Int]) -> Bool {

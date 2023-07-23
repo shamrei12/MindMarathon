@@ -86,15 +86,15 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(gameView)
         
         gameView.snp.makeConstraints { maker in
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
             maker.centerX.equalTo(self.view)
             maker.centerY.equalTo(self.view)
         }
         
         let colorStackView = UIStackView()
         
-        colorView.backgroundColor = UIColor(named: "gameElementColor")
+        colorView.backgroundColor = .clear
         colorView.layer.cornerRadius = 10
         view.addSubview(colorView)
         view.addSubview(colorStackView)
@@ -107,6 +107,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             colorButton.backgroundColor = UIColor(cgColor: colorMass[i].cgColor)
             colorButton.layer.cornerRadius = 10
             colorButton.tag = i
+
             
             if i == 0 {
                 colorButton.layer.borderColor = UIColor.label.cgColor
@@ -114,6 +115,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
             colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
             view.addSubview(colorButton)
+            colorButton.snp.makeConstraints { maker in
+                maker.width.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.2)
+            }
             colorStackView.addArrangedSubview(colorButton)
             colorMassiveButton.append(colorButton)
         }
@@ -122,13 +126,14 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.bottom.equalToSuperview().inset(30)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.12)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.08)
         }
         
         colorStackView.snp.makeConstraints { maker in
-            maker.left.right.bottom.top.equalTo(colorView).inset(10)
+            maker.left.right.bottom.top.equalTo(colorView).inset(0.00001)
         }
     }
+    
     //MARK: Выход и правила
     @objc func cancelTapped() {
         if alertView != nil {
@@ -179,10 +184,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         contentViewStackView.spacing = 0
         
         contentViewStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(gameView).inset(10)
-            maker.top.equalTo(gameView).inset(10)
-            maker.right.equalTo(gameView).inset(10)
-            maker.bottom.equalTo(gameView).inset(10)
+            maker.left.equalTo(gameView).inset(5)
+            maker.top.equalTo(gameView).inset(5)
+            maker.right.equalTo(gameView).inset(5)
+            maker.bottom.equalTo(gameView).inset(5)
         }
         
         coloringView() // Вызываем функцию расскрашивания ячеек

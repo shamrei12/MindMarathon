@@ -13,14 +13,7 @@ enum ResultGame {
     case win, lose
 }
 
-protocol WhiteBoardProtocol {
-    var nameGame: String { get set }
-    var timerGame: String { get set }
-    var countStep: String { get set }
-    var resultGame: String { get set}
-}
-
-struct WhiteBoardModel: WhiteBoardProtocol {
+struct WhiteBoardModel {
     var nameGame: String
     var resultGame: String
     var countStep: String
