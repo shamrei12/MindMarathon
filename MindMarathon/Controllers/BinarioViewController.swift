@@ -8,19 +8,18 @@
 import UIKit
 
 class BinarioViewController: UIViewController, AlertDelegate {
-    
-    let panelControllView = UIView()
-    let panelControllStackView = UIStackView()
-    let sendClearStackView = UIStackView()
-    let clearMoves = UIButton()
+    private let panelControllView = UIView()
+    private let panelControllStackView = UIStackView()
+    private let sendClearStackView = UIStackView()
+    private let clearMoves = UIButton()
     private var stopwatch = Timer()
     private var seconds = 0
-    var isstartGame = false
-    var iscontinuePlaying = false
-    let playButton = UIButton()
-    let levelButton = UIButton()
+    private var isstartGame = false
+    private var iscontinuePlaying = false
+    private let playButton = UIButton()
+    private let levelButton = UIButton()
     private var alertView: ResultAlertView!
-    let containerView = UIView()
+    private let containerView = UIView()
     private var gridSize = 4
     private let contentStackView = UIStackView()
     private var index = 0
@@ -30,9 +29,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
     private var messegeView: UserMistakeView!
     private var game = BinarioViewModel()
     
-    private var colorMass = [UIColor(hex: 0xb5b5b5),UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
+    private var colorMass = [UIColor(hex: 0xb5b5b5), UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
     let checkResultButton = UIButton()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +76,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
         
-        //GameZone
+        // GameZone
         containerView.backgroundColor = UIColor(named: "gameElementColor")
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
@@ -139,7 +137,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
         
         for i in 0..<gridSize {
-            for j in 0..<gridSize {
+            for _ in 0..<gridSize {
                 let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
                 let cell = UIView()
                 cell.addGestureRecognizer(tapRecognizer)
@@ -167,7 +165,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         
         createGameElement()
     }
-    //Cоздание view
+    // Cоздание view
     func createGameElement() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {
@@ -177,15 +175,15 @@ class BinarioViewController: UIViewController, AlertDelegate {
             }
         }
         
-        let tagMassive = [1,2,1,2,1,2,1,2]
-        for i in 0..<gridSize {
+        let tagMassive = [1, 2, 1, 2, 1, 2, 1, 2]
+        for index in 0..<gridSize {
             let random = game.makeRandomDiggit(min: 1, max: gridSize - 1)
-            cells[i][random].tag = tagMassive[i]
-            cells[i][random].isUserInteractionEnabled = false
-            var imageBlock = UIImageView()
+            cells[index][random].tag = tagMassive[index]
+            cells[index][random].isUserInteractionEnabled = false
+            let imageBlock = UIImageView()
             imageBlock.image = UIImage(named: "padlock")
             imageBlock.alpha = 0.3
-            cells[i][random].addSubview(imageBlock)
+            cells[index][random].addSubview(imageBlock)
             
             imageBlock.snp.makeConstraints { maker in
                 maker.left.top.right.bottom.equalToSuperview().inset(10)
@@ -212,7 +210,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         sender.setTitle( game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
     }
     
-    //MARK: управление статусом игры
+    // MARK: управление статусом игры
     func startNewGame() {
         seconds = 0
         createTimer()
@@ -250,7 +248,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //раскраская каждого view в зависимости от tag
+    // Раскраская каждого view в зависимости от tag
     func coloringView() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {
@@ -259,7 +257,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //функция раскраски view
+    // Функция раскраски view
     func makeColor(viewElement: UIView) {
         switch viewElement.tag {
         case 1:
@@ -268,8 +266,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
             viewElement.layer.shadowOpacity = 0.8
             viewElement.layer.shadowOffset = CGSize(width: 1, height: 1)
             viewElement.layer.shadowRadius = 5
-            
-            
         case 2:
             viewElement.backgroundColor = UIColor(cgColor: colorMass[2].cgColor)
             viewElement.layer.shadowColor = UIColor.black.cgColor
@@ -312,7 +308,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
             if selectedCell.tag + 1 > 2 {
                 selectedCell.tag = 0
             } else {
-                selectedCell.tag = selectedCell.tag + 1
+                selectedCell.tag += 1
             }
             makeColor(viewElement: selectedCell)
         }
@@ -331,7 +327,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
-        
         
     }
     
@@ -361,7 +356,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
         return resultMass
     }
-    
     
     @objc
     func clearColor() {
@@ -447,7 +441,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
             view.removeFromSuperview()
         }
         
-        
         contentStackView.removeFromSuperview()
         cells.removeAll()
         row.removeAll()
@@ -458,5 +451,4 @@ class BinarioViewController: UIViewController, AlertDelegate {
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
-    
 }

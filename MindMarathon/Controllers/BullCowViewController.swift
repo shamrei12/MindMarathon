@@ -464,11 +464,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = BullCowViewModel.shared.stepList.count
-        if count == 0 {
-            return count
-        } else {
-            return count
-        }
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

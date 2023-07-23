@@ -228,7 +228,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //MARK: Таймер и управление игрой
+    // MARK: Таймер и управление игрой
     @objc func selectMaxLenghtTapped() {
         levelButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
     }
@@ -246,7 +246,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
-    //MARK: Статус игры
+    // MARK: Статус игры
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isstartGame, iscontinuePlaying)
         
@@ -317,13 +317,11 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         self.dismiss(animated: true)
     }
     
-    //MARK: Этапы работы клавиатуры
+    // MARK: Этапы работы клавиатуры
     @objc func deleteLastWord() {
-        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() {
-            if !i.text!.isEmpty {
-                i.text = ""
-                break
-            }
+        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() where !i.text!.isEmpty {
+            i.text = ""
+            break
         }
         
         if controllerTextField - 1 >= firstWordIndex {
@@ -341,14 +339,14 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     func checkTextField(letter: String) {
         if controllerTextField < lastWordIndex {
-            if massTextField[controllerTextField].text?.count == 0 {
+            if massTextField[controllerTextField].text?.isEmpty ?? true {
                 massTextField[controllerTextField].text = letter
                 controllerTextField += 1
                 userWords += letter
             }
         }
     }
-    
+
     @objc func cancelTapped() {
         if alertView != nil {
             alertView.removeFromSuperview()
@@ -381,9 +379,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             }
         }
     }
-    //MARK: Проверка ответа и вывод результата
+    // MARK: Проверка ответа и вывод результата
     func checkCorrctAnswer(massiveAnswer: [Int]) -> Bool {
-        for i in massiveAnswer {
+        for i in massiveAnswer where i != 2 {
             if i != 2 {
                 return false
             }

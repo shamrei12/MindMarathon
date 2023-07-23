@@ -191,7 +191,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     func fillStackViews() {
         var counter = 1
         var tag = 0
-        for _ in counter...3{
+        for _ in counter...3 {
             let button = UIButton()
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
@@ -205,7 +205,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             tag += 1
         }
         counter = 1
-        for _ in counter...3{
+        for _ in counter...3 {
             let button = UIButton()
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
@@ -219,7 +219,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             tag += 1
         }
         counter = 1
-        for _ in counter...3{
+        for _ in counter...3 {
             let button = UIButton()
             button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
             button.tag = tag
@@ -251,15 +251,13 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     func clearGameField() {
-
         for row in buttonBoard {
             for button in row {
                 button.isUserInteractionEnabled = false
                 button.setImage(UIImage(), for: .normal)
             }
         }
-        board = [["","",""], ["","",""], ["","",""]]
-       
+        board = [["", "", ""], ["", "", ""], ["", "", ""]]
     }
     
     @objc func cancelTapped() {
@@ -275,7 +273,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         rulesVC.rulesGame(numberGame: 4)
         present(rulesVC, animated: true)
     }
-    
     
     func playerTurn() {
         self.view.isUserInteractionEnabled = true
@@ -344,8 +341,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         if isUserWon {
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
-        }
-        else {
+        } else {
             guard let position = ticTacToeManager.computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
@@ -410,12 +406,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
                                          repeats: true)
     }
     
-    
     @objc func updateTimer() {
         seconds += 1
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
-    
     
     func createAlertMessage(description: String) {
         UIView.animate(withDuration: 0.1) {

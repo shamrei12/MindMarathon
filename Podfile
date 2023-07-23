@@ -5,6 +5,6 @@ target 'MindMarathon' do
   use_frameworks!
   
   pod 'SnapKit'
-  pod "SwiftLint"
+  pod 'SwiftLint'
   
 end

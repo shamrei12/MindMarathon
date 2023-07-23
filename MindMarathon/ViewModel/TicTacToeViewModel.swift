@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class TicTacToeViewModel {
     
     static var shared: TicTacToeViewModel = {
@@ -44,7 +43,7 @@ class TicTacToeViewModel {
         
         // Выбираем случайную пустую клетку
         let emptyPositions = findEmptyPositions(board: board)
-        if emptyPositions.count > 0 {
+        if !emptyPositions.isEmpty {
             let randomIndex = Int(arc4random_uniform(UInt32(emptyPositions.count)))
             return emptyPositions[randomIndex]
         }
