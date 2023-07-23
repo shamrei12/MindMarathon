@@ -190,6 +190,23 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func textFieldWindowCreated() -> UITextField {
+        let textFieldWindow = UITextField()
+        textFieldWindow.isEnabled = false
+        textFieldWindow.tintColor = UIColor.label
+        textFieldWindow.backgroundColor = UIColor.tertiaryLabel
+        textFieldWindow.layer.cornerRadius = 5
+        textFieldWindow.layer.borderColor = UIColor.gray.cgColor
+        textFieldWindow.layer.borderWidth = 0.1
+        textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
+        textFieldWindow.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        textFieldWindow.minimumFontSize = 30
+        textFieldWindow.textAlignment = .center
+        
+        view.addSubview(textFieldWindow)
+        return textFieldWindow
+    }
+    
     func createPlaceGame() {
         massTextField.removeAll()
         massLayer.removeAll()
@@ -210,21 +227,9 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 stackView.distribution = .fillEqually
                 stackView.spacing = 1
                 massLayer.append(stackView)
-                
-                let textFieldWindow = UITextField()
-                textFieldWindow.isEnabled = false
-                textFieldWindow.tintColor = UIColor.label
-                textFieldWindow.backgroundColor = UIColor.tertiaryLabel
-                textFieldWindow.layer.cornerRadius = 5
-                textFieldWindow.layer.borderColor = UIColor.gray.cgColor
-                textFieldWindow.layer.borderWidth = 0.1
-                textFieldWindow.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
-                textFieldWindow.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-                textFieldWindow.minimumFontSize = 30
-                textFieldWindow.textAlignment = .center
+                let textFieldWindow = textFieldWindowCreated()
                 massTextField.append(textFieldWindow)
                 
-                view.addSubview(textFieldWindow)
                 massLayer[i].addArrangedSubview(textFieldWindow)
             }
             
@@ -243,15 +248,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         contentViewStackView.spacing = 1
         
         contentViewStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(containerView).inset(10)
-            maker.top.equalTo(containerView).inset(10)
-            maker.right.equalTo(containerView).inset(10)
-            maker.bottom.equalTo(containerView).inset(10)
+            maker.edges.equalTo(containerView).inset(10)
         }
     }
     
     // MARK: Таймер и управление игрой
-    @objc func selectMaxLenghtTapped() {
+    @objc
+    func selectMaxLenghtTapped() {
         levelButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
     }
     
@@ -345,7 +348,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             i.text = ""
             break
         }
-        
         if controllerTextField - 1 >= firstWordIndex {
             controllerTextField -= 1
             userWords = String(userWords.dropLast())
@@ -387,7 +389,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         if userWords.count == maxLenght {
             if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
-                if firstWordIndex < 30 && lastWordIndex < 30 {
+                if firstWordIndex < maxLenght * 6 && lastWordIndex < maxLenght * 6 {
                     controllerTextField = firstWordIndex + Int(levelButton.titleLabel?.text ?? "")!
                     firstWordIndex += Int(levelButton.titleLabel?.text ?? "")!
                     lastWordIndex += Int(levelButton.titleLabel?.text ?? "")!
