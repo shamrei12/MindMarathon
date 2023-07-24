@@ -9,7 +9,7 @@ import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
     
-    private var ticTacToeManager: TicTacToeViewModel!
+    private var game: TicTacToeViewModel!
     private var alertView: ResultAlertView!
     var vStackView: UIStackView!
     var hStackViewFirst: UIStackView!
@@ -34,7 +34,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var computerRow = 0
     var computerCol = 0
     
-    var isstartGame = false
+    var isStartGame = false
     var iscontinuePlaying = false
     
     var board: [[String]] =
@@ -49,25 +49,43 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .secondarySystemBackground
-        self.view.backgroundColor = UIColor(named: "viewColor")
-        self.ticTacToeManager = TicTacToeViewModel()
+        self.game = TicTacToeViewModel()
         setupNavigationBar()
-        createUI()
+        createUIElements()
         createConstraints()
     }
-    
+    //MARK: - UI Setup
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
     }
     
-    func createUI() {
+    func createUIElements() {
+        setupBackgroundColor()
+        setupGameControllerView()
+        setupPlayButton()
+        setupGameControllerStackView()
+        setupGameContainerView()
+        setupGameStatusBarView()
+        setupGameStatusStackView()
+        setupGameStatusPlayerLabel()
+        setupGameStatusSpinner()
+        setupHorizontalStackViews()
+        setupVerticalStackView()
+    }
+    
+    func setupBackgroundColor() {
+        self.view.backgroundColor = UIColor(named: "viewColor")
+    }
+    
+    func setupGameControllerView() {
         gameControllerView = UIView()
         gameControllerView.layer.cornerRadius = 10
         gameControllerView.backgroundColor = .clear
         view.addSubview(gameControllerView)
-        
+    }
+    
+    func setupPlayButton() {
         playButton = UIButton()
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
@@ -75,38 +93,52 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
         view.addSubview(playButton)
-        
+    }
+    
+    func setupGameControllerStackView() {
         gameControllerStackView = UIStackView()
         gameControllerStackView.addArrangedSubview(playButton)
         gameControllerStackView.distribution = .equalSpacing
         view.addSubview(gameControllerStackView)
-        
+    }
+    
+    func setupGameContainerView() {
         gameContainerView = UIView()
         gameContainerView.layer.cornerRadius = 20
         gameContainerView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameContainerView)
-        
+    }
+    
+    func setupGameStatusBarView() {
         gameStatusBarView = UIView()
         gameStatusBarView.layer.cornerRadius = 10
         gameStatusBarView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameStatusBarView)
-        
+    }
+    
+    func setupGameStatusStackView() {
         gameStatusStackView = UIStackView()
         gameStatusStackView.axis = .vertical
         gameStatusStackView.spacing = 6
         gameStatusBarView.addSubview(gameStatusStackView)
-        
+    }
+    
+    func setupGameStatusPlayerLabel() {
         gameStatusPlayerLabel = UILabel()
         gameStatusPlayerLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         gameStatusPlayerLabel.textColor = .label
         gameStatusPlayerLabel.textAlignment = .center
         gameStatusPlayerLabel.text = ""
         gameStatusStackView.addArrangedSubview(gameStatusPlayerLabel)
-        
+    }
+    
+    func setupGameStatusSpinner() {
         gameStatusSpinner = UIActivityIndicatorView()
         gameStatusSpinner.color = .label
         gameStatusSpinner.startAnimating()
-        
+    }
+    
+    func setupHorizontalStackViews() {
         hStackViewFirst = UIStackView()
         hStackViewFirst.axis = .horizontal
         hStackViewFirst.distribution = .fillEqually
@@ -129,7 +161,9 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         hStackViewThird.spacing = 5
         hStackViewThird.heightAnchor.constraint(equalToConstant: 100).isActive = true
         self.view.addSubview(hStackViewThird)
-        
+    }
+    
+    func setupVerticalStackView() {
         vStackView = UIStackView()
         vStackView.axis = .vertical
         vStackView.addArrangedSubview(hStackViewFirst)
@@ -138,7 +172,6 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         vStackView.spacing = 5
         vStackView.distribution = .fillEqually
         vStackView.backgroundColor = UIColor(hex: 0x8c9197)
-        
         self.view.addSubview(vStackView)
         fillStackViews()
     }
@@ -228,7 +261,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             tag += 1
         }
     }
-    
+    //MARK: - Field Controls
     func openGameField() {
         for row in buttonBoard {
             for button in row {
@@ -331,13 +364,13 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         thinkingTimeElapsed = 0
         drawUserTurn(row: row, col: col)
         board[row][col] = "X"
-        let isUserWon = ticTacToeManager.checkForWinner(board: board, symbol: "X")
+        let isUserWon = game.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
-            guard let position = ticTacToeManager.computerMove(board: board) else {
+            guard let position = game.computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
@@ -371,7 +404,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
        if thinkingTimeElapsed == computerThinkingTime {
             drawComputerTurn(row: computerRow, col: computerCol)
-           let isComputerWon = ticTacToeManager.checkForWinner(board: board, symbol: "O")
+           let isComputerWon = game.checkForWinner(board: board, symbol: "O")
            if isComputerWon {
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
@@ -392,6 +425,9 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         buttonBoard[row][col].setImage(UIImage(named: "O"), for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
+    
+   
+    //MARK: - Game Controls
     
     func createTimer() {
         stopwatch = Timer.scheduledTimer(timeInterval: 1,
@@ -422,10 +458,10 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
-        let chekPartGame = (isstartGame, iscontinuePlaying)
+        let chekPartGame = (isStartGame, iscontinuePlaying)
         gameStatusPlayerLabel.text = "Ваш ход!"
         if chekPartGame == (false, false) {
-            isstartGame = true
+            isStartGame = true
             iscontinuePlaying = true
             startNewGame()
         } else if chekPartGame == (true, true) {
@@ -468,7 +504,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         computerThinkingTimer?.invalidate()
         alertView.removeFromSuperview()
         startNewGame()
-        isstartGame = true
+        isStartGame = true
         iscontinuePlaying = true
     }
     
