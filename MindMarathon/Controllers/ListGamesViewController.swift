@@ -113,7 +113,7 @@ extension ListGamesViewController: UITableViewDataSource {
         } else if indexPath.row == 3 {
             cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
         } else if indexPath.row == 4 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
+            cell.backgroundView = UIImageView(image: UIImage(named: "BinarioCell"))
         }
         return cell
     }
