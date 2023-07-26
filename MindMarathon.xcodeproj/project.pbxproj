@@ -24,7 +24,6 @@
 		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
 		D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D829AC312A6D124900A38F6E /* .swiftlint.yml */; };
 		D82FB1EC2A626A1000F725B5 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82FB1EB2A626A1000F725B5 /* Localization.swift */; };
-		D82FB1F02A626AC100F725B5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D82FB1F22A626AC100F725B5 /* Localizable.strings */; };
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
@@ -73,8 +72,6 @@
 		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D829AC312A6D124900A38F6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D82FB1EB2A626A1000F725B5 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
-		D82FB1F12A626AC100F725B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D82FB1F32A626B1E00F725B5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
@@ -255,7 +252,6 @@
 			children = (
 				D831619A2A1B5A4600087769 /* ru_RU */,
 				D86D0A782A28A62800AB6789 /* singular */,
-				D82FB1F22A626AC100F725B5 /* Localizable.strings */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -357,7 +353,6 @@
 			files = (
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
 				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
-				D82FB1F02A626AC100F725B5 /* Localizable.strings in Resources */,
 				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
@@ -477,15 +472,6 @@
 				D826CF152A10C69200263CEB /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		D82FB1F22A626AC100F725B5 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D82FB1F12A626AC100F725B5 /* en */,
-				D82FB1F32A626B1E00F725B5 /* ru */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

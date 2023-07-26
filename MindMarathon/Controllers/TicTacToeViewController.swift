@@ -178,8 +178,8 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     func createConstraints() {
         vStackView.snp.makeConstraints { make in
-            make.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            make.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            make.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.8)
+            make.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.8)
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view)
         }
@@ -204,7 +204,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameStatusBarView.snp.makeConstraints { make in
             make.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.15)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.05)
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom).offset(-70)
         }

@@ -83,8 +83,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         gameView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameView)
         gameView.snp.makeConstraints { maker in
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
             maker.centerX.equalTo(self.view)
             maker.centerY.equalTo(self.view)
         }
@@ -128,7 +128,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
     }
     
-    //MARK: Выход и правила
+    // MARK: Выход и правила
     @objc func cancelTapped() {
         if alertView != nil {
             alertView.removeFromSuperview()
@@ -143,7 +143,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         present(rulesVC, animated: true)
     }
     
-    //MARK: создание поля с игрой
+    // MARK: создание поля с игрой
     func createGamePlace(sizePlace: Int) {
         indexTag = 0
         var row = [UIView]() // Инициализируем переменную row
@@ -259,7 +259,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
         return true
     }
-    
     
     func createTimer() {
         stopwatch = Timer.scheduledTimer(timeInterval: 1,
