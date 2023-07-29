@@ -89,9 +89,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
         }
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)

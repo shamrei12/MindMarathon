@@ -85,7 +85,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
         }

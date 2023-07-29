@@ -18,26 +18,45 @@ class MenuViewController: UIViewController {
     }
     
     func creatingUI() {
-        let labelFirst = UILabel()
-        labelFirst.text = "MIND"
-        labelFirst.font = UIFont(name: "HelveticaNeue-Bold", size: 55.0)
-        labelFirst.numberOfLines = 0
-        labelFirst.textAlignment = .center
-        view.addSubview(labelFirst)
         
-        let labelSecond = UILabel()
-        labelSecond.text = "MARATHON"
-        labelSecond.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
-        labelSecond.numberOfLines = 0
-        labelSecond.textAlignment = .center
-        view.addSubview(labelSecond)
+//        let labelStackView = UIStackView()
+//        let labelFirst = UILabel()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "labelGame")
+        view.addSubview(imageView)
+        
+//        labelFirst.text = "MIND"
+//        labelFirst.font = UIFont(name: "HelveticaNeue-Bold", size: 100.0)
+//        labelFirst.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+//        labelFirst.minimumScaleFactor = 0.01
+//        labelFirst.numberOfLines = 0
+//        labelFirst.textAlignment = .center
+//        view.addSubview(labelFirst)
+//
+//        let labelSecond = UILabel()
+//        labelSecond.text = "MARATHON"
+//        labelSecond.font = UIFont(name: "HelveticaNeue-Bold", size: 45.0)
+//        labelSecond.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+//        labelSecond.minimumScaleFactor = 0.00000001
+//        labelSecond.numberOfLines = 0
+//        labelSecond.textAlignment = .center
+//        view.addSubview(labelSecond)
+        
+//        labelStackView.addArrangedSubview(labelFirst)
+//        labelStackView.addArrangedSubview(labelSecond)
+//        labelStackView.axis = .vertical
+//        labelStackView.alignment = .fill
+//        labelStackView.distribution = .fill
+//        labelStackView.spacing = 5
+//        view.addSubview(labelStackView)
         
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр".localized(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
         startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
         startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        startMarathon.titleLabel!.minimumScaleFactor = 0.5
+        startMarathon.titleLabel!.minimumScaleFactor = 0.1
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
         
         startMarathon.layer.cornerRadius = 10
@@ -51,7 +70,7 @@ class MenuViewController: UIViewController {
         whiteBoard.layer.cornerRadius = 10
         whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
         whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        whiteBoard.titleLabel!.minimumScaleFactor = 0.5
+        whiteBoard.titleLabel!.minimumScaleFactor = 0.1
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         view.addSubview(whiteBoard)
         
@@ -63,14 +82,11 @@ class MenuViewController: UIViewController {
         buttonStackView.addArrangedSubview(whiteBoard)
         view.addSubview(buttonStackView)
         
-        labelFirst.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(100)
-            maker.left.right.equalToSuperview().inset(100)
-        }
-        
-        labelSecond.snp.makeConstraints { maker in
-            maker.top.equalTo(labelFirst).inset(60)
-            maker.left.right.equalToSuperview().inset(100)
+        imageView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide).inset(0.01)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.40)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.50)
+            maker.centerX.equalToSuperview()
         }
         
         buttonStackView.snp.makeConstraints { maker in
