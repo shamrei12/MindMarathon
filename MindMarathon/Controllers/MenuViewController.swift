@@ -18,38 +18,11 @@ class MenuViewController: UIViewController {
     }
     
     func creatingUI() {
-        
-//        let labelStackView = UIStackView()
-//        let labelFirst = UILabel()
-        
+
         let imageView = UIImageView()
         imageView.image = UIImage(named: "labelGame")
         view.addSubview(imageView)
-        
-//        labelFirst.text = "MIND"
-//        labelFirst.font = UIFont(name: "HelveticaNeue-Bold", size: 100.0)
-//        labelFirst.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-//        labelFirst.minimumScaleFactor = 0.01
-//        labelFirst.numberOfLines = 0
-//        labelFirst.textAlignment = .center
-//        view.addSubview(labelFirst)
-//
-//        let labelSecond = UILabel()
-//        labelSecond.text = "MARATHON"
-//        labelSecond.font = UIFont(name: "HelveticaNeue-Bold", size: 45.0)
-//        labelSecond.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-//        labelSecond.minimumScaleFactor = 0.00000001
-//        labelSecond.numberOfLines = 0
-//        labelSecond.textAlignment = .center
-//        view.addSubview(labelSecond)
-        
-//        labelStackView.addArrangedSubview(labelFirst)
-//        labelStackView.addArrangedSubview(labelSecond)
-//        labelStackView.axis = .vertical
-//        labelStackView.alignment = .fill
-//        labelStackView.distribution = .fill
-//        labelStackView.spacing = 5
-//        view.addSubview(labelStackView)
+
         
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр".localized(), for: .normal)
