@@ -178,8 +178,8 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     func createConstraints() {
         vStackView.snp.makeConstraints { make in
-            make.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.8)
-            make.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.8)
+            make.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            make.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
             make.centerX.equalTo(self.view)
             make.centerY.equalTo(self.view)
         }
@@ -187,7 +187,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameControllerView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
         }
         
         gameControllerStackView.snp.makeConstraints { maker in
@@ -204,9 +204,9 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
         gameStatusBarView.snp.makeConstraints { make in
             make.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.05)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.view.snp.bottom).offset(-70)
+            make.bottom.equalTo(self.view.snp.bottom).inset(20)
         }
         
         gameStatusStackView.snp.makeConstraints { make in
@@ -216,17 +216,21 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func createButton(tag: Int) -> UIButton {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
+        button.tag = tag
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
+        button.backgroundColor = UIColor(named: "gameElementColor")
+        button.isUserInteractionEnabled = false
+        return button
+    }
+    
     func fillStackViews() {
         var counter = 1
         var tag = 0
         for _ in counter...3 {
-            let button = UIButton()
-            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
-            button.tag = tag
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
-            button.backgroundColor = UIColor(named: "gameElementColor")
-            button.isUserInteractionEnabled = false
-            
+            let button = createButton(tag: tag)
             hStackViewFirst.addArrangedSubview(button)
             buttonBoard[0][tag] = button
             counter += 1
@@ -234,13 +238,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         }
         counter = 1
         for _ in counter...3 {
-            let button = UIButton()
-            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
-            button.tag = tag
-            button.backgroundColor = UIColor(named: "gameElementColor")
-            button.isUserInteractionEnabled = false
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
-            
+            let button = createButton(tag: tag)
             hStackViewSecond.addArrangedSubview(button)
             buttonBoard[1][tag-3] = button
             counter += 1
@@ -248,20 +246,14 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         }
         counter = 1
         for _ in counter...3 {
-            let button = UIButton()
-            button.addTarget(self, action: #selector(playerMove), for: .touchUpInside)
-            button.tag = tag
-            button.backgroundColor = UIColor(named: "gameElementColor")
-            button.isUserInteractionEnabled = false
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 60, weight: .bold)
-            
+            let button = createButton(tag: tag)
             hStackViewThird.addArrangedSubview(button)
             buttonBoard[2][tag-6] = button
             counter += 1
             tag += 1
         }
     }
-    //MARK: - Field Controls
+    // MARK: - Field Controls
     func openGameField() {
         for row in buttonBoard {
             for button in row {
@@ -382,9 +374,8 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     func setComputerTurn(row: Int, col: Int) {
         self.computerRow = row
         self.computerCol = col
-        
         computerTurn()
-      
+
         setCountdownTimer()
         board[row][col] = "O"
     }
@@ -418,16 +409,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     func drawUserTurn(row: Int, col: Int) {
         stepCount += 1
         buttonBoard[row][col].setImage(UIImage(named: "X"), for: .normal)
+        buttonBoard[row][col].subviews.first?.contentMode = .scaleAspectFit
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
     
     func drawComputerTurn(row: Int, col: Int) {
-        buttonBoard[row][col].setImage(UIImage(named: "O"), for: .normal)
+        let image = UIImage(named: "O")
+        buttonBoard[row][col].setImage(image, for: .normal)
         buttonBoard[row][col].isUserInteractionEnabled = false
     }
     
-   
-    //MARK: - Game Controls
+    // MARK: - Game Controls
     
     func createTimer() {
         stopwatch = Timer.scheduledTimer(timeInterval: 1,

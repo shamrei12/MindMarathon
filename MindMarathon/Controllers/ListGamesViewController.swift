@@ -106,10 +106,8 @@ extension ListGamesViewController: UITableViewDataSource {
             cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
         } else if indexPath.row == 1 {
             cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
-            
         } else if indexPath.row == 2 {
             cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
-            
         } else if indexPath.row == 3 {
             cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
         } else if indexPath.row == 4 {

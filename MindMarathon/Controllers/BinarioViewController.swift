@@ -69,7 +69,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -326,7 +326,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
-        
     }
     
     func makeAnswer(mass: [[Int]]) -> Bool {

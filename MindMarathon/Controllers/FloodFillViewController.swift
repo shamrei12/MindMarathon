@@ -42,28 +42,36 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         createUI()
     }
     
-    func createUI() {
-        guard let firstColor = colorMass.first else {return}
-        selectedColor = firstColor
-        
-        panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .clear
-        view.addSubview(panelControllView)
-        
+    func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
         levelButton.setTitle("5", for: .normal)
+        levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
-        
+    }
+    
+    func playButtonCreated() {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
         view.addSubview(playButton)
+    }
+    
+    func panelControlCreated() {
+        levelButtonCreated()
+        playButtonCreated()
         
+        panelControllView.layer.cornerRadius = 10
+        panelControllView.backgroundColor = .clear
+        view.addSubview(panelControllView)
+
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -72,17 +80,27 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         view.addSubview(panelControllStackView)
         
         panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(15)
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(30)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
         }
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
+    }
+    
+    func createUI() {
+        
+        guard let firstColor = colorMass.first else {return}
+        selectedColor = firstColor
+        
+        panelControlCreated()
+        
         gameView.layer.cornerRadius = 10
         gameView.backgroundColor = UIColor(named: "gameElementColor")
         view.addSubview(gameView)
         gameView.snp.makeConstraints { maker in
+            maker.top.equalTo(panelControllView.snp.bottom).inset(100)
             maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
             maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
             maker.centerX.equalTo(self.view)
@@ -124,7 +142,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
         
         colorStackView.snp.makeConstraints { maker in
-            maker.left.right.bottom.top.equalTo(colorView).inset(0.00001)
+            maker.left.right.bottom.top.equalTo(colorView).inset(0.001)
         }
     }
     
