@@ -95,10 +95,10 @@ class BinarioViewController: UIViewController, AlertDelegate {
         checkResultButton.backgroundColor = UIColor(named: "gameElementColor")
         checkResultButton.setTitle("Проверить", for: .normal)
         checkResultButton.setTitleColor(.label, for: .normal)
-        checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+        checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
         checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        checkResultButton.titleLabel!.minimumScaleFactor = 0.5
+        checkResultButton.titleLabel!.minimumScaleFactor = 0.1
         checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(checkResultButton)
         
@@ -106,9 +106,9 @@ class BinarioViewController: UIViewController, AlertDelegate {
         clearMoves.backgroundColor = UIColor(named: "gameElementColor")
         clearMoves.setTitle("Очистить", for: .normal)
         clearMoves.setTitleColor(.label, for: .normal)
-        clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 35)
+        clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        clearMoves.titleLabel!.minimumScaleFactor = 0.5
+        clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
         clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(clearMoves)
