@@ -32,6 +32,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
     let playButton = UIButton()
+    var game: FloodFillViewModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -229,19 +230,18 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             let currentColor = cells[0][0].backgroundColor
             
             if currentColor != selectedColor {
-                FloodFillViewModel.shared.countStep += 1
+                game?.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
         }
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(FloodFillViewModel.shared.countStep) ходов.")
-            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(FloodFillViewModel.shared.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(game?.gameResult() ?? "") ходов.")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(game?.gameResult() ?? "")", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
-    
     
     func fillCell(row: Int, col: Int, color: UIColor, currentColor: UIColor) {
         // Проверяем, что ячейка находится в пределах игрового поля
@@ -308,6 +308,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
+        game = FloodFillViewModel(countStep: 0)
         let size = levelButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
         createGamePlace(sizePlace: gridSize)
@@ -368,7 +369,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         isContinuePlaying = false
         isStartGame = false
-        FloodFillViewModel.shared.countStep = 0
+        game?.countStep = 0
         alertView.removeFromSuperview()
     }
     
@@ -378,6 +379,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle(FloodFillViewModel.shared.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+        sender.setTitle(game?.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
     }
 }

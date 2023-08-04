@@ -13,6 +13,7 @@ class BullCowViewModel {
         let instance = BullCowViewModel()
         return instance
     }()
+    
     var isStartGame = false
     var isContinueGame = false
     var stepList = [BullCowProtocol]()
@@ -20,14 +21,8 @@ class BullCowViewModel {
     var bull = 0
     var cow = 0
     
-    func getRulesGame() -> String {
-        let gameRules = "1. Вы выбираете количество цифр в загаданном числе и нажимаете кнопку \"Play\". Игру можно поставить на паузу.\n\n2. Вам предстоит угадать число, выбранное компьютером. Число может начинаться с нуля.\n\n3. Вы делаете попытку, вводя число.\n\n4. Компьютер сообщает вам, сколько цифр в вашей попытке совпадают с загаданным числом и находятся на том же месте (такие цифры называются \"быками\"), а также сколько цифр совпадают с загаданным числом, но находятся на другом месте (такие цифры называются \"коровами\").\n\n5. Вы используете эту информацию для следующей попытки, и так далее, пока не угадаете число.\n\n6. Игра продолжается, пока вы не угадаете загаданное число.\n\n7. Вы можете начать новую игру после окончания предыдущей.".localized()
-        return gameRules
-    }
-    
     func selectMaxLenght(maxLenght: String) -> String {
         var newLenght: Int = Int(maxLenght)!
-        
         if newLenght == 6 {
             newLenght = 2
         } else {
