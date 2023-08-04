@@ -20,11 +20,11 @@ class RulesViewController: UIViewController {
         let rulesLabel = UILabel()
         
         switch numberGame {
-        case 1: gameRules.text = BullCowViewModel.shared.getRulesGame()
-        case 2: gameRules.text = SlovusViewModel.shared.getRulesGame()
-        case 3: gameRules.text = FloodFillViewModel.shared.getRulesGame()
-        case 4: gameRules.text = TicTacToeViewModel.shared.getRulesGame()
-        case 5: gameRules.text = BinarioViewModel.shared.getRulesGame()
+        case 1: gameRules.text = GetRules.bullCow.rules
+        case 2: gameRules.text = GetRules.slovus.rules
+        case 3: gameRules.text = GetRules.floodFill.rules
+        case 4: gameRules.text = GetRules.ticTacToe.rules
+        case 5: gameRules.text = GetRules.binario.rules
         default: print("error")
         }
         
@@ -36,7 +36,7 @@ class RulesViewController: UIViewController {
         
         gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 35.0)
         gameRules.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameRules.minimumScaleFactor = 0.3
+        gameRules.minimumScaleFactor = 0.2
         gameRules.textAlignment = .left
         gameRules.numberOfLines = 0
         gameRules.textColor = .label

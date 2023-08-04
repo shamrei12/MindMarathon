@@ -23,6 +23,8 @@
 		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
 		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
 		D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D829AC312A6D124900A38F6E /* .swiftlint.yml */; };
+		D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC342A7D52B000A38F6E /* Backgroungs.swift */; };
+		D829AC382A7D5BC600A38F6E /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC372A7D5BC600A38F6E /* GameRules.swift */; };
 		D82FB1EC2A626A1000F725B5 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82FB1EB2A626A1000F725B5 /* Localization.swift */; };
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
@@ -71,6 +73,8 @@
 		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
 		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D829AC312A6D124900A38F6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D829AC342A7D52B000A38F6E /* Backgroungs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backgroungs.swift; sourceTree = "<group>"; };
+		D829AC372A7D5BC600A38F6E /* GameRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		D82FB1EB2A626A1000F725B5 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
+				D829AC362A7D5BB200A38F6E /* Helps */,
+				D829AC332A7D527E00A38F6E /* Settings */,
 				D83161A12A1CD29300087769 /* Dictionary */,
 				D882215F2A12A81800531EED /* Manager */,
 				D826CF372A115F1500263CEB /* Protocols */,
@@ -245,6 +251,22 @@
 				D826CF382A11600300263CEB /* Protocols.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D829AC332A7D527E00A38F6E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D829AC342A7D52B000A38F6E /* Backgroungs.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D829AC362A7D5BB200A38F6E /* Helps */ = {
+			isa = PBXGroup;
+			children = (
+				D829AC372A7D5BC600A38F6E /* GameRules.swift */,
+			);
+			path = Helps;
 			sourceTree = "<group>";
 		};
 		D83161A12A1CD29300087769 /* Dictionary */ = {
@@ -451,6 +473,7 @@
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
+				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
@@ -460,6 +483,7 @@
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */,
 				D826CF392A11600300263CEB /* Protocols.swift in Sources */,
+				D829AC382A7D5BC600A38F6E /* GameRules.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
