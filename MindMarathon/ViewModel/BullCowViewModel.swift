@@ -8,7 +8,6 @@
 import Foundation
 
 class BullCowViewModel {
-    
     static var shared: BullCowViewModel = {
         let instance = BullCowViewModel()
         return instance

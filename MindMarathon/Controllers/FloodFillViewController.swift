@@ -32,7 +32,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
     let playButton = UIButton()
-    var game: FloodFillViewModel? = nil
+    var game: FloodFillViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -237,8 +237,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(game?.gameResult() ?? "") ходов.")
-            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(game?.gameResult() ?? "")", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(game.gameResult()) ходов.")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(game.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -332,7 +332,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
     }
-    
     
     func createAlertMessage(description: String) {
         UIView.animate(withDuration: 0.1) {

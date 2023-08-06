@@ -23,7 +23,6 @@ class MenuViewController: UIViewController {
         imageView.image = UIImage(named: "labelGame")
         view.addSubview(imageView)
 
-        
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр".localized(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
