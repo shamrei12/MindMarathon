@@ -10,7 +10,9 @@ import SnapKit
 
 class ListGamesViewController: UIViewController {
     let tableView = UITableView()
-    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
+//    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
+    
+    let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вы должны угадать загаданное компьютером число", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача первым  выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель правильно расставить синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,40 +100,47 @@ extension ListGamesViewController: UITableViewDataSource {
     }
     
     private func configure(cell: ListGameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let index = Int(indexPath.row)
-        let countGame = gameList[index]
-        cell.layer.borderColor = UIColor.clear.cgColor
-        cell.layer.borderWidth = 10
-        if indexPath.row == 0 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
-        } else if indexPath.row == 1 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
-        } else if indexPath.row == 2 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
-        } else if indexPath.row == 3 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
-        } else if indexPath.row == 4 {
-            cell.backgroundView = UIImageView(image: UIImage(named: "BinarioCell"))
-        }
+        //        let index = Int(indexPath.row)
+        //        let countGame = gameList[index]
+        //        cell.layer.borderColor = UIColor.clear.cgColor
+        //        cell.layer.borderWidth = 10
+        //        if indexPath.row == 0 {
+        //            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
+        //        } else if indexPath.row == 1 {
+        //            cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
+        //        } else if indexPath.row == 2 {
+        //            cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
+        //        } else if indexPath.row == 3 {
+        //            cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
+        //        } else if indexPath.row == 4 {
+        //            cell.backgroundView = UIImageView(image: UIImage(named: "BinarioCell"))
+        //        }
+        //        return cell
+        //    }
+        
+        cell.gameNameLabel.text = gameList[indexPath.row].gameName
+        cell.createdByLabel.text = "by \(gameList[indexPath.row].createdBy)"
+        cell.aboutGameLabel.text = gameList[indexPath.row].aboutGame
+        cell.gameImageView.image = UIImage(named: "bull")
         return cell
     }
 }
-
-extension ListGamesViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let tableViewWidth = tableView.frame.width
-        let height = tableViewWidth / 3.308641975308642
-        return height
-    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0: bullCowButtonTapped()
-        case 1: slovusButtonTapped()
-        case 2: floodFillTapped()
-        case 3: ticTacToeTapped()
-        case 4: binarioTapped()
-        default: print("Default")
+    extension ListGamesViewController: UITableViewDelegate {
+            func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+                let tableViewWidth = tableView.frame.width
+                let height = tableViewWidth / 2.5
+                return height
+            }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            switch indexPath.row {
+            case 0: bullCowButtonTapped()
+            case 1: slovusButtonTapped()
+            case 2: floodFillTapped()
+            case 3: ticTacToeTapped()
+            case 4: binarioTapped()
+            default: print("Default")
+            }
         }
     }
-}

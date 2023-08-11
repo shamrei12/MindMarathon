@@ -16,7 +16,6 @@ class SlovusViewModel {
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
     
-    
     private static func loadDictionaryPuzzleWord() -> Set<String> {
         if let path = Bundle.main.path(forResource: "singular", ofType: ""),
             let contents = try? String(contentsOfFile: path) {
@@ -57,8 +56,6 @@ class SlovusViewModel {
         return String(newLenght)
     }
     
-//    let words = [ "карта", "кухня", "книга", "кровь", "кость", "город", "фильм", "птица", "комод",  "цветы", "чайка", "талия",  "леска", "ручка", "крыша", "дурак", "трава", "глаза", "крест", "свеча", "купец",  "полет", "рюмка", "робот", "котел", "шахта", "берег", "барон", "шпага", "голос", "сосна", "трава", "камин", "пряжа", "шарик", "мужик", "сапог", "факел", "музей", "труба", "сетка", "ворот"]
-    
     func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()
         for i in dictionaryPuzzleWord {
@@ -71,7 +68,6 @@ class SlovusViewModel {
         
     }
     
-    //
     func replaceLetter(userString: String) -> String {
         var newWord = String()
         for i in userString {
@@ -125,6 +121,4 @@ class SlovusViewModel {
         
         return result
     }
-
 }
-

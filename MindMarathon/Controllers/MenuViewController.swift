@@ -13,16 +13,29 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = CustomColor.viewColor.color
         creatingUI()
-        self.view.backgroundColor = UIColor(named: "viewColor")
     }
     
     func creatingUI() {
-
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "labelGame")
-        view.addSubview(imageView)
-
+        let labelStackView = UIStackView()
+        let firstLabel = UILabel()
+        let secondLabel = UILabel()
+        
+        firstLabel.text = "MIND"
+        firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 95.0)
+        
+        secondLabel.text = "MARATHON"
+        secondLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 43.0)
+        
+        labelStackView.addArrangedSubview(firstLabel)
+        labelStackView.addArrangedSubview(secondLabel)
+        labelStackView.axis = .vertical
+        labelStackView.alignment = .center
+        labelStackView.distribution = .fill
+        labelStackView.spacing = 2
+        view.addSubview(labelStackView)
+        
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр".localized(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
@@ -54,10 +67,8 @@ class MenuViewController: UIViewController {
         buttonStackView.addArrangedSubview(whiteBoard)
         view.addSubview(buttonStackView)
         
-        imageView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide).inset(0.01)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.40)
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.50)
+        labelStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
             maker.centerX.equalToSuperview()
         }
         
