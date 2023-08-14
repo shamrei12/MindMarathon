@@ -10,7 +10,7 @@ import SnapKit
 
 class ListGamesViewController: UIViewController {
     let tableView = UITableView()
-//    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
+    //    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
     
     let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вы должны угадать загаданное компьютером число", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача первым  выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель правильно расставить синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
     
@@ -34,7 +34,7 @@ class ListGamesViewController: UIViewController {
         tableView.snp.makeConstraints { maker in
             maker.centerX.centerY.equalToSuperview()
             maker.width.equalToSuperview().multipliedBy(0.90)
-            maker.height.equalTo(view.safeAreaLayoutGuide)
+            maker.height.equalToSuperview()
         }
     }
     
@@ -121,26 +121,39 @@ extension ListGamesViewController: UITableViewDataSource {
         cell.gameNameLabel.text = gameList[indexPath.row].gameName
         cell.createdByLabel.text = "by \(gameList[indexPath.row].createdBy)"
         cell.aboutGameLabel.text = gameList[indexPath.row].aboutGame
-        cell.gameImageView.image = UIImage(named: "bull")
+        if indexPath.row == 0 {
+            cell.gameImageView.image = UIImage(named: "bullCowImage")
+        } else if indexPath.row == 1 {
+            cell.gameImageView.image = UIImage(named: "slovusImage")
+        } else if indexPath.row == 2 {
+            cell.gameImageView.image = UIImage(named: "floodFillImage")
+        } else if indexPath.row == 3 {
+            cell.gameImageView.image = UIImage(named: "tikTakToeImage")
+        } else if indexPath.row == 4 {
+            cell.gameImageView.image = UIImage(named: "binarioImage")
+        } else {
+            cell.gameImageView.image = UIImage(named: "bull")
+        }
         return cell
     }
-}
     
-    extension ListGamesViewController: UITableViewDelegate {
-            func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-                let tableViewWidth = tableView.frame.width
-                let height = tableViewWidth / 2.5
-                return height
-            }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            switch indexPath.row {
-            case 0: bullCowButtonTapped()
-            case 1: slovusButtonTapped()
-            case 2: floodFillTapped()
-            case 3: ticTacToeTapped()
-            case 4: binarioTapped()
-            default: print("Default")
-            }
+}
+
+extension ListGamesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let tableViewWidth = tableView.frame.width
+        let height = tableViewWidth / 2.5
+        return height
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: bullCowButtonTapped()
+        case 1: slovusButtonTapped()
+        case 2: floodFillTapped()
+        case 3: ticTacToeTapped()
+        case 4: binarioTapped()
+        default: print("Default")
         }
     }
+}

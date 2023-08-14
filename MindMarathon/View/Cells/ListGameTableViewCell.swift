@@ -25,8 +25,8 @@ class ListGameTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         gameNameStackView.axis = .horizontal
-        gameNameStackView.distribution = .equalCentering
-        gameNameStackView.spacing = 1
+        gameNameStackView.distribution = .fill
+        gameNameStackView.spacing = 5
         containerView.addSubview(gameNameStackView)
         
         gameImageView.contentMode = .scaleAspectFit
@@ -55,13 +55,13 @@ class ListGameTableViewCell: UITableViewCell {
         }
         
         gameNameStackView.snp.makeConstraints { make in
-            make.leading.equalTo(gameImageView.snp.trailing).offset(5)
+            make.leading.equalTo(gameImageView.snp.trailing).offset(10)
             make.top.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
         }
         
         aboutGameLabel.snp.makeConstraints { maker in
-            maker.leading.equalTo(gameImageView.snp.trailing).offset(5)
+            maker.leading.equalTo(gameImageView.snp.trailing).offset(10)
             maker.top.equalTo(gameNameStackView.snp.bottom).offset(5)
             maker.trailing.bottom.equalToSuperview()
         }
