@@ -228,8 +228,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 stackView.spacing = 1
                 massLayer.append(stackView)
                 let textFieldWindow = textFieldWindowCreated()
-                massTextField.append(textFieldWindowCreated())
-                
+                massTextField.append(textFieldWindow)
                 massLayer[i].addArrangedSubview(textFieldWindow)
             }
             

@@ -37,7 +37,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localized(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
-        self.view.backgroundColor = UIColor(named: "viewColor")
+        self.view.backgroundColor = CustomColor.viewColor.color
         createUIElements()
     }
     

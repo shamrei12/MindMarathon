@@ -8,12 +8,12 @@
 import UIKit
 
 class GameTableViewCell: UITableViewCell {
-    let mainView = UIView()
-    let stackView = UIStackView()
-    let gameName = UILabel()
-    let gameResult = UILabel()
-    let gameCount = UILabel()
-    let gameTimer = UILabel()
+    var mainView = UIView()
+    var stackView = UIStackView()
+    var gameName = UILabel()
+    var gameResult = UILabel()
+    var gameCount = UILabel()
+    var gameTimer = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
