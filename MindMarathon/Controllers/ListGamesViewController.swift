@@ -12,7 +12,7 @@ class ListGamesViewController: UIViewController {
     let tableView = UITableView()
     //    let gameList: [[String: String]] = [["Быки и Коровы": "Aliaksei Shamrei"], ["Словус": "Aliaksei Shamrei"], ["Заливка": "Aliaksei Shamrei"], ["Крестики Нолики": "Nikita Shakalov"], ["01": "Aliaksei Shamrei"]]
     
-    let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вы должны угадать загаданное компьютером число", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача первым  выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель правильно расставить синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
+    let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель угадать загаданное компьютером число", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача первым  выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель правильно расставить синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ListGamesViewController: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.centerX.centerY.equalToSuperview()
-            maker.width.equalToSuperview().multipliedBy(0.90)
+            maker.width.equalToSuperview().multipliedBy(0.95)
             maker.height.equalToSuperview()
         }
     }
@@ -100,41 +100,22 @@ extension ListGamesViewController: UITableViewDataSource {
     }
     
     private func configure(cell: ListGameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        //        let index = Int(indexPath.row)
-        //        let countGame = gameList[index]
-        //        cell.layer.borderColor = UIColor.clear.cgColor
-        //        cell.layer.borderWidth = 10
-        //        if indexPath.row == 0 {
-        //            cell.backgroundView = UIImageView(image: UIImage(named: "BullsAndCowsCell"))
-        //        } else if indexPath.row == 1 {
-        //            cell.backgroundView = UIImageView(image: UIImage(named: "SlovusCell"))
-        //        } else if indexPath.row == 2 {
-        //            cell.backgroundView = UIImageView(image: UIImage(named: "FloodFillCell"))
-        //        } else if indexPath.row == 3 {
-        //            cell.backgroundView = UIImageView(image: UIImage(named: "TicTacToeCell"))
-        //        } else if indexPath.row == 4 {
-        //            cell.backgroundView = UIImageView(image: UIImage(named: "BinarioCell"))
-        //        }
-        //        return cell
-        //    }
-        
         cell.gameNameLabel.text = gameList[indexPath.row].gameName
         cell.createdByLabel.text = "by \(gameList[indexPath.row].createdBy)"
         cell.aboutGameLabel.text = gameList[indexPath.row].aboutGame
-        if indexPath.row == 0 {
-            cell.gameImageView.image = UIImage(named: "bullCowImage")
-        } else if indexPath.row == 1 {
-            cell.gameImageView.image = UIImage(named: "slovusImage")
-        } else if indexPath.row == 2 {
-            cell.gameImageView.image = UIImage(named: "floodFillImage")
-        } else if indexPath.row == 3 {
-            cell.gameImageView.image = UIImage(named: "tikTakToeImage")
-        } else if indexPath.row == 4 {
-            cell.gameImageView.image = UIImage(named: "binarioImage")
-        } else {
-            cell.gameImageView.image = UIImage(named: "bull")
-        }
+        cell.gameImageView.image = getImage(index: indexPath.row)
         return cell
+    }
+    
+    func getImage(index: Int) -> UIImage {
+        switch index {
+        case 0: return UIImage(named: "bullCowImage")!
+        case 1: return UIImage(named: "slovusImage")!
+        case 2: return UIImage(named: "floodFillImage")!
+        case 3: return UIImage(named: "tikTakToeImage")!
+        case 4: return UIImage(named: "binarioImage")!
+        default: return UIImage(named: "bull")!
+        }
     }
     
 }

@@ -25,8 +25,8 @@ class ListGameTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         gameNameStackView.axis = .horizontal
-        gameNameStackView.distribution = .fill
-        gameNameStackView.spacing = 5
+        gameNameStackView.distribution = .fillProportionally
+        gameNameStackView.spacing = 1
         containerView.addSubview(gameNameStackView)
         
         gameImageView.contentMode = .scaleAspectFit
@@ -39,13 +39,15 @@ class ListGameTableViewCell: UITableViewCell {
         gameNameStackView.addArrangedSubview(createdByLabel)
         
         aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont.systemFont(ofSize: 14)
+        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        aboutGameLabel.minimumScaleFactor = 0.5
         containerView.addSubview(aboutGameLabel)
     }
     
     func setupConstraints() {
         containerView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 1, bottom: 5, right: 1))
+            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 1, bottom: 5, right: 5))
         }
         
         gameImageView.snp.makeConstraints { maker in
