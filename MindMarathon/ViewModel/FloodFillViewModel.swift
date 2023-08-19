@@ -8,20 +8,16 @@
 import Foundation
 
 class FloodFillViewModel {
-//    static var shared: FloodFillViewModel = {
-//        let instance = FloodFillViewModel()
-//        return instance
-//    }()
+    static var shared: FloodFillViewModel = {
+        let instance = FloodFillViewModel()
+        return instance
+    }()
     
-    var countStep: Int
+    var countStep = 0
     
-    init(countStep: Int) {
-        self.countStep = countStep
-    }
 
     func selectMaxLenght(maxLenght: String) -> String {
         var newLenght: Int = Int(maxLenght)!
-        
         if newLenght == 20 {
             newLenght += 5
         } else if newLenght == 25 {

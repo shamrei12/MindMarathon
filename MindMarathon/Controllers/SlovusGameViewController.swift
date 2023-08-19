@@ -10,32 +10,32 @@ import UIKit
 class SlovusGameViewController: UIViewController, AlertDelegate {
     private var alertView: ResultAlertView!
     private var messegeView: UserMistakeView!
-    var massLayer = [UIStackView]()
-    var contentViewStackView = UIStackView()
-    let panelControllView = UIView()
-    let panelControllStackView = UIStackView()
+    private var massLayer = [UIStackView]()
+    private var contentViewStackView = UIStackView()
+    private let panelControllView = UIView()
+    private let panelControllStackView = UIStackView()
     private var stopwatch = Timer()
     private var isshowMessageAlert: Bool = false
     private var puzzleWord = ""
     private var userWords = ""
-    let playButton = UIButton()
-    let levelButton = UIButton()
-    let numberOfRows = 6
-    var numberOfColumns = 5
-    let containerView = UIView()
-    let textFieldHeight: CGFloat = 50
-    let textFieldWidth: CGFloat = 40
-    let spacing: CGFloat = 20
-    var massTextField = [UITextField]()
-    var firstWordIndex = 0
-    var lastWordIndex = 0
-    var controllerTextField = 0
-    var game: SlovusViewModel!
-    var seconds = 0
-    var isstartGame = false
-    var iscontinuePlaying = false
-    var maxLenght = 5
-    var step = 0
+    private let playButton = UIButton()
+    private let levelButton = UIButton()
+    private let numberOfRows = 6
+    private var numberOfColumns = 5
+    private let containerView = UIView()
+    private let textFieldHeight: CGFloat = 50
+    private let textFieldWidth: CGFloat = 40
+    private let spacing: CGFloat = 20
+    private var massTextField = [UITextField]()
+    private var firstWordIndex = 0
+    private var lastWordIndex = 0
+    private var controllerTextField = 0
+    private var game: SlovusViewModel!
+    private var seconds = 0
+    private var isstartGame = false
+    private var iscontinuePlaying = false
+    private var maxLenght = 5
+    private var step = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +76,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-
+        
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -117,7 +117,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
         return keyBoardView
     }
-
+    
     func sendButtonCreated() -> UIButton {
         let sendWordsButton = UIButton()
         sendWordsButton.setTitle("ОТПРАВИТЬ", for: .normal)
@@ -369,7 +369,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             }
         }
     }
-
+    
     @objc func cancelTapped() {
         if alertView != nil {
             alertView.removeFromSuperview()

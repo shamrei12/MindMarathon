@@ -47,7 +47,6 @@ class SlovusViewModel {
     
     func selectMaxLenght(maxLenght: String) -> String {
         var newLenght: Int = Int(maxLenght)!
-        
         if newLenght == 9 {
             newLenght = 5
         } else {

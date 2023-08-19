@@ -117,13 +117,12 @@ extension ListGamesViewController: UITableViewDataSource {
         default: return UIImage(named: "bull")!
         }
     }
-    
 }
 
 extension ListGamesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewWidth = tableView.frame.width
-        let height = tableViewWidth / 2.5
+        let height = tableViewWidth / 3
         return height
     }
     

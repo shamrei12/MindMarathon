@@ -40,57 +40,29 @@ class BinarioViewController: UIViewController, AlertDelegate {
         createUI()
     }
     
-    func createUI() {
-        // ControlStatusGame
-        panelControllView.layer.cornerRadius = 10
-        panelControllView.backgroundColor = .clear
-        view.addSubview(panelControllView)
-        levelButton.addTarget(self, action: #selector(selectedGridSize), for: .touchUpInside)
+    func levelButtonCreated() {
+        levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
         levelButton.setTitle("4", for: .normal)
+        levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
-        
+    }
+    
+    func playButtonCreated() {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
         view.addSubview(playButton)
-        
-        panelControllStackView.addArrangedSubview(levelButton)
-        panelControllStackView.addArrangedSubview(playButton)
-        panelControllStackView.axis = .horizontal
-        panelControllStackView.spacing = 10
-        panelControllStackView.distribution = .fillEqually
-        view.addSubview(panelControllStackView)
-        
-        panelControllView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
-            maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
-        }
-        
-        panelControllStackView.snp.makeConstraints { maker in
-            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
-        }
-        
-        // GameZone
-        containerView.backgroundColor = UIColor(named: "gameElementColor")
-        containerView.layer.cornerRadius = 10
-        containerView.isUserInteractionEnabled = false
-        
-        view.addSubview(containerView)
-        
-        containerView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
-            maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
-
-        }
-        
+    }
+    
+    func checkResultButtonCreated() {
         checkResultButton.layer.cornerRadius = 10
         checkResultButton.backgroundColor = UIColor(named: "gameElementColor")
         checkResultButton.setTitle("Проверить", for: .normal)
@@ -101,7 +73,9 @@ class BinarioViewController: UIViewController, AlertDelegate {
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
         checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(checkResultButton)
-        
+    }
+    
+    func clearMovesCreated() {
         clearMoves.layer.cornerRadius = 10
         clearMoves.backgroundColor = UIColor(named: "gameElementColor")
         clearMoves.setTitle("Очистить", for: .normal)
@@ -112,7 +86,9 @@ class BinarioViewController: UIViewController, AlertDelegate {
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
         clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
         view.addSubview(clearMoves)
-        
+    }
+    
+    func sendClearStackViewCreated() {
         sendClearStackView.axis = .horizontal
         sendClearStackView.alignment = .fill
         sendClearStackView.distribution = .fillEqually
@@ -128,6 +104,57 @@ class BinarioViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
             maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.1)
         }
+    }
+    
+    func containerCreated() {
+        // GameZone
+        containerView.backgroundColor = UIColor(named: "gameElementColor")
+        containerView.layer.cornerRadius = 10
+        containerView.isUserInteractionEnabled = false
+        
+        view.addSubview(containerView)
+        
+        containerView.snp.makeConstraints { maker in
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
+            maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+        }
+    }
+    
+    func panelControllStackViewCreated() {
+        panelControllView.layer.cornerRadius = 10
+        panelControllView.backgroundColor = .clear
+        view.addSubview(panelControllView)
+        
+        panelControllStackView.addArrangedSubview(levelButton)
+        panelControllStackView.addArrangedSubview(playButton)
+        panelControllStackView.axis = .horizontal
+        panelControllStackView.spacing = 10
+        panelControllStackView.distribution = .fillEqually
+        view.addSubview(panelControllStackView)
+    }
+    
+    func createUI() {
+        levelButtonCreated()
+        playButtonCreated()
+        // ControlStatusGame
+        panelControllStackViewCreated() 
+        
+        panelControllView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+        }
+        
+        panelControllStackView.snp.makeConstraints { maker in
+            maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
+        }
+        
+        containerCreated()
+        checkResultButtonCreated()
+        clearMovesCreated()
+        sendClearStackViewCreated()
     }
     
     func createGamePlace(size: Int) {
@@ -185,12 +212,14 @@ class BinarioViewController: UIViewController, AlertDelegate {
             cells[index][random].isUserInteractionEnabled = false
             let imageBlock = UIImageView()
             imageBlock.image = UIImage(named: "padlock")
-            imageBlock.alpha = 0.3
+            imageBlock.alpha = 0.15
             cells[index][random].addSubview(imageBlock)
             
             imageBlock.snp.makeConstraints { maker in
-                maker.left.top.right.bottom.equalToSuperview().inset(10)
+                maker.centerX.centerY.equalToSuperview()
+                maker.width.height.equalToSuperview().multipliedBy(0.5)
             }
+
         }
         coloringView()
     }
@@ -209,7 +238,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     @objc
-    func selectedGridSize(sender: UIButton) {
+    func selectMaxLenghtTapped(sender: UIButton) {
         sender.setTitle( game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
     }
     
@@ -297,8 +326,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         present(rulesVC, animated: true)
     }
     
-    @objc
-    func handleTap(_ recognizer: UITapGestureRecognizer) {
+    @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
         
         guard let selectedCell = recognizer.view else {
             return
@@ -307,14 +335,16 @@ class BinarioViewController: UIViewController, AlertDelegate {
             return
         }
         
-        if selectedCell.isUserInteractionEnabled {
-            if selectedCell.tag + 1 > 2 {
-                selectedCell.tag = 0
-            } else {
-                selectedCell.tag += 1
-            }
-            makeColor(viewElement: selectedCell)
+        guard selectedCell.isUserInteractionEnabled else {
+            return
         }
+        
+        if selectedCell.tag + 1 > 2 {
+            selectedCell.tag = 0
+        } else {
+            selectedCell.tag += 1
+        }
+        makeColor(viewElement: selectedCell)
     }
     
     @objc

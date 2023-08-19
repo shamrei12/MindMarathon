@@ -32,7 +32,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
     let playButton = UIButton()
-    var game: FloodFillViewModel!
+    var game: FloodFillViewModel = FloodFillViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
+        
     }
     
     func levelButtonCreated() {
@@ -49,7 +50,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
-        levelButton.tintColor = UIColor.label
+        levelButton.tintColor = UIColor.blue
         levelButton.backgroundColor = UIColor.tertiaryLabel
         levelButton.layer.cornerRadius = 10
         view.addSubview(levelButton)
@@ -230,7 +231,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             let currentColor = cells[0][0].backgroundColor
             
             if currentColor != selectedColor {
-                game?.countStep += 1
+                game.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
         }
@@ -308,7 +309,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func startNewGame() {
-        game = FloodFillViewModel(countStep: 0)
         let size = levelButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
         createGamePlace(sizePlace: gridSize)
@@ -368,7 +368,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         isContinuePlaying = false
         isStartGame = false
-        game?.countStep = 0
+        game.countStep = 0
         alertView.removeFromSuperview()
     }
     
@@ -378,6 +378,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle(game?.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+        sender.setTitle(game.selectMaxLenght(maxLenght: sender.titleLabel!.text!), for: .normal)
     }
 }
+//
