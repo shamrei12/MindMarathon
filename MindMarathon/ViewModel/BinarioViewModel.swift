@@ -9,11 +9,6 @@ import Foundation
 
 class BinarioViewModel {
     
-    static var shared: BinarioViewModel = {
-        let instance = BinarioViewModel()
-        return instance
-    }()
-    
     var isStartGame = false
     var isContinueGame = false
     var size = 4

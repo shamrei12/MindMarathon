@@ -45,6 +45,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
         levelButton.setTitle("5", for: .normal)
+        game = SlovusViewModel()
     }
     
     func levelButtonCreated() {
@@ -254,7 +255,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Таймер и управление игрой
     @objc
     func selectMaxLenghtTapped() {
-        levelButton.setTitle(SlovusViewModel.shared.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
+        levelButton.setTitle(game.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
     }
     
     func createTimer() {
@@ -297,7 +298,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         seconds = 0
         createTimer()
         levelButton.isEnabled = false
-        puzzleWord = SlovusViewModel.shared.choiceRandomWord(size: maxLenght)
+        puzzleWord = game.choiceRandomWord(size: maxLenght)
         print(puzzleWord)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createPlaceGame()
@@ -386,8 +387,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     @objc func sendWordsTapped() {
         if userWords.count == maxLenght {
-            if SlovusViewModel.shared.checkWord(wordToCheck: userWords) {
-                makeColorTextField(massiveAnswer: SlovusViewModel.shared.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
+            if game.checkWord(wordToCheck: userWords) {
+                makeColorTextField(massiveAnswer: game.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < maxLenght * 6 && lastWordIndex < maxLenght * 6 {
                     controllerTextField = firstWordIndex + Int(levelButton.titleLabel?.text ?? "")!
                     firstWordIndex += Int(levelButton.titleLabel?.text ?? "")!

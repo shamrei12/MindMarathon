@@ -49,7 +49,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.game = TicTacToeViewModel()
+        game = TicTacToeViewModel()
         setupNavigationBar()
         createUIElements()
         createConstraints()

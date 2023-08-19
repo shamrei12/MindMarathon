@@ -9,11 +9,6 @@ import Foundation
 
 class TicTacToeViewModel {
     
-    static var shared: TicTacToeViewModel = {
-        let instance = TicTacToeViewModel()
-        return instance
-    }()
-    
     // Функция для определения хода компьютера
     func computerMove(board: [[String]]) -> (Int, Int)? {
         // Проверяем, есть ли у компьютера возможность выиграть

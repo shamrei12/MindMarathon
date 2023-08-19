@@ -7,12 +7,7 @@
 
 import Foundation
 
-class SlovusViewModel {
-    static var shared: SlovusViewModel = {
-        let instance = SlovusViewModel()
-        return instance
-    }()
-    
+class SlovusViewModel {    
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
     

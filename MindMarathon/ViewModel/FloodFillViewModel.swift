@@ -8,11 +8,6 @@
 import Foundation
 
 class FloodFillViewModel {
-    static var shared: FloodFillViewModel = {
-        let instance = FloodFillViewModel()
-        return instance
-    }()
-    
     var countStep = 0
     
 
@@ -30,5 +25,9 @@ class FloodFillViewModel {
     
     func gameResult() -> String {
         return "\(countStep)"
+    }
+    
+    func restartGame() {
+        countStep = 0
     }
 }

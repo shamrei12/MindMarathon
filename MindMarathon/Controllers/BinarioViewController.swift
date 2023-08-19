@@ -133,13 +133,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         panelControllStackView.spacing = 10
         panelControllStackView.distribution = .fillEqually
         view.addSubview(panelControllStackView)
-    }
-    
-    func createUI() {
-        levelButtonCreated()
-        playButtonCreated()
-        // ControlStatusGame
-        panelControllStackViewCreated() 
         
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
@@ -150,7 +143,12 @@ class BinarioViewController: UIViewController, AlertDelegate {
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
-        
+    }
+    
+    func createUI() {
+        levelButtonCreated()
+        playButtonCreated()
+        panelControllStackViewCreated()
         containerCreated()
         checkResultButtonCreated()
         clearMovesCreated()

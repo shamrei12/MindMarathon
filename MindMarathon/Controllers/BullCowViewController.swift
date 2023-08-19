@@ -260,7 +260,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         if alertView != nil {
             alertView.removeFromSuperview()
         }
-        BullCowViewModel.shared.stepList.removeAll()
+        game.stepList.removeAll()
         tableview.reloadData()
         self.dismiss(animated: true)
     }
@@ -317,6 +317,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         maxLenght = Int((levelButton.titleLabel?.text)!)!
         levelButton.isEnabled = false
         computerDiggit = game.makeNumber(maxLenght: maxLenght)
+        print(computerDiggit)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
     
@@ -358,10 +359,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
             if userDiggitLabel.text?.count == maxLenght {
                 game.comparisonNumber(game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
                 
-                BullCowViewModel.shared.stepList.append(BullCowModel(size: maxLenght, bull: game.bull, cow: game.cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
+                    game.stepList.append(BullCowModel(size: maxLenght, bull: game.bull, cow: game.cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
                 userDiggitLabel.text = ""
                 
-                let lastIndexPath = IndexPath(row: BullCowViewModel.shared.stepList.count - 1, section: 0)
+                let lastIndexPath = IndexPath(row: game.stepList.count - 1, section: 0)
                 tableview.insertRows(at: [lastIndexPath], with: .automatic)
                 tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
                 countStep += 1
@@ -390,7 +391,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         pauseGame()
         timerLabel.text = "0"
         levelButton.isEnabled = true
-        BullCowViewModel.shared.stepList.removeAll()
+        game.stepList.removeAll()
         tableview.reloadData()
         alertView.removeFromSuperview()
     }
@@ -461,7 +462,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
 // MARK: расширение для tableview
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = BullCowViewModel.shared.stepList.count
+        let count = game.stepList.count
         return count
     }
     
@@ -476,7 +477,7 @@ extension BullCowViewController: UITableViewDataSource {
     }
     
     private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let step = BullCowViewModel.shared.stepList[indexPath.row]
+        let step = game.stepList[indexPath.row]
         cell.gameData = [step]
         cell.createUI()
         cell.backgroundColor = UIColor.clear
