@@ -28,6 +28,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     private var row = [UIView]()
     private var messegeView: UserMistakeView!
     private var game = BinarioViewModel()
+    private var gameLevel: GameLevel!
     
     private var colorMass = [UIColor(hex: 0xb5b5b5), UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
     let checkResultButton = UIButton()
@@ -38,6 +39,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         createUI()
+        gameLevel = GameLevel()
     }
     
     func levelButtonCreated() {
@@ -237,7 +239,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(sender: UIButton) {
-        sender.setTitle( game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.binarioGame)), for: .normal)
     }
     
     // MARK: управление статусом игры

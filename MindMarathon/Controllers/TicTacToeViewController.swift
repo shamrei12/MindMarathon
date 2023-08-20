@@ -8,23 +8,22 @@
 import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
-    
     private var game: TicTacToeViewModel!
     private var alertView: ResultAlertView!
-    var vStackView: UIStackView!
-    var hStackViewFirst: UIStackView!
-    var hStackViewSecond: UIStackView!
-    var hStackViewThird: UIStackView!
-    var gameContainerView: UIView!
-    var gameControllerView: UIView!
-    var gameStatusBarView: UIView!
-    var gameStatusSpinner: UIActivityIndicatorView!
-    var gameStatusPlayerLabel: UILabel!
-    var gameStatusStackView: UIStackView!
-    var playButton: UIButton!
-    var gameControllerStackView: UIStackView!
-    var seconds = 0
-    var stepCount = 0
+    private var vStackView: UIStackView!
+    private var hStackViewFirst: UIStackView!
+    private var hStackViewSecond: UIStackView!
+    private var hStackViewThird: UIStackView!
+    private var gameContainerView: UIView!
+    private var gameControllerView: UIView!
+    private var gameStatusBarView: UIView!
+    private var gameStatusSpinner: UIActivityIndicatorView!
+    private var gameStatusPlayerLabel: UILabel!
+    private var gameStatusStackView: UIStackView!
+    private var playButton: UIButton!
+    private var gameControllerStackView: UIStackView!
+    private var seconds = 0
+    private var stepCount = 0
     private var stopwatch = Timer()
     
     private var computerThinkingTime = 0
@@ -37,10 +36,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     var isStartGame = false
     var iscontinuePlaying = false
     
-    var board: [[String]] =
-    [["","",""],
-     ["","",""],
-     ["","",""]]
+    var board: [[String]] = Array(repeating: Array(repeating: "", count: 3), count: 3)
     
     var buttonBoard: [[UIButton]] = [
         [UIButton(), UIButton(), UIButton()],

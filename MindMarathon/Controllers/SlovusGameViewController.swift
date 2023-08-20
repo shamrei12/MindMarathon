@@ -36,6 +36,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     private var iscontinuePlaying = false
     private var maxLenght = 5
     private var step = 0
+    private var gameLevel: GameLevel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         createUI()
         levelButton.setTitle("5", for: .normal)
         game = SlovusViewModel()
+        gameLevel = GameLevel()
     }
     
     func levelButtonCreated() {
@@ -255,7 +257,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Таймер и управление игрой
     @objc
     func selectMaxLenghtTapped() {
-        levelButton.setTitle(game.selectMaxLenght(maxLenght: levelButton.titleLabel?.text ?? ""), for: .normal)
+        levelButton.setTitle(String(gameLevel.getLevel(level: Int(levelButton.titleLabel!.text!)!, step: 1, curentGame: CurentGame.slovusGame)), for: .normal)
     }
     
     func createTimer() {

@@ -33,6 +33,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var selectedColor = UIColor()
     let playButton = UIButton()
     var game: FloodFillViewModel = FloodFillViewModel()
+    private var gameLevel: GameLevel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
-        
+        gameLevel = GameLevel()
     }
     
     func levelButtonCreated() {
@@ -378,7 +379,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle(game.selectMaxLenght(maxLenght: sender.titleLabel!.text!), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.floodFillGame)), for: .normal)
     }
 }
 //

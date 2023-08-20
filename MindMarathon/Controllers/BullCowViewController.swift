@@ -29,6 +29,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var messegeView: UserMistakeView!
     private var alertView: ResultAlertView!
     private var game: BullCowViewModel!
+    private var gameLevel: GameLevel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         userDiggitLabel.text = ""
         self.view.backgroundColor = CustomColor.viewColor.color
         createUIElements()
+        gameLevel = GameLevel()
     }
     
     func settingTableView() {
@@ -275,7 +277,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(_ sender: UIButton) {
-        maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
+//        maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
+//        sender.setTitle(String(maxLenght), for: .normal)
+        maxLenght = gameLevel.getLevel(level: Int(sender.titleLabel?.text ?? "") ?? 2, step: 1, curentGame: CurentGame.bullCowGame)
         sender.setTitle(String(maxLenght), for: .normal)
     }
     

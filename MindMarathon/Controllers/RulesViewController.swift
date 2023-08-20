@@ -51,7 +51,5 @@ class RulesViewController: UIViewController {
             maker.top.equalTo(rulesLabel.snp.bottom).inset(-10)
             maker.left.right.bottom.equalToSuperview().inset(20)
         }
-        
     }
-
 }
