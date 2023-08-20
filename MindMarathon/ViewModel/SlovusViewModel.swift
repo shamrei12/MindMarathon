@@ -40,16 +40,6 @@ class SlovusViewModel {
         return Set()
     }
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        if newLenght == 9 {
-            newLenght = 5
-        } else {
-            newLenght += 1
-        }
-        return String(newLenght)
-    }
-    
     func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()
         for i in dictionaryPuzzleWord {

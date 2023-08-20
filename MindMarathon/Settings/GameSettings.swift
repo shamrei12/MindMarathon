@@ -45,6 +45,5 @@ struct GameLevel {
                 return level + step
             }
         }
-        
     }
 }

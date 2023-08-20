@@ -94,7 +94,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     func createUI() {
         
-        guard let firstColor = colorMass.first else {return}
+        guard let firstColor = colorMass.first else { return }
         selectedColor = firstColor
         
         panelControlCreated()
@@ -123,11 +123,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             colorButton.backgroundColor = UIColor(cgColor: colorMass[index].cgColor)
             colorButton.layer.cornerRadius = 10
             colorButton.tag = index
-
-            if index == 0 {
-                colorButton.layer.borderColor = UIColor.label.cgColor
-                colorButton.layer.borderWidth = 2
-            }
             colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
             view.addSubview(colorButton)
             colorButton.snp.makeConstraints { maker in
@@ -226,8 +221,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             }
             
             selectedColor = colorMass[sender.tag]
-            sender.layer.borderColor = UIColor.label.cgColor
-            sender.layer.borderWidth = 2
             
             let currentColor = cells[0][0].backgroundColor
             

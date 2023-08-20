@@ -13,17 +13,6 @@ class BinarioViewModel {
     var isContinueGame = false
     var size = 4
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        
-        if newLenght == 8 {
-            newLenght = 4
-        } else {
-            newLenght += 2
-        }
-        return String(newLenght)
-    }
-    
     // функция случайного числа
     func makeRandomDiggit(min: Int, max: Int) -> Int {
         return Int.random(in: min...max)

@@ -395,7 +395,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         pauseGame()
         timerLabel.text = "0"
         levelButton.isEnabled = true
-        game.stepList.removeAll()
+//        game.stepList.removeAll()
         tableview.reloadData()
         alertView.removeFromSuperview()
     }

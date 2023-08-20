@@ -15,16 +15,6 @@ class BullCowViewModel {
     var bull = 0
     var cow = 0
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        if newLenght == 6 {
-            newLenght = 2
-        } else {
-            newLenght += 1
-        }
-        return String(newLenght)
-    }
-    
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
         var result: [Int] = []
         while result.count < maxLenght {
