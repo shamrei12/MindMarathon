@@ -29,8 +29,8 @@ class BullCowViewModel {
     func  comparisonNumber(_ userDigg: [Int], _ computerNumber: [Int]) {
         var bullCount = 0
         var cowCount = 0
-        for (i, _) in userDigg.enumerated() {
-            for (j, _) in computerNumber.enumerated() {
+        for i in 0..<userDigg.count {
+            for j in 0..<computerNumber.count {
                 if userDigg[i] == computerNumber[j] && i == j {
                     bullCount += 1
                 } else if userDigg[i] == computerNumber[j] && i != j {

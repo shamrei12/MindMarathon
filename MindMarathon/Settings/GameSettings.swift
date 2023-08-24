@@ -25,10 +25,10 @@ struct GameLevel {
             let result = level + step > 9 ? 5 : level + step
             return result
         case .floodFillGame:
-            if level + step > 20 {
-                return 25
-            } else if level == 25 {
+            if level == 25 {
                 return 5
+            } else if level + step > 20 {
+                return 25
             } else {
                 return level + step
             }

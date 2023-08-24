@@ -42,12 +42,10 @@ class SlovusViewModel {
     
     func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()
-        for i in dictionaryPuzzleWord {
-            if i.count == size {
+        for i in dictionaryPuzzleWord where i.count == size {
                 wordArray.append(i)
-            }
         }
-        var randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
+        let randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
         return randomWord.count == size ? randomWord : choiceRandomWord(size: size)
         
     }
@@ -87,8 +85,7 @@ class SlovusViewModel {
         }
         
         // Проверяем буквы не на своем месте (1)
-        for (index, letter) in newUser.enumerated() {
-            if result[index] == 0 {
+        for (index, letter) in newUser.enumerated() where result[index] == 0 {
                 // Ищем первое упоминание буквы в загаданном слове
                 if let puzzleIndex = puzzleWord.firstIndex(of: letter)?.encodedOffset, !usedIndexes.contains(puzzleIndex) {
                     result[index] = 1
@@ -100,9 +97,7 @@ class SlovusViewModel {
                         userLetterCounts.removeValue(forKey: letter)
                     }
                 }
-            }
         }
-        
         return result
     }
 }
