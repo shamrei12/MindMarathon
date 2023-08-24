@@ -32,16 +32,20 @@ class ListGameTableViewCell: UITableViewCell {
         gameImageView.contentMode = .scaleAspectFit
         containerView.addSubview(gameImageView)
         
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 14.0)
-        createdByLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 10.0)
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24.0)
+        gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        gameNameLabel.minimumScaleFactor = 0.1
+        createdByLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        createdByLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        createdByLabel.minimumScaleFactor = 0.1
         
         gameNameStackView.addArrangedSubview(gameNameLabel)
         gameNameStackView.addArrangedSubview(createdByLabel)
         
         aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18.0)
+        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 40.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.5
+        aboutGameLabel.minimumScaleFactor = 0.2
         containerView.addSubview(aboutGameLabel)
     }
     

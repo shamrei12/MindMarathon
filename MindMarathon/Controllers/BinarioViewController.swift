@@ -239,7 +239,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(sender: UIButton) {
-        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.binarioGame)), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 2, curentGame: CurentGame.binarioGame)), for: .normal)
     }
     
     // MARK: управление статусом игры

@@ -10,8 +10,9 @@ import SnapKit
 
 class ListGamesViewController: UIViewController {
     let tableView = UITableView()
+
     
-    let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель угадать секретное число за минимальное количество ходов", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача первым  выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель правильно расставить синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
+    let gameList: [ListGameProtocol] = [ListGameModel(gameName: "Быки и Коровы", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель угадать секретное число за минимальное количество ходов", imageName: "BullCow"), ListGameModel(gameName: "Словус", createdBy: "Aliaksei Shamrei", aboutGame: "В данной игре Вам необходимо угадать секретное слово за 6 попыток", imageName: "Game"), ListGameModel(gameName: "Заливка", createdBy: "Aliaksei Shamrei", aboutGame: "Ваша цель закрасить поле в один цвет за минимальное количество ходов", imageName: "Game"), ListGameModel(gameName: "Крестики Нолики", createdBy: "Nikita Shakalov", aboutGame: "Ваша задача быстрее соперника выстроить свои символы (крестики) в линию", imageName: "Game"), ListGameModel(gameName: "Бинарио", createdBy: "Aliaksei Shamrei", aboutGame: "Правильно расставьте синие и красные блоки в сетке, удовлетворяя условиям", imageName: "Game")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
