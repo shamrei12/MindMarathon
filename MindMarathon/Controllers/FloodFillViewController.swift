@@ -291,7 +291,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
-        
         if chekPartGame == (false, false) {
             isStartGame = true
             isContinuePlaying = true
@@ -356,7 +355,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
         
         contentViewStackView.removeFromSuperview()
-        
         massLayer.removeAll()
         cells.removeAll()
         pauseGame()

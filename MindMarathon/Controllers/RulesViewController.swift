@@ -36,7 +36,7 @@ class RulesViewController: UIViewController {
         
         gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 35.0)
         gameRules.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameRules.minimumScaleFactor = 0.2
+        gameRules.minimumScaleFactor = 0.5
         gameRules.textAlignment = .left
         gameRules.numberOfLines = 0
         gameRules.textColor = .label

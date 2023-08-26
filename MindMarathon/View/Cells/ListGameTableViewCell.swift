@@ -46,7 +46,7 @@ class ListGameTableViewCell: UITableViewCell {
         aboutGameLabel.numberOfLines = 0
         aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 40.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.3
+        aboutGameLabel.minimumScaleFactor = 0.2
         containerView.addSubview(aboutGameLabel)
         
         gameInfoStackView.addArrangedSubview(gameNameStackView)
