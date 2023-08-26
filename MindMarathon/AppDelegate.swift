@@ -13,33 +13,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let notificationCenter = UNUserNotificationCenter.current()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .alert]) { (granted, error) in
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             guard granted else { return }
             self.notificationCenter.getNotificationSettings { (settings) in
-                print(settings)
                 guard settings.authorizationStatus == .authorized else { return }
-                 
+                self.sendMorningNotification()
+                self.sendEveningNotification()
             }
         }
-        sendNotification()
+        
         return true
     }
     
-    func sendNotification() {
+    func sendMorningNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Mind Marathon"
         content.body = "Быки и коровы начали играть в крестики нолики. Присоединишься?"
         content.sound = UNNotificationSound.default
         
-        let date = Date(timeIntervalSinceNow: 3600)
-        let triggerDaily = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: true)
-        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: trigger)
+        var dateComponents = DateComponents()
+        dateComponents.hour = 9 // Установите желаемое время утреннего уведомления
+        dateComponents.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "morningNotification", content: content, trigger: trigger)
         
         notificationCenter.add(request) { error in
-            print(error?.localizedDescription)
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func sendEveningNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Mind Marathon"
+        content.body = "Буквы начали строить плохие слова. Помешай им?"
+        content.sound = UNNotificationSound.default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 18 // Установите желаемое время вечернего уведомления
+        dateComponents.minute = 0
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "eveningNotification", content: content, trigger: trigger)
+        
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
         }
     }
 }
-
