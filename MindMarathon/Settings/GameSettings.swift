@@ -18,23 +18,15 @@ struct GameLevel {
     
     func getLevel(level: Int, step: Int, curentGame: CurentGame) -> Int {
         switch curentGame {
-        case .bullCowGame:
-            let result = level + step > 6 ? 2 : level + step
-            return result
-        case .slovusGame:
-            let result = level + step > 9 ? 5 : level + step
-            return result
+        case .bullCowGame: return level + step > 6 ? 2 : level + step
+        case .slovusGame: return level + step > 9 ? 5 : level + step
         case .floodFillGame:
             if level == 25 {
                 return 5
-            } else if level + step > 20 {
-                return 25
             } else {
-                return level + step
+                return level + step > 20 ? 25 : level + step
             }
-        case .binarioGame:
-            let result = level + step > 8 ? 4 : level + step
-            return result
+        case .binarioGame: return level + step > 8 ? 4 : level + step
         }
     }
 }

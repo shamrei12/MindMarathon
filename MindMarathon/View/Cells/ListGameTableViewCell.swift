@@ -9,6 +9,7 @@ class ListGameTableViewCell: UITableViewCell {
     let aboutGameLabel = UILabel()
     let gameNameStackView = UIStackView()
     let separationView = UIView()
+    let gameInfoStackView = UIStackView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,7 +33,7 @@ class ListGameTableViewCell: UITableViewCell {
         gameImageView.contentMode = .scaleAspectFit
         containerView.addSubview(gameImageView)
         
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 24.0)
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         gameNameLabel.minimumScaleFactor = 0.1
         createdByLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
@@ -45,8 +46,15 @@ class ListGameTableViewCell: UITableViewCell {
         aboutGameLabel.numberOfLines = 0
         aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 40.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.2
+        aboutGameLabel.minimumScaleFactor = 0.3
         containerView.addSubview(aboutGameLabel)
+        
+        gameInfoStackView.addArrangedSubview(gameNameStackView)
+        gameInfoStackView.addArrangedSubview(aboutGameLabel)
+        gameInfoStackView.axis = .vertical
+        gameInfoStackView.distribution = .fill
+        gameInfoStackView.spacing = 10
+        containerView.addSubview(gameInfoStackView)
     }
     
     func setupConstraints() {
@@ -60,16 +68,11 @@ class ListGameTableViewCell: UITableViewCell {
             maker.width.equalTo(gameImageView.snp.height)
         }
         
-        gameNameStackView.snp.makeConstraints { make in
+        gameInfoStackView.snp.makeConstraints { make in
             make.leading.equalTo(gameImageView.snp.trailing).offset(10)
             make.top.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
-        }
-        
-        aboutGameLabel.snp.makeConstraints { maker in
-            maker.leading.equalTo(gameImageView.snp.trailing).offset(10)
-            maker.top.equalTo(gameNameStackView.snp.bottom).offset(5)
-            maker.trailing.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(10)
         }
     }
 }

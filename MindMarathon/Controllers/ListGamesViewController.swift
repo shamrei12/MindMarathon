@@ -122,7 +122,7 @@ extension ListGamesViewController: UITableViewDataSource {
 extension ListGamesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let tableViewWidth = tableView.frame.width
-        let height = tableViewWidth / 3
+        let height = tableViewWidth / 4
         return height
     }
     
