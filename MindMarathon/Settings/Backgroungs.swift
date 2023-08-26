@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum CustomColor {
     case viewColor
     case gameElement

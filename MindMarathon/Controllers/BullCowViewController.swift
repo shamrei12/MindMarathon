@@ -112,16 +112,16 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let inputFieldStackView = UIStackView()
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
-        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
+        userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 50.0)
         userDiggitLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        userDiggitLabel.minimumScaleFactor = 0.5
+        userDiggitLabel.minimumScaleFactor = 0.7
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
         deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
         
         inputFieldStackView.addArrangedSubview(userDiggitLabel)
         inputFieldStackView.addArrangedSubview(deleteLastButton)
-        inputFieldStackView.distribution = .equalSpacing
+        inputFieldStackView.distribution = .fill
         inputFieldStackView.axis = .horizontal
         
         view.addSubview(inputFieldStackView)
@@ -133,7 +133,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.1)
         }
         userDiggitLabel.snp.makeConstraints { maker in
-            maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.6)
+            maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.8)
         }
         
         return inputFieldStackView
@@ -252,7 +252,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     
         sendDiggitsButton.snp.makeConstraints { maker in
-            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.15)
+            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.2)
         }
     }
     

@@ -92,23 +92,26 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         }
     }
     
+    func gameViewCreated() {
+        gameView.layer.cornerRadius = 10
+        gameView.backgroundColor = UIColor(named: "gameElementColor")
+        view.addSubview(gameView)
+        gameView.snp.makeConstraints { maker in
+            maker.top.equalTo(panelControllView.snp.bottom).inset(100)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.centerX.equalTo(self.view)
+            maker.centerY.equalTo(self.view)
+        }
+    }
+    
     func createUI() {
         
         guard let firstColor = colorMass.first else { return }
         selectedColor = firstColor
         
         panelControlCreated()
-        
-        gameView.layer.cornerRadius = 10
-        gameView.backgroundColor = UIColor(named: "gameElementColor")
-        view.addSubview(gameView)
-        gameView.snp.makeConstraints { maker in
-            maker.top.equalTo(panelControllView.snp.bottom).inset(100)
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.centerX.equalTo(self.view)
-            maker.centerY.equalTo(self.view)
-        }
+        gameViewCreated()
         let colorStackView = UIStackView()
         colorView.backgroundColor = .clear
         colorView.layer.cornerRadius = 10
@@ -375,4 +378,3 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.floodFillGame)), for: .normal)
     }
 }
-//

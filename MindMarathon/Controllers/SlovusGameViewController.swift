@@ -137,11 +137,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         return sendWordsButton
     }
     
-    func createUI() {
-        panelControlCreated()
-        continerCreated()
+    func keyboardCreated() {
         let view = keyboardViewCreated()
-        
         let keyBoardStackView = UIStackView()
         let keyboardLayers = [UIStackView(), UIStackView(), UIStackView()]
         let keyboard = [
@@ -160,13 +157,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                    keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchUpInside)
+                    keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
                 } else {
                     keyboarButton.setTitle(indexKey, for: .normal)
                     keyboarButton.layer.cornerRadius = 5
                     keyboarButton.backgroundColor = UIColor.systemBackground
                     keyboarButton.setTitleColor(UIColor.label, for: .normal)
-                    keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchUpInside)
+                    keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
                 }
                 keyboardRowStackView.addArrangedSubview(keyboarButton)
             }
@@ -191,6 +188,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         keyBoardStackView.snp.makeConstraints { maker in
             maker.edges.equalTo(view).inset(5)
         }
+    }
+    
+    func createUI() {
+        panelControlCreated()
+        continerCreated()
+        keyboardCreated()
     }
     
     func textFieldWindowCreated() -> UITextField {

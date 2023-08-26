@@ -49,7 +49,7 @@ class RulesViewController: UIViewController {
         
         gameRules.snp.makeConstraints { maker in
             maker.top.equalTo(rulesLabel.snp.bottom).inset(-10)
-            maker.left.right.bottom.equalToSuperview().inset(20)
+            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
 }
