@@ -19,7 +19,6 @@
 		D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF292A10CAA000263CEB /* BullCowViewController.swift */; };
 		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
 		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
-		D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D826CF332A115A2400263CEB /* ResultAlertView.xib */; };
 		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
 		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
 		D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D829AC312A6D124900A38F6E /* .swiftlint.yml */; };
@@ -45,6 +44,7 @@
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
+		D884F74A2A9A2FE500271263 /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D884F7492A9A2FE500271263 /* ResultAlertView.xib */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
 		D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */; };
@@ -71,7 +71,6 @@
 		D826CF292A10CAA000263CEB /* BullCowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewController.swift; sourceTree = "<group>"; };
 		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
-		D826CF332A115A2400263CEB /* ResultAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
 		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
 		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D829AC312A6D124900A38F6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
+		D884F7492A9A2FE500271263 /* ResultAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
@@ -182,6 +182,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D884F7442A9A1F5200271263 /* UserMessageForm */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
 				D826CF212A10C71F00263CEB /* Storyboards */,
@@ -241,8 +242,8 @@
 		D826CF322A1157B900263CEB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D826CF332A115A2400263CEB /* ResultAlertView.xib */,
 				D826CF352A115A3300263CEB /* ResultAlertView.swift */,
+				D884F7492A9A2FE500271263 /* ResultAlertView.xib */,
 				D83161952A1A583400087769 /* UserMistakeView.swift */,
 				D83161972A1A584F00087769 /* UserMistakeView.xib */,
 			);
@@ -300,6 +301,13 @@
 				D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D884F7442A9A1F5200271263 /* UserMessageForm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UserMessageForm;
 			sourceTree = "<group>";
 		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
@@ -381,10 +389,10 @@
 			files = (
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
 				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
-				D826CF342A115A2400263CEB /* ResultAlertView.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
+				D884F74A2A9A2FE500271263 /* ResultAlertView.xib in Resources */,
 				D86D0A792A28A62800AB6789 /* singular in Resources */,
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
@@ -649,7 +657,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = alexshamrey.MindMarathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -686,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = alexshamrey.MindMarathon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
