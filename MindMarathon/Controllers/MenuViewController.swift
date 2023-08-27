@@ -7,8 +7,10 @@
 
 import UIKit
 import SnapKit
+import MessageUI
 
-class MenuViewController: UIViewController {
+
+class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -39,7 +41,7 @@ class MenuViewController: UIViewController {
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр".localized(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
-        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         startMarathon.titleLabel!.minimumScaleFactor = 0.1
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
@@ -49,11 +51,11 @@ class MenuViewController: UIViewController {
         view.addSubview(startMarathon)
         
         let whiteBoard = UIButton()
-        whiteBoard.setTitle("Статистика игр".localized(), for: .normal)
+        whiteBoard.setTitle("Статистика игр", for: .normal)
         whiteBoard.setTitleColor(.label, for: .normal)
         whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
         whiteBoard.layer.cornerRadius = 10
-        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         whiteBoard.titleLabel!.minimumScaleFactor = 0.1
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
@@ -67,6 +69,17 @@ class MenuViewController: UIViewController {
         buttonStackView.addArrangedSubview(whiteBoard)
         view.addSubview(buttonStackView)
         
+        let buttonHelpsForUser = UIButton()
+        buttonHelpsForUser.setTitle("Обратная связь", for: .normal)
+        buttonHelpsForUser.setTitleColor(.label, for: .normal)
+        buttonHelpsForUser.backgroundColor = UIColor(named: "gameElementColor")
+        buttonHelpsForUser.layer.cornerRadius = 10
+        buttonHelpsForUser.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
+        buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
+        view.addSubview(buttonHelpsForUser)
+        
         labelStackView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
             maker.centerX.equalToSuperview()
@@ -76,6 +89,11 @@ class MenuViewController: UIViewController {
             maker.centerX.centerY.equalToSuperview()
             maker.width.equalToSuperview().multipliedBy(0.90)
             maker.height.equalToSuperview().multipliedBy(0.20)
+        }
+        
+        buttonHelpsForUser.snp.makeConstraints { maker in
+            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.08)
         }
     }
     
@@ -94,4 +112,31 @@ class MenuViewController: UIViewController {
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
-}
+    
+    @objc
+    func userHelpTapped() {
+        if MFMailComposeViewController.canSendMail() {
+              let mailComposer = MFMailComposeViewController()
+              mailComposer.mailComposeDelegate = self
+              mailComposer.setToRecipients(["mind.marathon.help@gmail.com"]) // адрес получателя
+              
+              // Заполнение данных письма
+              mailComposer.setSubject("Сообщение об ошибке")
+              mailComposer.setMessageBody("Текст сообщения", isHTML: false)
+              
+              present(mailComposer, animated: true, completion: nil)
+          } else {
+              // Обработка случая, когда почтовое приложение недоступно
+              let alert = UIAlertController(title: "Ошибка", message: "Невозможно отправить письмо", preferredStyle: .alert)
+              let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+              alert.addAction(okAction)
+              present(alert, animated: true, completion: nil)
+          }
+      }
+      
+      // Метод делегата MFMailComposeViewControllerDelegate, вызывается после отправки или отмены письма
+      func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+          controller.dismiss(animated: true, completion: nil)
+
+        }
+    }
