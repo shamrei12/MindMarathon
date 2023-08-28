@@ -30,13 +30,22 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     private var firstWordIndex = 0
     private var lastWordIndex = 0
     private var controllerTextField = 0
-    private var game: SlovusViewModel!
     private var seconds = 0
     private var isstartGame = false
     private var iscontinuePlaying = false
     private var maxLenght = 5
     private var step = 0
     private var gameLevel: GameLevel!
+    private let viewModel: SlovusViewModel
+    
+    init(viewModel: SlovusViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +55,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
         levelButton.setTitle("5", for: .normal)
-        game = SlovusViewModel()
         gameLevel = GameLevel()
     }
     
@@ -57,8 +65,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
-        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
+        levelButton.layer.shadowColor = UIColor.black.cgColor
+        levelButton.layer.shadowOpacity = 0.5
+        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        levelButton.layer.shadowRadius = 3
         view.addSubview(levelButton)
     }
     
@@ -69,6 +81,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+        playButton.layer.shadowColor = UIColor.black.cgColor
+        playButton.layer.shadowOpacity = 0.5
+        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        playButton.layer.shadowRadius = 4
         view.addSubview(playButton)
     }
     
@@ -90,7 +106,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
         }
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
@@ -114,8 +130,8 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(keyBoardView)
         keyBoardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-10)
-            maker.left.equalToSuperview().inset(10)
-            maker.right.bottom.equalToSuperview().inset(20)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.bottom.equalToSuperview().inset(20)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
         }
         return keyBoardView
@@ -137,6 +153,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         return sendWordsButton
     }
     
+
     func keyboardCreated() {
         let view = keyboardViewCreated()
         let keyBoardStackView = UIStackView()
@@ -149,10 +166,16 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         for (indexRow, row) in keyboard.enumerated() {
             let keyboardRowStackView = UIStackView()
-            keyboardRowStackView.axis = .horizontal
-            keyboardRowStackView.spacing = 5
-            keyboardRowStackView.distribution = .fillEqually
-            
+            if indexRow < 2 {
+                keyboardRowStackView.axis = .horizontal
+                keyboardRowStackView.spacing = 5
+                keyboardRowStackView.distribution = .fillEqually
+            } else {
+                keyboardRowStackView.axis = .horizontal
+                keyboardRowStackView.spacing = 5
+                keyboardRowStackView.distribution = .fillEqually
+            }
+
             for indexKey in row {
                 let keyboarButton = UIButton()
                 if indexKey == "delete" {
@@ -186,10 +209,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         view.addSubview(keyBoardStackView)
         
         keyBoardStackView.snp.makeConstraints { maker in
-            maker.edges.equalTo(view).inset(5)
+            maker.edges.equalTo(view.safeAreaLayoutGuide).inset(5)
         }
     }
-    
+
+
+
     func createUI() {
         panelControlCreated()
         continerCreated()
@@ -260,7 +285,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Таймер и управление игрой
     @objc
     func selectMaxLenghtTapped() {
-        levelButton.setTitle(String(gameLevel.getLevel(level: Int(levelButton.titleLabel!.text!)!, step: 1, curentGame: CurentGame.slovusGame)), for: .normal)
+        levelButton.setTitle(String(gameLevel.getLevel(curentLevel: Int(levelButton.titleLabel!.text!)!, step: 1, curentGame: CurentGame.slovusGame)), for: .normal)
     }
     
     func createTimer() {
@@ -303,7 +328,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         seconds = 0
         createTimer()
         levelButton.isEnabled = false
-        puzzleWord = game.choiceRandomWord(size: maxLenght)
+        puzzleWord = viewModel.choiceRandomWord(size: maxLenght)
         print(puzzleWord)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createPlaceGame()
@@ -384,16 +409,15 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController()
+      let rulesVC = RulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 2)
         present(rulesVC, animated: true)
     }
     
     @objc func sendWordsTapped() {
         if userWords.count == maxLenght {
-            if game.checkWord(wordToCheck: userWords) {
-                makeColorTextField(massiveAnswer: game.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
+            if viewModel.checkWord(wordToCheck: userWords) {
+                makeColorTextField(massiveAnswer: viewModel.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < maxLenght * 6 && lastWordIndex < maxLenght * 6 {
                     controllerTextField = firstWordIndex + Int(levelButton.titleLabel?.text ?? "")!
                     firstWordIndex += Int(levelButton.titleLabel?.text ?? "")!

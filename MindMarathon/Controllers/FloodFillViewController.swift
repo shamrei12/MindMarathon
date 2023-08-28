@@ -32,8 +32,17 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
     let playButton = UIButton()
-    var game: FloodFillViewModel = FloodFillViewModel()
     private var gameLevel: GameLevel!
+    private let viewModel: FloodFillViewModel
+    
+    init(viewModel: FloodFillViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +56,17 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
-        levelButton.setTitle("5", for: .normal)
+        levelButton.setTitle("4", for: .normal)
         levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
-        levelButton.tintColor = UIColor.blue
-        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.tintColor = UIColor.label
+        levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
+        levelButton.layer.shadowColor = UIColor.black.cgColor
+        levelButton.layer.shadowOpacity = 0.5
+        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        levelButton.layer.shadowRadius = 3
         view.addSubview(levelButton)
     }
     
@@ -64,6 +77,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+        playButton.layer.shadowColor = UIColor.black.cgColor
+        playButton.layer.shadowOpacity = 0.5
+        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        playButton.layer.shadowRadius = 4
         view.addSubview(playButton)
     }
     
@@ -85,7 +102,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
         }
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
@@ -106,7 +123,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     func createUI() {
-        
         guard let firstColor = colorMass.first else { return }
         selectedColor = firstColor
         
@@ -156,10 +172,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController()
-        rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 3)
-        present(rulesVC, animated: true)
+//        let rulesVC = RulesViewController()
+//        rulesVC.modalPresentationStyle = .formSheet
+//        rulesVC.rulesGame(numberGame: 3)
+//        present(rulesVC, animated: true)
     }
     
     // MARK: создание поля с игрой
@@ -228,15 +244,15 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             let currentColor = cells[0][0].backgroundColor
             
             if currentColor != selectedColor {
-                game.countStep += 1
+                viewModel.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
         }
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(game.gameResult()) ходов.")
-            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(game.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -365,7 +381,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         isContinuePlaying = false
         isStartGame = false
-        game.countStep = 0
+        viewModel.countStep = 0
         alertView.removeFromSuperview()
     }
     
@@ -375,6 +391,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.floodFillGame)), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(curentLevel: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.floodFillGame)), for: .normal)
     }
 }

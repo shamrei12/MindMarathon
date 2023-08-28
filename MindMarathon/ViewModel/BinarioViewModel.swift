@@ -12,6 +12,12 @@ class BinarioViewModel {
     var isStartGame = false
     var isContinueGame = false
     var size = 4
+    let game: Game
+    
+    init(game: Game) {
+        self.game = game
+    }
+    
     
     // функция случайного числа
     func makeRandomDiggit(min: Int, max: Int) -> Int {

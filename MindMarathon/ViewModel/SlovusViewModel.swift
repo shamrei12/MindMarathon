@@ -7,9 +7,14 @@
 
 import Foundation
 
-class SlovusViewModel {    
+class SlovusViewModel {
+    let game: Game
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+    
+    init(game: Game) {
+        self.game = game
+    }
     
     private static func loadDictionaryPuzzleWord() -> Set<String> {
         if let path = Bundle.main.path(forResource: "singular", ofType: ""),

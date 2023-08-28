@@ -8,7 +8,7 @@
 import UIKit
 
 class TicTacToeViewController: UIViewController, AlertDelegate {
-    private var game: TicTacToeViewModel!
+    private var viewModel: TicTacToeViewModel
     private var alertView: ResultAlertView!
     private var vStackView: UIStackView!
     private var hStackViewFirst: UIStackView!
@@ -20,7 +20,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     private var gameStatusSpinner: UIActivityIndicatorView!
     private var gameStatusPlayerLabel: UILabel!
     private var gameStatusStackView: UIStackView!
-    private var playButton: UIButton!
+    private let playButton = UIButton()
     private var gameControllerStackView: UIStackView!
     private var seconds = 0
     private var stepCount = 0
@@ -43,9 +43,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         [ UIButton(), UIButton(), UIButton()],
         [ UIButton(), UIButton(), UIButton()]]
     
+    init(viewModel: TicTacToeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = TicTacToeViewModel()
         setupNavigationBar()
         createUIElements()
         createConstraints()
@@ -59,7 +67,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     func createUIElements() {
         setupBackgroundColor()
         setupGameControllerView()
-        setupPlayButton()
+        playButtonCreated() 
         setupGameControllerStackView()
         setupGameContainerView()
         setupGameStatusBarView()
@@ -81,13 +89,17 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         view.addSubview(gameControllerView)
     }
     
-    func setupPlayButton() {
-        playButton = UIButton()
+    func playButtonCreated() {
         playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+        playButton.layer.shadowColor = UIColor.black.cgColor
+        playButton.layer.shadowOpacity = 0.5
+        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        playButton.layer.shadowRadius = 4
         view.addSubview(playButton)
     }
     
@@ -183,7 +195,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameControllerView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
         }
         
         gameControllerStackView.snp.makeConstraints { maker in
@@ -284,9 +296,8 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController()
+        let rulesVC = RulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 4)
         present(rulesVC, animated: true)
     }
     
@@ -352,13 +363,13 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         thinkingTimeElapsed = 0
         drawUserTurn(row: row, col: col)
         board[row][col] = "X"
-        let isUserWon = game.checkForWinner(board: board, symbol: "X")
+        let isUserWon = viewModel.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
             createAlertMessage(description: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
-            guard let position = game.computerMove(board: board) else {
+            guard let position = viewModel.computerMove(board: board) else {
                 createAlertMessage(description: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
@@ -391,7 +402,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         
        if thinkingTimeElapsed == computerThinkingTime {
             drawComputerTurn(row: computerRow, col: computerCol)
-           let isComputerWon = game.checkForWinner(board: board, symbol: "O")
+           let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
            if isComputerWon {
                createAlertMessage(description: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))

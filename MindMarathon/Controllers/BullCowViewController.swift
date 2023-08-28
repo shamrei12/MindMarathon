@@ -28,12 +28,20 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var seconds: Int = .zero
     private var messegeView: UserMistakeView!
     private var alertView: ResultAlertView!
-    private var game: BullCowViewModel!
     private var gameLevel: GameLevel!
+    private let viewModel: BullCowViewModel
+    
+    init(viewModel: BullCowViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = BullCowViewModel()
         settingTableView()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localized(), style: .plain, target: self, action: #selector(rulesTapped))
@@ -60,8 +68,12 @@ class BullCowViewController: UIViewController, AlertDelegate {
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
-        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
+        levelButton.layer.shadowColor = UIColor.black.cgColor
+        levelButton.layer.shadowOpacity = 0.5
+        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        levelButton.layer.shadowRadius = 3
         view.addSubview(levelButton)
     }
     
@@ -72,6 +84,10 @@ class BullCowViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+        playButton.layer.shadowColor = UIColor.black.cgColor
+        playButton.layer.shadowOpacity = 0.5
+        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        playButton.layer.shadowRadius = 4
         view.addSubview(playButton)
     }
     
@@ -93,7 +109,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
         }
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
@@ -262,16 +278,15 @@ class BullCowViewController: UIViewController, AlertDelegate {
         if alertView != nil {
             alertView.removeFromSuperview()
         }
-        game.stepList.removeAll()
+        viewModel.stepList.removeAll()
         tableview.reloadData()
         self.dismiss(animated: true)
     }
     
     @objc
     func rulesTapped() {
-        let rulesVC = RulesViewController()
+        let rulesVC = RulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 1)
         present(rulesVC, animated: true)
     }
     
@@ -279,7 +294,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func selectMaxLenghtTapped(_ sender: UIButton) {
 //        maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
 //        sender.setTitle(String(maxLenght), for: .normal)
-        maxLenght = gameLevel.getLevel(level: Int(sender.titleLabel?.text ?? "") ?? 2, step: 1, curentGame: CurentGame.bullCowGame)
+        maxLenght = gameLevel.getLevel(curentLevel: Int(sender.titleLabel?.text ?? "") ?? 2, step: 1, curentGame: CurentGame.bullCowGame)
         sender.setTitle(String(maxLenght), for: .normal)
     }
     
@@ -300,7 +315,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     // MARK: Keyboard
     @objc
     func diggitsTapped(_ sender: UIButton) {
-        if game.isStartGame && game.isContinueGame {
+        if viewModel.isStartGame && viewModel.isContinueGame {
             if userDiggitLabel.text!.count < maxLenght {
                 userDiggitLabel.text! += "\(sender.tag)"
             }
@@ -320,7 +335,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         createTimer()
         maxLenght = Int((levelButton.titleLabel?.text)!)!
         levelButton.isEnabled = false
-        computerDiggit = game.makeNumber(maxLenght: maxLenght)
+        computerDiggit = viewModel.makeNumber(maxLenght: maxLenght)
         print(computerDiggit)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
     }
@@ -338,39 +353,39 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func startGameTapped(_ sender: UIButton) {
-        let chekPartGame = (game.isStartGame, game.isContinueGame)
+        let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         if chekPartGame == (false, false) {
-            game.isStartGame = true
-            game.isContinueGame = true
+            viewModel.isStartGame = true
+            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            game.isContinueGame = false
+            viewModel.isContinueGame = false
             pauseGame()
         } else {
-            game.isContinueGame = true
+            viewModel.isContinueGame = true
             continueGame()
         }
     }
     
     @objc
     func sendDiggitTapped(_ sender: UIButton) {
-        guard game.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
+        guard viewModel.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
             createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры".localized())
             return
         }
         
-        if game.isStartGame {
+        if viewModel.isStartGame {
             if userDiggitLabel.text?.count == maxLenght {
-                game.comparisonNumber(game.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
+                viewModel.comparisonNumber(viewModel.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
                 
-                    game.stepList.append(BullCowModel(size: maxLenght, bull: game.bull, cow: game.cow, userStep: game.createMassive(userDiggit: userDiggitLabel.text!)))
+                viewModel.stepList.append(BullCowModel(size: maxLenght, bull: viewModel.bull, cow: viewModel.cow, userStep: viewModel.createMassive(userDiggit: userDiggitLabel.text!)))
                 userDiggitLabel.text = ""
                 
-                let lastIndexPath = IndexPath(row: game.stepList.count - 1, section: 0)
+                let lastIndexPath = IndexPath(row: viewModel.stepList.count - 1, section: 0)
                 tableview.insertRows(at: [lastIndexPath], with: .automatic)
                 tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
                 countStep += 1
-                checkResult(bull: game.bull)
+                checkResult(bull: viewModel.bull)
             } else {
                 createMistakeMessage(messages: "В веденном Вами числу не хватает цирф".localized())
             }
@@ -380,7 +395,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
-            createAlertMessage(description: "Ура! Загаданное число \(computerDiggit). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
+            createAlertMessage(description: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
             let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
@@ -391,11 +406,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
-        game.restartGame()
+        viewModel.restartGame()
         pauseGame()
         timerLabel.text = "0"
         levelButton.isEnabled = true
-//        game.stepList.removeAll()
+        viewModel.stepList.removeAll()
         tableview.reloadData()
         alertView.removeFromSuperview()
     }
@@ -405,7 +420,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
-        game.restartGame()
+        viewModel.restartGame()
         tableview.reloadData()
         alertView.removeFromSuperview()
         self.dismiss(animated: true)
@@ -466,7 +481,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
 // MARK: расширение для tableview
 extension BullCowViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = game.stepList.count
+        let count = viewModel.stepList.count
         return count
     }
     
@@ -481,7 +496,7 @@ extension BullCowViewController: UITableViewDataSource {
     }
     
     private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let step = game.stepList[indexPath.row]
+        let step = viewModel.stepList[indexPath.row]
         cell.gameData = [step]
         cell.createUI()
         cell.backgroundColor = UIColor.clear

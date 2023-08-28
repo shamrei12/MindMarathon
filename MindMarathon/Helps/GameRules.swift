@@ -7,6 +7,14 @@
 
 import Foundation
 
+protocol Game {
+    var title: String { get }
+    var createdBy: String { get}
+    var descripton: String { get }
+    var rules: String { get }
+    var gameImage: String { get set }
+}
+
 enum GetRules: String {
     case floodFill
     case bullCow

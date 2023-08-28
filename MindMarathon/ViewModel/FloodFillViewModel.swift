@@ -9,6 +9,11 @@ import Foundation
 
 class FloodFillViewModel {
     var countStep = 0
+    let game: Game
+    
+    init(game: Game) {
+        self.game = game
+    }
     
     func gameResult() -> String {
         return "\(countStep)"

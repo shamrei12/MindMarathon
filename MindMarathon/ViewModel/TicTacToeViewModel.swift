@@ -8,6 +8,11 @@
 import Foundation
 
 class TicTacToeViewModel {
+    let game: Game
+    
+    init(game: Game) {
+        self.game = game
+    }
     
     // Функция для определения хода компьютера
     func computerMove(board: [[String]]) -> (Int, Int)? {

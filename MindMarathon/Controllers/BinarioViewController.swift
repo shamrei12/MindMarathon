@@ -27,11 +27,19 @@ class BinarioViewController: UIViewController, AlertDelegate {
     private var cells = [[UIView]]()
     private var row = [UIView]()
     private var messegeView: UserMistakeView!
-    private var game = BinarioViewModel()
+    private var viewModel: BinarioViewModel
     private var gameLevel: GameLevel!
-    
     private var colorMass = [UIColor(hex: 0xb5b5b5), UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
     let checkResultButton = UIButton()
+    
+    init(viewModel: BinarioViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +57,12 @@ class BinarioViewController: UIViewController, AlertDelegate {
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
-        levelButton.backgroundColor = UIColor.tertiaryLabel
+        levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
+        levelButton.layer.shadowColor = UIColor.black.cgColor
+        levelButton.layer.shadowOpacity = 0.5
+        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        levelButton.layer.shadowRadius = 3
         view.addSubview(levelButton)
     }
     
@@ -61,32 +73,44 @@ class BinarioViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
+        playButton.layer.shadowColor = UIColor.black.cgColor
+        playButton.layer.shadowOpacity = 0.5
+        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        playButton.layer.shadowRadius = 4
         view.addSubview(playButton)
     }
     
     func checkResultButtonCreated() {
         checkResultButton.layer.cornerRadius = 10
-        checkResultButton.backgroundColor = UIColor(named: "gameElementColor")
+        checkResultButton.backgroundColor = .systemGreen
         checkResultButton.setTitle("Проверить", for: .normal)
-        checkResultButton.setTitleColor(.label, for: .normal)
-        checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        checkResultButton.setTitleColor(.white, for: .normal)
+        checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
         checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
         checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        checkResultButton.layer.shadowColor = UIColor.black.cgColor
+        checkResultButton.layer.shadowOpacity = 0.5
+        checkResultButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        checkResultButton.layer.shadowRadius = 4
         view.addSubview(checkResultButton)
     }
     
     func clearMovesCreated() {
         clearMoves.layer.cornerRadius = 10
-        clearMoves.backgroundColor = UIColor(named: "gameElementColor")
+        clearMoves.backgroundColor = .systemRed
         clearMoves.setTitle("Очистить", for: .normal)
-        clearMoves.setTitleColor(.label, for: .normal)
-        clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        clearMoves.setTitleColor(.white, for: .normal)
+        clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
         clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        clearMoves.layer.shadowColor = UIColor.black.cgColor
+        clearMoves.layer.shadowOpacity = 0.5
+        clearMoves.layer.shadowOffset = CGSize(width: 1, height: 1)
+        clearMoves.layer.shadowRadius = 4
         view.addSubview(clearMoves)
     }
     
@@ -104,7 +128,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
             maker.left.equalTo(view.safeAreaLayoutGuide.snp.left).inset(10)
             maker.right.equalTo(view.safeAreaLayoutGuide.snp.right).inset(10)
             maker.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(30)
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.1)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.08)
         }
     }
     
@@ -139,7 +163,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         panelControllView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.085)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
         }
         
         panelControllStackView.snp.makeConstraints { maker in
@@ -207,7 +231,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         
         let tagMassive = [1, 2, 1, 2, 1, 2, 1, 2]
         for index in 0..<gridSize {
-            let random = game.makeRandomDiggit(min: 1, max: gridSize - 1)
+            let random = viewModel.makeRandomDiggit(min: 1, max: gridSize - 1)
             cells[index][random].tag = tagMassive[index]
             cells[index][random].isUserInteractionEnabled = false
             let imageBlock = UIImageView()
@@ -239,7 +263,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(sender: UIButton) {
-        sender.setTitle(String(gameLevel.getLevel(level: Int(sender.titleLabel!.text!)!, step: 2, curentGame: CurentGame.binarioGame)), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(curentLevel: Int(sender.titleLabel!.text!)!, step: 2, curentGame: CurentGame.binarioGame)), for: .normal)
     }
     
     // MARK: управление статусом игры
@@ -250,7 +274,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = false
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createGamePlace(size: gridSize)
-        game.size = gridSize
+        viewModel.size = gridSize
     }
     
     func continueGame() {
@@ -265,17 +289,17 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
-        let chekPartGame = (game.isStartGame, game.isContinueGame)
+        let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         
         if chekPartGame == (false, false) {
-            game.isStartGame = true
-            game.isContinueGame = true
+            viewModel.isStartGame = true
+            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            game.isContinueGame = false
+            viewModel.isContinueGame = false
             pauseGame()
         } else {
-            game.isContinueGame = true
+            viewModel.isContinueGame = true
             continueGame()
         }
     }
@@ -320,9 +344,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func rulesTapped() {
-        let rulesVC = RulesViewController()
+        let rulesVC = RulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
-        rulesVC.rulesGame(numberGame: 5)
         present(rulesVC, animated: true)
     }
     
@@ -331,7 +354,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         guard let selectedCell = recognizer.view else {
             return
         }
-        guard game.isContinueGame == true else {
+        guard viewModel.isContinueGame == true else {
             return
         }
         
@@ -349,9 +372,9 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func checkResultTapped() {
-        if game.isStartGame && game.isContinueGame {
+        if viewModel.isStartGame && viewModel.isContinueGame {
             let mass = createMassiveTag()
-            guard !game.checkForZero(array: mass) else {
+            guard !viewModel.checkForZero(array: mass) else {
                 return
             }
             if makeAnswer(mass: mass) {
@@ -363,13 +386,12 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     func makeAnswer(mass: [[Int]]) -> Bool {
-        
-        guard game.uniqueLines(line: mass) else {
+        guard viewModel.uniqueLines(line: mass) else {
             createMistakeMessage(messages: "В одной из строк у Вас ошибка. Проверьте и повторите попытку")
             return false
         }
         
-        guard game.uniqueRows(mass: mass) else {
+        guard viewModel.uniqueRows(mass: mass) else {
             createMistakeMessage(messages: "В одном из столбцов у Вас ошибка. Проверьте и повторите попытку")
             return false
         }
@@ -391,7 +413,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     @objc
     func clearColor() {
-        if game.isStartGame && game.isContinueGame {
+        if viewModel.isStartGame && viewModel.isContinueGame {
             for i in 0..<gridSize {
                 for j in 0..<gridSize {
                     if cells[i][j].isUserInteractionEnabled {
@@ -459,8 +481,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
         pauseGame()
         levelButton.isEnabled = true
-        game.isContinueGame = false
-        game.isStartGame = false
+        viewModel.isContinueGame = false
+        viewModel.isStartGame = false
         stopwatch.invalidate()
         seconds = 0
         clearGame()

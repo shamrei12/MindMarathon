@@ -7,13 +7,18 @@
 
 import Foundation
 
-class BullCowViewModel {    
+class BullCowViewModel {
+    let game: Game
     var isStartGame = false
     var isContinueGame = false
     var stepList = [BullCowProtocol]()
     var countStep = 0
     var bull = 0
     var cow = 0
+    
+    init(game: Game) {
+        self.game = game
+    }
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
         var result: [Int] = []
@@ -57,6 +62,14 @@ class BullCowViewModel {
         var result = [Int]()
         for i in userDiggit {
             result.append(Int(String(i))!)
+        }
+        return result
+    }
+    
+    func remakeComputerNumberForAlert(computerDigit: [Int]) -> String {
+        var result = String()
+        for i in computerDigit {
+            result += String(i)
         }
         return result
     }
