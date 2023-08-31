@@ -48,6 +48,10 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         
         startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
+        startMarathon.layer.shadowColor = UIColor.label.cgColor
+        startMarathon.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        startMarathon.layer.shadowOpacity = 0.2
+        startMarathon.layer.shadowRadius = 3
         view.addSubview(startMarathon)
         
         let whiteBoard = UIButton()
@@ -59,6 +63,10 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         whiteBoard.titleLabel!.minimumScaleFactor = 0.1
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
+        whiteBoard.layer.shadowColor = UIColor.label.cgColor
+        whiteBoard.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        whiteBoard.layer.shadowOpacity = 0.2
+        whiteBoard.layer.shadowRadius = 3
         view.addSubview(whiteBoard)
         
         let buttonStackView = UIStackView()
@@ -70,7 +78,11 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         view.addSubview(buttonStackView)
         
         let buttonHelpsForUser = UIButton()
-        buttonHelpsForUser.setTitle("Обратная связь", for: .normal)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30)
+        let image = UIImage(systemName: "envelope")?.withConfiguration(symbolConfiguration)
+        buttonHelpsForUser.setImage(image, for: .normal)
+
+//        buttonHelpsForUser.setImage(UIImage(systemName: "envelope"), for: .normal)
         buttonHelpsForUser.setTitleColor(.label, for: .normal)
         buttonHelpsForUser.backgroundColor = UIColor(named: "gameElementColor")
         buttonHelpsForUser.layer.cornerRadius = 10
@@ -78,6 +90,10 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
         buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
+        buttonHelpsForUser.layer.shadowColor = UIColor.label.cgColor
+        buttonHelpsForUser.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        buttonHelpsForUser.layer.shadowOpacity = 0.2
+        buttonHelpsForUser.layer.shadowRadius = 3
         view.addSubview(buttonHelpsForUser)
         
         labelStackView.snp.makeConstraints { maker in
@@ -92,8 +108,9 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
         
         buttonHelpsForUser.snp.makeConstraints { maker in
-            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.08)
+            maker.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.09)
+            maker.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.2)
         }
     }
     

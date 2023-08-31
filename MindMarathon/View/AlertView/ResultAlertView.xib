@@ -13,9 +13,20 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ResultAlertView" customModule="MindMarathon" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="390" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QV1-lr-X25">
+                    <rect key="frame" x="125" y="131" width="104" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="envelope" catalog="system" title="Button"/>
+                </button>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="120.61068702290076" y="-224.29577464788733"/>
         </view>
     </objects>
+    <resources>
+        <image name="envelope" catalog="system" width="128" height="93"/>
+    </resources>
 </document>

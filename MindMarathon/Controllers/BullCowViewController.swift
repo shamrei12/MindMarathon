@@ -124,8 +124,17 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func inputFieldCreated() -> UIStackView {
+    func inputFieldCreated() -> UIView {
         let inputFieldStackView = UIStackView()
+        let mainView = UIView()
+        mainView.backgroundColor = UIColor(named: "gameElementColor")
+        mainView.layer.cornerRadius = 10
+        mainView.layer.shadowColor = UIColor.label.cgColor
+        mainView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        mainView.layer.shadowOpacity = 0.2
+        mainView.layer.shadowRadius = 3
+        view.addSubview(mainView)
+        
         userDiggitLabel.tintColor = .label
         userDiggitLabel.textAlignment = .center
         userDiggitLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 50.0)
@@ -138,11 +147,15 @@ class BullCowViewController: UIViewController, AlertDelegate {
         inputFieldStackView.addArrangedSubview(userDiggitLabel)
         inputFieldStackView.addArrangedSubview(deleteLastButton)
         inputFieldStackView.distribution = .fill
+        inputFieldStackView.backgroundColor = .clear
+        inputFieldStackView.layer.cornerRadius = 10
         inputFieldStackView.axis = .horizontal
         
-        view.addSubview(inputFieldStackView)
+        mainView.addSubview(inputFieldStackView)
+        
         inputFieldStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.000001)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.8)
+            maker.edges.equalToSuperview().inset(5)
         }
         
         deleteLastButton.snp.makeConstraints { maker in
@@ -152,29 +165,32 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.width.equalTo(inputFieldStackView.snp.width).multipliedBy(0.8)
         }
         
-        return inputFieldStackView
+        return mainView
     }
     
     func buttonForNumpadCreated(index: Int) -> UIButton {
         let button = UIButton()
         button.tag = index// присваиваем tag кнопке
-        button.backgroundColor = .tertiaryLabel
+        button.backgroundColor = CustomColor.gameElement.color
         button.setTitle(String(index), for: .normal) // присваиваем title кнопке
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
         button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        button.titleLabel!.minimumScaleFactor = 0.5
-        button.tintColor = UIColor.label
+        button.titleLabel!.minimumScaleFactor = 0.7
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
+        button.layer.shadowColor = UIColor.label.cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowRadius = 3
         button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
-        
         return button
     }
     
     func firstLayerNumpadCreated() -> UIStackView {
         let firstLayerStackView = UIStackView()
         firstLayerStackView.distribution = .fillEqually
-        firstLayerStackView.spacing = 10
+        firstLayerStackView.spacing = 15
         let massDiggit = [1, 2, 3, 4, 5]
         var massButton: [UIButton] = []
         for _ in 0..<massDiggit.count {
@@ -193,7 +209,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func secondLayerNumpadCreated() -> UIStackView {
         let secondLayerStackView = UIStackView()
         secondLayerStackView.distribution = .fillEqually
-        secondLayerStackView.spacing = 10
+        secondLayerStackView.spacing = 15
         let massDiggit = [6, 7, 8, 9, 0]
         var massButton: [UIButton] = []
         for _ in 0..<massDiggit.count {
@@ -222,11 +238,16 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func sendButtonCreated() {
         sendDiggitsButton.setTitle("ОТПРАВИТЬ".localized(), for: .normal)
         sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+        sendDiggitsButton.setTitleColor(.label, for: .normal)
         sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         sendDiggitsButton.titleLabel?.minimumScaleFactor = 0.5
-        sendDiggitsButton.backgroundColor = .tertiaryLabel
+        sendDiggitsButton.backgroundColor = CustomColor.gameElement.color
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
+        sendDiggitsButton.layer.shadowColor = UIColor.label.cgColor
+        sendDiggitsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        sendDiggitsButton.layer.shadowOpacity = 0.2
+        sendDiggitsButton.layer.shadowRadius = 3
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
         view.addSubview(sendDiggitsButton)
     }
@@ -250,7 +271,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelInputContollStackView.spacing = 15
         panelIntputControlView.addSubview(panelInputContollStackView)
         panelIntputControlView.layer.cornerRadius = 10
-        panelIntputControlView.backgroundColor = UIColor(named: "gameElementColor")
+        panelIntputControlView.backgroundColor = .clear
         view.addSubview(panelIntputControlView)
         
         tableViewCreated()
@@ -292,9 +313,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     @objc
     func selectMaxLenghtTapped(_ sender: UIButton) {
-//        maxLenght = Int(game.selectMaxLenght(maxLenght: sender.titleLabel?.text ?? ""))!
-//        sender.setTitle(String(maxLenght), for: .normal)
-        maxLenght = gameLevel.getLevel(curentLevel: Int(sender.titleLabel?.text ?? "") ?? 2, step: 1, curentGame: CurentGame.bullCowGame)
+        maxLenght = gameLevel.getLevel(currentLevel: Int(sender.titleLabel?.text ?? "") ?? 2, step: 1, curentGame: CurentGame.bullCowGame)
         sender.setTitle(String(maxLenght), for: .normal)
     }
     

@@ -56,7 +56,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxSizeTapped), for: .touchUpInside)
-        levelButton.setTitle("4", for: .normal)
+        levelButton.setTitle("5", for: .normal)
         levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
@@ -142,6 +142,10 @@ class FloodFillViewController: UIViewController, AlertDelegate {
             colorButton.backgroundColor = UIColor(cgColor: colorMass[index].cgColor)
             colorButton.layer.cornerRadius = 10
             colorButton.tag = index
+            colorButton.layer.shadowColor = UIColor.label.cgColor
+            colorButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+            colorButton.layer.shadowOpacity = 0.2
+            colorButton.layer.shadowRadius = 3
             colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
             view.addSubview(colorButton)
             colorButton.snp.makeConstraints { maker in
@@ -391,6 +395,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     }
     
     @objc func selectMaxSizeTapped(_ sender: UIButton) {
-        sender.setTitle(String(gameLevel.getLevel(curentLevel: Int(sender.titleLabel!.text!)!, step: 1, curentGame: CurentGame.floodFillGame)), for: .normal)
+        sender.setTitle(String(gameLevel.getLevel(currentLevel: Int(sender.titleLabel!.text!)!, step: 5, curentGame: CurentGame.floodFillGame)), for: .normal)
     }
 }

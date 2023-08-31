@@ -143,6 +143,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         sendWordsButton.backgroundColor = UIColor.systemBackground
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
+        sendWordsButton.layer.shadowColor = UIColor.label.cgColor
+        sendWordsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        sendWordsButton.layer.shadowOpacity = 0.2
+        sendWordsButton.layer.shadowRadius = 3
         sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
         view.addSubview(sendWordsButton)
         
@@ -178,8 +182,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
 
             for indexKey in row {
                 let keyboarButton = UIButton()
+                keyboarButton.layer.shadowColor = UIColor.label.cgColor
+                keyboarButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+                keyboarButton.layer.shadowOpacity = 0.2
+                keyboarButton.layer.shadowRadius = 3
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+                    keyboarButton.tintColor = UIColor.black
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
                 } else {
                     keyboarButton.setTitle(indexKey, for: .normal)
@@ -285,7 +294,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     // MARK: Таймер и управление игрой
     @objc
     func selectMaxLenghtTapped() {
-        levelButton.setTitle(String(gameLevel.getLevel(curentLevel: Int(levelButton.titleLabel!.text!)!, step: 1, curentGame: CurentGame.slovusGame)), for: .normal)
+        levelButton.setTitle(String(gameLevel.getLevel(currentLevel: Int(levelButton.titleLabel!.text!)!, step: 1, curentGame: CurentGame.slovusGame)), for: .normal)
     }
     
     func createTimer() {

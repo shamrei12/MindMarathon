@@ -15,12 +15,12 @@ enum CurentGame {
 }
 
 struct GameLevel {
-    func getLevel(curentLevel: Int, step: Int, curentGame: CurentGame) -> Int {
+    func getLevel(currentLevel: Int, step: Int, curentGame: CurentGame) -> Int {
         switch curentGame {
-        case .bullCowGame: return curentLevel + step > 6 ? 2 : curentLevel + step
-        case .slovusGame: return curentLevel + step > 9 ? 5 : curentLevel + step
-        case .floodFillGame: return curentLevel == 25 ? 5 : curentLevel + step > 20 ? 25 : curentLevel + step
-        case .binarioGame: return curentLevel + step > 8 ? 4 : curentLevel + step
+        case .bullCowGame: return currentLevel + step > 6 ? 2 : currentLevel + step
+        case .slovusGame: return currentLevel + step > 9 ? 5 : currentLevel + step
+        case .floodFillGame: return currentLevel == 25 ? 5 : currentLevel + step
+        case .binarioGame: return currentLevel + step > 8 ? 4 : currentLevel + step
         }
     }
 }

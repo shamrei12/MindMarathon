@@ -21,8 +21,11 @@ class ListGameTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
-        
         containerView.backgroundColor = CustomColor.gameElement.color
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowRadius = 3
         contentView.addSubview(containerView)
         
         gameNameStackView.axis = .horizontal
