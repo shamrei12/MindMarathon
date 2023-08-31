@@ -154,7 +154,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         mainView.addSubview(inputFieldStackView)
         
         inputFieldStackView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.8)
+//            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.9)
             maker.edges.equalToSuperview().inset(5)
         }
         
@@ -174,9 +174,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
         button.backgroundColor = CustomColor.gameElement.color
         button.setTitle(String(index), for: .normal) // присваиваем title кнопке
         button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 35.0)
         button.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        button.titleLabel!.minimumScaleFactor = 0.7
+        button.titleLabel!.minimumScaleFactor = 0.5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.layer.shadowColor = UIColor.label.cgColor
@@ -187,48 +187,26 @@ class BullCowViewController: UIViewController, AlertDelegate {
         return button
     }
     
-    func firstLayerNumpadCreated() -> UIStackView {
-        let firstLayerStackView = UIStackView()
-        firstLayerStackView.distribution = .fillEqually
-        firstLayerStackView.spacing = 15
-        let massDiggit = [1, 2, 3, 4, 5]
+    func layerForKeyboarCreate(massDiggits: [Int]) -> UIStackView {
+        let layerStackView = UIStackView()
+        layerStackView.distribution = .fillEqually
+        layerStackView.spacing = 15
         var massButton: [UIButton] = []
-        for _ in 0..<massDiggit.count {
+        for _ in 0..<massDiggits.count {
             let button = UIButton()
             massButton.append(button)
         }
-        
         for i in 0..<massButton.count {
-            let button = buttonForNumpadCreated(index: massDiggit[i])
-            firstLayerStackView.addArrangedSubview(button)
+            let button = buttonForNumpadCreated(index: massDiggits[i])
+            layerStackView.addArrangedSubview(button)
         }
-
-        return firstLayerStackView
-    }
-    
-    func secondLayerNumpadCreated() -> UIStackView {
-        let secondLayerStackView = UIStackView()
-        secondLayerStackView.distribution = .fillEqually
-        secondLayerStackView.spacing = 15
-        let massDiggit = [6, 7, 8, 9, 0]
-        var massButton: [UIButton] = []
-        for _ in 0..<massDiggit.count {
-            let button = UIButton()
-            massButton.append(button)
-        }
-        
-        for i in 0..<massButton.count {
-            let button = buttonForNumpadCreated(index: massDiggit[i])
-            secondLayerStackView.addArrangedSubview(button)
-        }
-        
-        return secondLayerStackView
+        return layerStackView
     }
     
     func numpudCreated() -> UIStackView {
         let twiceInputLayerStackView = UIStackView()
-        twiceInputLayerStackView.addArrangedSubview(firstLayerNumpadCreated())
-        twiceInputLayerStackView.addArrangedSubview(secondLayerNumpadCreated())
+        twiceInputLayerStackView.addArrangedSubview(layerForKeyboarCreate(massDiggits: [1, 2, 3, 4, 5]))
+        twiceInputLayerStackView.addArrangedSubview(layerForKeyboarCreate(massDiggits: [6, 7, 8, 9, 0]))
         twiceInputLayerStackView.distribution = .fillEqually
         twiceInputLayerStackView.axis = .vertical
         twiceInputLayerStackView.spacing = 5
@@ -277,8 +255,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
         tableViewCreated()
         
         panelIntputControlView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.32)
-            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.35)
+            maker.left.right.equalToSuperview().inset(5)
             maker.bottom.equalToSuperview().inset(20)
             maker.top.equalTo(tableview.snp.bottom).offset(10) // Отступ между dashBoardTextView и panelInputControlView
         }
@@ -289,7 +267,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
     
         sendDiggitsButton.snp.makeConstraints { maker in
-            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.2)
+            maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.18)
         }
     }
     

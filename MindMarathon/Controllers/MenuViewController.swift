@@ -94,6 +94,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         buttonHelpsForUser.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         buttonHelpsForUser.layer.shadowOpacity = 0.2
         buttonHelpsForUser.layer.shadowRadius = 3
+        buttonHelpsForUser.tintColor = UIColor.label
         view.addSubview(buttonHelpsForUser)
         
         labelStackView.snp.makeConstraints { maker in
