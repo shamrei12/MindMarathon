@@ -9,25 +9,15 @@ import Foundation
 
 class BinarioViewModel {
     
-    static var shared: BinarioViewModel = {
-        let instance = BinarioViewModel()
-        return instance
-    }()
-    
     var isStartGame = false
     var isContinueGame = false
     var size = 4
+    let game: Game
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        
-        if newLenght == 8 {
-            newLenght = 4
-        } else {
-            newLenght += 2
-        }
-        return String(newLenght)
+    init(game: Game) {
+        self.game = game
     }
+    
     
     // функция случайного числа
     func makeRandomDiggit(min: Int, max: Int) -> Int {

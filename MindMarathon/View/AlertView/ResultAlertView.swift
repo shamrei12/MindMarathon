@@ -80,7 +80,7 @@ class ResultAlertView: UIView {
         
         descriptionLabel.snp.makeConstraints { maker in
             maker.top.equalTo(firstLabel).inset(50)
-            maker.left.right.equalTo(mainView).inset(20)
+            maker.left.right.equalTo(mainView).inset(10)
         }
         
         buttonStackView.snp.makeConstraints { maker in

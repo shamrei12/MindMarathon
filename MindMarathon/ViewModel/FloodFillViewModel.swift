@@ -8,31 +8,18 @@
 import Foundation
 
 class FloodFillViewModel {
-//    static var shared: FloodFillViewModel = {
-//        let instance = FloodFillViewModel()
-//        return instance
-//    }()
+    var countStep = 0
+    let game: Game
     
-    var countStep: Int
-    
-    init(countStep: Int) {
-        self.countStep = countStep
-    }
-
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        
-        if newLenght == 20 {
-            newLenght += 5
-        } else if newLenght == 25 {
-            newLenght = 5
-        } else {
-            newLenght += 1
-        }
-        return String(newLenght)
+    init(game: Game) {
+        self.game = game
     }
     
     func gameResult() -> String {
         return "\(countStep)"
+    }
+    
+    func restartGame() {
+        countStep = 0
     }
 }

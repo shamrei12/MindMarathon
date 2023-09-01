@@ -8,12 +8,7 @@
 import Foundation
 
 class BullCowViewModel {
-    
-    static var shared: BullCowViewModel = {
-        let instance = BullCowViewModel()
-        return instance
-    }()
-    
+    let game: Game
     var isStartGame = false
     var isContinueGame = false
     var stepList = [BullCowProtocol]()
@@ -21,14 +16,8 @@ class BullCowViewModel {
     var bull = 0
     var cow = 0
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        if newLenght == 6 {
-            newLenght = 2
-        } else {
-            newLenght += 1
-        }
-        return String(newLenght)
+    init(game: Game) {
+        self.game = game
     }
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
@@ -45,8 +34,8 @@ class BullCowViewModel {
     func  comparisonNumber(_ userDigg: [Int], _ computerNumber: [Int]) {
         var bullCount = 0
         var cowCount = 0
-        for (i, _) in userDigg.enumerated() {
-            for (j, _) in computerNumber.enumerated() {
+        for i in 0..<userDigg.count {
+            for j in 0..<computerNumber.count {
                 if userDigg[i] == computerNumber[j] && i == j {
                     bullCount += 1
                 } else if userDigg[i] == computerNumber[j] && i != j {
@@ -73,6 +62,14 @@ class BullCowViewModel {
         var result = [Int]()
         for i in userDiggit {
             result.append(Int(String(i))!)
+        }
+        return result
+    }
+    
+    func remakeComputerNumberForAlert(computerDigit: [Int]) -> String {
+        var result = String()
+        for i in computerDigit {
+            result += String(i)
         }
         return result
     }

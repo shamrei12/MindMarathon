@@ -9,22 +9,36 @@ import UIKit
 import SnapKit
 
 class RulesViewController: UIViewController {
-
+    let game: Game
+    
+    init(game: Game) {
+        self.game = game
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "viewColor")
+        rulesGame()
     }
 
-    func rulesGame(numberGame: Int) {
+    func rulesGame() {
         let gameRules = UILabel()
         let rulesLabel = UILabel()
         
-        switch numberGame {
-        case 1: gameRules.text = GetRules.bullCow.rules
-        case 2: gameRules.text = GetRules.slovus.rules
-        case 3: gameRules.text = GetRules.floodFill.rules
-        case 4: gameRules.text = GetRules.ticTacToe.rules
-        case 5: gameRules.text = GetRules.binario.rules
+        switch game.title {
+        case "Быки и Коровы":
+            gameRules.text = game.rules
+        case "Словус":
+            gameRules.text = game.rules
+        case "Крестики Нолики":
+            gameRules.text = game.rules
+        case "Бинарио":
+            gameRules.text = game.rules
         default: print("error")
         }
         
@@ -36,7 +50,7 @@ class RulesViewController: UIViewController {
         
         gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 35.0)
         gameRules.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameRules.minimumScaleFactor = 0.2
+        gameRules.minimumScaleFactor = 0.5
         gameRules.textAlignment = .left
         gameRules.numberOfLines = 0
         gameRules.textColor = .label
@@ -49,9 +63,7 @@ class RulesViewController: UIViewController {
         
         gameRules.snp.makeConstraints { maker in
             maker.top.equalTo(rulesLabel.snp.bottom).inset(-10)
-            maker.left.right.bottom.equalToSuperview().inset(20)
+            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
-        
     }
-
 }

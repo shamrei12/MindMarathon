@@ -8,11 +8,11 @@
 import Foundation
 
 class TicTacToeViewModel {
+    let game: Game
     
-    static var shared: TicTacToeViewModel = {
-        let instance = TicTacToeViewModel()
-        return instance
-    }()
+    init(game: Game) {
+        self.game = game
+    }
     
     // Функция для определения хода компьютера
     func computerMove(board: [[String]]) -> (Int, Int)? {

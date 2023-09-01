@@ -8,14 +8,13 @@
 import Foundation
 
 class SlovusViewModel {
-    static var shared: SlovusViewModel = {
-        let instance = SlovusViewModel()
-        return instance
-    }()
-    
+    let game: Game
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
     
+    init(game: Game) {
+        self.game = game
+    }
     
     private static func loadDictionaryPuzzleWord() -> Set<String> {
         if let path = Bundle.main.path(forResource: "singular", ofType: ""),
@@ -46,32 +45,16 @@ class SlovusViewModel {
         return Set()
     }
     
-    func selectMaxLenght(maxLenght: String) -> String {
-        var newLenght: Int = Int(maxLenght)!
-        
-        if newLenght == 9 {
-            newLenght = 5
-        } else {
-            newLenght += 1
-        }
-        return String(newLenght)
-    }
-    
-//    let words = [ "карта", "кухня", "книга", "кровь", "кость", "город", "фильм", "птица", "комод",  "цветы", "чайка", "талия",  "леска", "ручка", "крыша", "дурак", "трава", "глаза", "крест", "свеча", "купец",  "полет", "рюмка", "робот", "котел", "шахта", "берег", "барон", "шпага", "голос", "сосна", "трава", "камин", "пряжа", "шарик", "мужик", "сапог", "факел", "музей", "труба", "сетка", "ворот"]
-    
     func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()
-        for i in dictionaryPuzzleWord {
-            if i.count == size {
+        for i in dictionaryPuzzleWord where i.count == size {
                 wordArray.append(i)
-            }
         }
-        var randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
+        let randomWord = wordArray[Int.random(in: 0...wordArray.count - 1)]
         return randomWord.count == size ? randomWord : choiceRandomWord(size: size)
         
     }
     
-    //
     func replaceLetter(userString: String) -> String {
         var newWord = String()
         for i in userString {
@@ -107,8 +90,7 @@ class SlovusViewModel {
         }
         
         // Проверяем буквы не на своем месте (1)
-        for (index, letter) in newUser.enumerated() {
-            if result[index] == 0 {
+        for (index, letter) in newUser.enumerated() where result[index] == 0 {
                 // Ищем первое упоминание буквы в загаданном слове
                 if let puzzleIndex = puzzleWord.firstIndex(of: letter)?.encodedOffset, !usedIndexes.contains(puzzleIndex) {
                     result[index] = 1
@@ -120,11 +102,7 @@ class SlovusViewModel {
                         userLetterCounts.removeValue(forKey: letter)
                     }
                 }
-            }
         }
-        
         return result
     }
-
 }
-
