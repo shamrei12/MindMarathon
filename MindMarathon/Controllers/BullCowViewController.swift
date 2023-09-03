@@ -23,7 +23,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var isshowMessageAlert: Bool = false
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
-    private var countStep: Int = .zero
     private var indexMass: Int = .zero
     private var seconds: Int = .zero
     private var messegeView: UserMistakeView!
@@ -98,7 +97,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-
+        
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -155,7 +154,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         mainView.addSubview(inputFieldStackView)
         
         inputFieldStackView.snp.makeConstraints { maker in
-//            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.9)
+            //            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.9)
             maker.edges.equalToSuperview().inset(5)
         }
         
@@ -266,7 +265,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(panelIntputControlView).inset(10)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
         }
-    
+        
         sendDiggitsButton.snp.makeConstraints { maker in
             maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.18)
         }
@@ -336,31 +335,76 @@ class BullCowViewController: UIViewController, AlertDelegate {
         computerDiggit = viewModel.makeNumber(maxLenght: maxLenght)
         print(computerDiggit)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isStartGame = true
+        viewModel.isContinueGame = true
     }
     
     func continueGame() {
         createTimer()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isContinueGame = true
     }
     
     func pauseGame() {
+        viewModel.isContinueGame = false
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        navigationItem.title = "ПАУЗА".localized()
+        navigationItem.title = "ПАУЗА"
+    }
+    
+    func endGame() {
+        viewModel.restartGame()
+        viewModel.countStep = 0
+        pauseGame()
+        timerLabel.text = "0"
+        levelButton.isEnabled = true
+        viewModel.stepList.removeAll()
+        tableview.reloadData()
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.endGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.exitGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc
     func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         if chekPartGame == (false, false) {
-            viewModel.isStartGame = true
-            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            viewModel.isContinueGame = false
             pauseGame()
+            showAlertAboutFinishGame()
         } else {
-            viewModel.isContinueGame = true
             continueGame()
         }
     }
@@ -382,7 +426,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 let lastIndexPath = IndexPath(row: viewModel.stepList.count - 1, section: 0)
                 tableview.insertRows(at: [lastIndexPath], with: .automatic)
                 tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-                countStep += 1
+                viewModel.countStep += 1
                 checkResult(bull: viewModel.bull)
             } else {
                 createMistakeMessage(messages: "В веденном Вами числу не хватает цирф".localized())
@@ -393,8 +437,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
-            createAlertMessage(description: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
-            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            showAlertAboutFinishGame(title: "Конец игры", message: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
+//            createAlertMessage(description: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
+            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -410,7 +455,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         viewModel.stepList.removeAll()
         tableview.reloadData()
-        alertView.removeFromSuperview()
     }
     
     func exitGame() {
@@ -420,23 +464,22 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
         viewModel.restartGame()
         tableview.reloadData()
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
     
-    // MARK: создание элементов уведомления
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
-    }
+//    // MARK: создание элементов уведомления
+//    func createAlertMessage(description: String) {
+//        UIView.animate(withDuration: 0.1) {
+//            self.view.alpha = 0.6
+//            self.view.isUserInteractionEnabled = false
+//        }
+//        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
+//        alertView.delegate = self
+//        alertView.descriptionLabel.text = description
+//        UIApplication.shared.keyWindow?.addSubview(alertView)
+//        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
+//                                   y: self.view.frame.size.height / 2)
+//    }
     
     func createMistakeMessage(messages: String) {
         guard messegeView == nil else {

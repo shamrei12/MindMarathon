@@ -18,7 +18,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
     private var iscontinuePlaying = false
     private let playButton = UIButton()
     private let levelButton = UIButton()
-    private var alertView: ResultAlertView!
     private let containerView = UIView()
     private var gridSize = 4
     private let contentStackView = UIStackView()
@@ -275,33 +274,73 @@ class BinarioViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createGamePlace(size: gridSize)
         viewModel.size = gridSize
+        viewModel.isStartGame = true
+        viewModel.isContinueGame = true
     }
     
     func continueGame() {
         createTimer()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isContinueGame = true
+
     }
     
     func pauseGame() {
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
+        viewModel.isContinueGame = false
+    }
+    
+    func endGame() {
+        self.dismiss(animated: true)
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         
         if chekPartGame == (false, false) {
-            viewModel.isStartGame = true
-            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            viewModel.isContinueGame = false
+            showAlertAboutFinishGame()
             pauseGame()
         } else {
-            viewModel.isContinueGame = true
             continueGame()
         }
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.restartGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.exitGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     // Раскраская каждого view в зависимости от tag
@@ -378,7 +417,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
                 return
             }
             if makeAnswer(mass: mass) {
-                createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
+                showAlertAboutFinishGame(title: "Конец игры", message: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
                 let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
@@ -461,19 +500,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
-    }
-    
     func restartGame() {
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 1.0
@@ -486,7 +512,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         stopwatch.invalidate()
         seconds = 0
         clearGame()
-        alertView.removeFromSuperview()
     }
     
     func clearGame() {
@@ -502,7 +527,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     func exitGame() {
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
 }

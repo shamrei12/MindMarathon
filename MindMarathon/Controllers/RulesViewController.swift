@@ -39,6 +39,8 @@ class RulesViewController: UIViewController {
             gameRules.text = game.rules
         case "Бинарио":
             gameRules.text = game.rules
+        case "Заливка":
+            gameRules.text = game.rules
         default: print("error")
         }
         

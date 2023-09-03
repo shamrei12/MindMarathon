@@ -78,7 +78,7 @@ class BullCowViewModel {
         bull = 0
         cow = 0
         stepList.removeAll()
-        countStep = 0
+        self.countStep = 0
         isStartGame = false
         isContinueGame = false
     }

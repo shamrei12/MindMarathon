@@ -8,7 +8,7 @@
 import UIKit
 
 class SlovusGameViewController: UIViewController, AlertDelegate {
-    private var alertView: ResultAlertView!
+//    private var alertView: ResultAlertView!
     private var messegeView: UserMistakeView!
     private var massLayer = [UIStackView]()
     private var contentViewStackView = UIStackView()
@@ -222,8 +222,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         }
     }
 
-
-
     func createUI() {
         panelControlCreated()
         continerCreated()
@@ -315,16 +313,52 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         let chekPartGame = (isstartGame, iscontinuePlaying)
         
         if chekPartGame == (false, false) {
-            isstartGame = true
-            iscontinuePlaying = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            iscontinuePlaying = false
             pauseGame()
+            showAlertAboutFinishGame()
         } else {
             iscontinuePlaying = true
             continueGame()
         }
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.exitGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.restartGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func endGame() {
+        self.dismiss(animated: true)
     }
     
     func startNewGame() {
@@ -341,11 +375,14 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         print(puzzleWord)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createPlaceGame()
+        isstartGame = true
+        iscontinuePlaying = true
     }
     
     func continueGame() {
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createTimer()
+        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        iscontinuePlaying = true
     }
     
     func pauseGame() {
@@ -369,7 +406,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         isstartGame = false
         iscontinuePlaying = false
-        alertView.removeFromSuperview()
     }
     
     func exitGame() {
@@ -377,7 +413,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             self.view.alpha = 1.0
             self.view.isUserInteractionEnabled = true
         }
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
     
@@ -411,9 +446,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     @objc func cancelTapped() {
-        if alertView != nil {
-            alertView.removeFromSuperview()
-        }
         self.dismiss(animated: true)
     }
     
@@ -468,7 +500,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         step += 1
         
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
-            createAlertMessage(description: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
+            showAlertAboutFinishGame(title: "Конце игры", message: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
             let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
             
@@ -487,13 +519,13 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             self.view.alpha = 0.6
             self.view.isUserInteractionEnabled = false
         }
-        stopwatch.invalidate()
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
+//        stopwatch.invalidate()
+//        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
+//        alertView.delegate = self
+//        alertView.descriptionLabel.text = description
+//        UIApplication.shared.keyWindow?.addSubview(alertView)
+//        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
+//                                   y: self.view.frame.size.height / 2)
     }
     
     func createAlertMessage() {

@@ -20,7 +20,6 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
     private var seconds = 0
-    private var alertView: ResultAlertView!
     private var messegeView: UserMistakeView!
     private var cells = [[UIView]]()
     private var row = [UIView]()
@@ -169,17 +168,13 @@ class FloodFillViewController: UIViewController, AlertDelegate {
     
     // MARK: Выход и правила
     @objc func cancelTapped() {
-        if alertView != nil {
-            alertView.removeFromSuperview()
-        }
         self.dismiss(animated: true)
     }
     
     @objc func rulesTapped() {
-//        let rulesVC = RulesViewController()
-//        rulesVC.modalPresentationStyle = .formSheet
-//        rulesVC.rulesGame(numberGame: 3)
-//        present(rulesVC, animated: true)
+     let rulesVC = RulesViewController(game: viewModel.game)
+        rulesVC.modalPresentationStyle = .formSheet
+        present(rulesVC, animated: true)
     }
     
     // MARK: создание поля с игрой
@@ -255,7 +250,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
+//            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
+            showAlertAboutFinishGame(title: "Конце игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
             let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
@@ -313,16 +309,51 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         let chekPartGame = (isStartGame, isContinuePlaying)
         
         if chekPartGame == (false, false) {
-            isStartGame = true
-            isContinuePlaying = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            isContinuePlaying = false
             pauseGame()
+            showAlertAboutFinishGame()
         } else {
-            isContinuePlaying = true
             continueGame()
         }
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.restartGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.exitGame()
+//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
+
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func endGame() {
+        self.dismiss(animated: true)
     }
     
     func startNewGame() {
@@ -333,6 +364,8 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         createTimer()
         levelButton.isEnabled = false
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        isStartGame = true
+        isContinuePlaying = true
     }
     
     func continueGame() {
@@ -340,6 +373,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         colorView.isUserInteractionEnabled = true
         createTimer()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        isContinuePlaying = true
     }
     
     func pauseGame() {
@@ -348,21 +382,22 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
+        isContinuePlaying = false
     }
-    
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        stopwatch.invalidate()
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
-    }
+//
+//    func createAlertMessage(description: String) {
+//        UIView.animate(withDuration: 0.1) {
+//            self.view.alpha = 0.6
+//            self.view.isUserInteractionEnabled = false
+//        }
+//        stopwatch.invalidate()
+//        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
+//        alertView.delegate = self
+//        alertView.descriptionLabel.text = description
+//        UIApplication.shared.keyWindow?.addSubview(alertView)
+//        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
+//                                   y: self.view.frame.size.height / 2)
+//    }
     
     func restartGame() {
         UIView.animate(withDuration: 0.1) {
@@ -386,11 +421,9 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         isContinuePlaying = false
         isStartGame = false
         viewModel.countStep = 0
-        alertView.removeFromSuperview()
     }
     
     func exitGame() {
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
     
