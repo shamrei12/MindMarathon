@@ -129,7 +129,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let mainView = UIView()
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
-        mainView.layer.shadowColor = UIColor.label.cgColor
+        mainView.layer.shadowColor = UIColor.black.cgColor
         mainView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         mainView.layer.shadowOpacity = 0.2
         mainView.layer.shadowRadius = 3
@@ -142,6 +142,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         userDiggitLabel.minimumScaleFactor = 0.7
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+        deleteLastButton.tintColor = .label
         deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
         
         inputFieldStackView.addArrangedSubview(userDiggitLabel)
@@ -179,7 +180,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         button.titleLabel!.minimumScaleFactor = 0.5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.layer.shadowColor = UIColor.label.cgColor
+        button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         button.layer.shadowOpacity = 0.2
         button.layer.shadowRadius = 3
@@ -222,7 +223,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         sendDiggitsButton.backgroundColor = CustomColor.gameElement.color
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
-        sendDiggitsButton.layer.shadowColor = UIColor.label.cgColor
+        sendDiggitsButton.layer.shadowColor = UIColor.black.cgColor
         sendDiggitsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         sendDiggitsButton.layer.shadowOpacity = 0.2
         sendDiggitsButton.layer.shadowRadius = 3

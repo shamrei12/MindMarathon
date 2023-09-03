@@ -72,7 +72,11 @@ class SlovusViewModel {
         var newUser = userWord
         var usedIndexes = Set<Int>()
         var userLetterCounts = [Character: Int]()
+        var puzzleLetterCounts = [Character: Int]()
         
+        for letter in puzzleWord {
+            puzzleLetterCounts[letter, default: 0] += 1
+        }
         // Подсчитываем количество упоминаний каждой буквы в слове пользователя
         for letter in newUser {
             userLetterCounts[letter, default: 0] += 1
@@ -85,24 +89,28 @@ class SlovusViewModel {
                 let index = newUser.index(newUser.startIndex, offsetBy: index)
                 newUser.replaceSubrange(index..<newUser.index(after: index), with: " ")
                 usedIndexes.insert(index.encodedOffset)
-                userLetterCounts[letter, default: 0] -= 1
+//                userLetterCounts[letter, default: 0] -= 1
+                puzzleLetterCounts[letter, default: 0] -= 1
             }
         }
-        
         // Проверяем буквы не на своем месте (1)
         for (index, letter) in newUser.enumerated() where result[index] == 0 {
                 // Ищем первое упоминание буквы в загаданном слове
                 if let puzzleIndex = puzzleWord.firstIndex(of: letter)?.encodedOffset, !usedIndexes.contains(puzzleIndex) {
-                    result[index] = 1
-                    usedIndexes.insert(puzzleIndex)
-                    userLetterCounts[letter, default: 0] -= 1
-                    
+
                     // Если буква уже использовалась, учитываем ее только один раз
-                    if userLetterCounts[letter, default: 0] == 0 {
-                        userLetterCounts.removeValue(forKey: letter)
+                    if puzzleLetterCounts[letter, default: 0] == 0 {
+//                        userLetterCounts.removeValue(forKey: letter)
+                        continue
+                    } else {
+                        result[index] = 1
+                        usedIndexes.insert(puzzleIndex)
+                        userLetterCounts[letter, default: 0] -= 1
+                        puzzleLetterCounts[letter, default: 0] -= 1
                     }
                 }
         }
+        
         return result
     }
 }

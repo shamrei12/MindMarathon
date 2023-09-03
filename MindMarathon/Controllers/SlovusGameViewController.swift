@@ -143,7 +143,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         sendWordsButton.backgroundColor = UIColor.systemBackground
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
-        sendWordsButton.layer.shadowColor = UIColor.label.cgColor
+        sendWordsButton.layer.shadowColor = UIColor.black.cgColor
         sendWordsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         sendWordsButton.layer.shadowOpacity = 0.2
         sendWordsButton.layer.shadowRadius = 3
@@ -182,7 +182,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
 
             for indexKey in row {
                 let keyboarButton = UIButton()
-                keyboarButton.layer.shadowColor = UIColor.label.cgColor
+                keyboarButton.layer.shadowColor = UIColor.black.cgColor
                 keyboarButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
                 keyboarButton.layer.shadowOpacity = 0.2
                 keyboarButton.layer.shadowRadius = 3
@@ -426,7 +426,7 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     @objc func sendWordsTapped() {
         if userWords.count == maxLenght {
             if viewModel.checkWord(wordToCheck: userWords) {
-                makeColorTextField(massiveAnswer: viewModel.checkWord(puzzleWord: puzzleWord, userWord: userWords.lowercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
+                makeColorTextField(massiveAnswer: viewModel.checkWord(puzzleWord: puzzleWord.uppercased(), userWord: userWords.uppercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
                 if firstWordIndex < maxLenght * 6 && lastWordIndex < maxLenght * 6 {
                     controllerTextField = firstWordIndex + Int(levelButton.titleLabel?.text ?? "")!
                     firstWordIndex += Int(levelButton.titleLabel?.text ?? "")!

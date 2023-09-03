@@ -90,7 +90,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
         buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
-        buttonHelpsForUser.layer.shadowColor = UIColor.label.cgColor
+        buttonHelpsForUser.layer.shadowColor = UIColor.black.cgColor
         buttonHelpsForUser.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         buttonHelpsForUser.layer.shadowOpacity = 0.2
         buttonHelpsForUser.layer.shadowRadius = 3

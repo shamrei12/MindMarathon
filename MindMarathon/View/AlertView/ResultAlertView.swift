@@ -48,6 +48,10 @@ class ResultAlertView: UIView {
         restartGame.tintColor = UIColor.label
         restartGame.backgroundColor = UIColor.tertiaryLabel
         restartGame.layer.cornerRadius = 10
+        restartGame.layer.shadowColor = UIColor.black.cgColor
+        restartGame.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        restartGame.layer.shadowOpacity = 0.2
+        restartGame.layer.shadowRadius = 3
         restartGame.addTarget(self, action: #selector(restartGameTapped), for: .touchUpInside)
         self.addSubview(restartGame)
         
@@ -57,6 +61,10 @@ class ResultAlertView: UIView {
         exitGame.tintColor = UIColor.label
         exitGame.backgroundColor = UIColor.tertiaryLabel
         exitGame.layer.cornerRadius = 10
+        exitGame.layer.shadowColor = UIColor.black.cgColor
+        exitGame.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        exitGame.layer.shadowOpacity = 0.2
+        exitGame.layer.shadowRadius = 3
         exitGame.addTarget(self, action: #selector(exitGameTapped), for: .touchUpInside)
         self.addSubview(exitGame)
         

@@ -25,6 +25,11 @@ class GameTableViewCell: UITableViewCell {
     func createUI() {
         mainView.layer.cornerRadius = 10
         mainView.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        mainView.layer.shadowColor = UIColor.label.cgColor
+        mainView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        mainView.layer.shadowOpacity = 0.2
+        mainView.layer.shadowRadius = 3
+        mainView.tintColor = UIColor.label
         self.addSubview(mainView)
         mainView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalToSuperview().inset(10)
