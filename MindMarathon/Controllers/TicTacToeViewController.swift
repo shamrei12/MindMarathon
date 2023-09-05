@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TicTacToeViewController: UIViewController, AlertDelegate {
+class TicTacToeViewController: UIViewController {
     private var viewModel: TicTacToeViewModel
     private var vStackView: UIStackView!
     private var hStackViewFirst: UIStackView!
@@ -194,7 +194,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         gameControllerView.snp.makeConstraints { maker in
             maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(0.1)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.095)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.09)
         }
         
         gameControllerStackView.snp.makeConstraints { maker in
@@ -362,10 +362,12 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
         let isUserWon = viewModel.checkForWinner(board: board, symbol: "X")
         
         if isUserWon {
+            stopwatch.invalidate()
             showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
             guard let position = viewModel.computerMove(board: board) else {
+                stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
@@ -400,6 +402,7 @@ class TicTacToeViewController: UIViewController, AlertDelegate {
             drawComputerTurn(row: computerRow, col: computerCol)
             let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
             if isComputerWon {
+                stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))

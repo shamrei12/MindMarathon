@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BinarioViewController: UIViewController, AlertDelegate {
+class BinarioViewController: UIViewController {
     private let panelControllView = UIView()
     private let panelControllStackView = UIStackView()
     private let sendClearStackView = UIStackView()
@@ -417,6 +417,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
                 return
             }
             if makeAnswer(mass: mass) {
+                stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
                 let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)

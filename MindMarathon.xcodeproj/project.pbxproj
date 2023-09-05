@@ -19,12 +19,9 @@
 		D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF292A10CAA000263CEB /* BullCowViewController.swift */; };
 		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
 		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
-		D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF352A115A3300263CEB /* ResultAlertView.swift */; };
-		D826CF392A11600300263CEB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF382A11600300263CEB /* Protocols.swift */; };
 		D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D829AC312A6D124900A38F6E /* .swiftlint.yml */; };
 		D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC342A7D52B000A38F6E /* Backgroungs.swift */; };
 		D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC392A86747000A38F6E /* GamesModels.swift */; };
-		D82FB1EC2A626A1000F725B5 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82FB1EB2A626A1000F725B5 /* Localization.swift */; };
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
@@ -43,7 +40,6 @@
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
-		D884F74A2A9A2FE500271263 /* ResultAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D884F7492A9A2FE500271263 /* ResultAlertView.xib */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
@@ -71,12 +67,9 @@
 		D826CF292A10CAA000263CEB /* BullCowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewController.swift; sourceTree = "<group>"; };
 		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
-		D826CF352A115A3300263CEB /* ResultAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertView.swift; sourceTree = "<group>"; };
-		D826CF382A11600300263CEB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D829AC312A6D124900A38F6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D829AC342A7D52B000A38F6E /* Backgroungs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backgroungs.swift; sourceTree = "<group>"; };
 		D829AC392A86747000A38F6E /* GamesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModels.swift; sourceTree = "<group>"; };
-		D82FB1EB2A626A1000F725B5 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
@@ -93,7 +86,6 @@
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
-		D884F7492A9A2FE500271263 /* ResultAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultAlertView.xib; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +148,6 @@
 				D829AC332A7D527E00A38F6E /* Settings */,
 				D83161A12A1CD29300087769 /* Dictionary */,
 				D882215F2A12A81800531EED /* Manager */,
-				D826CF372A115F1500263CEB /* Protocols */,
 				D826CF242A10C7A600263CEB /* Controllers */,
 				D826CF2F2A11281300263CEB /* ViewModel */,
 				D848359D2A35B768008D2AB4 /* Model */,
@@ -174,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				D826CF1E2A10C6DA00263CEB /* Extension.swift */,
-				D82FB1EB2A626A1000F725B5 /* Localization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -182,7 +172,6 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D884F7442A9A1F5200271263 /* UserMessageForm */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
 				D826CF212A10C71F00263CEB /* Storyboards */,
@@ -215,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
+				D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
 				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
 				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
@@ -222,7 +212,6 @@
 				D88221662A16042B00531EED /* ListGamesViewController.swift */,
 				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
 				D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */,
-				D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -242,20 +231,10 @@
 		D826CF322A1157B900263CEB /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				D826CF352A115A3300263CEB /* ResultAlertView.swift */,
-				D884F7492A9A2FE500271263 /* ResultAlertView.xib */,
 				D83161952A1A583400087769 /* UserMistakeView.swift */,
 				D83161972A1A584F00087769 /* UserMistakeView.xib */,
 			);
 			path = AlertView;
-			sourceTree = "<group>";
-		};
-		D826CF372A115F1500263CEB /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				D826CF382A11600300263CEB /* Protocols.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D829AC332A7D527E00A38F6E /* Settings */ = {
@@ -301,13 +280,6 @@
 				D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */,
 			);
 			path = Manager;
-			sourceTree = "<group>";
-		};
-		D884F7442A9A1F5200271263 /* UserMessageForm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UserMessageForm;
 			sourceTree = "<group>";
 		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
@@ -392,7 +364,6 @@
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
-				D884F74A2A9A2FE500271263 /* ResultAlertView.xib in Resources */,
 				D86D0A792A28A62800AB6789 /* singular in Resources */,
 				D831619B2A1B5A4600087769 /* ru_RU in Resources */,
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
@@ -470,7 +441,6 @@
 			files = (
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
-				D82FB1EC2A626A1000F725B5 /* Localization.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
@@ -485,7 +455,6 @@
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
-				D826CF362A115A3300263CEB /* ResultAlertView.swift in Sources */,
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
@@ -499,7 +468,6 @@
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameTableViewCell.swift in Sources */,
-				D826CF392A11600300263CEB /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

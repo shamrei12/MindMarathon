@@ -39,34 +39,27 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         view.addSubview(labelStackView)
         
         let startMarathon = UIButton()
-        startMarathon.setTitle("Список игр".localized(), for: .normal)
+        startMarathon.setTitle("Список игр", for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
         startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         startMarathon.titleLabel!.minimumScaleFactor = 0.1
         startMarathon.backgroundColor = UIColor(named: "gameElementColor")
-        
-        startMarathon.layer.cornerRadius = 10
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
-        startMarathon.layer.shadowColor = UIColor.label.cgColor
-        startMarathon.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        startMarathon.layer.shadowOpacity = 0.2
-        startMarathon.layer.shadowRadius = 3
+        startMarathon.layer.cornerRadius = 10
+        startMarathon.addShadow()
         view.addSubview(startMarathon)
         
         let whiteBoard = UIButton()
         whiteBoard.setTitle("Статистика игр", for: .normal)
         whiteBoard.setTitleColor(.label, for: .normal)
-        whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
-        whiteBoard.layer.cornerRadius = 10
         whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         whiteBoard.titleLabel!.minimumScaleFactor = 0.1
         whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
-        whiteBoard.layer.shadowColor = UIColor.label.cgColor
-        whiteBoard.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        whiteBoard.layer.shadowOpacity = 0.2
-        whiteBoard.layer.shadowRadius = 3
+        whiteBoard.addShadow()
+        whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
+        whiteBoard.layer.cornerRadius = 10
         view.addSubview(whiteBoard)
         
         let buttonStackView = UIStackView()
@@ -90,10 +83,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
         buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
-        buttonHelpsForUser.layer.shadowColor = UIColor.black.cgColor
-        buttonHelpsForUser.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        buttonHelpsForUser.layer.shadowOpacity = 0.2
-        buttonHelpsForUser.layer.shadowRadius = 3
+        buttonHelpsForUser.addShadow()
         buttonHelpsForUser.tintColor = UIColor.label
         view.addSubview(buttonHelpsForUser)
         

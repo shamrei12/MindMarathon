@@ -8,14 +8,6 @@
 import Foundation
 import UIKit
 
-//extension UIViewController {
-//    static func instantiate() -> Self {
-//        let nibName = String(describing: self)
-//        let nib = UINib(nibName: nibName, bundle: nil)
-//        return nib.instantiate(withOwner: self, options: nil)[0] as? Self
-//    }
-//}
-
 extension UIView {
     static func loadFromNib() -> UIView {
         let nibName = String(describing: self)
@@ -38,3 +30,14 @@ extension UIColor {
         )
     }
 }
+
+extension UIButton {
+    
+    func addShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 3
+    }
+}
+

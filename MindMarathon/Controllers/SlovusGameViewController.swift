@@ -7,36 +7,32 @@
 
 import UIKit
 
-class SlovusGameViewController: UIViewController, AlertDelegate {
-//    private var alertView: ResultAlertView!
+class SlovusGameViewController: UIViewController {
     private var messegeView: UserMistakeView!
+    private var gameLevel: GameLevel!
+    private let viewModel: SlovusViewModel
     private var massLayer = [UIStackView]()
     private var contentViewStackView = UIStackView()
     private let panelControllView = UIView()
     private let panelControllStackView = UIStackView()
     private var stopwatch = Timer()
-    private var isshowMessageAlert: Bool = false
-    private var puzzleWord = ""
-    private var userWords = ""
     private let playButton = UIButton()
     private let levelButton = UIButton()
-    private let numberOfRows = 6
-    private var numberOfColumns = 5
     private let containerView = UIView()
-    private let textFieldHeight: CGFloat = 50
-    private let textFieldWidth: CGFloat = 40
-    private let spacing: CGFloat = 20
     private var massTextField = [UITextField]()
-    private var firstWordIndex = 0
-    private var lastWordIndex = 0
-    private var controllerTextField = 0
-    private var seconds = 0
+    private var firstWordIndex: Int = .zero
+    private var lastWordIndex: Int = .zero
+    private var controllerTextField: Int = .zero
+    private var seconds: Int = .zero
+    private var step: Int = .zero
+    private var isshowMessageAlert: Bool = false
+    private var numberOfColumns: Int = 5
+    private var maxLenght: Int = 5
+    private let numberOfRows: Int = 6
+    private var puzzleWord = ""
+    private var userWords = ""
     private var isstartGame = false
     private var iscontinuePlaying = false
-    private var maxLenght = 5
-    private var step = 0
-    private var gameLevel: GameLevel!
-    private let viewModel: SlovusViewModel
     
     init(viewModel: SlovusViewModel) {
         self.viewModel = viewModel
@@ -54,23 +50,20 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
-        levelButton.setTitle("5", for: .normal)
         gameLevel = GameLevel()
     }
     
     func levelButtonCreated() {
         levelButton.addTarget(self, action: #selector(selectMaxLenghtTapped), for: .touchUpInside)
-        levelButton.setTitle("4", for: .normal)
+        levelButton.setTitle("5", for: .normal)
         levelButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         levelButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         levelButton.titleLabel?.minimumScaleFactor = 0.5
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
-        levelButton.layer.shadowColor = UIColor.black.cgColor
-        levelButton.layer.shadowOpacity = 0.5
-        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        levelButton.layer.shadowRadius = 3
+        levelButton.backgroundColor = UIColor.lightGray
+        levelButton.addShadow()
         view.addSubview(levelButton)
     }
     
@@ -81,17 +74,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.backgroundColor = UIColor.systemBlue
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
-    func panelControlCreated() {
-        levelButtonCreated()
-        playButtonCreated()
-        
+    func panelControlCreate() {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
@@ -111,6 +99,12 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         panelControllStackView.snp.makeConstraints { maker in
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
+    }
+    
+    func panelControlCreated() {
+        levelButtonCreated()
+        playButtonCreated()
+        panelControlCreate()
     }
     
     func continerCreated() {
@@ -140,13 +134,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     func sendButtonCreated() -> UIButton {
         let sendWordsButton = UIButton()
         sendWordsButton.setTitle("ОТПРАВИТЬ", for: .normal)
-        sendWordsButton.backgroundColor = UIColor.systemBackground
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
-        sendWordsButton.layer.shadowColor = UIColor.black.cgColor
-        sendWordsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        sendWordsButton.layer.shadowOpacity = 0.2
-        sendWordsButton.layer.shadowRadius = 3
+        sendWordsButton.backgroundColor = UIColor.systemBackground
+        sendWordsButton.addShadow()
         sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
         view.addSubview(sendWordsButton)
         
@@ -157,7 +148,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         return sendWordsButton
     }
     
-
     func keyboardCreated() {
         let view = keyboardViewCreated()
         let keyBoardStackView = UIStackView()
@@ -170,40 +160,31 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         
         for (indexRow, row) in keyboard.enumerated() {
             let keyboardRowStackView = UIStackView()
-            if indexRow < 2 {
-                keyboardRowStackView.axis = .horizontal
-                keyboardRowStackView.spacing = 5
-                keyboardRowStackView.distribution = .fillEqually
-            } else {
-                keyboardRowStackView.axis = .horizontal
-                keyboardRowStackView.spacing = 5
-                keyboardRowStackView.distribution = .fillEqually
-            }
+            keyboardRowStackView.axis = .horizontal
+            keyboardRowStackView.spacing = 5
+            keyboardRowStackView.distribution = .fillEqually
 
             for indexKey in row {
                 let keyboarButton = UIButton()
-                keyboarButton.layer.shadowColor = UIColor.black.cgColor
-                keyboarButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-                keyboarButton.layer.shadowOpacity = 0.2
-                keyboarButton.layer.shadowRadius = 3
+                keyboarButton.addShadow()
+                keyboarButton.layer.cornerRadius = 5
+                
                 if indexKey == "delete" {
                     keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
                     keyboarButton.tintColor = UIColor.black
+                    keyboarButton.backgroundColor = .clear
                     keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
                 } else {
                     keyboarButton.setTitle(indexKey, for: .normal)
-                    keyboarButton.layer.cornerRadius = 5
-                    keyboarButton.backgroundColor = UIColor.systemBackground
+                    keyboarButton.backgroundColor = .systemBackground
                     keyboarButton.setTitleColor(UIColor.label, for: .normal)
                     keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
                 }
                 keyboardRowStackView.addArrangedSubview(keyboarButton)
             }
-            
             keyboardLayers[indexRow].addArrangedSubview(keyboardRowStackView)
             keyBoardStackView.addArrangedSubview(keyboardLayers[indexRow])
         }
-        
         keyBoardStackView.addArrangedSubview(sendButtonCreated())
         
         for keyboardLayer in keyboardLayers {
@@ -211,7 +192,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             keyboardLayer.distribution = .fillEqually
             keyboardLayer.spacing = 5
         }
-        
         keyBoardStackView.axis = .vertical
         keyBoardStackView.distribution = .fillEqually
         keyBoardStackView.spacing = 5
@@ -283,7 +263,6 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         contentViewStackView.axis = .vertical
         contentViewStackView.distribution = .fillEqually
         contentViewStackView.spacing = 1
-        
         contentViewStackView.snp.makeConstraints { maker in
             maker.edges.equalTo(containerView).inset(10)
         }
@@ -325,32 +304,27 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
-        
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
             self.exitGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
 
         }
         alertController.addAction(endAction)
-        
         present(alertController, animated: true, completion: nil)
     }
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
-            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
+            self.continueGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
             self.restartGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-
         }
         alertController.addAction(endAction)
         
@@ -361,14 +335,18 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
         self.dismiss(animated: true)
     }
     
-    func startNewGame() {
-        maxLenght = Int((levelButton.titleLabel?.text)!)!
+    func resetElementsGame() {
         lastWordIndex = maxLenght
         numberOfColumns = maxLenght
         controllerTextField = 0
         firstWordIndex = 0
         step = 0
         seconds = 0
+    }
+    
+    func startNewGame() {
+        maxLenght = Int((levelButton.titleLabel?.text)!)!
+        resetElementsGame()
         createTimer()
         levelButton.isEnabled = false
         puzzleWord = viewModel.choiceRandomWord(size: maxLenght)
@@ -393,26 +371,19 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
     }
     
     func restartGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
         for i in massTextField {
             i.textColor = UIColor.label
             i.backgroundColor = UIColor.tertiaryLabel
             i.text = ""
         }
         pauseGame()
+        resetElementsGame()
         levelButton.isEnabled = true
         isstartGame = false
         iscontinuePlaying = false
     }
     
     func exitGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
         self.dismiss(animated: true)
     }
     
@@ -469,10 +440,10 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
                     isshowMessageAlert = true
                     createAlertMessage()
                 }
-                
             }
         }
     }
+    
     // MARK: Проверка ответа и вывод результата
     func checkCorrctAnswer(massiveAnswer: [Int]) -> Bool {
         for i in massiveAnswer where i != 2 {
@@ -498,43 +469,32 @@ class SlovusGameViewController: UIViewController, AlertDelegate {
             }
         }
         step += 1
-        
+        checkCondition(massiveAnswer: massiveAnswer)
+        userWords = ""
+    }
+    
+    func checkCondition(massiveAnswer: [Int]) {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
-            showAlertAboutFinishGame(title: "Конце игры", message: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
+            stopwatch.invalidate()
+            showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(step) попыток")
             let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
             
         } else if step == 6 {
-            createAlertMessage(description: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
+            stopwatch.invalidate()
+            showAlertAboutFinishGame(title: "Конец игры", message: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
             let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Поражение", countStep: "\(step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
-        
-        userWords = ""
     }
-    
-    //MARK: Alerts
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-//        stopwatch.invalidate()
-//        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-//        alertView.delegate = self
-//        alertView.descriptionLabel.text = description
-//        UIApplication.shared.keyWindow?.addSubview(alertView)
-//        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-//                                   y: self.view.frame.size.height / 2)
-    }
-    
+}
+
+extension SlovusGameViewController {
     func createAlertMessage() {
         guard messegeView == nil else {
             return
         }
-        
         messegeView = UserMistakeView.loadFromNib() as? UserMistakeView
-        
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
         let topPadding = window?.safeAreaInsets.top ?? 0
         let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1

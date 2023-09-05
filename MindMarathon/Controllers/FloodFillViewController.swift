@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FloodFillViewController: UIViewController, AlertDelegate {
+class FloodFillViewController: UIViewController {
     private var levelButton = UIButton()
     private let timerLabel = UILabel()
     private let gameView = UIView()
@@ -251,7 +251,7 @@ class FloodFillViewController: UIViewController, AlertDelegate {
         if checkResult() {
             stopwatch.invalidate()
 //            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
-            showAlertAboutFinishGame(title: "Конце игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
+            showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
             let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
