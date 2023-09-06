@@ -11,6 +11,9 @@ class SlovusViewModel {
     let game: Game
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+    var isstartGame: Bool = false
+    var iscontinuePlaying: Bool = false
+    var step: Int = .zero
     
     init(game: Game) {
         self.game = game
@@ -110,7 +113,6 @@ class SlovusViewModel {
                     }
                 }
         }
-        
         return result
     }
 }
