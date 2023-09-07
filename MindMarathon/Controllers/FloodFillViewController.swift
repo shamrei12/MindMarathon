@@ -8,32 +8,32 @@
 import UIKit
 
 class FloodFillViewController: UIViewController {
+    private var gameLevel: GameLevel!
+    private let viewModel: FloodFillViewModel
+    private var messegeView: UserMistakeView!
     private var levelButton = UIButton()
     private let timerLabel = UILabel()
     private let gameView = UIView()
     private let colorView = UIView()
+    private let panelControllStackView = UIStackView()
+    private let panelControllView = UIView()
     private var contentViewStackView = UIStackView()
     private var massLayer = [UIStackView]()
-    private let panelControllView = UIView()
-    private let panelControllStackView = UIStackView()
-    private var gridSize = 5
-    private let cellSize: CGFloat = 40 // Размер ячейки
     private var stopwatch = Timer()
-    private var seconds = 0
-    private var messegeView: UserMistakeView!
-    private var cells = [[UIView]]()
-    private var row = [UIView]()
-    private var isStartGame: Bool = false
-    private var isContinuePlaying: Bool = false
-    private var colorMassiveButton = [UIButton]()
-    private var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
-    private var indexTag = 0
     private var currentColor = UIColor()
     private var selectedColor = UIColor()
-    let playButton = UIButton()
-    private var gameLevel: GameLevel!
-    private let viewModel: FloodFillViewModel
-    
+    private let playButton = UIButton()
+    private var cells = [[UIView]]()
+    private var row = [UIView]()
+    private var colorMassiveButton = [UIButton]()
+    private var indexTag: Int = .zero
+    private var seconds: Int = .zero
+    private var gridSize = 5
+    private let cellSize: CGFloat = 40 // Размер ячейки
+    private var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
+    private var isStartGame: Bool = false
+    private var isContinuePlaying: Bool = false
+
     init(viewModel: FloodFillViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -62,10 +62,7 @@ class FloodFillViewController: UIViewController {
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
-        levelButton.layer.shadowColor = UIColor.black.cgColor
-        levelButton.layer.shadowOpacity = 0.5
-        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        levelButton.layer.shadowRadius = 3
+        levelButton.addShadow()
         view.addSubview(levelButton)
     }
     
@@ -76,10 +73,7 @@ class FloodFillViewController: UIViewController {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
@@ -121,6 +115,16 @@ class FloodFillViewController: UIViewController {
         }
     }
     
+    func createButtonColorView(index: Int) -> UIButton {
+        let colorButton = UIButton()
+        colorButton.backgroundColor = UIColor(cgColor: colorMass[index].cgColor)
+        colorButton.layer.cornerRadius = 10
+        colorButton.tag = index
+        colorButton.addShadow()
+        colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
+        return colorButton
+    }
+    
     func createUI() {
         guard let firstColor = colorMass.first else { return }
         selectedColor = firstColor
@@ -137,15 +141,7 @@ class FloodFillViewController: UIViewController {
         colorStackView.spacing = 10
         
         for index in 0..<colorMass.count {
-            let colorButton = UIButton()
-            colorButton.backgroundColor = UIColor(cgColor: colorMass[index].cgColor)
-            colorButton.layer.cornerRadius = 10
-            colorButton.tag = index
-            colorButton.layer.shadowColor = UIColor.label.cgColor
-            colorButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-            colorButton.layer.shadowOpacity = 0.2
-            colorButton.layer.shadowRadius = 3
-            colorButton.addTarget(self, action: #selector(selectedColorTapped), for: .touchUpInside)
+            let colorButton = createButtonColorView(index: index)
             view.addSubview(colorButton)
             colorButton.snp.makeConstraints { maker in
                 maker.width.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.15)
@@ -212,12 +208,8 @@ class FloodFillViewController: UIViewController {
         contentViewStackView.spacing = 0
         
         contentViewStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(gameView).inset(5)
-            maker.top.equalTo(gameView).inset(5)
-            maker.right.equalTo(gameView).inset(5)
-            maker.bottom.equalTo(gameView).inset(5)
+            maker.edges.equalTo(gameView).inset(5)
         }
-        
         coloringView() // Вызываем функцию расскрашивания ячеек
     }
     
@@ -250,7 +242,6 @@ class FloodFillViewController: UIViewController {
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-//            createAlertMessage(description: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
             showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
             let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
@@ -320,15 +311,13 @@ class FloodFillViewController: UIViewController {
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
             self.restartGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-
         }
         alertController.addAction(endAction)
         
@@ -337,15 +326,13 @@ class FloodFillViewController: UIViewController {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
             self.exitGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-
         }
         alertController.addAction(endAction)
         
@@ -356,16 +343,26 @@ class FloodFillViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    func startConditions() {
+        levelButton.isEnabled = false
+        isStartGame = true
+        isContinuePlaying = true
+    }
+    
+    func finishConditions() {
+        levelButton.isEnabled = true
+        isStartGame = false
+        isContinuePlaying = false
+    }
+    
     func startNewGame() {
         let size = levelButton.titleLabel?.text ?? ""
         gridSize = Int(size)!
         createGamePlace(sizePlace: gridSize)
         seconds = 0
         createTimer()
-        levelButton.isEnabled = false
+        startConditions()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-        isStartGame = true
-        isContinuePlaying = true
     }
     
     func continueGame() {
@@ -377,50 +374,30 @@ class FloodFillViewController: UIViewController {
     }
     
     func pauseGame() {
-        gameView.isUserInteractionEnabled = false
         colorView.isUserInteractionEnabled = false
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
         isContinuePlaying = false
     }
-//
-//    func createAlertMessage(description: String) {
-//        UIView.animate(withDuration: 0.1) {
-//            self.view.alpha = 0.6
-//            self.view.isUserInteractionEnabled = false
-//        }
-//        stopwatch.invalidate()
-//        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-//        alertView.delegate = self
-//        alertView.descriptionLabel.text = description
-//        UIApplication.shared.keyWindow?.addSubview(alertView)
-//        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-//                                   y: self.view.frame.size.height / 2)
-//    }
     
     func restartGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
-        
         for view in contentViewStackView.arrangedSubviews {
             contentViewStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        
+        pauseGame()
+        resetElementsGame()
+        finishConditions()
+    }
+    
+    func resetElementsGame() {
+        viewModel.countStep = 0
+        timerLabel.text = "0"
+        indexTag = 0
         contentViewStackView.removeFromSuperview()
-        
         massLayer.removeAll()
         cells.removeAll()
-        pauseGame()
-        indexTag = 0
-        timerLabel.text = "0"
-        levelButton.isEnabled = true
-        isContinuePlaying = false
-        isStartGame = false
-        viewModel.countStep = 0
     }
     
     func exitGame() {

@@ -82,10 +82,7 @@ class BullCowViewController: UIViewController {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
@@ -178,10 +175,7 @@ class BullCowViewController: UIViewController {
         button.titleLabel!.minimumScaleFactor = 0.5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowRadius = 3
+        button.addShadow()
         button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
         return button
     }
@@ -221,10 +215,7 @@ class BullCowViewController: UIViewController {
         sendDiggitsButton.backgroundColor = CustomColor.gameElement.color
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
-        sendDiggitsButton.layer.shadowColor = UIColor.black.cgColor
-        sendDiggitsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        sendDiggitsButton.layer.shadowOpacity = 0.2
-        sendDiggitsButton.layer.shadowRadius = 3
+        sendDiggitsButton.addShadow()
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
         view.addSubview(sendDiggitsButton)
     }
@@ -453,7 +444,41 @@ class BullCowViewController: UIViewController {
         tableview.reloadData()
         self.dismiss(animated: true)
     }
+}
+
+// MARK: расширение для tableview
+extension BullCowViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = viewModel.stepList.count
+        return count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: BullCowTableViewCell
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
+            cell = reuseCell
+        } else {
+            cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
+        }
+        return configure(cell: cell, for: indexPath)
+    }
+    
+    private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        let step = viewModel.stepList[indexPath.row]
+        cell.gameData = [step]
+        cell.createUI()
+        cell.backgroundColor = UIColor.clear
+        return cell
+    }
+}
+
+extension BullCowViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+}
+
+extension BullCowViewController {
     func createMistakeMessage(messages: String) {
         guard messegeView == nil else {
             return
@@ -489,37 +514,5 @@ class BullCowViewController: UIViewController {
                 self.messegeView = nil
             })
         }
-    }
-}
-
-// MARK: расширение для tableview
-extension BullCowViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = viewModel.stepList.count
-        return count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: BullCowTableViewCell
-        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
-            cell = reuseCell
-        } else {
-            cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
-        }
-        return configure(cell: cell, for: indexPath)
-    }
-    
-    private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let step = viewModel.stepList[indexPath.row]
-        cell.gameData = [step]
-        cell.createUI()
-        cell.backgroundColor = UIColor.clear
-        return cell
-    }
-}
-
-extension BullCowViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
 }

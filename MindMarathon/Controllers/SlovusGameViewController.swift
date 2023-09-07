@@ -471,14 +471,11 @@ class SlovusGameViewController: UIViewController {
                                          
     func coloringButtonsKeyboard(arrayColor: [Character: Int]) {
         for value in arrayColor {
-            if value.value == 0 {
-                coloringKeyboardButtons(letter: String(value.key), color: .systemGray)
-            }
-            if value.value == 1 {
-                coloringKeyboardButtons(letter: String(value.key), color: .systemYellow)
-            }
-            if value.value == 2 {
-                coloringKeyboardButtons(letter: String(value.key), color: .systemGreen)
+            switch value.value {
+            case 0: coloringKeyboardButtons(letter: String(value.key), color: .systemGray)
+            case 1: coloringKeyboardButtons(letter: String(value.key), color: .systemYellow)
+            case 2: coloringKeyboardButtons(letter: String(value.key), color: .systemGreen)
+            default: print("Error")
             }
         }
     }

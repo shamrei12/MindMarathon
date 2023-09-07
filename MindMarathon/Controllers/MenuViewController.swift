@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import MessageUI
 
-
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     let tableView = UITableView()
     
