@@ -30,6 +30,7 @@ class SlovusGameViewController: UIViewController {
     private var puzzleWord = ""
     private var userWords = ""
     private var isshowMessageAlert: Bool = false
+    private var massiveKeyboardButtons = [UIButton]()
     
     init(viewModel: SlovusViewModel) {
         self.viewModel = viewModel
@@ -100,7 +101,7 @@ class SlovusGameViewController: UIViewController {
             maker.left.top.right.bottom.equalTo(panelControllView).inset(10)
         }
     }
-    
+     
     func panelControlCreated() {
         levelButtonCreated()
         playButtonCreated()
@@ -169,6 +170,7 @@ class SlovusGameViewController: UIViewController {
                 keyboarButton.backgroundColor = .systemBackground
                 keyboarButton.setTitleColor(UIColor.label, for: .normal)
                 keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
+                massiveKeyboardButtons.append(keyboarButton)
             }
             keyboardRowStackView.addArrangedSubview(keyboarButton)
         }
@@ -356,6 +358,7 @@ class SlovusGameViewController: UIViewController {
         pauseGame()
         resetElementsGame()
         finishingConditions()
+        clearKeyboardButtons()
     }
     
     func exitGame() {
@@ -430,22 +433,54 @@ class SlovusGameViewController: UIViewController {
         return true
     }
     
-    func makeColorTextField(massiveAnswer: [Int], startIndex: Int, lastIndex: Int) {
+    func makeColorTextField(massiveAnswer: ([Int], [Character: Int]), startIndex: Int, lastIndex: Int) {
         let massiveIndex = Array(startIndex..<lastIndex)
-        for i in 0..<massiveAnswer.count {
-            if massiveAnswer[i] == 0 {
+        let arrayResponse = massiveAnswer.0
+        for i in 0..<arrayResponse.count {
+            if arrayResponse[i] == 0 {
                 massTextField[massiveIndex[i]].textColor = .gray
-            } else if massiveAnswer[i] == 1 {
+            } else if arrayResponse[i] == 1 {
                 massTextField[massiveIndex[i]].textColor = .white
                 massTextField[massiveIndex[i]].backgroundColor = .systemYellow
-            } else if massiveAnswer[i] == 2 {
+            } else if arrayResponse[i] == 2 {
                 massTextField[massiveIndex[i]].textColor = .white
                 massTextField[massiveIndex[i]].backgroundColor = .systemGreen
             }
         }
+        coloringButtonsKeyboard(arrayColor: massiveAnswer.1)
+        
         viewModel.step += 1
-        checkCondition(massiveAnswer: massiveAnswer)
+        checkCondition(massiveAnswer: arrayResponse)
         userWords = ""
+    }
+    
+    func clearKeyboardButtons() {
+        for button in massiveKeyboardButtons {
+            button.backgroundColor = .systemBackground
+            button.setTitleColor(UIColor.label, for: .normal)
+        }
+    }
+    
+    func coloringKeyboardButtons(letter: String, color: UIColor) {
+        for button in massiveKeyboardButtons {
+            if button.titleLabel?.text ?? "" == letter {
+                button.backgroundColor = color
+            }
+        }
+    }
+                                         
+    func coloringButtonsKeyboard(arrayColor: [Character: Int]) {
+        for value in arrayColor {
+            if value.value == 0 {
+                coloringKeyboardButtons(letter: String(value.key), color: .systemGray)
+            }
+            if value.value == 1 {
+                coloringKeyboardButtons(letter: String(value.key), color: .systemYellow)
+            }
+            if value.value == 2 {
+                coloringKeyboardButtons(letter: String(value.key), color: .systemGreen)
+            }
+        }
     }
     
     func checkCondition(massiveAnswer: [Int]) {
@@ -509,7 +544,6 @@ extension SlovusGameViewController {
         alertController.addAction(continueAction)
         let endAction = UIAlertAction(title: "Выйти из игры", style: .destructive) { _ in
             self.exitGame()
-            
         }
         alertController.addAction(endAction)
         present(alertController, animated: true, completion: nil)
@@ -526,7 +560,6 @@ extension SlovusGameViewController {
             self.restartGame()
         }
         alertController.addAction(endAction)
-        
         present(alertController, animated: true, completion: nil)
     }
 }

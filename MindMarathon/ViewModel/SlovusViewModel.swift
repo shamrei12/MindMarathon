@@ -70,12 +70,13 @@ class SlovusViewModel {
         return newWord
     }
 
-    func checkWord(puzzleWord: String, userWord: String) -> [Int] {
+    func checkWord(puzzleWord: String, userWord: String) -> ([Int], [Character: Int]) {
         var result = Array(repeating: 0, count: puzzleWord.count)
         var newUser = userWord
         var usedIndexes = Set<Int>()
         var userLetterCounts = [Character: Int]()
         var puzzleLetterCounts = [Character: Int]()
+        var arrayOfKeyboardLetterColors = [Character: Int]()
         
         for letter in puzzleWord {
             puzzleLetterCounts[letter, default: 0] += 1
@@ -83,12 +84,14 @@ class SlovusViewModel {
         // Подсчитываем количество упоминаний каждой буквы в слове пользователя
         for letter in newUser {
             userLetterCounts[letter, default: 0] += 1
+            arrayOfKeyboardLetterColors[letter] = 0
         }
         
         // Проверяем буквы на своем месте (2)
         for (index, letter) in userWord.enumerated() {
             if puzzleWord[puzzleWord.index(puzzleWord.startIndex, offsetBy: index)] == letter {
                 result[index] = 2
+                arrayOfKeyboardLetterColors[letter] = 2
                 let index = newUser.index(newUser.startIndex, offsetBy: index)
                 newUser.replaceSubrange(index..<newUser.index(after: index), with: " ")
                 usedIndexes.insert(index.encodedOffset)
@@ -107,12 +110,15 @@ class SlovusViewModel {
                         continue
                     } else {
                         result[index] = 1
+                        if arrayOfKeyboardLetterColors[letter] != 2 {
+                            arrayOfKeyboardLetterColors[letter] = 1
+                        }
                         usedIndexes.insert(puzzleIndex)
                         userLetterCounts[letter, default: 0] -= 1
                         puzzleLetterCounts[letter, default: 0] -= 1
                     }
                 }
         }
-        return result
+        return (result,arrayOfKeyboardLetterColors)
     }
 }
