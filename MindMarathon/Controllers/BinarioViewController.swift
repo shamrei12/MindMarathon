@@ -58,10 +58,7 @@ class BinarioViewController: UIViewController {
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
-        levelButton.layer.shadowColor = UIColor.black.cgColor
-        levelButton.layer.shadowOpacity = 0.5
-        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        levelButton.layer.shadowRadius = 3
+        levelButton.addShadow()
         view.addSubview(levelButton)
     }
     
@@ -72,10 +69,7 @@ class BinarioViewController: UIViewController {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
@@ -89,10 +83,7 @@ class BinarioViewController: UIViewController {
         checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
         checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        checkResultButton.layer.shadowColor = UIColor.black.cgColor
-        checkResultButton.layer.shadowOpacity = 0.5
-        checkResultButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        checkResultButton.layer.shadowRadius = 4
+        checkResultButton.addShadow()
         view.addSubview(checkResultButton)
     }
     
@@ -106,10 +97,7 @@ class BinarioViewController: UIViewController {
         clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
         clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        clearMoves.layer.shadowColor = UIColor.black.cgColor
-        clearMoves.layer.shadowOpacity = 0.5
-        clearMoves.layer.shadowOffset = CGSize(width: 1, height: 1)
-        clearMoves.layer.shadowRadius = 4
+        clearMoves.addShadow()
         view.addSubview(clearMoves)
     }
     
@@ -318,8 +306,6 @@ class BinarioViewController: UIViewController {
         
         let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
             self.restartGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-
         }
         alertController.addAction(endAction)
         
@@ -335,8 +321,6 @@ class BinarioViewController: UIViewController {
         
         let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
             self.exitGame()
-//            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-
         }
         alertController.addAction(endAction)
         
@@ -369,10 +353,6 @@ class BinarioViewController: UIViewController {
             viewElement.layer.shadowRadius = 5
         default:
             viewElement.backgroundColor = UIColor(cgColor: colorMass[0].cgColor)
-            viewElement.layer.shadowColor = .none
-            viewElement.layer.shadowOpacity = 1
-            viewElement.layer.shadowOffset = CGSize(width: 0, height: 0) // смещение тени
-            viewElement.layer.shadowRadius = 0 // радиус размытия тени
         }
     }
     

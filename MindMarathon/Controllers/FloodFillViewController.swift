@@ -11,6 +11,7 @@ class FloodFillViewController: UIViewController {
     private var gameLevel: GameLevel!
     private let viewModel: FloodFillViewModel
     private var messegeView: UserMistakeView!
+    private var colorStackView = UIStackView()
     private var levelButton = UIButton()
     private let timerLabel = UILabel()
     private let gameView = UIView()
@@ -125,21 +126,14 @@ class FloodFillViewController: UIViewController {
         return colorButton
     }
     
-    func createUI() {
-        guard let firstColor = colorMass.first else { return }
-        selectedColor = firstColor
-        
-        panelControlCreated()
-        gameViewCreated()
-        let colorStackView = UIStackView()
-        colorView.backgroundColor = .clear
-        colorView.layer.cornerRadius = 10
-        view.addSubview(colorView)
-        view.addSubview(colorStackView)
+    func createColorStackView() {
         colorStackView.axis = .horizontal
         colorStackView.distribution = .equalSpacing
         colorStackView.spacing = 10
-        
+        view.addSubview(colorStackView)
+    }
+    
+    func createStackViewWithColorButton() {
         for index in 0..<colorMass.count {
             let colorButton = createButtonColorView(index: index)
             view.addSubview(colorButton)
@@ -149,17 +143,33 @@ class FloodFillViewController: UIViewController {
             colorStackView.addArrangedSubview(colorButton)
             colorMassiveButton.append(colorButton)
         }
-        
+        colorStackView.snp.makeConstraints { maker in
+            maker.left.right.bottom.top.equalTo(colorView).inset(0.001)
+        }
+    }
+    
+    func createColorView() {
+        colorView.backgroundColor = .clear
+        colorView.layer.cornerRadius = 10
+        view.addSubview(colorView)
         colorView.snp.makeConstraints { maker in
             maker.top.equalTo(gameView.snp.bottom).inset(-10)
             maker.bottom.equalToSuperview().inset(30)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.15)
         }
+    }
+    
+    func createUI() {
+        guard let firstColor = colorMass.first else { return }
+        selectedColor = firstColor
         
-        colorStackView.snp.makeConstraints { maker in
-            maker.left.right.bottom.top.equalTo(colorView).inset(0.001)
-        }
+        panelControlCreated()
+        gameViewCreated()
+        
+        createColorView()
+        createColorStackView()
+        createStackViewWithColorButton()
     }
     
     // MARK: Выход и правила
