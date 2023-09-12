@@ -8,28 +8,29 @@
 import UIKit
 
 class BinarioViewController: UIViewController {
+    private var messegeView: UserMistakeView!
+    private var viewModel: BinarioViewModel
+    private var gameLevel: GameLevel!
+    private let checkResultButton = UIButton()
     private let panelControllView = UIView()
     private let panelControllStackView = UIStackView()
     private let sendClearStackView = UIStackView()
     private let clearMoves = UIButton()
-    private var stopwatch = Timer()
-    private var seconds = 0
-    private var isstartGame = false
-    private var iscontinuePlaying = false
-    private let playButton = UIButton()
-    private let levelButton = UIButton()
-    private let containerView = UIView()
-    private var gridSize = 4
-    private let contentStackView = UIStackView()
-    private var index = 0
     private var massLayer = [UIStackView]()
     private var cells = [[UIView]]()
     private var row = [UIView]()
-    private var messegeView: UserMistakeView!
-    private var viewModel: BinarioViewModel
-    private var gameLevel: GameLevel!
+    private var stopwatch = Timer()
+    private let playButton = UIButton()
+    private let levelButton = UIButton()
+    private let containerView = UIView()
+    private let contentStackView = UIStackView()
+    private var gridSize = 4
+    private var index: Int = .zero
+    private var seconds: Int = .zero
+
     private var colorMass = [UIColor(hex: 0xb5b5b5), UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
-    let checkResultButton = UIButton()
+    private var isstartGame = false
+    private var iscontinuePlaying = false
     
     init(viewModel: BinarioViewModel) {
         self.viewModel = viewModel
@@ -82,7 +83,6 @@ class BinarioViewController: UIViewController {
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
         checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
-        checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         checkResultButton.addShadow()
         view.addSubview(checkResultButton)
     }
@@ -96,7 +96,6 @@ class BinarioViewController: UIViewController {
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
-        clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
         clearMoves.addShadow()
         view.addSubview(clearMoves)
     }
@@ -121,15 +120,15 @@ class BinarioViewController: UIViewController {
     
     func containerCreated() {
         // GameZone
-        containerView.backgroundColor = UIColor(named: "gameElementColor")
+        containerView.backgroundColor = .clear
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
         
         view.addSubview(containerView)
         
         containerView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
             maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
         }
@@ -168,7 +167,7 @@ class BinarioViewController: UIViewController {
         sendClearStackViewCreated()
     }
     
-    func createGamePlace(size: Int) {
+    func createStackViewForMassLayer() {
         for _ in 0..<gridSize {
             let stackView = UIStackView()
             stackView.axis = .horizontal
@@ -176,13 +175,20 @@ class BinarioViewController: UIViewController {
             stackView.spacing = 5
             massLayer.append(stackView)
         }
+    }
+    func createViewForContainerView() -> UIView {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        let cell = UIView()
+        cell.addGestureRecognizer(tapRecognizer)
+        cell.backgroundColor = UIColor.tertiaryLabel
+        return cell
+    }
+    func createGamePlace(size: Int) {
+        createStackViewForMassLayer()
         
         for i in 0..<gridSize {
             for _ in 0..<gridSize {
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-                let cell = UIView()
-                cell.addGestureRecognizer(tapRecognizer)
-                cell.backgroundColor = UIColor.tertiaryLabel
+                let cell = createViewForContainerView()
                 massLayer[i].addArrangedSubview(cell)
                 row.append(cell)
             }
@@ -198,10 +204,7 @@ class BinarioViewController: UIViewController {
         contentStackView.spacing = 5
         
         contentStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(containerView).inset(10)
-            maker.top.equalTo(containerView).inset(10)
-            maker.right.equalTo(containerView).inset(10)
-            maker.bottom.equalTo(containerView).inset(10)
+            maker.edges.equalTo(containerView).inset(5)
         }
         
         createGameElement()
@@ -353,6 +356,8 @@ class BinarioViewController: UIViewController {
             viewElement.layer.shadowRadius = 5
         default:
             viewElement.backgroundColor = UIColor(cgColor: colorMass[0].cgColor)
+            viewElement.layer.shadowColor = UIColor.clear.cgColor
+
         }
     }
     
@@ -381,11 +386,8 @@ class BinarioViewController: UIViewController {
             return
         }
         
-        if selectedCell.tag + 1 > 2 {
-            selectedCell.tag = 0
-        } else {
-            selectedCell.tag += 1
-        }
+        selectedCell.tag + 1 > 2 ? (selectedCell.tag = 0) : (selectedCell.tag += 1)
+
         makeColor(viewElement: selectedCell)
     }
     

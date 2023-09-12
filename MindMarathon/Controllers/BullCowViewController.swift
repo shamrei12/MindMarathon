@@ -474,7 +474,11 @@ extension BullCowViewController: UITableViewDataSource {
 
 extension BullCowViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        let safeAreaHeight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
+        let cellHeight = safeAreaHeight * 0.11
+
+        return cellHeight
+        
     }
 }
 

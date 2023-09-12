@@ -76,6 +76,7 @@ class BullCowTableViewCell: UITableViewCell {
         resultStepStacvkView.distribution = .fillEqually
         resultStepStacvkView.spacing = 5
 
+
         for i in 0..<gameData.first!.size {
             let viewElement = UIView()
             let userDiggitLabel = UILabel()
