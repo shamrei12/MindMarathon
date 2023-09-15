@@ -456,11 +456,11 @@ extension BullCowViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BullCowTableViewCell
-//        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
-//            cell = reuseCell
-//        } else {
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
+            cell = reuseCell
+        } else {
             cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
-//        }
+        }
         return configure(cell: cell, for: indexPath)
     }
     

@@ -17,7 +17,6 @@ class BullCowTableViewCell: UITableViewCell {
     let numberStackView = UIStackView()
     var gameData = [BullCowProtocol]()
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -25,6 +24,11 @@ class BullCowTableViewCell: UITableViewCell {
     }
     
     func createUI() {
+        for view in userMoveStackView.arrangedSubviews {
+            userMoveStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
         mainView.removeFromSuperview()
         // Создание главного View
         mainView.backgroundColor = UIColor(named: "gameElementColor")
@@ -57,11 +61,6 @@ class BullCowTableViewCell: UITableViewCell {
             return
         }
         
-        for view in userMoveStackView.arrangedSubviews {
-            userMoveStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
-    
         // Создание stack с ответом пользователя
         userMoveStackView.axis = .horizontal
         userMoveStackView.backgroundColor = .clear
@@ -75,7 +74,6 @@ class BullCowTableViewCell: UITableViewCell {
         resultStepStacvkView.backgroundColor = .clear
         resultStepStacvkView.distribution = .fillEqually
         resultStepStacvkView.spacing = 5
-
 
         for i in 0..<gameData.first!.size {
             let viewElement = UIView()
@@ -93,7 +91,6 @@ class BullCowTableViewCell: UITableViewCell {
             }
             userMoveStackView.addArrangedSubview(viewElement)
         }
-        
         createImageResult()
         createLabelResult()
     }
@@ -108,7 +105,6 @@ class BullCowTableViewCell: UITableViewCell {
         imageStackView.axis = .horizontal
         imageStackView.spacing = 15
         mainView.addSubview(imageStackView)
-        
         
         
         let cowImage = UIImageView(image: UIImage(named: "cow"))
