@@ -10,6 +10,8 @@
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
 		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
+		D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */; };
+		D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD12AB4CE79007A6597 /* IconsManager.swift */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
 		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
 		D826CF132A10C69200263CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D826CF122A10C69200263CEB /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
+		D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
+		D81F8DD12AB4CE79007A6597 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D826CF092A10C69000263CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D826CF0B2A10C69000263CEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 			children = (
 				D88221602A12A83800531EED /* TimeManager.swift */,
 				D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */,
+				D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */,
+				D81F8DD12AB4CE79007A6597 /* IconsManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -451,11 +457,13 @@
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
+				D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
+				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
