@@ -10,8 +10,7 @@ import SnapKit
 
 class KeyboardView: UIView {
     weak var delegate: KeyboardDelegate?
-
-    private var massiveKeyboardButtons = [UIButton]()
+    var massiveKeyboardButtons = [UIButton]()
     
     private func keyboardViewCreated() -> UIView {
         let keyBoardView = UIView()

@@ -13,29 +13,13 @@ protocol KeyboardDelegate: AnyObject {
     func sendWordsTapped()
 }
 
-
 final class SlovusGameViewController: UIViewController, KeyboardDelegate {
-    func deletePressed() {
-        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() where !i.text!.isEmpty {
-            i.text = ""
-            break
-        }
-        
-        if controllerTextField - 1 >= firstWordIndex {
-            controllerTextField -= 1
-            userWords = String(userWords.dropLast())
-        }
-    }
-    
-    func keyPressed(_ key: String) {
-        print(key)
-    }
-    
     
     private enum GameCondition {
         case started
         case finished
     }
+    
     private let keyboardView = KeyboardView()
     private var messegeView: UserMistakeView!
     private var massLayer = [UIStackView]()
@@ -163,9 +147,6 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     private func keyboardViewCreated() /*-> UIView */{
-//        let keyBoardView = UIView()
-//        
-//        view.addSubview(keyBoardView)
         keyboardView.keyboardCreated()
         keyboardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-5)
@@ -173,76 +154,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
             maker.bottom.equalToSuperview().inset(20)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.26)
         }
-        
-//        return keyboardView
     }
-    
-    // Вынести в отдельный файл
-//    func keyboardCreated() {
-//        let view = keyboardViewCreated()
-//        
-//        let keyBoardStackView = UIStackView()
-//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ"]))
-//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э"]))
-//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "delete"]))
-//        keyBoardStackView.addArrangedSubview(sendButtonCreated())
-//        
-//        keyBoardStackView.axis = .vertical
-//        keyBoardStackView.distribution = .fillEqually
-//        keyBoardStackView.spacing = 5
-//        
-//        view.addSubview(keyBoardStackView)
-//        
-//        keyBoardStackView.snp.makeConstraints { maker in
-//            maker.edges.equalTo(view.safeAreaLayoutGuide).inset(5)
-//        }
-//    }
-    
-//    func layerKeyboardCreate(letters: [String]) -> UIStackView {
-//        let keyboardRowStackView = UIStackView()
-//        keyboardRowStackView.axis = .horizontal
-//        keyboardRowStackView.spacing = 5
-//        keyboardRowStackView.distribution = .fillEqually
-//        
-//        for letter in letters {
-//            let keyboarButton = UIButton()
-//            keyboarButton.addShadow()
-//            keyboarButton.layer.cornerRadius = 5
-//            
-//            if letter == "delete" {
-//                keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-//                keyboarButton.tintColor = UIColor.black
-//                keyboarButton.backgroundColor = .clear
-//                keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
-//            } else {
-//                keyboarButton.setTitle(letter, for: .normal)
-//                keyboarButton.backgroundColor = .systemBackground
-//                keyboarButton.setTitleColor(UIColor.label, for: .normal)
-//                keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
-//                massiveKeyboardButtons.append(keyboarButton)
-//            }
-//            keyboardRowStackView.addArrangedSubview(keyboarButton)
-//        }
-//        return keyboardRowStackView
-//    }
-    
-//    private func sendButtonCreated() -> UIButton {
-//        let sendWordsButton = UIButton()
-//        sendWordsButton.setTitle("ПРОВЕРИТЬ СЛОВО", for: .normal)
-//        sendWordsButton.setTitleColor(UIColor.label, for: .normal)
-//        sendWordsButton.layer.cornerRadius = 10
-//        sendWordsButton.backgroundColor = UIColor.systemBackground
-//        sendWordsButton.addShadow()
-//        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
-//        
-//        view.addSubview(sendWordsButton)
-//        
-//        sendWordsButton.snp.makeConstraints { maker in
-//            maker.height.equalToSuperview().multipliedBy(0.22)
-//        }
-//        
-//        return sendWordsButton
-//    }
     
     func textFieldWindowCreated() -> UITextField {
         let textFieldWindow = UITextField()
@@ -416,9 +328,9 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         }
     }
     
-    @objc func letterinputTapped(sender: UIButton) {
+    func letterinputTapped(letter: String) {
         if (viewModel.isstartGame, viewModel.iscontinuePlaying) == (true, true) {
-            let letter = sender.titleLabel?.text ?? ""
+            
             checkTextField(letter: letter.uppercased())
         }
     }
@@ -443,7 +355,23 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         present(rulesVC, animated: true)
     }
     
-    @objc func sendWordsTapped() {
+    func deletePressed() {
+        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() where !i.text!.isEmpty {
+            i.text = ""
+            break
+        }
+        
+        if controllerTextField - 1 >= firstWordIndex {
+            controllerTextField -= 1
+            userWords = String(userWords.dropLast())
+        }
+    }
+    
+    func keyPressed(_ key: String) {
+        letterinputTapped(letter: key)
+    }
+    
+    func sendWordsTapped() {
         if userWords.count == maxLenght {
             if viewModel.checkWord(wordToCheck: userWords) {
                 makeColorTextField(massiveAnswer: viewModel.checkWord(puzzleWord: puzzleWord.uppercased(), userWord: userWords.uppercased()), startIndex: firstWordIndex, lastIndex: lastWordIndex)
@@ -500,7 +428,9 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     func coloringKeyboardButtons(letter: String, color: UIColor) {
-        for button in massiveKeyboardButtons {
+        
+        
+        for button in keyboardView.massiveKeyboardButtons {
             if button.titleLabel?.text ?? "" == letter {
                 button.backgroundColor = color
             }
