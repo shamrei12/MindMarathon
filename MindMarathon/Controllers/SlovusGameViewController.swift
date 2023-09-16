@@ -7,13 +7,36 @@
 
 import UIKit
 
-final class SlovusGameViewController: UIViewController {
+protocol KeyboardDelegate: AnyObject {
+    func keyPressed(_ key: String)
+    func deletePressed()
+    func sendWordsTapped()
+}
+
+
+final class SlovusGameViewController: UIViewController, KeyboardDelegate {
+    func deletePressed() {
+        for i in massTextField[firstWordIndex..<lastWordIndex].reversed() where !i.text!.isEmpty {
+            i.text = ""
+            break
+        }
+        
+        if controllerTextField - 1 >= firstWordIndex {
+            controllerTextField -= 1
+            userWords = String(userWords.dropLast())
+        }
+    }
+    
+    func keyPressed(_ key: String) {
+        print(key)
+    }
+    
     
     private enum GameCondition {
         case started
         case finished
     }
-    
+    private let keyboardView = KeyboardView()
     private var messegeView: UserMistakeView!
     private var massLayer = [UIStackView]()
     private var contentViewStackView = UIStackView()
@@ -55,11 +78,13 @@ final class SlovusGameViewController: UIViewController {
     
     private func setupUI() {
         self.view.backgroundColor = UIColor(named: "viewColor")
-        
         navigationBarCreate()
         panelControlCreated()
         continerCreated()
-        keyboardCreated()
+        keyboardView.delegate = self
+        view.addSubview(keyboardView)
+
+        keyboardViewCreated()
     }
     
     private func panelControlCreated() {
@@ -125,7 +150,7 @@ final class SlovusGameViewController: UIViewController {
     }
     
     private func continerCreated() {
-        containerView.backgroundColor = UIColor(named: "gameElementColor")
+        containerView.backgroundColor = .clear
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
         
@@ -137,85 +162,87 @@ final class SlovusGameViewController: UIViewController {
         }
     }
     
-    private func keyboardViewCreated() -> UIView {
-        let keyBoardView = UIView()
-        
-        view.addSubview(keyBoardView)
-        
-        keyBoardView.snp.makeConstraints { maker in
-            maker.top.equalTo(containerView.snp.bottom).inset(-10)
-            maker.left.right.equalToSuperview().inset(10)
+    private func keyboardViewCreated() /*-> UIView */{
+//        let keyBoardView = UIView()
+//        
+//        view.addSubview(keyBoardView)
+        keyboardView.keyboardCreated()
+        keyboardView.snp.makeConstraints { maker in
+            maker.top.equalTo(containerView.snp.bottom).inset(-5)
+            maker.left.right.equalToSuperview().inset(5)
             maker.bottom.equalToSuperview().inset(20)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.26)
         }
         
-        return keyBoardView
+//        return keyboardView
     }
+    
     // Вынести в отдельный файл
-    func keyboardCreated() {
-        let view = keyboardViewCreated()
-        
-        let keyBoardStackView = UIStackView()
-        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ"]))
-        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э"]))
-        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "delete"]))
-        keyBoardStackView.addArrangedSubview(sendButtonCreated())
-        
-        keyBoardStackView.axis = .vertical
-        keyBoardStackView.distribution = .fillEqually
-        keyBoardStackView.spacing = 5
-        
-        view.addSubview(keyBoardStackView)
-        
-        keyBoardStackView.snp.makeConstraints { maker in
-            maker.edges.equalTo(view.safeAreaLayoutGuide).inset(5)
-        }
-    }
+//    func keyboardCreated() {
+//        let view = keyboardViewCreated()
+//        
+//        let keyBoardStackView = UIStackView()
+//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ"]))
+//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э"]))
+//        keyBoardStackView.addArrangedSubview(layerKeyboardCreate(letters: ["Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", "delete"]))
+//        keyBoardStackView.addArrangedSubview(sendButtonCreated())
+//        
+//        keyBoardStackView.axis = .vertical
+//        keyBoardStackView.distribution = .fillEqually
+//        keyBoardStackView.spacing = 5
+//        
+//        view.addSubview(keyBoardStackView)
+//        
+//        keyBoardStackView.snp.makeConstraints { maker in
+//            maker.edges.equalTo(view.safeAreaLayoutGuide).inset(5)
+//        }
+//    }
     
-    func layerKeyboardCreate(letters: [String]) -> UIStackView {
-        let keyboardRowStackView = UIStackView()
-        keyboardRowStackView.axis = .horizontal
-        keyboardRowStackView.spacing = 5
-        keyboardRowStackView.distribution = .fillEqually
-        
-        for letter in letters {
-            let keyboarButton = UIButton()
-            keyboarButton.addShadow()
-            keyboarButton.layer.cornerRadius = 5
-            
-            if letter == "delete" {
-                keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
-                keyboarButton.tintColor = UIColor.black
-                keyboarButton.backgroundColor = .clear
-                keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
-            } else {
-                keyboarButton.setTitle(letter, for: .normal)
-                keyboarButton.backgroundColor = .systemBackground
-                keyboarButton.setTitleColor(UIColor.label, for: .normal)
-                keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
-                massiveKeyboardButtons.append(keyboarButton)
-            }
-            keyboardRowStackView.addArrangedSubview(keyboarButton)
-        }
-        return keyboardRowStackView
-    }
+//    func layerKeyboardCreate(letters: [String]) -> UIStackView {
+//        let keyboardRowStackView = UIStackView()
+//        keyboardRowStackView.axis = .horizontal
+//        keyboardRowStackView.spacing = 5
+//        keyboardRowStackView.distribution = .fillEqually
+//        
+//        for letter in letters {
+//            let keyboarButton = UIButton()
+//            keyboarButton.addShadow()
+//            keyboarButton.layer.cornerRadius = 5
+//            
+//            if letter == "delete" {
+//                keyboarButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+//                keyboarButton.tintColor = UIColor.black
+//                keyboarButton.backgroundColor = .clear
+//                keyboarButton.addTarget(self, action: #selector(deleteLastWord), for: .touchDown)
+//            } else {
+//                keyboarButton.setTitle(letter, for: .normal)
+//                keyboarButton.backgroundColor = .systemBackground
+//                keyboarButton.setTitleColor(UIColor.label, for: .normal)
+//                keyboarButton.addTarget(self, action: #selector(letterinputTapped), for: .touchDown)
+//                massiveKeyboardButtons.append(keyboarButton)
+//            }
+//            keyboardRowStackView.addArrangedSubview(keyboarButton)
+//        }
+//        return keyboardRowStackView
+//    }
     
-    private func sendButtonCreated() -> UIButton {
-        let sendWordsButton = UIButton()
-        sendWordsButton.setTitle("ПРОВЕРИТЬ СЛОВО", for: .normal)
-        sendWordsButton.setTitleColor(UIColor.label, for: .normal)
-        sendWordsButton.layer.cornerRadius = 10
-        sendWordsButton.backgroundColor = UIColor.systemBackground
-        sendWordsButton.addShadow()
-        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
-        view.addSubview(sendWordsButton)
-        
-        sendWordsButton.snp.makeConstraints { maker in
-            maker.height.equalToSuperview().multipliedBy(0.22)
-        }
-        
-        return sendWordsButton
-    }
+//    private func sendButtonCreated() -> UIButton {
+//        let sendWordsButton = UIButton()
+//        sendWordsButton.setTitle("ПРОВЕРИТЬ СЛОВО", for: .normal)
+//        sendWordsButton.setTitleColor(UIColor.label, for: .normal)
+//        sendWordsButton.layer.cornerRadius = 10
+//        sendWordsButton.backgroundColor = UIColor.systemBackground
+//        sendWordsButton.addShadow()
+//        sendWordsButton.addTarget(self, action: #selector(sendWordsTapped), for: .touchUpInside)
+//        
+//        view.addSubview(sendWordsButton)
+//        
+//        sendWordsButton.snp.makeConstraints { maker in
+//            maker.height.equalToSuperview().multipliedBy(0.22)
+//        }
+//        
+//        return sendWordsButton
+//    }
     
     func textFieldWindowCreated() -> UITextField {
         let textFieldWindow = UITextField()
@@ -230,30 +257,22 @@ final class SlovusGameViewController: UIViewController {
         textFieldWindow.minimumFontSize = 30
         textFieldWindow.textAlignment = .center
         
-        view.addSubview(textFieldWindow)
-        
         return textFieldWindow
     }
     
     func clearPlaceGame() {
-
-    }
-    
-    func createPlaceGame() {
-//        clearPlaceGame()
         massTextField.removeAll()
         massLayer.removeAll()
         for view in contentViewStackView.arrangedSubviews {
-            contentViewStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        contentViewStackView.removeFromSuperview()
-        // Удаляем все элементы из contentViewStackView
+        
+        containerView.addSubview(contentViewStackView)
+    }
+    
+    func createPlaceGame() {
+        clearPlaceGame()
 
-        
-        // Добавляем contentViewStackView на view
-        view.addSubview(contentViewStackView)
-        
         // Создаем и добавляем все элементы в массивы
         for i in 0..<numberOfRows {
             for _ in 0..<numberOfColumns {
@@ -270,7 +289,7 @@ final class SlovusGameViewController: UIViewController {
             contentViewStackView.addArrangedSubview(massLayer[i])
         }
         
-        // Устанавливаем необходимые свойства
+        // setup conditions
         for i in massLayer {
             i.axis = .horizontal
             i.distribution = .fillEqually
@@ -280,9 +299,10 @@ final class SlovusGameViewController: UIViewController {
         contentViewStackView.axis = .vertical
         contentViewStackView.distribution = .fillEqually
         contentViewStackView.spacing = 1
+        contentViewStackView.layer.cornerRadius = 5
         
         contentViewStackView.snp.makeConstraints { maker in
-            maker.edges.equalTo(containerView).inset(10)
+            maker.edges.equalTo(containerView).inset(5)
         }
     }
     

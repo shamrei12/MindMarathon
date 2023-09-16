@@ -12,6 +12,7 @@
 		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
 		D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */; };
 		D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD12AB4CE79007A6597 /* IconsManager.swift */; };
+		D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD42AB60F59007A6597 /* KeyboardView.swift */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
 		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
 		D826CF132A10C69200263CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D826CF122A10C69200263CEB /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
 		D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		D81F8DD12AB4CE79007A6597 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
+		D81F8DD42AB60F59007A6597 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D826CF092A10C69000263CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D826CF0B2A10C69000263CEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D81F8DD32AB60F36007A6597 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D81F8DD42AB60F59007A6597 /* KeyboardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D826CEFD2A10C69000263CEB = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D81F8DD32AB60F36007A6597 /* Views */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
 				D826CF212A10C71F00263CEB /* Storyboards */,
@@ -470,6 +481,7 @@
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
+				D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
