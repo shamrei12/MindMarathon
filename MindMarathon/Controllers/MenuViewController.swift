@@ -15,10 +15,17 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = CustomColor.viewColor.color
-        creatingUI()
+        setupUI()
     }
     
-    func creatingUI() {
+    func setupUI() {
+        createLabelName()
+        createStackButton()
+        createBugButton()
+    }
+    
+    
+    func createLabelName() {
         let labelStackView = UIStackView()
         let firstLabel = UILabel()
         let secondLabel = UILabel()
@@ -35,8 +42,34 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         labelStackView.alignment = .center
         labelStackView.distribution = .fill
         labelStackView.spacing = 2
+        
         view.addSubview(labelStackView)
         
+        labelStackView.snp.makeConstraints { maker in
+            maker.top.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
+            maker.centerX.equalToSuperview()
+        }
+    }
+    
+    func createStackButton() {
+        let buttonStackView = UIStackView()
+        buttonStackView.axis = .vertical
+        buttonStackView.spacing = 20
+        buttonStackView.distribution = .fillEqually
+        buttonStackView.addArrangedSubview(createStartButton())
+        buttonStackView.addArrangedSubview(createWhiteBoardButton())
+        
+        view.addSubview(buttonStackView)
+        
+        buttonStackView.snp.makeConstraints { maker in
+            maker.centerX.centerY.equalToSuperview()
+            maker.width.equalToSuperview().multipliedBy(0.9)
+            maker.height.equalToSuperview().multipliedBy(0.2)
+        }
+        
+    }
+    
+    func createStartButton() -> UIButton {
         let startMarathon = UIButton()
         startMarathon.setTitle("Список игр", for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
@@ -47,55 +80,42 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         startMarathon.layer.cornerRadius = 10
         startMarathon.addShadow()
-        view.addSubview(startMarathon)
         
-        let whiteBoard = UIButton()
-        whiteBoard.setTitle("Статистика игр", for: .normal)
-        whiteBoard.setTitleColor(.label, for: .normal)
-        whiteBoard.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
-        whiteBoard.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        whiteBoard.titleLabel!.minimumScaleFactor = 0.1
-        whiteBoard.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
-        whiteBoard.addShadow()
-        whiteBoard.backgroundColor = UIColor(named: "gameElementColor")
-        whiteBoard.layer.cornerRadius = 10
-        view.addSubview(whiteBoard)
-        
-        let buttonStackView = UIStackView()
-        buttonStackView.axis = .vertical
-        buttonStackView.spacing = 20
-        buttonStackView.distribution = .fillEqually
-        buttonStackView.addArrangedSubview(startMarathon)
-        buttonStackView.addArrangedSubview(whiteBoard)
-        view.addSubview(buttonStackView)
-        
+        return startMarathon
+    }
+    
+    func createWhiteBoardButton() -> UIButton {
+        let whiteBoardButton = UIButton()
+        whiteBoardButton.setTitle("Статистика игр", for: .normal)
+        whiteBoardButton.setTitleColor(.label, for: .normal)
+        whiteBoardButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        whiteBoardButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        whiteBoardButton.titleLabel!.minimumScaleFactor = 0.1
+        whiteBoardButton.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
+        whiteBoardButton.addShadow()
+        whiteBoardButton.backgroundColor = UIColor(named: "gameElementColor")
+        whiteBoardButton.layer.cornerRadius = 10
+
+        return whiteBoardButton
+    }
+    
+    func createBugButton() {
         let buttonHelpsForUser = UIButton()
-        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 30)
+        let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40)
         let image = UIImage(systemName: "envelope")?.withConfiguration(symbolConfiguration)
         buttonHelpsForUser.setImage(image, for: .normal)
 
-//        buttonHelpsForUser.setImage(UIImage(systemName: "envelope"), for: .normal)
+
         buttonHelpsForUser.setTitleColor(.label, for: .normal)
         buttonHelpsForUser.backgroundColor = UIColor(named: "gameElementColor")
         buttonHelpsForUser.layer.cornerRadius = 10
-        buttonHelpsForUser.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        buttonHelpsForUser.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
         buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
         buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
         buttonHelpsForUser.addShadow()
         buttonHelpsForUser.tintColor = UIColor.label
         view.addSubview(buttonHelpsForUser)
-        
-        labelStackView.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.9)
-            maker.centerX.equalToSuperview()
-        }
-        
-        buttonStackView.snp.makeConstraints { maker in
-            maker.centerX.centerY.equalToSuperview()
-            maker.width.equalToSuperview().multipliedBy(0.90)
-            maker.height.equalToSuperview().multipliedBy(0.20)
-        }
         
         buttonHelpsForUser.snp.makeConstraints { maker in
             maker.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)

@@ -95,10 +95,7 @@ class TicTacToeViewController: UIViewController {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     

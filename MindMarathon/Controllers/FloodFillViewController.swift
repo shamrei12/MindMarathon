@@ -105,7 +105,7 @@ class FloodFillViewController: UIViewController {
     
     func gameViewCreated() {
         gameView.layer.cornerRadius = 10
-        gameView.backgroundColor = UIColor(named: "gameElementColor")
+        gameView.backgroundColor = .clear
         view.addSubview(gameView)
         gameView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(100)

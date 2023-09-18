@@ -32,6 +32,7 @@ class BullCowTableViewCell: UITableViewCell {
     }
     
     func createView() {
+        
         // Создание главного View
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
@@ -91,7 +92,7 @@ class BullCowTableViewCell: UITableViewCell {
             userDiggitLabel.textAlignment = .center
             userDiggitLabel.textColor = .white
             mainView.addSubview(viewElement)
-            mainView.addSubview(userDiggitLabel)
+            viewElement.addSubview(userDiggitLabel)
             userDiggitLabel.snp.makeConstraints { maker in
                 maker.left.right.bottom.top.equalTo(viewElement).inset(0)
             }

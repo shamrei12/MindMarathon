@@ -421,14 +421,10 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     func clearKeyboardButtons() {
-        for button in massiveKeyboardButtons {
-            button.backgroundColor = .systemBackground
-            button.setTitleColor(UIColor.label, for: .normal)
-        }
+        keyboardView.clearColorButtons()
     }
     
     func coloringKeyboardButtons(letter: String, color: UIColor) {
-        
         
         for button in keyboardView.massiveKeyboardButtons {
             if button.titleLabel?.text ?? "" == letter {

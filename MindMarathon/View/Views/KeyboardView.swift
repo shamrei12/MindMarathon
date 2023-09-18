@@ -93,6 +93,12 @@ class KeyboardView: UIView {
         return keyboardRowStackView
     }
     
+    func clearColorButtons() {
+        for button in massiveKeyboardButtons {
+            button.backgroundColor = .systemBackground
+        }
+    }
+    
     @objc func letterinputTapped(_ sender: UIButton) {
         guard let key = sender.titleLabel?.text else { return }
         delegate?.keyPressed(key)
