@@ -9,6 +9,9 @@ excluded:
     - Carthage
     - Pods
 type_body_length:
-  warning: 400
+  warning: 500
   error: 500
+file_lenght:
+  warning: 550
+  error: 600
 

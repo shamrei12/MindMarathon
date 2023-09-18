@@ -39,10 +39,12 @@ class RulesViewController: UIViewController {
             gameRules.text = game.rules
         case "Бинарио":
             gameRules.text = game.rules
+        case "Заливка":
+            gameRules.text = game.rules
         default: print("error")
         }
         
-        rulesLabel.text = "Правила игры".localized()
+        rulesLabel.text = "Правила игры"
         rulesLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
         rulesLabel.textAlignment = .center
         rulesLabel.textColor = .label

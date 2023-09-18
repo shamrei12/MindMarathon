@@ -17,7 +17,7 @@ class ListGamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.title = "Список игр".localized()
+        navigationItem.title = "Список игр"
         tableView.register(UINib(nibName: "ListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "ListGameTableViewCell")
         tableView.separatorColor = .none
         tableView.separatorStyle = .none

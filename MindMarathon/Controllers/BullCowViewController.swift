@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BullCowViewController: UIViewController, AlertDelegate {
+class BullCowViewController: UIViewController {
     private let panelControllView = UIView()
     private let combinationCountLabel = UILabel()
     private let panelControllStackView = UIStackView()
@@ -23,11 +23,9 @@ class BullCowViewController: UIViewController, AlertDelegate {
     private var isshowMessageAlert: Bool = false
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
-    private var countStep: Int = .zero
     private var indexMass: Int = .zero
     private var seconds: Int = .zero
     private var messegeView: UserMistakeView!
-    private var alertView: ResultAlertView!
     private var gameLevel: GameLevel!
     private let viewModel: BullCowViewModel
     
@@ -42,11 +40,11 @@ class BullCowViewController: UIViewController, AlertDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingTableView()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localized(), style: .plain, target: self, action: #selector(rulesTapped))
-        userDiggitLabel.text = ""
         self.view.backgroundColor = CustomColor.viewColor.color
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        userDiggitLabel.text = ""
+        settingTableView()
         createUIElements()
         gameLevel = GameLevel()
     }
@@ -59,6 +57,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         tableview.delegate = self
         tableview.separatorStyle = .none
         tableview.allowsSelection = false
+        tableview.showsVerticalScrollIndicator = false
     }
     
     func levelButtonCreated() {
@@ -84,10 +83,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
@@ -98,7 +94,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         panelControllView.layer.cornerRadius = 10
         panelControllView.backgroundColor = .clear
         view.addSubview(panelControllView)
-
+        
         panelControllStackView.addArrangedSubview(levelButton)
         panelControllStackView.addArrangedSubview(playButton)
         panelControllStackView.axis = .horizontal
@@ -129,7 +125,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         let mainView = UIView()
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
-        mainView.layer.shadowColor = UIColor.label.cgColor
+        mainView.layer.shadowColor = UIColor.black.cgColor
         mainView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         mainView.layer.shadowOpacity = 0.2
         mainView.layer.shadowRadius = 3
@@ -142,6 +138,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         userDiggitLabel.minimumScaleFactor = 0.7
         
         deleteLastButton.setBackgroundImage(UIImage(systemName: "delete.left.fill"), for: .normal)
+        deleteLastButton.tintColor = .label
         deleteLastButton.addTarget(self, action: #selector(deleteLastTapped), for: .touchUpInside)
         
         inputFieldStackView.addArrangedSubview(userDiggitLabel)
@@ -154,7 +151,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         mainView.addSubview(inputFieldStackView)
         
         inputFieldStackView.snp.makeConstraints { maker in
-//            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.9)
+            //            maker.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.9)
             maker.edges.equalToSuperview().inset(5)
         }
         
@@ -179,10 +176,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         button.titleLabel!.minimumScaleFactor = 0.5
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.layer.shadowColor = UIColor.label.cgColor
-        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        button.layer.shadowOpacity = 0.2
-        button.layer.shadowRadius = 3
+        button.addShadow()
         button.addTarget(self, action: #selector(diggitsTapped), for: .touchUpInside)
         return button
     }
@@ -214,7 +208,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
     }
     
     func sendButtonCreated() {
-        sendDiggitsButton.setTitle("ОТПРАВИТЬ".localized(), for: .normal)
+        sendDiggitsButton.setTitle("ОТПРАВИТЬ", for: .normal)
         sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         sendDiggitsButton.setTitleColor(.label, for: .normal)
         sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -222,10 +216,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
         sendDiggitsButton.backgroundColor = CustomColor.gameElement.color
         sendDiggitsButton.tintColor = UIColor.label
         sendDiggitsButton.layer.cornerRadius = 10
-        sendDiggitsButton.layer.shadowColor = UIColor.label.cgColor
-        sendDiggitsButton.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        sendDiggitsButton.layer.shadowOpacity = 0.2
-        sendDiggitsButton.layer.shadowRadius = 3
+        sendDiggitsButton.addShadow()
         sendDiggitsButton.addTarget(self, action: #selector(sendDiggitTapped), for: .touchUpInside)
         view.addSubview(sendDiggitsButton)
     }
@@ -265,7 +256,7 @@ class BullCowViewController: UIViewController, AlertDelegate {
             maker.bottom.equalTo(panelIntputControlView).inset(10)
             maker.left.right.top.equalTo(panelIntputControlView).inset(10)
         }
-    
+        
         sendDiggitsButton.snp.makeConstraints { maker in
             maker.height.equalTo(panelIntputControlView.snp.height).multipliedBy(0.18)
         }
@@ -274,9 +265,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
     // MARK: Navigation Bar
     @objc
     func cancelTapped() {
-        if alertView != nil {
-            alertView.removeFromSuperview()
-        }
         viewModel.stepList.removeAll()
         tableview.reloadData()
         self.dismiss(animated: true)
@@ -333,33 +321,72 @@ class BullCowViewController: UIViewController, AlertDelegate {
         maxLenght = Int((levelButton.titleLabel?.text)!)!
         levelButton.isEnabled = false
         computerDiggit = viewModel.makeNumber(maxLenght: maxLenght)
-        print(computerDiggit)
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isStartGame = true
+        viewModel.isContinueGame = true
     }
     
     func continueGame() {
         createTimer()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isContinueGame = true
     }
     
     func pauseGame() {
+        viewModel.isContinueGame = false
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        navigationItem.title = "ПАУЗА".localized()
+        navigationItem.title = "ПАУЗА"
+    }
+    
+    func endGame() {
+        viewModel.restartGame()
+        viewModel.countStep = 0
+        pauseGame()
+        timerLabel.text = "0"
+        levelButton.isEnabled = true
+        viewModel.stepList.removeAll()
+        tableview.reloadData()
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+            self.endGame()
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+            self.exitGame()
+        }
+        alertController.addAction(endAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc
     func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         if chekPartGame == (false, false) {
-            viewModel.isStartGame = true
-            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            viewModel.isContinueGame = false
             pauseGame()
+            showAlertAboutFinishGame()
         } else {
-            viewModel.isContinueGame = true
             continueGame()
         }
     }
@@ -367,24 +394,22 @@ class BullCowViewController: UIViewController, AlertDelegate {
     @objc
     func sendDiggitTapped(_ sender: UIButton) {
         guard viewModel.checkRepeatDiggits(userDiggit: userDiggitLabel.text!) else {
-            createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры".localized())
+            createMistakeMessage(messages: "В вашем числе есть повторяющиеся цифры")
             return
         }
         
         if viewModel.isStartGame {
             if userDiggitLabel.text?.count == maxLenght {
                 viewModel.comparisonNumber(viewModel.createMassive(userDiggit: userDiggitLabel.text!), computerDiggit)
-                
                 viewModel.stepList.append(BullCowModel(size: maxLenght, bull: viewModel.bull, cow: viewModel.cow, userStep: viewModel.createMassive(userDiggit: userDiggitLabel.text!)))
                 userDiggitLabel.text = ""
-                
                 let lastIndexPath = IndexPath(row: viewModel.stepList.count - 1, section: 0)
                 tableview.insertRows(at: [lastIndexPath], with: .automatic)
                 tableview.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-                countStep += 1
+                viewModel.countStep += 1
                 checkResult(bull: viewModel.bull)
             } else {
-                createMistakeMessage(messages: "В веденном Вами числу не хватает цирф".localized())
+                createMistakeMessage(messages: "В веденном Вами числу не хватает цирф")
             }
         }
     }
@@ -392,8 +417,8 @@ class BullCowViewController: UIViewController, AlertDelegate {
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
-            createAlertMessage(description: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
-            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            showAlertAboutFinishGame(title: "Конец игры", message: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
+            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -409,7 +434,6 @@ class BullCowViewController: UIViewController, AlertDelegate {
         levelButton.isEnabled = true
         viewModel.stepList.removeAll()
         tableview.reloadData()
-        alertView.removeFromSuperview()
     }
     
     func exitGame() {
@@ -419,24 +443,47 @@ class BullCowViewController: UIViewController, AlertDelegate {
         }
         viewModel.restartGame()
         tableview.reloadData()
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
-    
-    // MARK: создание элементов уведомления
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
+}
+
+// MARK: расширение для tableview
+extension BullCowViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = viewModel.stepList.count
+        return count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: BullCowTableViewCell
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
+            cell = reuseCell
+        } else {
+            cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
+        }
+        return configure(cell: cell, for: indexPath)
+    }
+    
+    private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        let step = viewModel.stepList[indexPath.row]
+        cell.gameData = [step]
+        cell.createUI()
+        cell.backgroundColor = UIColor.clear
+        return cell
+    }
+}
+
+extension BullCowViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let safeAreaHeight = self.view.safeAreaLayoutGuide.layoutFrame.size.height
+        let cellHeight = safeAreaHeight * 0.11
+
+        return cellHeight
+        
+    }
+}
+
+extension BullCowViewController {
     func createMistakeMessage(messages: String) {
         guard messegeView == nil else {
             return
@@ -472,37 +519,5 @@ class BullCowViewController: UIViewController, AlertDelegate {
                 self.messegeView = nil
             })
         }
-    }
-}
-
-// MARK: расширение для tableview
-extension BullCowViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = viewModel.stepList.count
-        return count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: BullCowTableViewCell
-        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "BullCowTableViewCell", for: indexPath) as? BullCowTableViewCell {
-            cell = reuseCell
-        } else {
-            cell = BullCowTableViewCell(style: .default, reuseIdentifier: "BullCowTableViewCell")
-        }
-        return configure(cell: cell, for: indexPath)
-    }
-    
-    private func configure(cell: BullCowTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        let step = viewModel.stepList[indexPath.row]
-        cell.gameData = [step]
-        cell.createUI()
-        cell.backgroundColor = UIColor.clear
-        return cell
-    }
-}
-
-extension BullCowViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
 }

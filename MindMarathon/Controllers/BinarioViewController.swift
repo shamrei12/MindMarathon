@@ -7,30 +7,30 @@
 
 import UIKit
 
-class BinarioViewController: UIViewController, AlertDelegate {
+class BinarioViewController: UIViewController {
+    private var messegeView: UserMistakeView!
+    private var viewModel: BinarioViewModel
+    private var gameLevel: GameLevel!
+    private let checkResultButton = UIButton()
     private let panelControllView = UIView()
     private let panelControllStackView = UIStackView()
     private let sendClearStackView = UIStackView()
     private let clearMoves = UIButton()
-    private var stopwatch = Timer()
-    private var seconds = 0
-    private var isstartGame = false
-    private var iscontinuePlaying = false
-    private let playButton = UIButton()
-    private let levelButton = UIButton()
-    private var alertView: ResultAlertView!
-    private let containerView = UIView()
-    private var gridSize = 4
-    private let contentStackView = UIStackView()
-    private var index = 0
     private var massLayer = [UIStackView]()
     private var cells = [[UIView]]()
     private var row = [UIView]()
-    private var messegeView: UserMistakeView!
-    private var viewModel: BinarioViewModel
-    private var gameLevel: GameLevel!
+    private var stopwatch = Timer()
+    private let playButton = UIButton()
+    private let levelButton = UIButton()
+    private let containerView = UIView()
+    private let contentStackView = UIStackView()
+    private var gridSize = 4
+    private var index: Int = .zero
+    private var seconds: Int = .zero
+
     private var colorMass = [UIColor(hex: 0xb5b5b5), UIColor(hex: 0xff2b66), UIColor(hex: 0x006fc5)]
-    let checkResultButton = UIButton()
+    private var isstartGame = false
+    private var iscontinuePlaying = false
     
     init(viewModel: BinarioViewModel) {
         self.viewModel = viewModel
@@ -59,10 +59,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
-        levelButton.layer.shadowColor = UIColor.black.cgColor
-        levelButton.layer.shadowOpacity = 0.5
-        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        levelButton.layer.shadowRadius = 3
+        levelButton.addShadow()
         view.addSubview(levelButton)
     }
     
@@ -73,10 +70,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         playButton.backgroundColor = .systemBlue
         playButton.layer.cornerRadius = 10
         playButton.tintColor = UIColor.white
-        playButton.layer.shadowColor = UIColor.black.cgColor
-        playButton.layer.shadowOpacity = 0.5
-        playButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        playButton.layer.shadowRadius = 4
+        playButton.addShadow()
         view.addSubview(playButton)
     }
     
@@ -89,11 +83,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
         checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
-        checkResultButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        checkResultButton.layer.shadowColor = UIColor.black.cgColor
-        checkResultButton.layer.shadowOpacity = 0.5
-        checkResultButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        checkResultButton.layer.shadowRadius = 4
+        checkResultButton.addShadow()
         view.addSubview(checkResultButton)
     }
     
@@ -106,11 +96,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
-        clearMoves.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        clearMoves.layer.shadowColor = UIColor.black.cgColor
-        clearMoves.layer.shadowOpacity = 0.5
-        clearMoves.layer.shadowOffset = CGSize(width: 1, height: 1)
-        clearMoves.layer.shadowRadius = 4
+        clearMoves.addShadow()
         view.addSubview(clearMoves)
     }
     
@@ -134,15 +120,15 @@ class BinarioViewController: UIViewController, AlertDelegate {
     
     func containerCreated() {
         // GameZone
-        containerView.backgroundColor = UIColor(named: "gameElementColor")
+        containerView.backgroundColor = .clear
         containerView.layer.cornerRadius = 10
         containerView.isUserInteractionEnabled = false
         
         view.addSubview(containerView)
         
         containerView.snp.makeConstraints { maker in
-            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
-            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
+            maker.height.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
+            maker.width.equalTo(view.safeAreaLayoutGuide.snp.width).multipliedBy(0.95)
             maker.centerX.equalTo(view.safeAreaLayoutGuide.snp.centerX)
             maker.centerY.equalTo(view.safeAreaLayoutGuide.snp.centerY)
         }
@@ -181,7 +167,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         sendClearStackViewCreated()
     }
     
-    func createGamePlace(size: Int) {
+    func createStackViewForMassLayer() {
         for _ in 0..<gridSize {
             let stackView = UIStackView()
             stackView.axis = .horizontal
@@ -189,13 +175,20 @@ class BinarioViewController: UIViewController, AlertDelegate {
             stackView.spacing = 5
             massLayer.append(stackView)
         }
+    }
+    func createViewForContainerView() -> UIView {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        let cell = UIView()
+        cell.addGestureRecognizer(tapRecognizer)
+        cell.backgroundColor = UIColor.tertiaryLabel
+        return cell
+    }
+    func createGamePlace(size: Int) {
+        createStackViewForMassLayer()
         
         for i in 0..<gridSize {
             for _ in 0..<gridSize {
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-                let cell = UIView()
-                cell.addGestureRecognizer(tapRecognizer)
-                cell.backgroundColor = UIColor.tertiaryLabel
+                let cell = createViewForContainerView()
                 massLayer[i].addArrangedSubview(cell)
                 row.append(cell)
             }
@@ -211,10 +204,7 @@ class BinarioViewController: UIViewController, AlertDelegate {
         contentStackView.spacing = 5
         
         contentStackView.snp.makeConstraints { maker in
-            maker.left.equalTo(containerView).inset(10)
-            maker.top.equalTo(containerView).inset(10)
-            maker.right.equalTo(containerView).inset(10)
-            maker.bottom.equalTo(containerView).inset(10)
+            maker.edges.equalTo(containerView).inset(5)
         }
         
         createGameElement()
@@ -275,33 +265,69 @@ class BinarioViewController: UIViewController, AlertDelegate {
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         createGamePlace(size: gridSize)
         viewModel.size = gridSize
+        viewModel.isStartGame = true
+        viewModel.isContinueGame = true
     }
     
     func continueGame() {
         createTimer()
         playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        viewModel.isContinueGame = true
+
     }
     
     func pauseGame() {
         stopwatch.invalidate()
         playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         navigationItem.title = "PAUSE"
+        viewModel.isContinueGame = false
+    }
+    
+    func endGame() {
+        self.dismiss(animated: true)
     }
     
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (viewModel.isStartGame, viewModel.isContinueGame)
         
         if chekPartGame == (false, false) {
-            viewModel.isStartGame = true
-            viewModel.isContinueGame = true
             startNewGame()
         } else if chekPartGame == (true, true) {
-            viewModel.isContinueGame = false
+            showAlertAboutFinishGame()
             pauseGame()
         } else {
-            viewModel.isContinueGame = true
             continueGame()
         }
+    }
+    
+    func showAlertAboutFinishGame() {
+        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+            self.exitGame()
+        }
+        alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     // Раскраская каждого view в зависимости от tag
@@ -330,10 +356,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
             viewElement.layer.shadowRadius = 5
         default:
             viewElement.backgroundColor = UIColor(cgColor: colorMass[0].cgColor)
-            viewElement.layer.shadowColor = .none
-            viewElement.layer.shadowOpacity = 1
-            viewElement.layer.shadowOffset = CGSize(width: 0, height: 0) // смещение тени
-            viewElement.layer.shadowRadius = 0 // радиус размытия тени
+            viewElement.layer.shadowColor = UIColor.clear.cgColor
+
         }
     }
     
@@ -362,11 +386,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
             return
         }
         
-        if selectedCell.tag + 1 > 2 {
-            selectedCell.tag = 0
-        } else {
-            selectedCell.tag += 1
-        }
+        selectedCell.tag + 1 > 2 ? (selectedCell.tag = 0) : (selectedCell.tag += 1)
+
         makeColor(viewElement: selectedCell)
     }
     
@@ -378,7 +399,8 @@ class BinarioViewController: UIViewController, AlertDelegate {
                 return
             }
             if makeAnswer(mass: mass) {
-                createAlertMessage(description: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
+                stopwatch.invalidate()
+                showAlertAboutFinishGame(title: "Конец игры", message: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
                 let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
@@ -461,19 +483,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         }
     }
     
-    func createAlertMessage(description: String) {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 0.6
-            self.view.isUserInteractionEnabled = false
-        }
-        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-        alertView.delegate = self
-        alertView.descriptionLabel.text = description
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-                                   y: self.view.frame.size.height / 2)
-    }
-    
     func restartGame() {
         UIView.animate(withDuration: 0.1) {
             self.view.alpha = 1.0
@@ -486,7 +495,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
         stopwatch.invalidate()
         seconds = 0
         clearGame()
-        alertView.removeFromSuperview()
     }
     
     func clearGame() {
@@ -502,7 +510,6 @@ class BinarioViewController: UIViewController, AlertDelegate {
     }
     
     func exitGame() {
-        alertView.removeFromSuperview()
         self.dismiss(animated: true)
     }
 }

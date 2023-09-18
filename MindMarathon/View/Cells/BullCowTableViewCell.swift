@@ -17,15 +17,22 @@ class BullCowTableViewCell: UITableViewCell {
     let numberStackView = UIStackView()
     var gameData = [BullCowProtocol]()
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         self.isSelected = false
     }
     
-    func createUI() {
+    func clearView() {
+        for view in userMoveStackView.arrangedSubviews {
+            userMoveStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
         mainView.removeFromSuperview()
+    }
+    
+    func createView() {
+        
         // Создание главного View
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
@@ -34,7 +41,9 @@ class BullCowTableViewCell: UITableViewCell {
         mainView.snp.makeConstraints { maker in
             maker.left.right.top.bottom.equalToSuperview().inset(5)
         }
-        
+    }
+    
+    func createMainStackView() {
         // Создание главного Stackview и двух в него входящих Stackview
         for view in mainStackView.arrangedSubviews {
             imageStackView.removeArrangedSubview(view)
@@ -52,16 +61,9 @@ class BullCowTableViewCell: UITableViewCell {
             maker.top.bottom.equalTo(mainView).inset(5)
             maker.left.right.equalTo(mainView).inset(10)
         }
-        
-        guard let countCow = gameData.first?.cow, let countBull = gameData.first?.bull else {
-            return
-        }
-        
-        for view in userMoveStackView.arrangedSubviews {
-            userMoveStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
-        }
+    }
     
+    func createUserMoveStackView() {
         // Создание stack с ответом пользователя
         userMoveStackView.axis = .horizontal
         userMoveStackView.backgroundColor = .clear
@@ -69,13 +71,17 @@ class BullCowTableViewCell: UITableViewCell {
         userMoveStackView.spacing = 5
         let widthConstraint = userMoveStackView.widthAnchor.constraint(equalTo: mainStackView.widthAnchor, multiplier: 0.7)
         widthConstraint.isActive = true
-        
+    }
+    
+    func createResultStackView() {
         // Создание stack с ответом алгоритма
         resultStepStacvkView.axis = .vertical
         resultStepStacvkView.backgroundColor = .clear
         resultStepStacvkView.distribution = .fillEqually
         resultStepStacvkView.spacing = 5
-
+    }
+    
+    func makeUserMove() {
         for i in 0..<gameData.first!.size {
             let viewElement = UIView()
             let userDiggitLabel = UILabel()
@@ -86,13 +92,21 @@ class BullCowTableViewCell: UITableViewCell {
             userDiggitLabel.textAlignment = .center
             userDiggitLabel.textColor = .white
             mainView.addSubview(viewElement)
-            mainView.addSubview(userDiggitLabel)
+            viewElement.addSubview(userDiggitLabel)
             userDiggitLabel.snp.makeConstraints { maker in
                 maker.left.right.bottom.top.equalTo(viewElement).inset(0)
             }
             userMoveStackView.addArrangedSubview(viewElement)
         }
-        
+    }
+    
+    func createUI() {
+        clearView()
+        createView()
+        createMainStackView()
+        createUserMoveStackView()
+        createResultStackView()
+        makeUserMove()
         createImageResult()
         createLabelResult()
     }
@@ -107,8 +121,6 @@ class BullCowTableViewCell: UITableViewCell {
         imageStackView.axis = .horizontal
         imageStackView.spacing = 15
         mainView.addSubview(imageStackView)
-        
-        
         
         let cowImage = UIImageView(image: UIImage(named: "cow"))
         cowImage.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +147,6 @@ class BullCowTableViewCell: UITableViewCell {
             numberStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-        
         numberStackView.distribution = .fillEqually
         numberStackView.axis = .horizontal
         numberStackView.spacing = 20

@@ -29,7 +29,7 @@ class ListGameTableViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         
         gameNameStackView.axis = .horizontal
-        gameNameStackView.distribution = .fillProportionally
+        gameNameStackView.distribution = .fillEqually
         gameNameStackView.spacing = 1
         containerView.addSubview(gameNameStackView)
         
@@ -43,6 +43,7 @@ class ListGameTableViewCell: UITableViewCell {
         createdByLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         createdByLabel.minimumScaleFactor = 0.1
         
+        gameNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         gameNameStackView.addArrangedSubview(gameNameLabel)
         gameNameStackView.addArrangedSubview(createdByLabel)
         

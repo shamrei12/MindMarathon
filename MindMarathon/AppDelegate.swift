@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func sendEveningNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Mind Marathon"
-        content.body = "Буквы начали строить плохие слова. Помешай им?"
+        content.body = "Буквы начали строить плохие слова. Помешай им!"
         content.sound = UNNotificationSound.default
         
         var dateComponents = DateComponents()
