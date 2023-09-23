@@ -13,6 +13,7 @@
 		D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */; };
 		D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD12AB4CE79007A6597 /* IconsManager.swift */; };
 		D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD42AB60F59007A6597 /* KeyboardView.swift */; };
+		D81F8DE02AB8CA25007A6597 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D81F8DE22AB8CA25007A6597 /* Localizable.strings */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
 		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
 		D826CF132A10C69200263CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D826CF122A10C69200263CEB /* Assets.xcassets */; };
@@ -62,6 +63,8 @@
 		D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		D81F8DD12AB4CE79007A6597 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
 		D81F8DD42AB60F59007A6597 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		D81F8DE12AB8CA25007A6597 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D81F8DE32AB8CA47007A6597 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D826CF092A10C69000263CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D826CF0B2A10C69000263CEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 				D826CF0B2A10C69000263CEB /* SceneDelegate.swift */,
 				D826CF122A10C69200263CEB /* Assets.xcassets */,
 				D826CF172A10C69200263CEB /* Info.plist */,
+				D81F8DE22AB8CA25007A6597 /* Localizable.strings */,
 			);
 			path = MindMarathon;
 			sourceTree = "<group>";
@@ -378,6 +382,7 @@
 			files = (
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
 				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
+				D81F8DE02AB8CA25007A6597 /* Localizable.strings in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
@@ -494,6 +499,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D81F8DE22AB8CA25007A6597 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D81F8DE12AB8CA25007A6597 /* en */,
+				D81F8DE32AB8CA47007A6597 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D826CF142A10C69200263CEB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

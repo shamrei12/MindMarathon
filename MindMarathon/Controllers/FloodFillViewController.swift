@@ -48,7 +48,7 @@ class FloodFillViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
         gameLevel = GameLevel()
@@ -68,7 +68,7 @@ class FloodFillViewController: UIViewController {
     }
     
     func playButtonCreated() {
-        playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -253,7 +253,7 @@ class FloodFillViewController: UIViewController {
         if checkResult() {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
-            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -372,21 +372,21 @@ class FloodFillViewController: UIViewController {
         seconds = 0
         createTimer()
         startConditions()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
     }
     
     func continueGame() {
         gameView.isUserInteractionEnabled = true
         colorView.isUserInteractionEnabled = true
         createTimer()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         isContinuePlaying = true
     }
     
     func pauseGame() {
         colorView.isUserInteractionEnabled = false
         stopwatch.invalidate()
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         navigationItem.title = "PAUSE"
         isContinuePlaying = false
     }

@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 class BullCowViewController: UIViewController {
+    
+    private var messegeView: UserMistakeView!
+    private var gameLevel = GameLevel()
+    private let viewModel: BullCowViewModel
+    
     private let panelControllView = UIView()
     private let combinationCountLabel = UILabel()
     private let panelControllStackView = UIStackView()
@@ -19,16 +24,14 @@ class BullCowViewController: UIViewController {
     private let deleteLastButton = UIButton()
     private let sendDiggitsButton = UIButton()
     private let playButton = UIButton()
+    
     private var stopwatch = Timer()
     private var isshowMessageAlert: Bool = false
     private var computerDiggit = [Int]()
     private var maxLenght: Int = 4
     private var indexMass: Int = .zero
     private var seconds: Int = .zero
-    private var messegeView: UserMistakeView!
-    private var gameLevel: GameLevel!
-    private let viewModel: BullCowViewModel
-    
+
     init(viewModel: BullCowViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -42,11 +45,10 @@ class BullCowViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = CustomColor.viewColor.color
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
         settingTableView()
         createUIElements()
-        gameLevel = GameLevel()
     }
     
     func settingTableView() {
@@ -69,15 +71,12 @@ class BullCowViewController: UIViewController {
         levelButton.tintColor = UIColor.label
         levelButton.backgroundColor = UIColor.lightGray
         levelButton.layer.cornerRadius = 10
-        levelButton.layer.shadowColor = UIColor.black.cgColor
-        levelButton.layer.shadowOpacity = 0.5
-        levelButton.layer.shadowOffset = CGSize(width: 1, height: 1)
-        levelButton.layer.shadowRadius = 3
+        levelButton.addShadow()
         view.addSubview(levelButton)
     }
     
     func playButtonCreated() {
-        playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -125,10 +124,7 @@ class BullCowViewController: UIViewController {
         let mainView = UIView()
         mainView.backgroundColor = UIColor(named: "gameElementColor")
         mainView.layer.cornerRadius = 10
-        mainView.layer.shadowColor = UIColor.black.cgColor
-        mainView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        mainView.layer.shadowOpacity = 0.2
-        mainView.layer.shadowRadius = 3
+        mainView.addShadowView()
         view.addSubview(mainView)
         
         userDiggitLabel.tintColor = .label
@@ -208,7 +204,7 @@ class BullCowViewController: UIViewController {
     }
     
     func sendButtonCreated() {
-        sendDiggitsButton.setTitle("ОТПРАВИТЬ", for: .normal)
+        sendDiggitsButton.setTitle("ОТПРАВИТЬ".localize(), for: .normal)
         sendDiggitsButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         sendDiggitsButton.setTitleColor(.label, for: .normal)
         sendDiggitsButton.titleLabel?.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -321,21 +317,21 @@ class BullCowViewController: UIViewController {
         maxLenght = Int((levelButton.titleLabel?.text)!)!
         levelButton.isEnabled = false
         computerDiggit = viewModel.makeNumber(maxLenght: maxLenght)
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         viewModel.isStartGame = true
         viewModel.isContinueGame = true
     }
     
     func continueGame() {
         createTimer()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         viewModel.isContinueGame = true
     }
     
     func pauseGame() {
         viewModel.isContinueGame = false
         stopwatch.invalidate()
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         navigationItem.title = "ПАУЗА"
     }
     
@@ -418,16 +414,12 @@ class BullCowViewController: UIViewController {
         if bull == maxLenght {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "Конец игры", message: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
-            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы", resultGame: "Победа", countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы".localize(), resultGame: "Победа", countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
     
     func restartGame() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1.0
-            self.view.isUserInteractionEnabled = true
-        }
         viewModel.restartGame()
         pauseGame()
         timerLabel.text = "0"

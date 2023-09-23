@@ -45,7 +45,7 @@ class BinarioViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "viewColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         createUI()
         gameLevel = GameLevel()
     }
@@ -77,7 +77,7 @@ class BinarioViewController: UIViewController {
     func checkResultButtonCreated() {
         checkResultButton.layer.cornerRadius = 10
         checkResultButton.backgroundColor = .systemGreen
-        checkResultButton.setTitle("Проверить", for: .normal)
+        checkResultButton.setTitle("Проверить".localize(), for: .normal)
         checkResultButton.setTitleColor(.white, for: .normal)
         checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
@@ -90,7 +90,7 @@ class BinarioViewController: UIViewController {
     func clearMovesCreated() {
         clearMoves.layer.cornerRadius = 10
         clearMoves.backgroundColor = .systemRed
-        clearMoves.setTitle("Очистить", for: .normal)
+        clearMoves.setTitle("Очистить".localize(), for: .normal)
         clearMoves.setTitleColor(.white, for: .normal)
         clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -401,7 +401,7 @@ class BinarioViewController: UIViewController {
             if makeAnswer(mass: mass) {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
-                let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                let resultGame = WhiteBoardModel(nameGame: "Бинарио".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }

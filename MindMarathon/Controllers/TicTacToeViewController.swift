@@ -57,10 +57,11 @@ class TicTacToeViewController: UIViewController {
         createUIElements()
         createConstraints()
     }
+    
     //MARK: - UI Setup
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     func createUIElements() {
@@ -89,7 +90,7 @@ class TicTacToeViewController: UIViewController {
     }
     
     func playButtonCreated() {
-        playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -361,12 +362,12 @@ class TicTacToeViewController: UIViewController {
         if isUserWon {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
             }
             setComputerTurn(row: position.0, col: position.1)
@@ -402,7 +403,7 @@ class TicTacToeViewController: UIViewController {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "Конец игры", message: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
             }
             computerThinkingTimer?.invalidate()
             playerTurn()

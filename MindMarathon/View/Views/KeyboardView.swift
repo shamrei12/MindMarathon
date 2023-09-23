@@ -18,10 +18,10 @@ class KeyboardView: UIView {
         self.addSubview(keyBoardView)
         
         keyBoardView.snp.makeConstraints { maker in
-            maker.top.equalTo(self.snp.bottom).inset(1)
-            maker.left.right.equalToSuperview().inset(1)
-            maker.bottom.equalToSuperview().inset(1)
-            maker.height.equalTo(self.safeAreaLayoutGuide).multipliedBy(1)
+            maker.top.equalTo(self.snp.bottom)
+            maker.left.right.equalToSuperview()
+            maker.bottom.equalToSuperview()
+            maker.height.equalToSuperview()
         }
         
         return keyBoardView
@@ -49,7 +49,7 @@ class KeyboardView: UIView {
     
     private func sendButtonCreated() -> UIButton {
         let sendWordsButton = UIButton()
-        sendWordsButton.setTitle("ПРОВЕРИТЬ СЛОВО", for: .normal)
+        sendWordsButton.setTitle("ПРОВЕРИТЬ СЛОВО".localize(), for: .normal)
         sendWordsButton.setTitleColor(UIColor.label, for: .normal)
         sendWordsButton.layer.cornerRadius = 10
         sendWordsButton.backgroundColor = UIColor.systemBackground

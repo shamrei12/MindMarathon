@@ -47,30 +47,35 @@ class WhiteboardViewController: UIViewController {
         gameNameLabel.textAlignment = .center
         gameNameLabel.numberOfLines = 0
         gameNameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        
         view.addSubview(gameNameLabel)
         
         let gameResultLabel = UILabel()
         gameResultLabel.text = "Статус"
         gameResultLabel.textAlignment = .center
         gameResultLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        
         view.addSubview(gameResultLabel)
         
         let gameCountLabel = UILabel()
         gameCountLabel.text = "Ходы"
         gameCountLabel.textAlignment = .center
         gameCountLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        
         view.addSubview(gameCountLabel)
         
         let gameTimerLabel = UILabel()
         gameTimerLabel.text = "Время"
         gameTimerLabel.textAlignment = .center
         gameTimerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        
         view.addSubview(gameTimerLabel)
         
         let labelStackView = UIStackView(arrangedSubviews: [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel])
         labelStackView.axis = .horizontal
         labelStackView.distribution = .fillEqually
         labelStackView.spacing = 5
+        
         view.addSubview(labelStackView)
         
         labelStackView.snp.makeConstraints { maker in
@@ -79,6 +84,7 @@ class WhiteboardViewController: UIViewController {
         }
         
         view.addSubview(tableView)
+        
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(labelStackView).inset(20)
             maker.left.right.bottom.equalToSuperview().inset(10)
@@ -89,7 +95,6 @@ class WhiteboardViewController: UIViewController {
     func cancelTapped() {
         self.dismiss(animated: true)
     }
-    
 }
 
 extension WhiteboardViewController: UITableViewDataSource {
@@ -119,13 +124,12 @@ extension WhiteboardViewController: UITableViewDataSource {
         cell.gameCount.text = item.countStep
         cell.gameTimer.text = item.timerGame
         
-        if item.resultGame == "Победа" {
-            cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        } else if item.resultGame == "Ничья" {
-            cell.mainView.backgroundColor = UIColor.systemYellow
-        } else {
-            cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
+        switch item.resultGame {
+        case "Победа": cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+        case "Ничья": cell.mainView.backgroundColor = UIColor.systemYellow
+        default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
         }
+
         return cell
     }
 }

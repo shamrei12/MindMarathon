@@ -79,7 +79,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     
     private func navigationBarCreate() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     private func levelButtonCreate() {
@@ -97,7 +97,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     private func createPlayButton() {
-        playButton.setImage(Icons.playFill?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -151,7 +151,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         keyboardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-5)
             maker.left.right.equalToSuperview().inset(5)
-            maker.bottom.equalToSuperview().inset(20)
+            maker.bottom.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.26)
         }
     }
@@ -283,18 +283,18 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         createTimer()
         gameCondition(.started)
         puzzleWord = getPuzzleWord()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         createPlaceGame()
     }
     
     func continueGame() {
         createTimer()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         viewModel.iscontinuePlaying = true
     }
     
     func pauseGame() {
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         stopwatch?.invalidate()
         navigationItem.title = "PAUSE"
     }
@@ -448,7 +448,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             stopwatch?.invalidate()
             showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(viewModel.step) попыток")
-            let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Победа", countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
             
         } else if viewModel.step == 6 {
