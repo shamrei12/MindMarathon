@@ -41,7 +41,7 @@ class RulesViewController: UIViewController {
             gameRules.text = game.rules
         case "Заливка".localize():
             gameRules.text = game.rules
-        default: print("error")
+        default: gameRules.text = game.rules
         }
         
         rulesLabel.text = "Правила игры".localize()

@@ -46,3 +46,13 @@ struct BinarioGame: Game {
     var rules: String
     var gameImage: String
 }
+
+struct NumbersGame: Game {
+    var title: String
+    var createdBy: String
+    var descripton: String
+    var rules: String
+    var gameImage: String
+    
+    
+}
