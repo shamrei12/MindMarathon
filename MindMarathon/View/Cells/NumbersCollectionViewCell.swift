@@ -9,14 +9,18 @@ import UIKit
 import SnapKit
 
 class NumbersCollectionViewCell: UICollectionViewCell {
-
+    
     let numberLabel = UILabel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLabel()
     }
-
+    
+    override func prepareForReuse() {
+        
+    }
+    
     func setupLabel() {
         numberLabel.font =  UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         numberLabel.textAlignment = .center
@@ -28,4 +32,17 @@ class NumbersCollectionViewCell: UICollectionViewCell {
             maker.edges.equalToSuperview()
         }
     }
+    
+    func select() {
+        self.backgroundColor = .red
+    }
+    
+    func deselect() {
+        self.backgroundColor = .systemGray
+    }
+    
+    func hide() {
+        self.backgroundColor = .systemGray.withAlphaComponent(0.2)
+    }
+
 }

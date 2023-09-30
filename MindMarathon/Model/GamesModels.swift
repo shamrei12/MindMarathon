@@ -53,6 +53,4 @@ struct NumbersGame: Game {
     var descripton: String
     var rules: String
     var gameImage: String
-    
-    
 }

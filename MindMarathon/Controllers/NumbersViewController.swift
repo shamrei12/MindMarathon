@@ -87,8 +87,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         addNumbersButton.snp.makeConstraints { maker in
             maker.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
             maker.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
-            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.1)
-            maker.top.equalTo(gameView.snp.bottom).inset(-10)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.08)
         }
     }
     
