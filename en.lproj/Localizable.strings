@@ -9,12 +9,12 @@
 "Бинарио" = "Binario";
 "Цифры" = "Numbers";
 
-"Ваша цель угадать секретное число за минимальное количество ходов" = "Your goal is to guess the secret number in as few moves as possible";
-"В данной игре Вам необходимо угадать секретное слово за 6 попыток" = "In this game you have to guess the secret word in 6 tries";
-"Ваша цель закрасить поле в один цвет за минимальное количество ходов" = "Your goal is to paint the field in one color in the minimum number of moves";
-"Ваша задача быстрее соперника выстроить свои символы (крестики) в линию" = "Your task is to line up your symbols (crosses) in a line faster than your opponent";
-"Правильно расставьте синие и красные блоки в сетке, удовлетворяя условиям" = "Correctly arrange blue and red blocks in the grid, satisfying the conditions";
-"Удалите все цифры с игрового поля сумма которых равна 10, или пары одинаковых цифр" = "Remove all digits from the playing field whose sum equals 10, or pairs of identical digits.";
+"Угадай загаданное число" = "Guess the mystery number";
+"В данной игре Вам необходимо угадать секретное слово за 6 попыток" = "Guess the word in 6 moves";
+"Закрась поле в один цвет" = "Paint the field one color";
+"Выстроить линию из трех одинаковых символов" = "Line up three identical symbols";
+"Расставьте синие и красные блоки" = "Arrange the blue and red blocks";
+"Удалите все цифры с игрового поля" = "Remove all the numbers from the playing field";
 
 "Правила игры" = "Game rules";
 "Правила" = "Rules";

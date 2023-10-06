@@ -14,6 +14,7 @@ protocol FinishGameDelegate: AnyObject {
 
 class NumbersViewController: UIViewController, FinishGameDelegate {
     func alertResult() {
+        stopwatch?.invalidate()
         showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?")
         let resultGame = WhiteBoardModel(nameGame: "Цифры".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         RealmManager.shared.saveResult(result: resultGame)
@@ -102,7 +103,8 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         } else {
             print("Error")
         }
-        collectionView.setupView(elementMassive: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "1", "1", "2", "1", "3", "1", "4", "1", "5", "1", "6", "1", "7", "1", "8"])
+        collectionView.setupView(massive: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "1", "1", "2", "1", "3", "1", "4", "1", "5", "1", "6", "1", "7", "1", "8"]
+)
         gameView.addSubview(collectionView)
         collectionView.snp.makeConstraints { maker in
             maker.edges.equalTo(gameView).inset(5)
@@ -156,13 +158,13 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     }
     
     func createGameView() {
-        gameView.backgroundColor = .systemBackground
+        gameView.backgroundColor = .clear
         view.addSubview(gameView)
         
         gameView.snp.makeConstraints { maker in
             maker.top.equalTo(panelControllView.snp.bottom).inset(-20)
-            maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalToSuperview().multipliedBy(0.65)
+            maker.width.equalToSuperview()
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.7)
         }
         
         collectionViewCreated()
