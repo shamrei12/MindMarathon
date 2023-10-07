@@ -1,14 +1,12 @@
 import UIKit
 import SnapKit
 
-class ListGameTableViewCell: UITableViewCell {
+class ListGameCollectionViewCell: UICollectionViewCell {
     let containerView = UIView()
     let gameImageView = UIImageView()
     let gameNameLabel = UILabel()
-    let createdByLabel = UILabel()
     let aboutGameLabel = UILabel()
     let gameNameStackView = UIStackView()
-    let separationView = UIView()
     let gameInfoStackView = UIStackView()
     
     override func awakeFromNib() {
@@ -16,16 +14,12 @@ class ListGameTableViewCell: UITableViewCell {
         containerView.layer.cornerRadius = 10
         setupUI()
         setupConstraints()
-        self.selectionStyle = .none
         self.backgroundColor = .clear
     }
     
     func setupUI() {
         containerView.backgroundColor = CustomColor.gameElement.color
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-        containerView.layer.shadowOpacity = 0.2
-        containerView.layer.shadowRadius = 3
+        containerView.addShadowView()
         contentView.addSubview(containerView)
         
         gameNameStackView.axis = .horizontal
@@ -38,17 +32,14 @@ class ListGameTableViewCell: UITableViewCell {
         
         gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
         gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameNameLabel.minimumScaleFactor = 0.1
-        createdByLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        createdByLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        createdByLabel.minimumScaleFactor = 0.1
+        gameNameLabel.minimumScaleFactor = 0.5
+
         
         gameNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         gameNameStackView.addArrangedSubview(gameNameLabel)
-        gameNameStackView.addArrangedSubview(createdByLabel)
         
         aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 40.0)
+        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 10.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         aboutGameLabel.minimumScaleFactor = 0.2
         containerView.addSubview(aboutGameLabel)
@@ -57,26 +48,27 @@ class ListGameTableViewCell: UITableViewCell {
         gameInfoStackView.addArrangedSubview(aboutGameLabel)
         gameInfoStackView.axis = .vertical
         gameInfoStackView.distribution = .fill
-        gameInfoStackView.spacing = 10
+        gameInfoStackView.spacing = 5
         containerView.addSubview(gameInfoStackView)
     }
     
     func setupConstraints() {
         containerView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 5, left: 1, bottom: 5, right: 5))
+            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         }
         
         gameImageView.snp.makeConstraints { maker in
-            maker.leading.equalToSuperview().offset(10)
-            maker.top.bottom.equalToSuperview().inset(10)
-            maker.width.equalTo(gameImageView.snp.height)
+            maker.top.equalToSuperview().inset(1)
+            maker.left.right.equalToSuperview().inset(5)
+            maker.height.equalTo(self.safeAreaLayoutGuide).multipliedBy(0.8)
+            maker.centerY.equalToSuperview()
         }
         
         gameInfoStackView.snp.makeConstraints { make in
-            make.leading.equalTo(gameImageView.snp.trailing).offset(10)
-            make.top.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-10)
+            make.top.equalTo(gameImageView.snp.bottom).inset(10)
+            make.left.right.equalToSuperview().inset(5)
             make.bottom.equalToSuperview().inset(10)
         }
     }
+
 }
