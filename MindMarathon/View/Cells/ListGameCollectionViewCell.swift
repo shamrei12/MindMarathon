@@ -30,18 +30,17 @@ class ListGameCollectionViewCell: UICollectionViewCell {
         gameImageView.contentMode = .scaleAspectFit
         containerView.addSubview(gameImageView)
         
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25.0)
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameNameLabel.minimumScaleFactor = 0.5
+        gameNameLabel.minimumScaleFactor = 0.1
 
-        
         gameNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         gameNameStackView.addArrangedSubview(gameNameLabel)
         
         aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 10.0)
+        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.2
+        aboutGameLabel.minimumScaleFactor = 0.1
         containerView.addSubview(aboutGameLabel)
         
         gameInfoStackView.addArrangedSubview(gameNameStackView)
@@ -54,7 +53,7 @@ class ListGameCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints() {
         containerView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
+            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: -5, left: 1, bottom: 1, right: 1))
         }
         
         gameImageView.snp.makeConstraints { maker in
@@ -65,9 +64,9 @@ class ListGameCollectionViewCell: UICollectionViewCell {
         }
         
         gameInfoStackView.snp.makeConstraints { make in
-            make.top.equalTo(gameImageView.snp.bottom).inset(10)
+            make.top.equalTo(gameImageView.snp.bottom).inset(5)
             make.left.right.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(7)
         }
     }
 
