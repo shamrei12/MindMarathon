@@ -404,7 +404,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         let arrayResponse = massiveAnswer.0
         for i in 0..<arrayResponse.count {
             if arrayResponse[i] == 0 {
-                massTextField[massiveIndex[i]].textColor = .gray
+                massTextField[massiveIndex[i]].textColor = .lightGray
             } else if arrayResponse[i] == 1 {
                 massTextField[massiveIndex[i]].textColor = .white
                 massTextField[massiveIndex[i]].backgroundColor = .systemYellow
