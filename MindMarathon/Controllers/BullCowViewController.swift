@@ -45,7 +45,7 @@ class BullCowViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = CustomColor.viewColor.color
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
         settingTableView()
         createUIElements()
@@ -346,14 +346,14 @@ class BullCowViewController: UIViewController {
     }
     
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
-            self.endGame()
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
+            self.restartGame()
         }
         alertController.addAction(endAction)
         
@@ -362,15 +362,16 @@ class BullCowViewController: UIViewController {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.exitGame()
         }
         alertController.addAction(endAction)
+        
         present(alertController, animated: true, completion: nil)
     }
     
@@ -405,7 +406,7 @@ class BullCowViewController: UIViewController {
                 viewModel.countStep += 1
                 checkResult(bull: viewModel.bull)
             } else {
-                createMistakeMessage(messages: "В веденном Вами числу не хватает цирф")
+                createMistakeMessage(messages: "The number you've given is missing the cirphs".localize())
             }
         }
     }
@@ -413,8 +414,8 @@ class BullCowViewController: UIViewController {
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "Конец игры", message: "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?")
-            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы".localize(), resultGame: "Победа", countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            showAlertAboutFinishGame(title: "End game".localize(), message: "Yay! The guessed number\(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Your score \(viewModel.countStep) of attempts in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Shall we play again?".localize())
+            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }

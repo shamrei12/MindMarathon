@@ -15,7 +15,7 @@ protocol FinishGameDelegate: AnyObject {
 class NumbersViewController: UIViewController, FinishGameDelegate {
     func alertResult() {
         stopwatch?.invalidate()
-        showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?")
+        showAlertAboutFinishGame(title: "End game".localize(), message: "Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?".localize())
         let resultGame = WhiteBoardModel(nameGame: "Цифры".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         RealmManager.shared.saveResult(result: resultGame)
     }
@@ -132,10 +132,17 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     }
     
     @objc func addNumbers() {
+        guard isstartGame else {
+            return
+        }
         collectionView.createMassiveWhenAddbuttonWasTapped()
     }
     
     @objc func showPossibleMove() {
+        guard isstartGame else {
+            return
+        }
+
         collectionView.showPossibleMoveWhenPossibleMoveWasTapped()
     }
     
@@ -161,7 +168,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     
     private func navigationBarCreate() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     private func createPlayButton() {
@@ -271,30 +278,33 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
 }
 
 extension NumbersViewController {
-    func showAlertAboutFinishGame(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
-            self.restartGame()
-        }
-        alertController.addAction(continueAction)
-        let endAction = UIAlertAction(title: "Выйти из игры", style: .destructive) { _ in
-            self.exitGame()
-        }
-        alertController.addAction(endAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
-            self.continueGame()
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.restartGame()
         }
         alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
+            self.exitGame()
+        }
+        alertController.addAction(endAction)
+        
         present(alertController, animated: true, completion: nil)
     }
 }

@@ -32,3 +32,29 @@
 "ПРОВЕРИТЬ СЛОВО" = "WORD CHECK";
 "ОТПРАВИТЬ" = "SEND";
 "Добавить" = "Add";
+
+"Конец игры" = "End game";
+"Внимание!" = "Attention!";
+
+"Вы действительно хотите закончить игру?" = "Do you really want to finish the game?";
+
+"Продолжить" = "To be continued";
+"Закончить игру"  = "Finish the game";
+"Новая игра" = "New game";
+
+"В веденном Вами числе не хватает цифр" = "The number you have given is missing digits";
+"Данного слова не существует в словаре. Проверьте написание и повторите попытку" = "This word does not exist in the dictionary. Check the spelling and try again";
+
+"Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?" = "Yay! The guessed number\(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Your score \(viewModel.countStep) of attempts in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Shall we play again?";
+
+"Поздравляем! Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов." = "Congratulations! You have completely filled the field in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.gameResult()) moves.";
+"Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!" = "Victory! You have colored the entire field in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Not a bad result. More to come!";
+"Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?" = "The moves are over! We made a word \(puzzleWord). Will you try again?";
+"Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(viewModel.step) попыток" = "Congratulations! We guessed the word\(puzzleWord) that you guessed in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.step) tries.";
+"Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Congratulations! You have won! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
+
+"Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Tie! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
+
+"Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "You lose! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
+
+"Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?" = "Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?";
