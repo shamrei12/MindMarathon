@@ -30,7 +30,7 @@ class ListGameCollectionViewCell: UICollectionViewCell {
         gameImageView.contentMode = .scaleAspectFit
         containerView.addSubview(gameImageView)
         
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
+        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
         gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         gameNameLabel.minimumScaleFactor = 0.1
 
@@ -38,15 +38,15 @@ class ListGameCollectionViewCell: UICollectionViewCell {
         gameNameStackView.addArrangedSubview(gameNameLabel)
         
         aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 12.0)
+        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.1
+        aboutGameLabel.minimumScaleFactor = 0.5
         containerView.addSubview(aboutGameLabel)
         
         gameInfoStackView.addArrangedSubview(gameNameStackView)
         gameInfoStackView.addArrangedSubview(aboutGameLabel)
         gameInfoStackView.axis = .vertical
-        gameInfoStackView.distribution = .fill
+        gameInfoStackView.distribution = .fillEqually
         gameInfoStackView.spacing = 5
         containerView.addSubview(gameInfoStackView)
     }

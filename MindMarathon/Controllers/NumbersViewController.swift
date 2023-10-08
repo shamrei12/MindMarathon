@@ -29,13 +29,15 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     private let gameView = UIView()
     private let gameCollectionView: UICollectionView
     private var stopwatch: Timer?
-    private var addNumbersButton = UIButton()
+    private let addNumbersButton = UIButton()
+    private let movesСheck = UIButton()
+    private let gameControlStackView = UIStackView()
     
     private var seconds: Int = .zero
     private var isstartGame = false
     private var iscontinuePlaying = false
 
-    private var massiveButtons = [[UIButton]]()
+//    private var massiveButtons = [[UIButton]]()
     
     init(viewModel: NumbersViewModel) {
         self.viewModel = viewModel
@@ -71,9 +73,10 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         self.view.backgroundColor = UIColor(named: "viewColor")
         navigationBarCreate()
         panelControlCreated()
+        createGameControlStackView()
     }
     
-    func createAddNumbersButton() {
+    func createAddNumbersButton() -> UIButton {
         addNumbersButton.layer.cornerRadius = 10
         addNumbersButton.backgroundColor = .systemGreen
         addNumbersButton.setTitle("Добавить".localize(), for: .normal)
@@ -83,17 +86,57 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         addNumbersButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         addNumbersButton.titleLabel!.minimumScaleFactor = 0.1
         addNumbersButton.addShadow()
-        view.addSubview(addNumbersButton)
         
+        view.addSubview(addNumbersButton)
+////        
         addNumbersButton.snp.makeConstraints { maker in
-            maker.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
-            maker.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.25)
+            maker.width.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.7)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.08)
         }
+//        
+        return addNumbersButton
+    }
+    
+    func createMovesСheckButton() -> UIButton {
+        movesСheck.layer.cornerRadius = 10
+        movesСheck.backgroundColor = .systemGray
+        movesСheck.setImage(UIImage(systemName: "lightbulb"), for: .normal)
+        movesСheck.scalesLargeContentImage = true
+        movesСheck.showsLargeContentViewer = true
+        movesСheck.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large), forImageIn: .normal)
+        movesСheck.tintColor = .white
+        movesСheck.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        movesСheck.addTarget(self, action: #selector(showPossibleMove), for: .touchUpInside)
+        movesСheck.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        movesСheck.titleLabel!.minimumScaleFactor = 0.1
+        movesСheck.addShadow()
+        
+        return movesСheck
+    }
+    
+    func createGameControlStackView() {
+        gameControlStackView.axis = .horizontal
+        gameControlStackView.distribution = .fillEqually
+        gameControlStackView.spacing = 20
+        gameControlStackView.addArrangedSubview(createMovesСheckButton())
+        gameControlStackView.addArrangedSubview(createAddNumbersButton())
+
+        view.addSubview(gameControlStackView)
+    
+        gameControlStackView.snp.makeConstraints { maker in
+            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.08)
+            
+        }
+        
     }
     
     @objc func addNumbers() {
         collectionView.createMassiveWhenAddbuttonWasTapped()
+    }
+    
+    @objc func showPossibleMove() {
+        collectionView.showPossibleMoveWhenPossibleMoveWasTapped()
     }
     
     func collectionViewCreated() {
@@ -168,7 +211,6 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         }
         
         collectionViewCreated()
-        createAddNumbersButton()
     }
     
     @objc func cancelTapped() {
