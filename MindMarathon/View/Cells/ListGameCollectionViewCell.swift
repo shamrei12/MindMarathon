@@ -53,7 +53,7 @@ class ListGameCollectionViewCell: UICollectionViewCell {
     
     func setupConstraints() {
         containerView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: -5, left: 1, bottom: 1, right: 1))
+            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
         }
         
         gameImageView.snp.makeConstraints { maker in

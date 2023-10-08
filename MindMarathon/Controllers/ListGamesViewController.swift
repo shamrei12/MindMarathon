@@ -28,7 +28,8 @@ class ListGamesViewController: UIViewController {
         collectionView.snp.makeConstraints { maker in
             maker.centerX.centerY.equalToSuperview()
             maker.width.equalToSuperview().multipliedBy(0.95)
-            maker.height.equalTo(view.safeAreaLayoutGuide)
+            maker.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            maker.bottom.equalToSuperview().inset(10)
         }
         createUI()
     }
