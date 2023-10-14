@@ -347,7 +347,7 @@ class BullCowViewController: UIViewController {
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
@@ -414,7 +414,7 @@ class BullCowViewController: UIViewController {
     func checkResult(bull: Int) {
         if bull == maxLenght {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "End game".localize(), message: "Yay! The guessed number\(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Your score \(viewModel.countStep) of attempts in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Shall we play again?".localize())
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleDiggit_message".localize() + "\(computerDiggit). " + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.countStep)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }

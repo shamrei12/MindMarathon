@@ -361,12 +361,12 @@ class TicTacToeViewController: UIViewController {
         
         if isUserWon {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "End game".localize(), message: "Congratulations! You have won! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))".localize())
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "End game".localize(), message: "Tie! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))".localize())
+                showAlertAboutFinishGame(title: "End game".localize(), message: "draw_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
             }
@@ -401,8 +401,7 @@ class TicTacToeViewController: UIViewController {
             let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
             if isComputerWon {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "End game".localize(), message: "You lose! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                
+                showAlertAboutFinishGame(title: "End game".localize(), message: "defeat_message".localize() + "time_message".localize() + " \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
             }
             computerThinkingTimer?.invalidate()

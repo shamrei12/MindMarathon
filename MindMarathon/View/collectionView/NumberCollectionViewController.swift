@@ -65,7 +65,12 @@ extension NumberCollectionView: UICollectionViewDataSource {
             cell.backgroundColor = .systemGray.withAlphaComponent(0.2)
             cell.isUserInteractionEnabled = false
             return cell
-        } else {
+        } else if posibleMove.contains(indexPath) {
+            cell.helpSelected()
+            cell.isUserInteractionEnabled = true
+            return cell
+        }
+        else {
             cell.backgroundColor = .systemGray.withAlphaComponent(1)
             cell.isUserInteractionEnabled = true
             return cell

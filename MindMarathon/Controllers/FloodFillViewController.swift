@@ -234,11 +234,14 @@ class FloodFillViewController: UIViewController {
     
     @objc func selectedColorTapped(sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
-        if chekPartGame == (true, true) {
-            for index in colorMassiveButton {
-                index.layer.borderColor = .none
-                index.layer.borderWidth = 0
-            }
+        
+        guard chekPartGame == (true, true)  else {
+            return
+        }
+        for index in colorMassiveButton {
+            index.layer.borderColor = .none
+            index.layer.borderWidth = 0
+        }
             
             selectedColor = colorMass[sender.tag]
             
@@ -248,12 +251,14 @@ class FloodFillViewController: UIViewController {
                 viewModel.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
-        }
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "End game".localize(), message: "Congratulations! You have completely filled the field in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.gameResult()) moves.".localize())
-            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+   
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+
+
+            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -321,7 +326,7 @@ class FloodFillViewController: UIViewController {
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)

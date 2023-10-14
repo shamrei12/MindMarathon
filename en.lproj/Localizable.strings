@@ -57,4 +57,12 @@
 
 "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "You lose! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
 
-"Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?" = "Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?";
+
+
+"congratulations_message" = "Congratulations! You've won! ";
+"defeat_message" = "You lost:( ";
+"draw_message" = "Draw! ";
+"time_message" = "Game time: ";
+"step_message" = "Number of steps: ";
+"puzzleWord_message" = "We made a word: ";
+"puzzleDiggit_message" = "We've puzzled out the numbers: ";
