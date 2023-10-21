@@ -71,7 +71,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     
     func createStartButton() -> UIButton {
         let startMarathon = UIButton()
-        startMarathon.setTitle("Список игр", for: .normal)
+        startMarathon.setTitle("Game list".localize(), for: .normal)
         startMarathon.setTitleColor(.label, for: .normal)
         startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -86,7 +86,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     
     func createWhiteBoardButton() -> UIButton {
         let whiteBoardButton = UIButton()
-        whiteBoardButton.setTitle("Статистика игр", for: .normal)
+        whiteBoardButton.setTitle("Game stats".localize(), for: .normal)
         whiteBoardButton.setTitleColor(.label, for: .normal)
         whiteBoardButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         whiteBoardButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта

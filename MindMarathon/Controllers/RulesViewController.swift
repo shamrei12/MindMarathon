@@ -31,20 +31,20 @@ class RulesViewController: UIViewController {
         let rulesLabel = UILabel()
         
         switch game.title {
-        case "Быки и Коровы":
+        case "Быки и Коровы".localize():
             gameRules.text = game.rules
-        case "Словус":
+        case "Словус".localize():
             gameRules.text = game.rules
-        case "Крестики Нолики":
+        case "Крестики Нолики".localize():
             gameRules.text = game.rules
-        case "Бинарио":
+        case "Бинарио".localize():
             gameRules.text = game.rules
-        case "Заливка":
+        case "Заливка".localize():
             gameRules.text = game.rules
-        default: print("error")
+        default: gameRules.text = game.rules
         }
         
-        rulesLabel.text = "Правила игры"
+        rulesLabel.text = "Правила игры".localize()
         rulesLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
         rulesLabel.textAlignment = .center
         rulesLabel.textColor = .label

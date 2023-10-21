@@ -9,4 +9,5 @@ import UIKit
 
 enum Icons {
     static let playFill = UIImage(systemName: "play.fill")
+    static let pauseFill = UIImage(systemName: "pause.fill")
 }

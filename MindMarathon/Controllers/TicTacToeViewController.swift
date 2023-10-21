@@ -57,10 +57,11 @@ class TicTacToeViewController: UIViewController {
         createUIElements()
         createConstraints()
     }
+    
     //MARK: - UI Setup
     func setupNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     func createUIElements() {
@@ -89,7 +90,7 @@ class TicTacToeViewController: UIViewController {
     }
     
     func playButtonCreated() {
-        playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -360,13 +361,13 @@ class TicTacToeViewController: UIViewController {
         
         if isUserWon {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Победа", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "Конец игры", message: "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+                showAlertAboutFinishGame(title: "End game".localize(), message: "draw_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Ничья", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
                 return
             }
             setComputerTurn(row: position.0, col: position.1)
@@ -400,9 +401,8 @@ class TicTacToeViewController: UIViewController {
             let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
             if isComputerWon {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "Конец игры", message: "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики", resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
+                showAlertAboutFinishGame(title: "End game".localize(), message: "defeat_message".localize() + "time_message".localize() + " \(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Поражение", countStep: stepCount.description, timerGame: "\(seconds.description) с"))
             }
             computerThinkingTimer?.invalidate()
             playerTurn()
@@ -438,21 +438,6 @@ class TicTacToeViewController: UIViewController {
         navigationItem.title = TimeManager.shared.convertToMinutes(seconds: seconds)
     }
     
-    //    func createAlertMessage(description: String) {
-    //        UIView.animate(withDuration: 0.1) {
-    //            self.view.alpha = 0.6
-    //            self.view.isUserInteractionEnabled = false
-    //        }
-    //        stopwatch.invalidate()
-    //        alertView = ResultAlertView.loadFromNib() as? ResultAlertView
-    //        alertView.delegate = self
-    //        alertView.descriptionLabel.text = description
-    //        UIApplication.shared.keyWindow?.addSubview(alertView)
-    //        alertView.center = CGPoint(x: self.view.frame.size.width  / 2,
-    //                                   y: self.view.frame.size.height / 2)
-    //
-    //    }
-    
     @objc func startGameTapped(_ sender: UIButton) {
         let chekPartGame = (isStartGame, iscontinuePlaying)
         gameStatusPlayerLabel.text = "Ваш ход!"
@@ -467,16 +452,14 @@ class TicTacToeViewController: UIViewController {
     }
     
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.restartGame()
-            //            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-            
         }
         alertController.addAction(endAction)
         
@@ -485,15 +468,13 @@ class TicTacToeViewController: UIViewController {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.exitGame()
-            //            alertController.dismiss(animated: true, completion: nil) // Скрытие алерта после нажатия кнопки "Закончить игру"
-            
         }
         alertController.addAction(endAction)
         

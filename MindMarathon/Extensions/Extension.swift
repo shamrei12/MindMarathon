@@ -17,7 +17,6 @@ extension UIView {
         }
         return view
     }
-
 }
 
 extension UIColor {
@@ -41,3 +40,18 @@ extension UIButton {
     }
 }
 
+extension UIView {
+    
+    func addShadowView() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 3
+    }
+}
+
+extension String {
+    func localize() -> String {
+        NSLocalizedString(self, tableName: "Localizable", value: self, comment: self)
+    }
+}

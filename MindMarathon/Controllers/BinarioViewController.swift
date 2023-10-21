@@ -45,7 +45,7 @@ class BinarioViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "viewColor")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         createUI()
         gameLevel = GameLevel()
     }
@@ -77,7 +77,7 @@ class BinarioViewController: UIViewController {
     func checkResultButtonCreated() {
         checkResultButton.layer.cornerRadius = 10
         checkResultButton.backgroundColor = .systemGreen
-        checkResultButton.setTitle("Проверить", for: .normal)
+        checkResultButton.setTitle("Проверить".localize(), for: .normal)
         checkResultButton.setTitleColor(.white, for: .normal)
         checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
@@ -90,7 +90,7 @@ class BinarioViewController: UIViewController {
     func clearMovesCreated() {
         clearMoves.layer.cornerRadius = 10
         clearMoves.backgroundColor = .systemRed
-        clearMoves.setTitle("Очистить", for: .normal)
+        clearMoves.setTitle("Очистить".localize(), for: .normal)
         clearMoves.setTitleColor(.white, for: .normal)
         clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
@@ -301,13 +301,13 @@ class BinarioViewController: UIViewController {
     }
     
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { (action) in
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.restartGame()
         }
         alertController.addAction(endAction)
@@ -317,12 +317,12 @@ class BinarioViewController: UIViewController {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { (action) in
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { (action) in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.exitGame()
         }
         alertController.addAction(endAction)
@@ -400,8 +400,8 @@ class BinarioViewController: UIViewController {
             }
             if makeAnswer(mass: mass) {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "Конец игры", message: "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!")
-                let resultGame = WhiteBoardModel(nameGame: "Бинарио", resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                let resultGame = WhiteBoardModel(nameGame: "Бинарио".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }

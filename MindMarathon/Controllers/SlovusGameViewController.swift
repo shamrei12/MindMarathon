@@ -79,7 +79,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     
     private func navigationBarCreate() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     private func levelButtonCreate() {
@@ -97,7 +97,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     private func createPlayButton() {
-        playButton.setImage(Icons.playFill?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -151,7 +151,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         keyboardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-5)
             maker.left.right.equalToSuperview().inset(5)
-            maker.bottom.equalToSuperview().inset(20)
+            maker.bottom.equalToSuperview().inset(10)
             maker.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.26)
         }
     }
@@ -283,18 +283,19 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         createTimer()
         gameCondition(.started)
         puzzleWord = getPuzzleWord()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        print(puzzleWord)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         createPlaceGame()
     }
     
     func continueGame() {
         createTimer()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         viewModel.iscontinuePlaying = true
     }
     
     func pauseGame() {
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         stopwatch?.invalidate()
         navigationItem.title = "PAUSE"
     }
@@ -404,7 +405,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         let arrayResponse = massiveAnswer.0
         for i in 0..<arrayResponse.count {
             if arrayResponse[i] == 0 {
-                massTextField[massiveIndex[i]].textColor = .gray
+                massTextField[massiveIndex[i]].textColor = .lightGray
             } else if arrayResponse[i] == 1 {
                 massTextField[massiveIndex[i]].textColor = .white
                 massTextField[massiveIndex[i]].backgroundColor = .systemYellow
@@ -447,14 +448,16 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     func checkCondition(massiveAnswer: [Int]) {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             stopwatch?.invalidate()
-            showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(viewModel.step) попыток")
-            let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Победа", countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            let steper = viewModel.step
+            let puzzle = puzzleWord
+            let time = TimeManager.shared.convertToMinutes(seconds: seconds)
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
+            let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
-            
         } else if viewModel.step == 6 {
             stopwatch?.invalidate()
-            showAlertAboutFinishGame(title: "Конец игры", message: "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?")
-            let resultGame = WhiteBoardModel(nameGame: "Словус", resultGame: "Поражение", countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            showAlertAboutFinishGame(title: NSLocalizedString("End game", comment: ""), message: String(format: NSLocalizedString("The moves are over! We made a word %@. Will you try again?", comment: ""), puzzleWord))
+            let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Поражение".localize(), countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -471,7 +474,7 @@ extension SlovusGameViewController {
         let alertViewWidth: CGFloat = self.view.frame.size.width / 1.1
         let alertViewHeight: CGFloat = 100
         
-        messegeView.createUI(messages: "Данного слова не существует в словаре. Проверьте написание и повторите попытку")
+        messegeView.createUI(messages: "This word does not exist in the dictionary. Check the spelling and try again".localize())
         messegeView.frame = CGRect(x: (window!.frame.width - alertViewWidth) / 2,
                                    y: -alertViewHeight,
                                    width: alertViewWidth,
@@ -497,30 +500,33 @@ extension SlovusGameViewController {
         }
     }
     
-    func showAlertAboutFinishGame(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
-            self.restartGame()
-        }
-        alertController.addAction(continueAction)
-        let endAction = UIAlertAction(title: "Выйти из игры", style: .destructive) { _ in
-            self.exitGame()
-        }
-        alertController.addAction(endAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
-            self.continueGame()
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
+            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.restartGame()
         }
         alertController.addAction(endAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertAboutFinishGame(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
+            self.restartGame()
+        }
+        alertController.addAction(continueAction)
+        
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
+            self.exitGame()
+        }
+        alertController.addAction(endAction)
+        
         present(alertController, animated: true, completion: nil)
     }
 }

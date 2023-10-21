@@ -48,7 +48,7 @@ class FloodFillViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .secondarySystemBackground
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Правила", style: .plain, target: self, action: #selector(rulesTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         self.view.backgroundColor = UIColor(named: "viewColor")
         createUI()
         gameLevel = GameLevel()
@@ -68,7 +68,7 @@ class FloodFillViewController: UIViewController {
     }
     
     func playButtonCreated() {
-        playButton.setImage(UIImage(systemName: "play.fill")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         playButton.imageView?.contentMode = .scaleAspectFit
         playButton.addTarget(self, action: #selector(startGameTapped), for: .touchUpInside)
         playButton.backgroundColor = .systemBlue
@@ -234,11 +234,14 @@ class FloodFillViewController: UIViewController {
     
     @objc func selectedColorTapped(sender: UIButton) {
         let chekPartGame = (isStartGame, isContinuePlaying)
-        if chekPartGame == (true, true) {
-            for index in colorMassiveButton {
-                index.layer.borderColor = .none
-                index.layer.borderWidth = 0
-            }
+        
+        guard chekPartGame == (true, true)  else {
+            return
+        }
+        for index in colorMassiveButton {
+            index.layer.borderColor = .none
+            index.layer.borderWidth = 0
+        }
             
             selectedColor = colorMass[sender.tag]
             
@@ -248,12 +251,14 @@ class FloodFillViewController: UIViewController {
                 viewModel.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
-        }
         // Проверяем, достигнута ли цель
         if checkResult() {
             stopwatch.invalidate()
-            showAlertAboutFinishGame(title: "Конец игры", message: "Поздравляем. Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.")
-            let resultGame = WhiteBoardModel(nameGame: "Заливка", resultGame: "Победа", countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+   
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+
+
+            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
     }
@@ -320,13 +325,13 @@ class FloodFillViewController: UIViewController {
     }
     
     func showAlertAboutFinishGame() {
-        let alertController = UIAlertController(title: "Внимание!", message: "Вы действительно хотите закончить игру?", preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Продолжить", style: .default) { _ in
+        let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.restartGame()
         }
         alertController.addAction(endAction)
@@ -336,12 +341,12 @@ class FloodFillViewController: UIViewController {
     
     func showAlertAboutFinishGame(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Новая игра", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "New game".localize(), style: .default) { _ in
             self.restartGame()
         }
         alertController.addAction(continueAction)
         
-        let endAction = UIAlertAction(title: "Закончить игру", style: .destructive) { _ in
+        let endAction = UIAlertAction(title: "Finish the game".localize(), style: .destructive) { _ in
             self.exitGame()
         }
         alertController.addAction(endAction)
@@ -372,21 +377,21 @@ class FloodFillViewController: UIViewController {
         seconds = 0
         createTimer()
         startConditions()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
     }
     
     func continueGame() {
         gameView.isUserInteractionEnabled = true
         colorView.isUserInteractionEnabled = true
         createTimer()
-        playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        playButton.setImage(Icons.pauseFill, for: .normal)
         isContinuePlaying = true
     }
     
     func pauseGame() {
         colorView.isUserInteractionEnabled = false
         stopwatch.invalidate()
-        playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        playButton.setImage(Icons.playFill, for: .normal)
         navigationItem.title = "PAUSE"
         isContinuePlaying = false
     }
