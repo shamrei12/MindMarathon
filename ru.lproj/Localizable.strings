@@ -45,27 +45,6 @@
 "Finish the game" = "Закончить игру";
 "New game" = "Новая игра";
 
-"The number you've given is missing the cirphs" = "В веденном Вами числе не хватает цифр";
-
-"This word does not exist in the dictionary. Check the spelling and try again" = "Данного слова не существует в словаре. Проверьте написание и повторите попытку";
-
-
-"Yay! The guessed number %@. Your score %@ of attempts in %@. Shall we play again?" = "Ура! Угадано число %@. Ваш счет %@ попыток за %@. Хотите сыграть еще раз?";
-
-"Congratulations! You have completely filled the field in %@ and %@ moves." = "Поздравляем! Вы полностью закрасили поле за %@ и %@ ходов.";
-
-
-"Victory! You have colored the entire field in %@. Not a bad result. More to come!" = "Победа! Вы полностью заполнили поле за %@. Неплохой результат. Ещё больше впереди!";
-
-"The moves are over! We made a word %@. Will you try again?" = "Ходы закончились! Мы загадали слово %@. Хотите попробовать еще раз?";
-"Congratulations! We guessed the word \(puzzle) that you guessed in \(time) and \(steper) tries." = "Поздравляем! Мы загадали слово \(puzzle), которое вы отгадали за \(time) и \(steper) попыток";
-
-"Congratulations! You have won! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-"Tie! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-"You lose! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-
-"Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?" = "Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?";
-
 "congratulations_message" = "Поздравляем! Вы победили! ";
 "defeat_message" = "Вы проиграли:( ";
 "draw_message" = "Ничья! ";
