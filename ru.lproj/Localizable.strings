@@ -1,4 +1,3 @@
-
 "Game list" = "Список игр";
 "Game stats" = "Статистика игр";
 
@@ -28,7 +27,6 @@
 "1. The grid has cells of different colors: red, blue and empty cells.\n\n2. The goal of the game is to fill the grid so that the following conditions are met:\n- No row or column must contain repeating colors.\n- Each row and column must contain the same number of red and blue cells.\n\n\n3. The player can fill the grid by clicking on the cells to change their color.\n\n\n4. If all the rules are followed and the grid is completely filled, the player wins." = "1. В сетке есть клетки разных цветов: красные, синие и пустые клетки.\n\n2. Цель игры - заполнить всю сетку так, чтобы выполнились следующие условия:\n- Ни одна строка или столбец не должны содержать повторяющиеся цвета.\n- Каждая строка и столбец должны содержать одинаковое количество красных и синих клеток.\n\n3. Игрок может заполнять сетку, нажимая на клетки, чтобы изменить их цвет.\n\n4. Если все правила выполняются и сетка полностью заполнена, игрок побеждает.\n\n";
 "1. On the game board there is a grid consisting of cells. In each cell there is a digit from 0 to 9.\n2. The goal of the game - to remove all the digits from the field, connecting pairs of digits, the sum of which is 10.\n3. The player can connect digits if they are next to each other horizontally or vertically.\n4. To remove digits, the player must choose a pair of digits, the sum of which is 10, and click on them. After that the digits will be removed from the field.\n5. The player can connect only neighboring digits that are next to each other horizontally or vertically.\n6. A player can get bonus points if he removes several pairs of digits in a row without gaps. " = "1. На игровом поле представлена сетка, состоящая из ячеек. В каждой ячейке расположена цифра от 0 до 9.\n2. Цель игры - удалить все цифры с поля, соединяя пары цифр, сумма которых составляет 10.\n3. Игрок может соединять цифры, если они находятся рядом друг с другом горизонтально или вертикально.\n4. Для удаления цифр, игрок должен выбрать пару цифр, сумма которых равна 10, и нажать на них. После этого цифры будут удалены с поля.\n5. Игрок может соединять только соседние цифры, которые находятся рядом горизонтально или вертикально.\n6. Игрок может получить бонусные очки, если удалит несколько пар цифр подряд без промежутков.";
 
-
 //Games
 
 "Check" = "Проверить";
@@ -37,6 +35,7 @@
 "SEND" = "ОТПРАВИТЬ";
 "Add" = "Добавить";
 "Win" = "Победа";
+"Continue" = "Продолжить";
 
 
 "End game" = "Конец игры";
@@ -46,21 +45,11 @@
 "Finish the game" = "Закончить игру";
 "New game" = "Новая игра";
 
-"The number you've given is missing the cirphs" = "В веденном Вами числе не хватает цифр";
+"congratulations_message" = "Поздравляем! Вы победили! ";
+"defeat_message" = "Вы проиграли:( ";
+"draw_message" = "Ничья! ";
+"time_message" = "Время игры: ";
+"step_message" = "Количество шагов: ";
+"puzzleWord_message" = "Мы загадали слово: ";
+"puzzleDiggit_message" = "Мы загали цифры: ";
 
-"This word does not exist in the dictionary. Check the spelling and try again" = "Данного слова не существует в словаре. Проверьте написание и повторите попытку";
-
-
-
-"Yay! The guessed number \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Your score \(viewModel.countStep) of attempts in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Shall we play again?" = "Ура! Загаданное число \(viewModel.remakeComputerNumberForAlert(computerDigit: computerDiggit)). Ваш результат \(viewModel.countStep) попыток за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Сыграем еще?";
-
-
-"Congratulations! You have completely filled the field in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.gameResult()) moves." = "Поздравляем! Вы полностью закрасили поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и \(viewModel.gameResult()) ходов.";
-"Victory! You have colored the entire field in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Not a bad result. More to come!" = "Победа! Вы закрасили все поле за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Неплохой результат. Дальше больше!";
-"The moves are over! We made a word \(puzzleWord). Will you try again?" = "Ходы закончились! Мы загадали слово \(puzzleWord). Попробуешь еще раз?";
-"Congratulations! We guessed the word\(puzzleWord) that you guessed in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.step) tries." = "Поздравляем! Мы загадали слово \(puzzleWord), которое вы угадали за \(TimeManager.shared.convertToMinutes(seconds: seconds)) и за \(viewModel.step) попыток";
-"Congratulations! You have won! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Поздравляем! Вы выиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-"Tie! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Ничья! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-"You lose! Your game time: \(TimeManager.shared.convertToMinutes(seconds: seconds))" = "Вы проиграли! Время вашей игры: \(TimeManager.shared.convertToMinutes(seconds: seconds))";
-
-"Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?" = "Поздравляем! Вы прошли игру за \(TimeManager.shared.convertToMinutes(seconds: seconds)). Попробуете еще раз?";

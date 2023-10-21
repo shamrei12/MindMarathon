@@ -1,4 +1,3 @@
-
 # platform :ios, '9.0'
 
 target 'MindMarathon' do
@@ -6,5 +5,6 @@ target 'MindMarathon' do
   
   pod 'SnapKit'
   pod 'SwiftLint'
+  pod 'SwiftGen'
   
 end

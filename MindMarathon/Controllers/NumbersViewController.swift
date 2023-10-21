@@ -15,7 +15,7 @@ protocol FinishGameDelegate: AnyObject {
 class NumbersViewController: UIViewController, FinishGameDelegate {
     func alertResult() {
         stopwatch?.invalidate()
-        showAlertAboutFinishGame(title: "End game".localize(), message: "Congratulations! You have completed the game in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Will you try again?".localize())
+        showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         let resultGame = WhiteBoardModel(nameGame: "Цифры".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         RealmManager.shared.saveResult(result: resultGame)
     }
@@ -280,7 +280,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
 extension NumbersViewController {
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)

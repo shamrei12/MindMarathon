@@ -302,7 +302,7 @@ class BinarioViewController: UIViewController {
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
@@ -400,7 +400,7 @@ class BinarioViewController: UIViewController {
             }
             if makeAnswer(mass: mass) {
                 stopwatch.invalidate()
-                showAlertAboutFinishGame(title: "End game".localize(), message: "Victory! You have colored the entire field in \(TimeManager.shared.convertToMinutes(seconds: seconds)). Not a bad result. More to come!".localize())
+                showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 let resultGame = WhiteBoardModel(nameGame: "Бинарио".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 RealmManager.shared.saveResult(result: resultGame)
             }

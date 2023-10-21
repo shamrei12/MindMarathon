@@ -283,6 +283,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         createTimer()
         gameCondition(.started)
         puzzleWord = getPuzzleWord()
+        print(puzzleWord)
         playButton.setImage(Icons.pauseFill, for: .normal)
         createPlaceGame()
     }
@@ -447,13 +448,15 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     func checkCondition(massiveAnswer: [Int]) {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             stopwatch?.invalidate()
-            showAlertAboutFinishGame(title: "End game".localize(), message: "Congratulations! We guessed the word \(puzzleWord) that you guessed in \(TimeManager.shared.convertToMinutes(seconds: seconds)) and \(viewModel.step) tries.".localize())
+            let steper = viewModel.step
+            let puzzle = puzzleWord
+            let time = TimeManager.shared.convertToMinutes(seconds: seconds)
+            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
             let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
-            
         } else if viewModel.step == 6 {
             stopwatch?.invalidate()
-            showAlertAboutFinishGame(title: "End game".localize(), message: "The moves are over! We made a word \(puzzleWord). Will you try again?".localize())
+            showAlertAboutFinishGame(title: NSLocalizedString("End game", comment: ""), message: String(format: NSLocalizedString("The moves are over! We made a word %@. Will you try again?", comment: ""), puzzleWord))
             let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Поражение".localize(), countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             RealmManager.shared.saveResult(result: resultGame)
         }
@@ -499,7 +502,7 @@ extension SlovusGameViewController {
     
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
-        let continueAction = UIAlertAction(title: "Continue", style: .default) { _ in
+        let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
             self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
         }
         alertController.addAction(continueAction)
