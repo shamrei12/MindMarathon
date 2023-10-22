@@ -31,7 +31,7 @@ struct FloodFillGame: Game {
     var gameImage: String
 }
 
-struct TicTakToeGame: Game {
+struct TicTacToeGame: Game {
     var title: String
     var createdBy: String
     var descripton: String
