@@ -112,18 +112,18 @@ extension ListGamesViewController: UICollectionViewDataSource {
 
 extension ListGamesViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewWidth = collectionView.bounds.width
-        let itemWidth = collectionViewWidth * 0.49 // 10% от ширины collectionView
-        let itemHeight = itemWidth * 1.47 // Предполагаем, что ячейка квадратная
-        return CGSize(width: itemWidth, height: itemHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        let collectionViewWidth = collectionView.bounds.width
-        let interitemSpacing = collectionViewWidth * 0.000000005 // 5% ширины коллекции
+            let collectionViewWidth = collectionView.bounds.width
+            let itemWidth = collectionViewWidth * 0.49 // 10% от ширины collectionView
+            let itemHeight = itemWidth * 1.3 // Предполагаем, что ячейка квадратная
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
         
-        return interitemSpacing
-    }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            let collectionViewWidth = collectionView.bounds.width
+            let interitemSpacing = collectionViewWidth * 0.005 // 5% ширины коллекции
+            return interitemSpacing
+        }
+
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let game = gameList[indexPath.row]
