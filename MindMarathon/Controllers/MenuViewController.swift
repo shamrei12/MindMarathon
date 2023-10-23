@@ -24,17 +24,20 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         createBugButton()
     }
     
-    
     func createLabelName() {
         let labelStackView = UIStackView()
         let firstLabel = UILabel()
         let secondLabel = UILabel()
-        
+
         firstLabel.text = "MIND"
-        firstLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 95.0)
-        
         secondLabel.text = "MARATHON"
-        secondLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 43.0)
+        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
+            firstLabel.font = UIFont(name: "SFProText-Semibold", size: 80)
+            secondLabel.font = UIFont(name: "SFProText-Semibold", size: 36)
+        } else {
+            secondLabel.font = UIFont(name: "SFProText-Semibold", size: 72)
+            firstLabel.font = UIFont(name: "SFProText-Semibold", size: 160)
+        }
         
         labelStackView.addArrangedSubview(firstLabel)
         labelStackView.addArrangedSubview(secondLabel)
@@ -72,11 +75,14 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     func createStartButton() -> UIButton {
         let startMarathon = UIButton()
         startMarathon.setTitle("Game list".localize(), for: .normal)
-        startMarathon.setTitleColor(.label, for: .normal)
-        startMarathon.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
-        startMarathon.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        startMarathon.titleLabel!.minimumScaleFactor = 0.1
-        startMarathon.backgroundColor = UIColor(named: "gameElementColor")
+        startMarathon.setTitleColor(.white, for: .normal)
+        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
+            startMarathon.titleLabel?.font = UIFont.sfProText(ofSize: 18, weight: .semiBold)
+        } else {
+            startMarathon.titleLabel?.font = UIFont.sfProText(ofSize: 36, weight: .semiBold)
+        }
+        
+        startMarathon.backgroundColor = UIColor(hex: 0x786BC0)
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         startMarathon.layer.cornerRadius = 10
         startMarathon.addShadow()
@@ -88,12 +94,18 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         let whiteBoardButton = UIButton()
         whiteBoardButton.setTitle("Game stats".localize(), for: .normal)
         whiteBoardButton.setTitleColor(.label, for: .normal)
-        whiteBoardButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        
+        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
+            whiteBoardButton.titleLabel?.font = UIFont.sfProText(ofSize: 18, weight: .semiBold)
+        } else {
+            whiteBoardButton.titleLabel?.font = UIFont.sfProText(ofSize: 36, weight: .semiBold)
+        }
         whiteBoardButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         whiteBoardButton.titleLabel!.minimumScaleFactor = 0.1
         whiteBoardButton.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
-        whiteBoardButton.addShadow()
-        whiteBoardButton.backgroundColor = UIColor(named: "gameElementColor")
+        whiteBoardButton.layer.borderColor = UIColor(hex: 0x786BC0).cgColor
+        whiteBoardButton.layer.borderWidth = 2
+        whiteBoardButton.backgroundColor = CustomColor.viewColor.color
         whiteBoardButton.layer.cornerRadius = 10
 
         return whiteBoardButton
@@ -102,18 +114,14 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     func createBugButton() {
         let buttonHelpsForUser = UIButton()
         let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 40)
-        let image = UIImage(systemName: "envelope")?.withConfiguration(symbolConfiguration)
+        let image = UIImage(named: "letter")
         buttonHelpsForUser.setImage(image, for: .normal)
-
-
         buttonHelpsForUser.setTitleColor(.label, for: .normal)
-        buttonHelpsForUser.backgroundColor = UIColor(named: "gameElementColor")
         buttonHelpsForUser.layer.cornerRadius = 10
         buttonHelpsForUser.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
         buttonHelpsForUser.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
         buttonHelpsForUser.titleLabel!.minimumScaleFactor = 0.1
         buttonHelpsForUser.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
-        buttonHelpsForUser.addShadow()
         buttonHelpsForUser.tintColor = UIColor.label
         view.addSubview(buttonHelpsForUser)
         

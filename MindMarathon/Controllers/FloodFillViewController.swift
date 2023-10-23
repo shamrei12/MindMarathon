@@ -251,7 +251,7 @@ class FloodFillViewController: UIViewController {
                 viewModel.countStep += 1
                 fillCell(row: 0, col: 0, color: selectedColor, currentColor: currentColor!)
             }
-        // Проверяем, достигнута ли цель
+
         if checkResult() {
             stopwatch.invalidate()
    
