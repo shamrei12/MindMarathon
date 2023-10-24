@@ -31,20 +31,15 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
         firstLabel.text = "MIND"
         secondLabel.text = "MARATHON"
-        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
-            firstLabel.font = UIFont(name: "SFProText-Semibold", size: 80)
-            secondLabel.font = UIFont(name: "SFProText-Semibold", size: 36)
-        } else {
-            secondLabel.font = UIFont(name: "SFProText-Semibold", size: 72)
-            firstLabel.font = UIFont(name: "SFProText-Semibold", size: 160)
-        }
-        
+        firstLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 80), weight: .bold)
+        secondLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 36), weight: .bold)
+
         labelStackView.addArrangedSubview(firstLabel)
         labelStackView.addArrangedSubview(secondLabel)
         labelStackView.axis = .vertical
         labelStackView.alignment = .center
         labelStackView.distribution = .fill
-        labelStackView.spacing = 2
+        labelStackView.spacing = 1
         
         view.addSubview(labelStackView)
         
@@ -76,12 +71,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         let startMarathon = UIButton()
         startMarathon.setTitle("Game list".localize(), for: .normal)
         startMarathon.setTitleColor(.white, for: .normal)
-        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
-            startMarathon.titleLabel?.font = UIFont.sfProText(ofSize: 18, weight: .semiBold)
-        } else {
-            startMarathon.titleLabel?.font = UIFont.sfProText(ofSize: 36, weight: .semiBold)
-        }
-        
+        startMarathon.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
         startMarathon.backgroundColor = UIColor(hex: 0x786BC0)
         startMarathon.addTarget(self, action: #selector(listGameTapped), for: .touchUpInside)
         startMarathon.layer.cornerRadius = 10
@@ -94,13 +84,8 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         let whiteBoardButton = UIButton()
         whiteBoardButton.setTitle("Game stats".localize(), for: .normal)
         whiteBoardButton.setTitleColor(.label, for: .normal)
-        
-        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
-            whiteBoardButton.titleLabel?.font = UIFont.sfProText(ofSize: 18, weight: .semiBold)
-        } else {
-            whiteBoardButton.titleLabel?.font = UIFont.sfProText(ofSize: 36, weight: .semiBold)
-        }
-        whiteBoardButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        whiteBoardButton.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
+        whiteBoardButton.titleLabel!.adjustsFontSizeToFitWidth = true
         whiteBoardButton.titleLabel!.minimumScaleFactor = 0.1
         whiteBoardButton.addTarget(self, action: #selector(whiteBoardTapped), for: .touchUpInside)
         whiteBoardButton.layer.borderColor = UIColor(hex: 0x786BC0).cgColor
@@ -153,9 +138,8 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         if MFMailComposeViewController.canSendMail() {
               let mailComposer = MFMailComposeViewController()
               mailComposer.mailComposeDelegate = self
-              mailComposer.setToRecipients(["mind.marathon.help@gmail.com"]) // адрес получателя
+              mailComposer.setToRecipients(["mind.marathon.help@gmail.com"])
               
-              // Заполнение данных письма
               mailComposer.setSubject("Сообщение об ошибке")
               mailComposer.setMessageBody("Текст сообщения", isHTML: false)
               

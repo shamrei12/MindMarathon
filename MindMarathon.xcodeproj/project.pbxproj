@@ -12,7 +12,6 @@
 		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
 		D81C72E62ABF479A00B8D4F0 /* NumberCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */; };
 		D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */; };
-		D81C72EA2AC0586900B8D4F0 /* NumbersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81C72E82AC0586900B8D4F0 /* NumbersCollectionViewCell.xib */; };
 		D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */; };
 		D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD12AB4CE79007A6597 /* IconsManager.swift */; };
 		D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD42AB60F59007A6597 /* KeyboardView.swift */; };
@@ -71,6 +70,8 @@
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
+		D8F1C5482AE8351500CF365B /* NumbersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */; };
+		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,7 +81,6 @@
 		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
 		D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCollectionViewController.swift; sourceTree = "<group>"; };
 		D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersCollectionViewCell.swift; sourceTree = "<group>"; };
-		D81C72E82AC0586900B8D4F0 /* NumbersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumbersCollectionViewCell.xib; sourceTree = "<group>"; };
 		D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		D81F8DD12AB4CE79007A6597 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
 		D81F8DD42AB60F59007A6597 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
@@ -141,6 +141,8 @@
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
+		D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumbersCollectionViewCell.xib; sourceTree = "<group>"; };
+		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,7 +265,7 @@
 				D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */,
 				D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */,
 				D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */,
-				D81C72E82AC0586900B8D4F0 /* NumbersCollectionViewCell.xib */,
+				D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */,
 				D86EA8552AD0786C00B8D961 /* ListGameCollectionViewCell.xib */,
 			);
 			path = Cells;
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				D884F7502A9E3E1700271263 /* GameRules.swift */,
+				D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */,
 			);
 			path = Helps;
 			sourceTree = "<group>";
@@ -452,12 +455,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86EADD02AE549B400FB19B6 /* SF-Pro-Text-Bold.otf in Resources */,
+				D8F1C5482AE8351500CF365B /* NumbersCollectionViewCell.xib in Resources */,
 				D86EADCA2AE549B400FB19B6 /* SF-Pro-Text-Heavy.otf in Resources */,
 				D86EA8562AD0786C00B8D961 /* ListGameCollectionViewCell.xib in Resources */,
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
 				D86EADD22AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */,
-				D81C72EA2AC0586900B8D4F0 /* NumbersCollectionViewCell.xib in Resources */,
 				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
@@ -576,6 +579,7 @@
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
 				D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */,
 				D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */,
+				D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,

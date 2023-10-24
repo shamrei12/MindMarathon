@@ -14,8 +14,25 @@ class ListGamesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationItem()
+        setupCollectionView()
+        createUI()
+    }
+    
+    func setupNavigationItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.title = "Список игр".localize()
+        let titleLabel = UILabel()
+        titleLabel.text = "Список игр".localize()
+        
+        titleLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
+        
+        // Нужный шрифт
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.75 // Минимальный относительный размер шрифта
+        navigationItem.titleView = titleLabel
+    }
+    
+    func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
@@ -31,7 +48,6 @@ class ListGamesViewController: UIViewController {
             maker.top.equalTo(view.safeAreaLayoutGuide).inset(10)
             maker.bottom.equalToSuperview().inset(10)
         }
-        createUI()
     }
     
     static func createGames() -> [Game] {
@@ -69,6 +85,7 @@ class ListGamesViewController: UIViewController {
             let viewModel = NumbersViewModel(game: game)
             viewController = NumbersViewController(viewModel: viewModel)
         }
+        
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -124,10 +141,8 @@ extension ListGamesViewController: UICollectionViewDelegate, UICollectionViewDel
             return interitemSpacing
         }
 
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let game = gameList[indexPath.row]
            selected(game: game)
     }
 }
-
