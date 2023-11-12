@@ -35,7 +35,7 @@ class NumberCollectionView: UIView, UICollectionViewDelegate {
         layout.minimumLineSpacing = 3
         
         collectionView.collectionViewLayout = layout
-        collectionView.register(UINib(nibName: "NumbersCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "NumbersCollectionViewCell")
+        collectionView.register(NumbersCollectionViewCell.self, forCellWithReuseIdentifier: "NumbersCollectionViewCell")
         
         addSubview(collectionView)
         
@@ -59,6 +59,7 @@ extension NumberCollectionView: UICollectionViewDataSource {
     
     private func configure(cell: NumbersCollectionViewCell, for indexPath: IndexPath) -> UICollectionViewCell {
         
+        cell.setupLabel()
         cell.numberLabel.text = numberMassive[indexPath.row]
         cell.backgroundColor = .systemGray
         if selectedCells.contains(indexPath) {

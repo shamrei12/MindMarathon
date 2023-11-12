@@ -17,17 +17,26 @@ class WhiteboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+        setunNavigationBar()
+        loadGameList()
+        setupUI()
+    }
+    
+    func setupTableView() {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.clear
         tableView.showsVerticalScrollIndicator = false
-        tableView.register(UINib(nibName: "GameTableViewCell", bundle: nil), forCellReuseIdentifier: "GameTableViewCell")
+        tableView.register(GameTableViewCell.self, forCellReuseIdentifier: "GameTableViewCell")
         self.view.backgroundColor = UIColor(named: "viewColor")
         
+        view.addSubview(tableView)
+    }
+    
+    func setunNavigationBar() {
         navigationItem.title = "Статистика игр"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        loadGameList()
-        createUI()
     }
     
     func loadGameList() {
@@ -36,42 +45,22 @@ class WhiteboardViewController: UIViewController {
             gameList = realm.objects(WhiteBoardManager.self)
             gameListArray = Array(gameList).reversed()
         } catch {
-            // Обработка ошибки, если не удалось создать экземпляр Realm или выполнить запрос
             print("Failed to load game list: \(error)")
         }
     }
     
-    func createUI() {
-        let gameNameLabel = UILabel()
-        gameNameLabel.text = "Игра"
-        gameNameLabel.textAlignment = .center
-        gameNameLabel.numberOfLines = 0
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        
-        view.addSubview(gameNameLabel)
-        
-        let gameResultLabel = UILabel()
-        gameResultLabel.text = "Статус"
-        gameResultLabel.textAlignment = .center
-        gameResultLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        
-        view.addSubview(gameResultLabel)
-        
-        let gameCountLabel = UILabel()
-        gameCountLabel.text = "Ходы"
-        gameCountLabel.textAlignment = .center
-        gameCountLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        
-        view.addSubview(gameCountLabel)
-        
-        let gameTimerLabel = UILabel()
-        gameTimerLabel.text = "Время"
-        gameTimerLabel.textAlignment = .center
-        gameTimerLabel.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
-        
-        view.addSubview(gameTimerLabel)
-        
-        let labelStackView = UIStackView(arrangedSubviews: [gameNameLabel, gameResultLabel, gameCountLabel, gameTimerLabel])
+    func createLabelCategories(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = UIColor.black
+        label.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }
+    
+    func setupUI() {
+        let labelStackView = UIStackView(arrangedSubviews: [createLabelCategories(text: "Игра"), createLabelCategories(text: "Статус"), createLabelCategories(text: "Ходы"), createLabelCategories(text: "Время")])
         labelStackView.axis = .horizontal
         labelStackView.distribution = .fillEqually
         labelStackView.spacing = 5
@@ -83,7 +72,6 @@ class WhiteboardViewController: UIViewController {
             maker.left.right.equalToSuperview().inset(25)
         }
         
-        view.addSubview(tableView)
         
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(labelStackView).inset(20)
@@ -118,6 +106,7 @@ extension WhiteboardViewController: UITableViewDataSource {
     }
     
     private func configure(cell: GameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
+        cell.createUI()
         let item = gameListArray[indexPath.row]
         cell.gameName.text = item.nameGame
         cell.gameResult.text = item.resultGame
@@ -129,7 +118,7 @@ extension WhiteboardViewController: UITableViewDataSource {
         case "Ничья": cell.mainView.backgroundColor = UIColor.systemYellow
         default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
         }
-
+        
         return cell
     }
 }

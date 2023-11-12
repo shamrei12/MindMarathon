@@ -65,12 +65,10 @@
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
-		D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */; };
 		D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
-		D8F1C5482AE8351500CF365B /* NumbersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
 /* End PBXBuildFile section */
 
@@ -136,12 +134,10 @@
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
-		D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BullCowTableViewCell.xib; sourceTree = "<group>"; };
 		D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewController.swift; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
-		D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumbersCollectionViewCell.xib; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,12 +165,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		D81C72E32ABF477800B8D4F0 /* collectionView */ = {
+		D81C72E32ABF477800B8D4F0 /* NumberCollectionVC */ = {
 			isa = PBXGroup;
 			children = (
+				D8E321122B00A22E00674541 /* Cell */,
 				D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */,
 			);
-			path = collectionView;
+			path = NumberCollectionVC;
 			sourceTree = "<group>";
 		};
 		D81F8DD32AB60F36007A6597 /* Views */ = {
@@ -239,7 +236,6 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D81C72E32ABF477800B8D4F0 /* collectionView */,
 				D81F8DD32AB60F36007A6597 /* Views */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
@@ -262,10 +258,6 @@
 				D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */,
 				D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */,
 				D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */,
-				D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */,
-				D8C2244D2A5018EA00F1E01A /* BullCowTableViewCell.xib */,
-				D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */,
-				D8F1C5472AE8351500CF365B /* NumbersCollectionViewCell.xib */,
 				D86EA8552AD0786C00B8D961 /* ListGameCollectionViewCell.xib */,
 			);
 			path = Cells;
@@ -274,16 +266,11 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
-				D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */,
-				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
-				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
-				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
-				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
-				D88221662A16042B00531EED /* ListGamesViewController.swift */,
-				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
-				D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */,
-				D81F8DE42ABF12FB007A6597 /* NumbersViewController.swift */,
+				D8E321132B00A58400674541 /* Menu */,
+				D8E3211E2B00A79E00674541 /* WhiteBoardVC */,
+				D8E3211D2B00A79000674541 /* RulesVC */,
+				D8E3211C2B00A76C00674541 /* ListGameVC */,
+				D8E3211B2B00A74800674541 /* Games */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -296,7 +283,6 @@
 				D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */,
 				1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */,
 				D8BB84732A51C46700166091 /* BinarioViewModel.swift */,
-				D81F8DE62ABF1573007A6597 /* NumbersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -377,6 +363,118 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		D8E321112B00A0AF00674541 /* NumberGame */ = {
+			isa = PBXGroup;
+			children = (
+				D81C72E32ABF477800B8D4F0 /* NumberCollectionVC */,
+				D81F8DE62ABF1573007A6597 /* NumbersViewModel.swift */,
+				D81F8DE42ABF12FB007A6597 /* NumbersViewController.swift */,
+			);
+			path = NumberGame;
+			sourceTree = "<group>";
+		};
+		D8E321122B00A22E00674541 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D8E321132B00A58400674541 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF252A10C7DA00263CEB /* MenuViewController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		D8E321142B00A59D00674541 /* FloodFillGame */ = {
+			isa = PBXGroup;
+			children = (
+				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
+			);
+			path = FloodFillGame;
+			sourceTree = "<group>";
+		};
+		D8E321152B00A5FE00674541 /* BinarioGame */ = {
+			isa = PBXGroup;
+			children = (
+				D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */,
+			);
+			path = BinarioGame;
+			sourceTree = "<group>";
+		};
+		D8E321162B00A60C00674541 /* BullCowGame */ = {
+			isa = PBXGroup;
+			children = (
+				D8E321172B00A69900674541 /* Cell */,
+				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
+			);
+			path = BullCowGame;
+			sourceTree = "<group>";
+		};
+		D8E321172B00A69900674541 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D8E321182B00A6F600674541 /* SlovusGame */ = {
+			isa = PBXGroup;
+			children = (
+				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
+			);
+			path = SlovusGame;
+			sourceTree = "<group>";
+		};
+		D8E321192B00A71D00674541 /* TicTacToeGame */ = {
+			isa = PBXGroup;
+			children = (
+				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
+			);
+			path = TicTacToeGame;
+			sourceTree = "<group>";
+		};
+		D8E3211B2B00A74800674541 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				D8E321192B00A71D00674541 /* TicTacToeGame */,
+				D8E321182B00A6F600674541 /* SlovusGame */,
+				D8E321162B00A60C00674541 /* BullCowGame */,
+				D8E321152B00A5FE00674541 /* BinarioGame */,
+				D8E321142B00A59D00674541 /* FloodFillGame */,
+				D8E321112B00A0AF00674541 /* NumberGame */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		D8E3211C2B00A76C00674541 /* ListGameVC */ = {
+			isa = PBXGroup;
+			children = (
+				D88221662A16042B00531EED /* ListGamesViewController.swift */,
+			);
+			path = ListGameVC;
+			sourceTree = "<group>";
+		};
+		D8E3211D2B00A79000674541 /* RulesVC */ = {
+			isa = PBXGroup;
+			children = (
+				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
+			);
+			path = RulesVC;
+			sourceTree = "<group>";
+		};
+		D8E3211E2B00A79E00674541 /* WhiteBoardVC */ = {
+			isa = PBXGroup;
+			children = (
+				D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */,
+			);
+			path = WhiteBoardVC;
+			sourceTree = "<group>";
+		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,13 +553,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86EADD02AE549B400FB19B6 /* SF-Pro-Text-Bold.otf in Resources */,
-				D8F1C5482AE8351500CF365B /* NumbersCollectionViewCell.xib in Resources */,
 				D86EADCA2AE549B400FB19B6 /* SF-Pro-Text-Heavy.otf in Resources */,
 				D86EA8562AD0786C00B8D961 /* ListGameCollectionViewCell.xib in Resources */,
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
 				D86EADD22AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */,
-				D8C2244E2A5018EA00F1E01A /* BullCowTableViewCell.xib in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
 				D826CF2E2A10F84300263CEB /* Podfile in Resources */,
 				D86EADD52AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf in Resources */,

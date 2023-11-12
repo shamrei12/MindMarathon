@@ -200,8 +200,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
             
             contentViewStackView.addArrangedSubview(massLayer[i])
         }
-        
-        // setup conditions
+
         for i in massLayer {
             i.axis = .horizontal
             i.distribution = .fillEqually
@@ -503,7 +502,7 @@ extension SlovusGameViewController {
     func showAlertAboutFinishGame() {
         let alertController = UIAlertController(title: "Attention!".localize(), message: "Do you really want to finish the game?".localize(), preferredStyle: .alert)
         let continueAction = UIAlertAction(title: "Continue".localize(), style: .default) { _ in
-            self.continueGame() // Вызов функции 1 при нажатии кнопки "Продолжить"
+            self.continueGame()
         }
         alertController.addAction(continueAction)
         
@@ -529,4 +528,7 @@ extension SlovusGameViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-}
+} //531
+
+
+

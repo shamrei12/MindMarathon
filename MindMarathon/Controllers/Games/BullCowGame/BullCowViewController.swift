@@ -52,7 +52,7 @@ class BullCowViewController: UIViewController {
     }
     
     func settingTableView() {
-        tableview.register(UINib(nibName: "BullCowTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowTableViewCell")
+        tableview.register(BullCowTableViewCell.self, forCellReuseIdentifier: "BullCowTableViewCell")
         tableview.register(UINib(nibName: "BullCowAlertTableViewCell", bundle: nil), forCellReuseIdentifier: "BullCowAlertTableViewCell")
         tableview.backgroundColor = .clear
         tableview.dataSource = self

@@ -14,7 +14,6 @@ class NumbersCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupLabel()
     }
     
     override func prepareForReuse() {
