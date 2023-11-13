@@ -447,8 +447,6 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     func checkCondition(massiveAnswer: [Int]) {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             stopwatch?.invalidate()
-            let steper = viewModel.step
-            let puzzle = puzzleWord
             let time = TimeManager.shared.convertToMinutes(seconds: seconds)
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
             let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.step)", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
