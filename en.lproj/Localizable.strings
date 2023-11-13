@@ -1,5 +1,8 @@
-"Список игр" = "Game list";
-"Статистика игр" = "Game stats";
+"games_list" = "Games";
+"game_rules" = "Rules";
+"games_history" = "History";
+"feedback" = "Feedback";
+"profile" = "Profile";
 
 //List Game ViewController
 "Быки и Коровы" = "Bulls and Cows";

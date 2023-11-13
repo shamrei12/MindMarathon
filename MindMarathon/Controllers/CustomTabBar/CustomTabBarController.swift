@@ -17,11 +17,11 @@ class CustomTabBarController: UITabBarController {
     
     func setupTabBar() {
             
-            let mainViewController = setupVC(viewController: ListGamesViewController(), title: "Игры", image: setupImage(named: "gamecontroller"))
-            let createViewController = setupVC(viewController: UIViewController(), title: "Правила", image: setupImage(named: "book"))
-            let nocreateViewController = setupVC(viewController: WhiteboardViewController(), title: "История", image: setupImage(named: "clock.arrow.circlepath"))
-            let profileViewController = setupVC(viewController: UIViewController(), title: "Обратная связь", image: setupImage(named: "envelope"))
-            let createViewControllerS = setupVC(viewController: UIViewController(), title: "Профиль", image: setupImage(named: "person"))
+        let mainViewController = setupVC(viewController: ListGamesViewController(), title: "games_list".localize(), image: setupImage(named: "gamecontroller"))
+        let createViewController = setupVC(viewController: UIViewController(), title: "game_rules".localize(), image: setupImage(named: "book"))
+        let nocreateViewController = setupVC(viewController: WhiteboardViewController(), title: "games_history".localize(), image: setupImage(named: "clock.arrow.circlepath"))
+        let profileViewController = setupVC(viewController: UIViewController(), title: "feedback".localize(), image: setupImage(named: "envelope"))
+        let createViewControllerS = setupVC(viewController: UIViewController(), title: "profile".localize(), image: setupImage(named: "person"))
             
             // Ограничиваем количество отображаемых контроллеров в таб-баре
             let visibleViewControllers = [mainViewController, createViewController, nocreateViewController, profileViewController, createViewControllerS]
