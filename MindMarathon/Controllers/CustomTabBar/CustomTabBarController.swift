@@ -20,7 +20,7 @@ class CustomTabBarController: UITabBarController {
         let mainViewController = setupVC(viewController: ListGamesViewController(), title: "games_list".localize(), image: setupImage(named: "gamecontroller"))
         let createViewController = setupVC(viewController: UIViewController(), title: "game_rules".localize(), image: setupImage(named: "book"))
         let nocreateViewController = setupVC(viewController: WhiteboardViewController(), title: "games_history".localize(), image: setupImage(named: "clock.arrow.circlepath"))
-        let profileViewController = setupVC(viewController: UIViewController(), title: "feedback".localize(), image: setupImage(named: "envelope"))
+        let profileViewController = setupVC(viewController: FeedbackViewController(), title: "feedback".localize(), image: setupImage(named: "envelope"))
         let createViewControllerS = setupVC(viewController: UIViewController(), title: "profile".localize(), image: setupImage(named: "person"))
             
             // Ограничиваем количество отображаемых контроллеров в таб-баре

@@ -64,6 +64,7 @@
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
+		D8C11F282B029A1C00EA28D6 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
 		D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
@@ -134,6 +135,7 @@
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
+		D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewController.swift; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8C11F262B0299F700EA28D6 /* FeedBackVC */,
 				D8E3211F2B028E1E00674541 /* CustomTabBar */,
 				D8E321132B00A58400674541 /* Menu */,
 				D8E3211E2B00A79E00674541 /* WhiteBoardVC */,
@@ -364,6 +367,14 @@
 				D81F8DD12AB4CE79007A6597 /* IconsManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D8C11F262B0299F700EA28D6 /* FeedBackVC */ = {
+			isa = PBXGroup;
+			children = (
+				D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */,
+			);
+			path = FeedBackVC;
 			sourceTree = "<group>";
 		};
 		D8E321112B00A0AF00674541 /* NumberGame */ = {
@@ -658,6 +669,7 @@
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
+				D8C11F282B029A1C00EA28D6 /* FeedbackViewController.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
