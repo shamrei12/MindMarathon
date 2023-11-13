@@ -65,6 +65,7 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = CustomColor.viewColor.color
+
         setupUI()
     }
     

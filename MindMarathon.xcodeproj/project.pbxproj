@@ -69,6 +69,7 @@
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
+		D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E321202B028EBC00674541 /* CustomTabBarController.swift */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
+		D8E321202B028EBC00674541 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -266,6 +268,7 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8E3211F2B028E1E00674541 /* CustomTabBar */,
 				D8E321132B00A58400674541 /* Menu */,
 				D8E3211E2B00A79E00674541 /* WhiteBoardVC */,
 				D8E3211D2B00A79000674541 /* RulesVC */,
@@ -475,6 +478,14 @@
 			path = WhiteBoardVC;
 			sourceTree = "<group>";
 		};
+		D8E3211F2B028E1E00674541 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D8E321202B028EBC00674541 /* CustomTabBarController.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
 		E003456EF9BDDAF33D197310 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -682,6 +693,7 @@
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
+				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
