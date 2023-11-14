@@ -19,6 +19,14 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
 //        feedbackButtons.alignment = .center
         return feedbackButtons
     }()
+    
+    private lazy var mainLabel: UILabel = {
+        let mainLabel = UILabel()
+        mainLabel.text = "Found a bug in the game? Contact us."
+        mainLabel.font = UIFont.sfProText(ofSize: 28, weight: .bold)
+        mainLabel.numberOfLines = 0
+        return mainLabel
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +37,7 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
 
     func setupUI() {
         self.view.backgroundColor = CustomColor.viewColor.color
+        self.view.addSubview(mainLabel)
         self.view.addSubview(feedbackButtons)
     }
     
@@ -45,22 +54,20 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
         button.addShadow()
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
 
-        
         switch idButton {
         case 1:
-            button.setTitle("Связаться через почту", for: .normal)
-            button.backgroundColor = .systemGray
             button.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
+            button.setTitle("Contact by mail", for: .normal)
             let image = UIImage(named: "gmail")
             button.setImage(image, for: .normal)
             button.backgroundColor = .systemGreen
         case 2:
-            button.setTitle("   Связаться через telegram", for: .normal)
+            button.setTitle("Write in Telegram", for: .normal)
             button.backgroundColor = UIColor(hex: 0x2AABEA, alpha: 1)
             let image = UIImage(named: "telegram")
             button.setImage(image, for: .normal)
         case 3:
-            button.setTitle("Связаться через facebook", for: .normal)
+            button.setTitle("Write on Facebook", for: .normal)
             button.backgroundColor = UIColor(hex: 0x0866FF, alpha: 1)
             let image = UIImage(named: "facebook")
             button.setImage(image, for: .normal)
@@ -80,14 +87,18 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
     }
     
     func makeConstraints() {
+        
+        mainLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+        }
+        
         feedbackButtons.snp.makeConstraints { maker in
             let safeAreaWidth = self.view.safeAreaLayoutGuide.layoutFrame.width
-            
             maker.left.equalTo(self.view.safeAreaLayoutGuide).offset(safeAreaWidth * 0.1)
             maker.right.equalTo(self.view.safeAreaLayoutGuide).offset(-safeAreaWidth * 0.1)
             maker.centerX.centerY.equalToSuperview()
         }
-
     }
     
     @objc
