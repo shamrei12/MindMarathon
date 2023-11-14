@@ -23,7 +23,7 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
         mainLabel.text = "Found a bug in the game? Contact us."
-        mainLabel.font = UIFont.sfProText(ofSize: 28, weight: .bold)
+        mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 28), weight: .bold)
         mainLabel.numberOfLines = 0
         return mainLabel
     }()
@@ -49,7 +49,7 @@ class FeedbackViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     func createButton(idButton: Int) -> UIButton {
         let button = UIButton()
-        button.titleLabel?.font = UIFont.sfProText(ofSize: 16, weight: .semiBold)
+        button.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 16), weight: .semiBold)
         button.titleLabel?.textColor = UIColor(hex: 0xffffff)
         button.addShadow()
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
