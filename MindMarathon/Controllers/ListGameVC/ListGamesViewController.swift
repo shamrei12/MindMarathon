@@ -9,14 +9,25 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController {
+    
+    private let userDefaults = UserDefaults()
+    private let firstStartKey = "firstStart"
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let gameList: [Game] = ListGamesViewController.createGames()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkFirstStart()
         setupNavigationItem()
         setupCollectionView()
         createUI()
+    }
+    
+    func checkFirstStart() {
+        if userDefaults.object(forKey: firstStartKey) == nil {
+            userDefaults.setValue(true, forKey: firstStartKey)
+            RealmManager.shared.clearRealmDatabase()
+        }
     }
     
     func setupNavigationItem() {
@@ -65,19 +76,19 @@ class ListGamesViewController: UIViewController {
     func selected(game: Game) {
         let viewController: UIViewController
         switch game.title {
-        case "Быки и Коровы".localize():
+        case "bullcow".localize():
             let viewModel = BullCowViewModel(game: game)
             viewController = BullCowViewController(viewModel: viewModel)
-        case "Словус".localize():
+        case "slovus".localize():
             let viewModel = SlovusViewModel(game: game)
             viewController = SlovusGameViewController(viewModel: viewModel)
-        case "Заливка".localize():
+        case "flood_fill".localize():
             let viewModel = FloodFillViewModel(game: game)
             viewController = FloodFillViewController(viewModel: viewModel)
-        case "Крестики Нолики".localize():
+        case "tictactoe".localize():
             let viewModel = TicTacToeViewModel(game: game)
             viewController = TicTacToeViewController(viewModel: viewModel)
-        case "Бинарио".localize():
+        case "binario".localize():
             let viewModel = BinarioViewModel(game: game)
             viewController = BinarioViewController(viewModel: viewModel)
         default:
