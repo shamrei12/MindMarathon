@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.sendEveningNotification()
             }
         }
-        
         return true
     }
     

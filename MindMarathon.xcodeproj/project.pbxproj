@@ -32,6 +32,7 @@
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
+		D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */; };
 		D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */; };
 		D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */; };
 		D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */; };
@@ -40,6 +41,7 @@
 		D84835A82A35C88E008D2AB4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D84835A72A35C88E008D2AB4 /* RealmSwift */; };
 		D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */; };
 		D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84BCAA12AC7723A00967444 /* Localizable.strings */; };
+		D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E51252B03645600CBA32F /* StatisticsModel.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
@@ -63,8 +65,14 @@
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
+		D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */; };
+		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
+		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
-		D8C11F282B029A1C00EA28D6 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */; };
+		D8C11F282B029A1C00EA28D6 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */; };
+		D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
+		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
+		D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */; };
 		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
 		D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
@@ -103,6 +111,7 @@
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
+		D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatisticsModel.swift; sourceTree = "<group>"; };
 		D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardViewController.swift; sourceTree = "<group>"; };
 		D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBoardModel.swift; sourceTree = "<group>"; };
 		D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +120,7 @@
 		D84BCAA22AC772E600967444 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D84BCAA32AC772E600967444 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D84BCAA42AC7736900967444 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D84E51252B03645600CBA32F /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
@@ -134,8 +144,14 @@
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
+		D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
+		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
-		D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatiscticsCollectionView.swift; sourceTree = "<group>"; };
+		D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewController.swift; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +256,8 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D84E51272B03A31E00CBA32F /* TableViews */,
+				D8C11F2C2B0360A800EA28D6 /* CollectionViews */,
 				D81F8DD32AB60F36007A6597 /* Views */,
 				D826CF322A1157B900263CEB /* AlertView */,
 				D826CF232A10C73B00263CEB /* Cells */,
@@ -263,6 +281,7 @@
 				D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */,
 				D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */,
 				D86EA8552AD0786C00B8D961 /* ListGameCollectionViewCell.xib */,
+				D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -270,6 +289,7 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D8C11F292B033DB500EA28D6 /* ProfileVC */,
 				D8C11F262B0299F700EA28D6 /* FeedBackVC */,
 				D8E3211F2B028E1E00674541 /* CustomTabBar */,
 				D8E321132B00A58400674541 /* Menu */,
@@ -335,8 +355,20 @@
 				D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */,
 				D8D7884C2A4B49E80013FECC /* BullCowModel.swift */,
 				D829AC392A86747000A38F6E /* GamesModels.swift */,
+				D84E51252B03645600CBA32F /* StatisticsModel.swift */,
+				D8B108C12B03AFA700CD09A1 /* TasksModel.swift */,
+				D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D84E51272B03A31E00CBA32F /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				D8B108BE2B03AAE700CD09A1 /* cell */,
+				D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */,
+			);
+			path = TableViews;
 			sourceTree = "<group>";
 		};
 		D86EADB52AE5477B00FB19B6 /* Fonts */ = {
@@ -369,12 +401,44 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		D8B108BE2B03AAE700CD09A1 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		D8C11F262B0299F700EA28D6 /* FeedBackVC */ = {
 			isa = PBXGroup;
 			children = (
-				D8C11F272B029A1C00EA28D6 /* FeedbackViewController.swift */,
+				D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */,
 			);
 			path = FeedBackVC;
+			sourceTree = "<group>";
+		};
+		D8C11F292B033DB500EA28D6 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
+		D8C11F2C2B0360A800EA28D6 /* CollectionViews */ = {
+			isa = PBXGroup;
+			children = (
+				D8C11F2D2B0360B800EA28D6 /* StatisticsCollectionView */,
+			);
+			path = CollectionViews;
+			sourceTree = "<group>";
+		};
+		D8C11F2D2B0360B800EA28D6 /* StatisticsCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */,
+			);
+			path = StatisticsCollectionView;
 			sourceTree = "<group>";
 		};
 		D8E321112B00A0AF00674541 /* NumberGame */ = {
@@ -669,9 +733,10 @@
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
-				D8C11F282B029A1C00EA28D6 /* FeedbackViewController.swift in Sources */,
+				D8C11F282B029A1C00EA28D6 /* SettingsVC.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
+				D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
@@ -680,16 +745,20 @@
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
+				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */,
+				D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
 				D81C72E62ABF479A00B8D4F0 /* NumberCollectionViewController.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
+				D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */,
 				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
+				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
@@ -699,9 +768,12 @@
 				D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */,
 				D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */,
 				D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */,
+				D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
+				D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */,
+				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
@@ -784,7 +856,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -839,7 +911,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

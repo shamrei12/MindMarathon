@@ -1,15 +1,15 @@
 "games_list" = "Список игр";
 "game_rules" = "Правила";
 "games_history" = "История";
-"feedback" = "Обратная связь";
+"settings" = "Настройки";
 "profile" = "Профиль";
 
 //List Game ViewController
-"Bulls and Cows" = "Быки и Коровы";
-"Slovus" = "Словус";
-"Flood Fill" = "Заливка";
-"Tic Tac Toe" = "Крестики Нолики";
-"Binario" = "Бинарио";
+"bullcow" = "Быки и Коровы";
+"slovus" = "Словус";
+"flood_fill" = "Заливка";
+"tictactoe" = "Крестики Нолики";
+"binario" = "Бинарио";
 "Numbers" = "Цифры";
 
 "Guess the mystery number" = "Угадай загаданное число";

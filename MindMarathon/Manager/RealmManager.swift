@@ -32,4 +32,24 @@ class RealmManager {
             print("Ошибка при доступе к хранилищу Realm: \(error)")
         }
     }
+    
+    func getResult() -> UserStatisticsModel {
+        var userStatistics: [WhiteBoardManager] = []
+        var winstrike = 0
+        var gameList: Results<WhiteBoardManager>!
+        var favoriteGame = String()
+        var hourInGame = 0
+        
+        do {
+            let realm = try Realm()
+            gameList = realm.objects(WhiteBoardManager.self)
+            userStatistics = Array(gameList).reversed()
+        } catch {
+            print("Failed to load game list: \(error)")
+        }
+        
+        print(userStatistics[0].timerGame)
+        return UserStatisticsModel(hoursInGame: 0, favoriteGame: "", winStrike: 0)
+    }
+    
 }

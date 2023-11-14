@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import MessageUI
 
-class FeedbackViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private lazy var feedbackButtons: UIStackView = {
         let feedbackButtons = UIStackView()
