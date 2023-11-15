@@ -258,7 +258,7 @@ class FloodFillViewController: UIViewController {
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
 
 
-            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.gameResult())", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+            let resultGame = WhiteBoardModel(nameGame: "Заливка".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.gameResult())", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
         }
     }

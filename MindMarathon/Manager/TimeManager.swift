@@ -45,4 +45,11 @@ class TimeManager {
         let formattedString = dateFormater.string(from: date)
         return formattedString
     }
+    
+    func getFinishTimeForTask(taskTime: TimeInterval) -> Int {
+        let currentTimeInterval = Date().timeIntervalSince1970
+        let finishTimeInterval = currentTimeInterval + taskTime
+        
+        return Int(finishTimeInterval - currentTimeInterval)
+    }
 }

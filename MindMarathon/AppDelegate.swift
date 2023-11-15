@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.sendEveningNotification()
             }
         }
+        configureRealm()
+        
         return true
+    }
+    
+    func configureRealm() {
+        let config = Realm.Configuration(
+            // Указываем новую версию схемы базы данных
+            schemaVersion: 4,
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion <= 3 {
+                    // Выполняем необходимые действия для изменения схемы
+                    migration.enumerateObjects(ofType: WhiteBoardManager.className()) { oldObject, newObject in
+                        if let oldTimerGame = oldObject?["timerGame"] as? String {
+                            if let newTimerGame = Int(oldTimerGame) {
+                                newObject?["timerGame"] = newTimerGame
+                            }
+                        }
+                    }
+                }
+            }
+        )
+        // Устанавливаем новую конфигурацию Realm до инициализации
+        Realm.Configuration.defaultConfiguration = config
     }
     
     func sendMorningNotification() {

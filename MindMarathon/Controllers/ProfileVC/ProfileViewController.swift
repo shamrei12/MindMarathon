@@ -73,7 +73,6 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        RealmManager.shared.getResult()
         setupUI()
         makeConstraints()
     }

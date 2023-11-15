@@ -401,7 +401,7 @@ class BinarioViewController: UIViewController {
             if makeAnswer(mass: mass) {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                let resultGame = WhiteBoardModel(nameGame: "Бинарио".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
+                let resultGame = WhiteBoardModel(nameGame: "Бинарио".localize(), resultGame: "Победа", countStep: "Без учета", timerGame: seconds)
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }

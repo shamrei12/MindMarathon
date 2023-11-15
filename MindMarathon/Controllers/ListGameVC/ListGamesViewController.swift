@@ -17,16 +17,16 @@ class ListGamesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkFirstStart()
         setupNavigationItem()
         setupCollectionView()
         createUI()
+        fisrStart()
     }
     
-    func checkFirstStart() {
+    func fisrStart() {
         if userDefaults.object(forKey: firstStartKey) == nil {
-            userDefaults.setValue(true, forKey: firstStartKey)
             RealmManager.shared.clearRealmDatabase()
+            userDefaults.setValue(true, forKey: firstStartKey)
         }
     }
     

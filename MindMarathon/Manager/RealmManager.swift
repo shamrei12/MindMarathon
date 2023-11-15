@@ -33,23 +33,38 @@ class RealmManager {
         }
     }
     
-    func getResult() -> UserStatisticsModel {
-        var userStatistics: [WhiteBoardManager] = []
-        var winstrike = 0
-        var gameList: Results<WhiteBoardManager>!
-        var favoriteGame = String()
-        var hourInGame = 0
-        
+    func getTaks() -> [TasksManager] {
+        var taskMassive = [TasksManager]()
+        clearRealmDatabase()
         do {
-            let realm = try Realm()
-            gameList = realm.objects(WhiteBoardManager.self)
-            userStatistics = Array(gameList).reversed()
+            let realm = try Realm() // Получение экземпляра Realm
+            let tasks = realm.objects(TasksManager.self)
+            
+            if tasks.isEmpty {
+                let massiveTask: [TasksManager] = [TasksManager(condition: "Выйграйте в любую игру", status: true, timeRestart: 10, finishTime: 10, reward: 10), TasksManager(condition: "Сыграйте в крестики нолики", status: false, timeRestart: 10, finishTime: 150, reward: 10), TasksManager(condition: "Закрасте поле в игре заливка в зеленый цвет", status: true, timeRestart: 10, finishTime: 0, reward: 100), TasksManager(condition: "Победите в крестики нолики 3 раза подряд", status: false, timeRestart: 10, finishTime: 0, reward: 20), TasksManager(condition: "В игре быки и коровы угадайте число за 7 попыток", status: false, timeRestart: 10, finishTime: 0, reward: 100) ]
+                try realm.write {
+                    realm.add(massiveTask)
+                }
+                taskMassive = Array(tasks)
+            } else {
+                taskMassive = Array(tasks)
+            }
         } catch {
             print("Failed to load game list: \(error)")
         }
-        
-        print(userStatistics[0].timerGame)
-        return UserStatisticsModel(hoursInGame: 0, favoriteGame: "", winStrike: 0)
+        return taskMassive
     }
     
+    func clearRealmDatabase() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print("Error \(error)")
+        }
+  
+    }
+
 }

@@ -12,16 +12,16 @@ protocol CustomCellDelegate: AnyObject {
     func buttonPressed(in cell: TasksTableViewCell)
 }
 
-
 class TasksTableViewCell: UITableViewCell {
     private var stopwatch: Timer?
     private var seconds = 0
-    private var dataCell: TasksModel!
+    private var dataCell: TasksManager!
     weak var delegate: CustomCellDelegate?
     
     private lazy var mainView: UIView = {
         let mainView = UIView()
         mainView.backgroundColor = UIColor(hex: 0xfcfcfc, alpha: 1)
+        mainView.layer.cornerRadius = 12
         return mainView
     }()
     
@@ -42,10 +42,8 @@ class TasksTableViewCell: UITableViewCell {
     lazy var takeReward: UIButton = {
         let takeReward = UIButton()
         takeReward.clipsToBounds = true
-        takeReward.setTitle("Забрать награду", for: .normal)
         takeReward.titleLabel?.font = UIFont.sfProText(ofSize: 14, weight: .light)
-        takeReward.backgroundColor = .systemMint
-        takeReward.setTitleColor(UIColor(hex: 0x000000, alpha: 1), for: .normal)
+        takeReward.setTitleColor(UIColor(hex: 0xffffff, alpha: 1), for: .normal)
         takeReward.layer.cornerRadius = 12
         takeReward.addTarget(self, action: #selector(getReward), for: .touchUpInside)
         return takeReward
@@ -55,7 +53,7 @@ class TasksTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func setupData(data: TasksModel) {
+    func setupData(data: TasksManager) {
         dataCell = data
         mainLabel.text = data.condition
         setupUI()
@@ -95,11 +93,8 @@ class TasksTableViewCell: UITableViewCell {
     }
     
     @objc func getReward(sender: UIButton) {
-        sender.backgroundColor = .systemGray
-        seconds = dataCell.timeRestart
-        createTimer()
         delegate?.buttonPressed(in: self)
-        takeReward.isEnabled = false
+        beforeRestartingStatus()
     }
     
     func createTimer() {
@@ -115,13 +110,34 @@ class TasksTableViewCell: UITableViewCell {
         takeReward.setTitle(TimeManager.shared.convertToMinutes(seconds: seconds), for: .normal)
         if seconds < 0 {
             stopwatch?.invalidate()
-            takeReward.setTitleColor(UIColor(hex: 0x000000, alpha: 1), for: .normal)
             takeReward.isEnabled = true
-            takeReward.setTitle("Забрать награду", for: .normal)
+            delegate?.buttonPressed(in: self)
             takeReward.backgroundColor = .systemMint
         }
     }
     
+    func startTimer() {
+        seconds = TimeManager.shared.getFinishTimeForTask(taskTime: dataCell.timeRestart)
+        createTimer()
+    }
+    
+    func inactiveButtonStatus() {
+        takeReward.isEnabled = false
+        takeReward.backgroundColor = .systemGray
+        takeReward.setTitle("Не выполнено", for: .normal)
+    }
+    
+    func beforeRestartingStatus() {
+        takeReward.backgroundColor = .systemGray
+        takeReward.isEnabled = false
+        startTimer()
+    }
+    
+    func getRewardStatus() {
+        takeReward.setTitle("Забрать награду", for: .normal)
+        takeReward.backgroundColor = .systemMint
+        takeReward.isEnabled = true
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

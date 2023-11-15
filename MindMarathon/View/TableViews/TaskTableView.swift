@@ -9,16 +9,15 @@ import UIKit
 
 class TasksTableView: UITableView, CustomCellDelegate {
     
-//    private lazy var profileVC = ProfileViewController()
+    let massiveTask = RealmManager.shared.getTaks()
     
     func buttonPressed(in cell: TasksTableViewCell) {
+        self.reloadData()
         let reward = massiveTask[cell.takeReward.tag].reward
         if let view = ProfileViewController.self as? ProfileViewController {
             view.getReward(reward: reward)
         }
     }
-    
-    private let massiveTask: [TasksModel] = [TasksModel(condition: "Выйграйте в любую игру", status: true, timeRestart: 10, reward: 10), TasksModel(condition: "Сыграйте в крестики нолики", status: true, timeRestart: 150, reward: 10), TasksModel(condition: "Закрасте поле в игре заливка в зеленый цвет", status: true, timeRestart: 1, reward: 100), TasksModel(condition: "Победите в крестики нолики 3 раза подряд", status: true, timeRestart: 11, reward: 20), TasksModel(condition: "В игре быки и коровы угадайте число за 7 попыток", status: true, timeRestart: 12, reward: 100), ]
     
     init() {
         super.init(frame: .zero, style: .plain)
@@ -62,6 +61,16 @@ extension TasksTableView: UITableViewDataSource {
         cell.setupData(data: massiveTask[indexPath.row])
         cell.takeReward.tag = indexPath.row
         cell.delegate = self
+        
+        if massiveTask[indexPath.row].status {
+            if massiveTask[indexPath.row].finishTime != TimeInterval(0) {
+                cell.beforeRestartingStatus()
+            } else {
+                cell.getRewardStatus()
+            }
+        } else {
+            cell.inactiveButtonStatus()
+        }
         return cell
     }
 }
