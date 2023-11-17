@@ -9,14 +9,18 @@ import UIKit
 
 class TasksTableView: UITableView, CustomCellDelegate {
     
-    let massiveTask = RealmManager.shared.getTaks()
+    var massiveTask = RealmManager.shared.getTasks()
     
     func buttonPressed(in cell: TasksTableViewCell) {
-        self.reloadData()
         let reward = massiveTask[cell.takeReward.tag].reward
-        if let view = ProfileViewController.self as? ProfileViewController {
-            view.getReward(reward: reward)
-        }
+        RealmManager.shared.updateTasks(index: cell.takeReward.tag)
+        massiveTask = RealmManager.shared.getTasks()
+        let indexPath = IndexPath(row: cell.takeReward.tag, section: 0) // Пример индекса ячейки
+        self.reloadRows(at: [indexPath], with: .fade)
+        
+//        if let view = ProfileViewController.self as? ProfileViewController {
+//            view.getReward(reward: reward)
+//        }
     }
     
     init() {
@@ -71,6 +75,7 @@ extension TasksTableView: UITableViewDataSource {
         } else {
             cell.inactiveButtonStatus()
         }
+        
         return cell
     }
 }

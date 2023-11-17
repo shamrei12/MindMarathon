@@ -118,10 +118,9 @@ extension WhiteboardViewController: UITableViewDataSource {
         cell.gameCount.text = item.countStep
         cell.gameTimer.text = TimeManager.shared.convertToMinutes(seconds: item.timerGame)
         
-        
         switch item.resultGame {
-        case "Победа": cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        case "Ничья": cell.mainView.backgroundColor = UIColor.systemYellow
+        case "Win".localize(): cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+        case "Draw".localize(): cell.mainView.backgroundColor = UIColor.systemYellow
         default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
         }
         

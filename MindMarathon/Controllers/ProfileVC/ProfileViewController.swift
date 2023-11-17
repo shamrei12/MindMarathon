@@ -46,7 +46,7 @@ class ProfileViewController: UIViewController {
         
     }()
     
-    private lazy var currentRunk: UILabel = {
+    private lazy var currentRank: UILabel = {
         let currentRunk = UILabel()
         currentRunk.font = UIFont.sfProText(ofSize: 10, weight: .light)
         currentRunk.textColor = UIColor(hex: 0x000000)
@@ -55,7 +55,7 @@ class ProfileViewController: UIViewController {
         return currentRunk
     }()
     
-    private lazy var nextRunk: UILabel = {
+    private lazy var nextRank: UILabel = {
         let nextRunk = UILabel()
         nextRunk.font = UIFont.sfProText(ofSize: 10, weight: .light)
         nextRunk.textColor = UIColor(hex: 0x000000)
@@ -77,14 +77,20 @@ class ProfileViewController: UIViewController {
         makeConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense()!)
+        
+    }
+    
     func setupUI() {
         self.view.backgroundColor = CustomColor.viewColor.color
         self.view.addSubview(userView)
         userView.addSubview(userImage)
         userView.addSubview(userName)
         userView.addSubview(progress)
-        progress.addSubview(currentRunk)
-        progress.addSubview(nextRunk)
+        progress.addSubview(currentRank)
+        progress.addSubview(nextRank)
         userView.addSubview(statisctiView)
         self.view.addSubview(taskLabel)
         self.view.addSubview(taskTableView)
@@ -116,11 +122,11 @@ class ProfileViewController: UIViewController {
             maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(10)
         }
         
-        currentRunk.snp.makeConstraints { maker in
+        currentRank.snp.makeConstraints { maker in
             maker.top.left.bottom.equalToSuperview().inset(5)
         }
         
-        nextRunk.snp.makeConstraints { maker in
+        nextRank.snp.makeConstraints { maker in
             maker.top.right.bottom.equalToSuperview().inset(5)
         }
         
@@ -144,6 +150,60 @@ class ProfileViewController: UIViewController {
     
     func getReward(reward: Int) {
         print(reward)
+    }
+    
+    func getUserExpiriense(exp: Int) {
+        var currentRank = getCurrentAndNextRank(exp: exp)
+        getCurrentAndNextRank(current: currentRank.0, next: currentRank.1)
+    }
+    
+    func getCurrentAndNextRank(exp: Int) -> (String, String?) {
+        var currentIndex = 0
+        var nextIndex = 0
+        var currentRank: String = "Нет звания"
+        var nextRank: String? = nil
+        let rankExperienceRequirements = [
+            ("Новичок", 0...100),
+            ("Ученик", 101...300),
+            ("Любопытный", 301...600),
+            ("Опытный", 601...1000),
+            ("Сын маминой подруги", 1001...10000)
+        ]
+        
+        for i in 0..<rankExperienceRequirements.count {
+            if rankExperienceRequirements[i].1.contains(exp) {
+                currentIndex = i
+                nextIndex = i + 1
+                currentRank = rankExperienceRequirements[i].0
+            }
+        }
+        if nextIndex > rankExperienceRequirements.count - 1 {
+            nextRank = nil
+        } else {
+           nextRank = rankExperienceRequirements[nextIndex].0
+        }
+        
+        makeResultsForProgressBar(newExp: exp, maxExp: rankExperienceRequirements[currentIndex].1.upperBound)
+        return (currentRank, nextRank)
+    }
+
+    func makeResultsForProgressBar(newExp: Int, maxExp: Int) {
+        if newExp != 0 {
+            let newExp: Float = Float(newExp) / Float(maxExp)
+            progress.progress = newExp
+        } else {
+            progress.progress = 0
+        }
+    }
+    
+    func getCurrentAndNextRank(current: String, next: String?) {
+        if next != nil {
+            nextRank.text = next
+        } else {
+            nextRank.text = ""
+        }
+        
+        currentRank.text = current
     }
 }
 

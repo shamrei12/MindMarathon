@@ -33,6 +33,7 @@
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
 		D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */; };
+		D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */; };
 		D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */; };
 		D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */; };
 		D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */; };
@@ -112,6 +113,7 @@
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
 		D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatisticsModel.swift; sourceTree = "<group>"; };
+		D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardViewController.swift; sourceTree = "<group>"; };
 		D848359E2A35B78F008D2AB4 /* WhiteBoardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBoardModel.swift; sourceTree = "<group>"; };
 		D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */,
 				D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */,
 				D81F8DD12AB4CE79007A6597 /* IconsManager.swift */,
+				D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
+				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */,

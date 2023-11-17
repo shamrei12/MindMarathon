@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController {
-    
-    private let userDefaults = UserDefaults()
-    private let firstStartKey = "firstStart"
+  
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let gameList: [Game] = ListGamesViewController.createGames()
 
@@ -24,10 +22,7 @@ class ListGamesViewController: UIViewController {
     }
     
     func fisrStart() {
-        if userDefaults.object(forKey: firstStartKey) == nil {
-            RealmManager.shared.clearRealmDatabase()
-            userDefaults.setValue(true, forKey: firstStartKey)
-        }
+        UserDefaultsManager.shared.checkFirstStart()
     }
     
     func setupNavigationItem() {

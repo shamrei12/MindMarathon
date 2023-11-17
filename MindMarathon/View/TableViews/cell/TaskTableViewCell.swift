@@ -112,7 +112,6 @@ class TasksTableViewCell: UITableViewCell {
             stopwatch?.invalidate()
             takeReward.isEnabled = true
             delegate?.buttonPressed(in: self)
-            takeReward.backgroundColor = .systemMint
         }
     }
     
@@ -142,6 +141,4 @@ class TasksTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
-
