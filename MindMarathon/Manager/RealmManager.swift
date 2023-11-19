@@ -33,6 +33,20 @@ class RealmManager {
         }
     }
     
+    func getUserStatistics() -> [WhiteBoardManager] {
+        var statisticsMassive = [WhiteBoardManager]()
+        
+        do {
+            let realm = try Realm()
+            let statistics = realm.objects(WhiteBoardManager.self)
+            statisticsMassive = Array(statistics)
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        return statisticsMassive
+    }
+    
     func getTasks() -> [TasksManager] {
         var taskMassive = [TasksManager]()
         do {

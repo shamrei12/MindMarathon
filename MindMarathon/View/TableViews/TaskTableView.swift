@@ -79,15 +79,10 @@ extension TasksTableView: UITableViewDataSource {
         cell.takeReward.tag = indexPath.row
         cell.delegate = self
         if massiveTask[indexPath.row].status {
-            print(indexPath.row)
             cell.getRewardStatus()
         } else if massiveTask[indexPath.row].isRestartTime == false {
-            print(indexPath.row)
-            print(massiveTask[indexPath.row].isRestartTime)
             cell.inactiveButtonStatus()
         } else if massiveTask[indexPath.row].isRestartTime == true {
-            print(indexPath.row)
-            print(massiveTask[indexPath.row].isRestartTime)
             cell.beforeRestartingStatus()
         }
         

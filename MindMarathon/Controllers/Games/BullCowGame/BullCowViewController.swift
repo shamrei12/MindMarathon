@@ -415,7 +415,7 @@ class BullCowViewController: UIViewController {
         if bull == maxLenght {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleDiggit_message".localize() + "\(computerDiggit). " + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            let resultGame = WhiteBoardModel(nameGame: "Быки и Коровы".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.countStep)", timerGame: seconds)
+            let resultGame = WhiteBoardModel(nameGame: "bullcow".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.countStep)", timerGame: seconds)
             RealmManager.shared.saveResult(result: resultGame)
             CheckTaskManager.shared.checkPlayGame(game: 0)
         }

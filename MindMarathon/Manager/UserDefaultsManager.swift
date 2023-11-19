@@ -19,6 +19,8 @@ class UserDefaultsManager {
     private let userExpirienseKey = "userExpiriense"
     
     func checkFirstStart() {
+//        userDefaults.setValue(nil, forKey: userExpirienseKey)
+//        userDefaults.setValue(nil, forKey: firstStartKey)
         if userDefaults.object(forKey: firstStartKey) == nil {
             userDefaults.setValue(true, forKey: firstStartKey)
         }

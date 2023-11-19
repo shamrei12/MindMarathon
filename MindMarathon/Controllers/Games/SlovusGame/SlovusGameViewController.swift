@@ -449,13 +449,13 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
             stopwatch?.invalidate()
             let time = TimeManager.shared.convertToMinutes(seconds: seconds)
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
-            let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Победа".localize(), countStep: "\(viewModel.step)", timerGame:  seconds)
+            let resultGame = WhiteBoardModel(nameGame: "slovus".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.step)", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
             CheckTaskManager.shared.checkPlayGame(game: 1)
         } else if viewModel.step == 6 {
             stopwatch?.invalidate()
             showAlertAboutFinishGame(title: NSLocalizedString("End game", comment: ""), message: String(format: NSLocalizedString("The moves are over! We made a word %@. Will you try again?", comment: ""), puzzleWord))
-            let resultGame = WhiteBoardModel(nameGame: "Словус".localize(), resultGame: "Поражение".localize(), countStep: "\(viewModel.step)", timerGame:  seconds)
+            let resultGame = WhiteBoardModel(nameGame: "slovus".localize(), resultGame: "Lose".localize(), countStep: "\(viewModel.step)", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
         }
     }

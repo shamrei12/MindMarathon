@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var currentRank: UILabel = {
         let currentRunk = UILabel()
-        currentRunk.font = UIFont.sfProText(ofSize: 10, weight: .light)
+        currentRunk.font = UIFont.sfProText(ofSize: 11, weight: .light)
         currentRunk.textColor = UIColor(hex: 0x000000)
         currentRunk.text = "Новичок"
         
@@ -57,11 +57,19 @@ class ProfileViewController: UIViewController {
     
     private lazy var nextRank: UILabel = {
         let nextRunk = UILabel()
-        nextRunk.font = UIFont.sfProText(ofSize: 10, weight: .light)
+        nextRunk.font = UIFont.sfProText(ofSize: 11, weight: .light)
         nextRunk.textColor = UIColor(hex: 0x000000)
         nextRunk.text = "Любитель"
-        
         return nextRunk
+    }()
+    
+    private lazy var currentRankScore: UILabel = {
+        let currentRankScore = UILabel()
+        currentRankScore.font = UIFont.sfProText(ofSize: 11, weight: .light)
+        currentRankScore.textColor = UIColor(hex: 0x000000)
+        currentRankScore.text = "0"
+        
+        return currentRankScore
     }()
     
     private lazy var taskLabel: UILabel = {
@@ -80,6 +88,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense()!)
+        getUserStatistics()
     }
     
     func setupUI() {
@@ -89,6 +98,7 @@ class ProfileViewController: UIViewController {
         userView.addSubview(userName)
         userView.addSubview(progress)
         progress.addSubview(currentRank)
+        progress.addSubview(currentRankScore)
         progress.addSubview(nextRank)
         userView.addSubview(statisctiView)
         self.view.addSubview(taskLabel)
@@ -123,6 +133,10 @@ class ProfileViewController: UIViewController {
         
         currentRank.snp.makeConstraints { maker in
             maker.top.left.bottom.equalToSuperview().inset(5)
+        }
+        
+        currentRankScore.snp.makeConstraints { maker in
+            maker.centerX.centerY.equalToSuperview()
         }
         
         nextRank.snp.makeConstraints { maker in
@@ -178,7 +192,7 @@ class ProfileViewController: UIViewController {
         } else {
            nextRank = rankExperienceRequirements[nextIndex].0
         }
-        
+        currentRankScore.text = "\(exp)"
         makeResultsForProgressBar(newExp: exp, maxExp: rankExperienceRequirements[currentIndex].1.upperBound)
         return (currentRank, nextRank)
     }
@@ -190,8 +204,6 @@ class ProfileViewController: UIViewController {
         } else {
             progress.progress = 0
         }
-        
-        print(progress.progress)
     }
     
     func getCurrentAndNextRank(current: String, next: String?) {
@@ -201,5 +213,47 @@ class ProfileViewController: UIViewController {
             nextRank.text = ""
         }
         currentRank.text = current
+    }
+    
+    func getUserStatistics() {
+        let userStatistics = RealmManager.shared.getUserStatistics()
+        var secondsTime = 0
+        var labelGame = [String]()
+        var favoriteGame = ""
+        var countWinStrike = 0
+        var massiveResultsGames = [String]()
+        for i in userStatistics {
+            secondsTime += i.timerGame
+            labelGame.append(i.nameGame)
+            massiveResultsGames.append(i.resultGame)
+        }
+        
+        favoriteGame = mostFrequentWord(in: labelGame) ?? "Нет данных"
+        countWinStrike = getWinStrike(massive: massiveResultsGames)
+        
+        statisctiView.dataMassive[0] = "\(TimeManager.shared.convertToMinutes(seconds: secondsTime))"
+        statisctiView.dataMassive[1] = favoriteGame
+        statisctiView.dataMassive[2] = "\(countWinStrike)"
+        statisctiView.reloadData()
+    }
+    
+    func mostFrequentWord(in words: [String]) -> String? {
+        let wordCounts = words.reduce(into: [:]) { counts, word in counts[word, default: 0] += 1 }
+        return wordCounts.max { $0.1 < $1.1 }?.key
+    }
+
+    func getWinStrike(massive: [String]) -> Int {
+        var countWinStrike = 0
+        var tempCountWinStrike = 0
+        
+        for i in massive {
+            if i == "Win" {
+                tempCountWinStrike += 1
+                countWinStrike = max(countWinStrike, tempCountWinStrike)
+            } else {
+                tempCountWinStrike = 0
+            }
+        }
+        return countWinStrike
     }
 }

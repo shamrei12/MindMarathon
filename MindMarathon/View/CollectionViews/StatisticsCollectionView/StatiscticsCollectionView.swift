@@ -9,8 +9,8 @@ import UIKit
 
 class StatiscticsCollectionView: UICollectionView {
     
-    private let dataMassive = ["1124141", "slovus".localize(), "10"]
-    private let descriptionMassive = ["Часов игры", "Любимая игра", "Серия побед"]
+    var dataMassive = ["", "", ""]
+    private let descriptionMassive = ["в игре", "Любимая игра", "Серия побед"]
     init() {
         let layout = UICollectionViewFlowLayout()
         super.init(frame: .zero, collectionViewLayout: layout)

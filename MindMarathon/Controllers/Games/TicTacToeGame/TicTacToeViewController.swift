@@ -362,13 +362,13 @@ class TicTacToeViewController: UIViewController {
         if isUserWon {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Win".localize(), countStep: stepCount.description, timerGame:  seconds))
+            saveResult(result: WhiteBoardModel(nameGame: "tictactoe".localize(), resultGame: "Win".localize(), countStep: stepCount.description, timerGame:  seconds))
             CheckTaskManager.shared.checkPlayGame(game: 2)
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "draw_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Draw".localize(), countStep: stepCount.description, timerGame:  seconds))
+                saveResult(result: WhiteBoardModel(nameGame: "tictactoe".localize(), resultGame: "Draw".localize(), countStep: stepCount.description, timerGame:  seconds))
                 return
             }
             setComputerTurn(row: position.0, col: position.1)
@@ -403,7 +403,7 @@ class TicTacToeViewController: UIViewController {
             if isComputerWon {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "defeat_message".localize() + "time_message".localize() + " \(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Поражение", countStep: stepCount.description, timerGame:  seconds))
+                saveResult(result: WhiteBoardModel(nameGame: "tictactoe".localize(), resultGame: "Lose".localize(), countStep: stepCount.description, timerGame:  seconds))
             } else {
                 computerThinkingTimer?.invalidate()
                 playerTurn()

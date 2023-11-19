@@ -12,6 +12,10 @@
 "binario" = "Бинарио";
 "Numbers" = "Цифры";
 
+"Win" = "Победа";
+"Draw" = "Ничья";
+"Lose" = "Поражение";
+
 "Guess the mystery number" = "Угадай загаданное число";
 "Guess the word in 6 moves" = "Угадай слово за 6 ходов";
 "Paint the field one color" = "Закрась поле в один цвет";
