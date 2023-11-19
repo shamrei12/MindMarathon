@@ -110,14 +110,15 @@ class TasksTableViewCell: UITableViewCell {
         takeReward.setTitle(TimeManager.shared.convertToMinutes(seconds: seconds), for: .normal)
         if seconds < 0 {
             stopwatch?.invalidate()
-            takeReward.isEnabled = true
-            delegate?.buttonPressed(in: self)
+            inactiveButtonStatus()
         }
     }
     
     func startTimer() {
-        seconds = TimeManager.shared.getFinishTimeForTask(taskTime: dataCell.timeRestart)
-        createTimer()
+        if stopwatch == nil {
+            seconds = TimeManager.shared.getFinishTimeForTimer(finishTime: dataCell.finishTime)
+            createTimer()
+        }
     }
     
     func inactiveButtonStatus() {

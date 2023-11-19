@@ -40,7 +40,15 @@ class RealmManager {
             let tasks = realm.objects(TasksManager.self)
             
             if tasks.isEmpty {
-                let massiveTask: [TasksManager] = [TasksManager(condition: "Выйграйте в любую игру", status: true, timeRestart: 10, finishTime: 10, reward: 10), TasksManager(condition: "Сыграйте в крестики нолики", status: true, timeRestart: 10, finishTime: 150, reward: 10), TasksManager(condition: "Закрасте поле в игре заливка в зеленый цвет", status: true, timeRestart: 10, finishTime: 0, reward: 100), TasksManager(condition: "Победите в крестики нолики 3 раза подряд", status: true, timeRestart: 10, finishTime: 0, reward: 20), TasksManager(condition: "В игре быки и коровы угадайте число за 7 попыток", status: true, timeRestart: 10, finishTime: 0, reward: 100) ]
+                let massiveTask: [TasksManager] = [
+                    TasksManager(condition: "Сыграйте в Быки и коровы", status: false, timeRestart: 1200, finishTime: 0, reward: 10, isRestartTime: false),
+                    TasksManager(condition: "Выйграйте в Словус", status: false, timeRestart: 1200, finishTime: 0, reward: 10, isRestartTime: false),
+                    TasksManager(condition: "Выиграть в Крестики нолики", status: false, timeRestart: 1200, finishTime: 0, reward: 20, isRestartTime: false),
+                    TasksManager(condition: "Сыграйте в Заливку", status: false, timeRestart: 1200, finishTime: 0, reward: 10, isRestartTime: false),
+                    TasksManager(condition: "Сыграйте в Бинарио", status: false, timeRestart: 1200, finishTime: 0, reward: 10, isRestartTime: false),
+                    TasksManager(condition: "Сыграйте в Цифры", status: false, timeRestart: 1200, finishTime: 0, reward: 40, isRestartTime: false)
+                ]
+
                 try realm.write {
                     realm.add(massiveTask)
                 }
@@ -54,7 +62,7 @@ class RealmManager {
         return taskMassive
     }
     
-    func updateTasks(index: Int) {
+    func taskCompleted(index: Int) {
         do {
             let realm = try Realm()
             let tasks = realm.objects(TasksManager.self)
@@ -64,16 +72,36 @@ class RealmManager {
                 return
             }
             
-            try realm.write {
-                tasks[index].status = !tasks[index].status // Обновление статуса задачи
-                tasks[index].finishTime = TimeInterval(0)
+            if (TimeManager.shared.chechConditionTime(finishTime: tasks[index].finishTime) || tasks[index].finishTime == TimeInterval(0)) && !tasks[index].status {
+                try realm.write {
+                    tasks[index].status = true // Обновление статуса задачи
+                    tasks[index].finishTime = TimeInterval(0)
+                    tasks[index].isRestartTime = false
+                }
             }
         } catch {
             print("Ошибка при обновлении статуса задачи: \(error)")
         }
     }
     
-
+    func awardReceived(index: Int) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(TasksManager.self)
+            
+            guard index >= 0 && index < tasks.count else {
+                print("Индекс задачи находится вне диапазона")
+                return
+            }
+                try realm.write {
+                    tasks[index].status = false
+                    tasks[index].finishTime = TimeManager.shared.getFinishTime(restartTime: tasks[index].timeRestart)
+                    tasks[index].isRestartTime = true
+                }
+            } catch {
+            print("Ошибка при обновлении статуса задачи: \(error)")
+        }
+    }
     
     func clearRealmDatabase() {
         do {

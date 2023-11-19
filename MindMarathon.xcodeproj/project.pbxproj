@@ -80,6 +80,7 @@
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
 		D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E321202B028EBC00674541 /* CustomTabBarController.swift */; };
+		D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		D8E321202B028EBC00674541 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTaskManager.swift; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -400,6 +402,7 @@
 				D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */,
 				D81F8DD12AB4CE79007A6597 /* IconsManager.swift */,
 				D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */,
+				D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -522,11 +525,11 @@
 		D8E3211B2B00A74800674541 /* Games */ = {
 			isa = PBXGroup;
 			children = (
-				D8E321192B00A71D00674541 /* TicTacToeGame */,
-				D8E321182B00A6F600674541 /* SlovusGame */,
 				D8E321162B00A60C00674541 /* BullCowGame */,
-				D8E321152B00A5FE00674541 /* BinarioGame */,
+				D8E321182B00A6F600674541 /* SlovusGame */,
 				D8E321142B00A59D00674541 /* FloodFillGame */,
+				D8E321192B00A71D00674541 /* TicTacToeGame */,
+				D8E321152B00A5FE00674541 /* BinarioGame */,
 				D8E321112B00A0AF00674541 /* NumberGame */,
 			);
 			path = Games;
@@ -765,6 +768,7 @@
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
 				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
+				D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */,
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */,

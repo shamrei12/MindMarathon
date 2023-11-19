@@ -47,9 +47,25 @@ class TimeManager {
     }
     
     func getFinishTimeForTask(taskTime: TimeInterval) -> Int {
-        let currentTimeInterval = Date().timeIntervalSince1970
-        let finishTimeInterval = currentTimeInterval + taskTime
+        let currentTimeInterval = getCurrentTime()
+        let finishTimeInterval = getFinishTime(restartTime: taskTime)
         
         return Int(finishTimeInterval - currentTimeInterval)
+    }
+    
+    func getFinishTimeForTimer(finishTime: TimeInterval) -> Int {
+        return Int(finishTime - getCurrentTime())
+    }
+    
+    func getFinishTime(restartTime: TimeInterval) -> TimeInterval {
+        return getCurrentTime() + restartTime
+    }
+    
+    func getCurrentTime() -> TimeInterval {
+        return Date().timeIntervalSince1970
+    }
+    
+    func chechConditionTime(finishTime: TimeInterval) -> Bool {
+        return finishTime <= getCurrentTime() ? true : false
     }
 }

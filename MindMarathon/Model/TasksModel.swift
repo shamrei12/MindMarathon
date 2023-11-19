@@ -14,6 +14,7 @@ struct TasksModel {
     var timeRestart: TimeInterval
     var finishTime: TimeInterval
     var reward: Int
+    var isRestartTime: Bool
 }
 
 class TasksManager: Object {
@@ -22,8 +23,9 @@ class TasksManager: Object {
     @objc dynamic var timeRestart =  TimeInterval(0)
     @objc dynamic var finishTime = TimeInterval(0)
     @objc dynamic var reward = 0
+    @objc dynamic var isRestartTime = false
     
-    convenience init(condition: String, status: Bool, timeRestart: TimeInterval, finishTime: TimeInterval, reward: Int) {
+    convenience init(condition: String, status: Bool, timeRestart: TimeInterval, finishTime: TimeInterval, reward: Int, isRestartTime: Bool) {
         self.init()
         
         self.condition = condition
@@ -31,6 +33,7 @@ class TasksManager: Object {
         self.timeRestart = timeRestart
         self.finishTime = finishTime
         self.reward = reward
+        self.isRestartTime = isRestartTime
     }
 }
 

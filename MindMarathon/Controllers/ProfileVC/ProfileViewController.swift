@@ -80,7 +80,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense()!)
-        
     }
     
     func setupUI() {
@@ -105,7 +104,7 @@ class ProfileViewController: UIViewController {
         userImage.snp.makeConstraints { maker in
             maker.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
             maker.centerX.equalToSuperview()
-            maker.width.height.equalTo(100)
+//            maker.width.height.equalTo(100)
         }
         
         userImage.layoutIfNeeded()
@@ -148,12 +147,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func getReward(reward: Int) {
-        print(reward)
-    }
-    
     func getUserExpiriense(exp: Int) {
-        var currentRank = getCurrentAndNextRank(exp: exp)
+        let currentRank = getCurrentAndNextRank(exp: exp)
         getCurrentAndNextRank(current: currentRank.0, next: currentRank.1)
     }
     
@@ -161,7 +156,7 @@ class ProfileViewController: UIViewController {
         var currentIndex = 0
         var nextIndex = 0
         var currentRank: String = "Нет звания"
-        var nextRank: String? = nil
+        var nextRank: String?
         let rankExperienceRequirements = [
             ("Новичок", 0...100),
             ("Ученик", 101...300),
@@ -177,6 +172,7 @@ class ProfileViewController: UIViewController {
                 currentRank = rankExperienceRequirements[i].0
             }
         }
+        
         if nextIndex > rankExperienceRequirements.count - 1 {
             nextRank = nil
         } else {
@@ -194,6 +190,8 @@ class ProfileViewController: UIViewController {
         } else {
             progress.progress = 0
         }
+        
+        print(progress.progress)
     }
     
     func getCurrentAndNextRank(current: String, next: String?) {
@@ -202,8 +200,6 @@ class ProfileViewController: UIViewController {
         } else {
             nextRank.text = ""
         }
-        
         currentRank.text = current
     }
 }
-

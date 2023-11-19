@@ -9,18 +9,30 @@ import UIKit
 
 class TasksTableView: UITableView, CustomCellDelegate {
     
-    var massiveTask = RealmManager.shared.getTasks()
-    
+    private var massiveTask = RealmManager.shared.getTasks()
+
     func buttonPressed(in cell: TasksTableViewCell) {
-        let reward = massiveTask[cell.takeReward.tag].reward
-        RealmManager.shared.updateTasks(index: cell.takeReward.tag)
-        massiveTask = RealmManager.shared.getTasks()
-        let indexPath = IndexPath(row: cell.takeReward.tag, section: 0) // Пример индекса ячейки
-        self.reloadRows(at: [indexPath], with: .fade)
+        let newMassiveTask = RealmManager.shared.getTasks()
+        guard !newMassiveTask.isEmpty, !massiveTask.isEmpty else {
+            return
+        }
         
-//        if let view = ProfileViewController.self as? ProfileViewController {
-//            view.getReward(reward: reward)
-//        }
+        if newMassiveTask != massiveTask {
+            massiveTask = newMassiveTask
+            let reward = massiveTask[cell.takeReward.tag].reward
+            RealmManager.shared.awardReceived(index: cell.takeReward.tag)
+            UserDefaultsManager.shared.addExpirience(exp: reward)
+            let indexPath = IndexPath(row: cell.takeReward.tag, section: 0)
+            self.reloadRows(at: [indexPath], with: .fade)
+            
+            if let cell = self.cellForRow(at: indexPath) as? TasksTableViewCell {
+                cell.setupData(data: massiveTask[indexPath.row])
+            }
+            
+            if let profileViewController = UIApplication.shared.keyWindow?.rootViewController as? ProfileViewController {
+                profileViewController.getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense() ?? 0)
+            }
+        }
     }
     
     init() {
@@ -44,6 +56,7 @@ class TasksTableView: UITableView, CustomCellDelegate {
         self.separatorStyle = .none
         self.backgroundColor = .clear
     }
+    
 }
 
 extension TasksTableView: UITableViewDataSource {
@@ -65,18 +78,19 @@ extension TasksTableView: UITableViewDataSource {
         cell.setupData(data: massiveTask[indexPath.row])
         cell.takeReward.tag = indexPath.row
         cell.delegate = self
-        
         if massiveTask[indexPath.row].status {
-            if massiveTask[indexPath.row].finishTime != TimeInterval(0) {
-                cell.beforeRestartingStatus()
-            } else {
-                cell.getRewardStatus()
-            }
-        } else {
+            print(indexPath.row)
+            cell.getRewardStatus()
+        } else if massiveTask[indexPath.row].isRestartTime == false {
+            print(indexPath.row)
+            print(massiveTask[indexPath.row].isRestartTime)
             cell.inactiveButtonStatus()
+        } else if massiveTask[indexPath.row].isRestartTime == true {
+            print(indexPath.row)
+            print(massiveTask[indexPath.row].isRestartTime)
+            cell.beforeRestartingStatus()
         }
         
         return cell
     }
 }
-

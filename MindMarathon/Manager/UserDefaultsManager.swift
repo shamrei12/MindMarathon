@@ -20,23 +20,22 @@ class UserDefaultsManager {
     
     func checkFirstStart() {
         if userDefaults.object(forKey: firstStartKey) == nil {
-            RealmManager.shared.clearRealmDatabase()
             userDefaults.setValue(true, forKey: firstStartKey)
         }
-    }
-    
-    func addExpirience(exp: Int) {
+        
         if userDefaults.object(forKey: userExpirienseKey) == nil {
             userDefaults.setValue(0, forKey: userExpirienseKey)
         }
-            
+        
+    }
+    
+    func addExpirience(exp: Int) {
         var userExp = userDefaults.object(forKey: userExpirienseKey) as? Int
         userExp! += exp
         userDefaults.setValue(userExp, forKey: userExpirienseKey)
     }
     
     func getUserExpiriense() -> Int? {
-        
         if let userExp = userDefaults.integer(forKey: userExpirienseKey) as Int? {
             return userExp
         }

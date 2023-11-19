@@ -362,12 +362,13 @@ class TicTacToeViewController: UIViewController {
         if isUserWon {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Победа", countStep: stepCount.description, timerGame:  seconds))
+            saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Win".localize(), countStep: stepCount.description, timerGame:  seconds))
+            CheckTaskManager.shared.checkPlayGame(game: 2)
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "draw_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Ничья", countStep: stepCount.description, timerGame:  seconds))
+                saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Draw".localize(), countStep: stepCount.description, timerGame:  seconds))
                 return
             }
             setComputerTurn(row: position.0, col: position.1)
@@ -396,19 +397,22 @@ class TicTacToeViewController: UIViewController {
     @objc func updateComputerThinking() {
         thinkingTimeElapsed += 1
         
-        if thinkingTimeElapsed == computerThinkingTime {
+        if thinkingTimeElapsed >= computerThinkingTime {
             drawComputerTurn(row: computerRow, col: computerCol)
             let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
             if isComputerWon {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "defeat_message".localize() + "time_message".localize() + " \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "Крестики Нолики".localize(), resultGame: "Поражение", countStep: stepCount.description, timerGame:  seconds))
+            } else {
                 computerThinkingTimer?.invalidate()
                 playerTurn()
             }
             
         }
     }
+    
+    
     
     func drawUserTurn(row: Int, col: Int) {
         stepCount += 1

@@ -51,7 +51,6 @@ class WhiteboardViewController: UIViewController {
         } catch {
             print("Failed to load game list: \(error)")
         }
-        
         tableView.reloadData()
     }
     

@@ -17,7 +17,6 @@ struct WhiteBoardModel {
     var resultGame: String
     var countStep: String
     var timerGame: Int
-
 }
 
 class WhiteBoardManager: Object {
