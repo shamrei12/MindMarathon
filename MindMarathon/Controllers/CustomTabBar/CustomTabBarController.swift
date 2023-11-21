@@ -54,6 +54,6 @@ class CustomTabBarController: UITabBarController {
     
     func configureTabBar() {
         tabBar.tintColor = UIColor(hex: 0x8965C3, alpha: 1)
-        tabBar.backgroundColor = UIColor(hex: 0xfcfcfc, alpha: 1)
+        tabBar.backgroundColor = UIColor(named: "viewColor")
     }
     }
