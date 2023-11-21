@@ -115,7 +115,7 @@ extension WhiteboardViewController: UITableViewDataSource {
         cell.gameName.text = item.nameGame
         cell.gameResult.text = item.resultGame
         cell.gameCount.text = item.countStep
-        cell.gameTimer.text = TimeManager.shared.convertToMinutes(seconds: item.timerGame)
+        cell.gameTimer.text = TimeManager.shared.convertToMinutesWhiteBoard(seconds: item.timerGame)
         
         switch item.resultGame {
         case "Win".localize(): cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)

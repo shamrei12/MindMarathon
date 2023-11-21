@@ -24,6 +24,14 @@ class TimeManager {
         return formattedString
     }
     
+    func convertToMinutesWhiteBoard(seconds: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .short
+        let formattedString = formatter.string(from: TimeInterval(seconds))!
+        return formattedString
+    }
+    
     func curentDate(_ time: String) -> String {
         let times = Int(NSDate().timeIntervalSince1970)
         let date = Date(timeIntervalSince1970: TimeInterval(times))
