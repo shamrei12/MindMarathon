@@ -18,8 +18,8 @@ class TimeManager {
     
     func convertToMinutes(seconds: Int) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.minute, .second]
-        formatter.unitsStyle = .short
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
         let formattedString = formatter.string(from: TimeInterval(seconds))!
         return formattedString
     }
@@ -44,5 +44,28 @@ class TimeManager {
         dateFormater.dateFormat = "HH:mm"
         let formattedString = dateFormater.string(from: date)
         return formattedString
+    }
+    
+    func getFinishTimeForTask(taskTime: TimeInterval) -> Int {
+        let currentTimeInterval = getCurrentTime()
+        let finishTimeInterval = getFinishTime(restartTime: taskTime)
+        
+        return Int(finishTimeInterval - currentTimeInterval)
+    }
+    
+    func getFinishTimeForTimer(finishTime: TimeInterval) -> Int {
+        return Int(finishTime - getCurrentTime())
+    }
+    
+    func getFinishTime(restartTime: TimeInterval) -> TimeInterval {
+        return getCurrentTime() + restartTime
+    }
+    
+    func getCurrentTime() -> TimeInterval {
+        return Date().timeIntervalSince1970
+    }
+    
+    func chechConditionTime(finishTime: TimeInterval) -> Bool {
+        return finishTime <= getCurrentTime() ? true : false
     }
 }

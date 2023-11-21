@@ -17,10 +17,14 @@ class WhiteboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupTableView()
         setunNavigationBar()
-        loadGameList()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadGameList()
     }
     
     func setupTableView() {
@@ -47,6 +51,7 @@ class WhiteboardViewController: UIViewController {
         } catch {
             print("Failed to load game list: \(error)")
         }
+        tableView.reloadData()
     }
     
     func createLabelCategories(text: String) -> UILabel {
@@ -72,7 +77,6 @@ class WhiteboardViewController: UIViewController {
             maker.left.right.equalToSuperview().inset(25)
         }
         
-        
         tableView.snp.makeConstraints { maker in
             maker.top.equalTo(labelStackView).inset(20)
             maker.left.right.bottom.equalToSuperview().inset(10)
@@ -87,8 +91,8 @@ class WhiteboardViewController: UIViewController {
 
 extension WhiteboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !gameList.isEmpty {
-            return gameList.count
+        if !gameListArray.isEmpty {
+            return gameListArray.count
         } else {
             return 0
         }
@@ -111,11 +115,11 @@ extension WhiteboardViewController: UITableViewDataSource {
         cell.gameName.text = item.nameGame
         cell.gameResult.text = item.resultGame
         cell.gameCount.text = item.countStep
-        cell.gameTimer.text = item.timerGame
+        cell.gameTimer.text = TimeManager.shared.convertToMinutes(seconds: item.timerGame)
         
         switch item.resultGame {
-        case "Победа": cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        case "Ничья": cell.mainView.backgroundColor = UIColor.systemYellow
+        case "Win".localize(): cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+        case "Draw".localize(): cell.mainView.backgroundColor = UIColor.systemYellow
         default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
         }
         

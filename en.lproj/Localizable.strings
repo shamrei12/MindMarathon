@@ -1,16 +1,20 @@
 "games_list" = "Games";
 "game_rules" = "Rules";
 "games_history" = "History";
-"feedback" = "Feedback";
+"settings" = "Settings";
 "profile" = "Profile";
 
 //List Game ViewController
-"Быки и Коровы" = "Bulls and Cows";
-"Словус" = "Slovus";
-"Заливка" = "Flood Fill";
-"Крестики Нолики" = "Tic Tac Toe";
-"Бинарио" = "Binario";
-"Цифры" = "Numbers";
+"bullcow" = "Bulls and Cows";
+"slovus" = "Slovus";
+"flood_fill" = "Flood Fill";
+"tictactoe" = "Tic Tac Toe";
+"binario" = "Binario";
+"Numbers" = "Numbers";
+
+"Win" = "Win";
+"Draw" = "Draw";
+"Lose" = "Defeat";
 
 "Угадай загаданное число" = "Guess the mystery number";
 "В данной игре Вам необходимо угадать секретное слово за 6 попыток" = "Guess the word in 6 moves";

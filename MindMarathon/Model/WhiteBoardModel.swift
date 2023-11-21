@@ -16,17 +16,16 @@ struct WhiteBoardModel {
     var nameGame: String
     var resultGame: String
     var countStep: String
-    var timerGame: String
-
+    var timerGame: Int
 }
 
 class WhiteBoardManager: Object {
     @objc dynamic var nameGame = ""
     @objc dynamic var resultGame = ""
     @objc dynamic var countStep = ""
-    @objc dynamic var timerGame = ""
+    @objc dynamic var timerGame = 0
     
-    convenience init(nameGame: String, resultGame: String, countStep: String, timerGame: String) {
+    convenience init(nameGame: String, resultGame: String, countStep: String, timerGame: Int) {
         self.init()
         self.nameGame = nameGame
         self.resultGame = resultGame

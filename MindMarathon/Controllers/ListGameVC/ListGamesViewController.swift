@@ -9,14 +9,20 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController {
+  
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     let gameList: [Game] = ListGamesViewController.createGames()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationItem()
         setupCollectionView()
         createUI()
+        fisrStart()
+    }
+    
+    func fisrStart() {
+        UserDefaultsManager.shared.checkFirstStart()
     }
     
     func setupNavigationItem() {
@@ -50,7 +56,7 @@ class ListGamesViewController: UIViewController {
     }
     
     static func createGames() -> [Game] {
-        return [BullCowGame(title: "Быки и Коровы".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the mystery number".localize(), rules: "bullCow_rules".localize(), gameImage: "BullCow"), SlovusGame(title: "Словус".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the word in 6 moves".localize(), rules: "slovus_rules".localize(), gameImage: "slovusImage"), FloodFillGame(title: "Заливка".localize(), createdBy: "Aliaksei Shamrei", descripton: "Paint the field one color".localize(), rules: "floodFill_rules".localize(), gameImage: "floodFillImage"), TicTacToeGame(title: "Крестики Нолики".localize(), createdBy: "Nikita Shakalov", descripton: "Collect a line of three symbols".localize(), rules: "tictactoe_rules".localize(), gameImage: "tikTakToeImage"), BinarioGame(title: "Бинарио".localize(), createdBy: "Aliaksei Shamrei", descripton: "Arrange the blue and red blocks".localize(), rules: "binario_rules".localize(), gameImage: "binarioImage"), NumbersGame(title: "Цифры".localize(), createdBy: "Aliaksei Shamrei", descripton: "Remove all the numbers from the field".localize(), rules: "numbers_rules".localize(), gameImage: "numbersImage")]
+        return [BullCowGame(title: "bullcow".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the mystery number".localize(), rules: "bullCow_rules".localize(), gameImage: "BullCow"), SlovusGame(title: "slovus".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the word in 6 moves".localize(), rules: "slovus_rules".localize(), gameImage: "slovusImage"), FloodFillGame(title: "flood_fill".localize(), createdBy: "Aliaksei Shamrei", descripton: "Paint the field one color".localize(), rules: "floodFill_rules".localize(), gameImage: "floodFillImage"), TicTacToeGame(title: "tictactoe".localize(), createdBy: "Nikita Shakalov", descripton: "Collect a line of three symbols".localize(), rules: "tictactoe_rules".localize(), gameImage: "tikTakToeImage"), BinarioGame(title: "binario".localize(), createdBy: "Aliaksei Shamrei", descripton: "Arrange the blue and red blocks".localize(), rules: "binario_rules".localize(), gameImage: "binarioImage"), NumbersGame(title: "Numbers".localize(), createdBy: "Aliaksei Shamrei", descripton: "Remove all the numbers from the field".localize(), rules: "numbers_rules".localize(), gameImage: "numbersImage")]
     }
 
     func createUI() {
@@ -65,19 +71,19 @@ class ListGamesViewController: UIViewController {
     func selected(game: Game) {
         let viewController: UIViewController
         switch game.title {
-        case "Быки и Коровы".localize():
+        case "bullcow".localize():
             let viewModel = BullCowViewModel(game: game)
             viewController = BullCowViewController(viewModel: viewModel)
-        case "Словус".localize():
+        case "slovus".localize():
             let viewModel = SlovusViewModel(game: game)
             viewController = SlovusGameViewController(viewModel: viewModel)
-        case "Заливка".localize():
+        case "flood_fill".localize():
             let viewModel = FloodFillViewModel(game: game)
             viewController = FloodFillViewController(viewModel: viewModel)
-        case "Крестики Нолики".localize():
+        case "tictactoe".localize():
             let viewModel = TicTacToeViewModel(game: game)
             viewController = TicTacToeViewController(viewModel: viewModel)
-        case "Бинарио".localize():
+        case "binario".localize():
             let viewModel = BinarioViewModel(game: game)
             viewController = BinarioViewController(viewModel: viewModel)
         default:

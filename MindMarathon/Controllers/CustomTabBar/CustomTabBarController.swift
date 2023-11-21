@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +19,8 @@ class CustomTabBarController: UITabBarController {
         let mainViewController = setupVC(viewController: ListGamesViewController(), title: "games_list".localize(), image: setupImage(named: "gamecontroller"))
         let createViewController = setupVC(viewController: UIViewController(), title: "game_rules".localize(), image: setupImage(named: "book"))
         let nocreateViewController = setupVC(viewController: WhiteboardViewController(), title: "games_history".localize(), image: setupImage(named: "clock.arrow.circlepath"))
-        let profileViewController = setupVC(viewController: FeedbackViewController(), title: "feedback".localize(), image: setupImage(named: "envelope"))
-        let createViewControllerS = setupVC(viewController: UIViewController(), title: "profile".localize(), image: setupImage(named: "person"))
+        let profileViewController = setupVC(viewController: SettingsViewController(), title: "settings".localize(), image: setupImage(named: "gearshape"))
+        let createViewControllerS = setupVC(viewController: ProfileViewController(), title: "profile".localize(), image: setupImage(named: "person"))
             
             // Ограничиваем количество отображаемых контроллеров в таб-баре
             let visibleViewControllers = [mainViewController, createViewController, nocreateViewController, profileViewController, createViewControllerS]
@@ -55,6 +54,6 @@ class CustomTabBarController: UITabBarController {
     
     func configureTabBar() {
         tabBar.tintColor = UIColor(hex: 0x8965C3, alpha: 1)
-        tabBar.backgroundColor = UIColor(hex: 0xfcfcfc, alpha: 1)
+        tabBar.backgroundColor = UIColor(named: "viewColor")
     }
     }
