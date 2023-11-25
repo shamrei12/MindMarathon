@@ -162,11 +162,16 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupTheme()
+        setupLanguage()
+    }
+    
     func setup() {
         createStackView()
         setupUI()
         makeConstaints()
-        setupConfigurationUI()
     }
     
     func setupUI() {
@@ -191,22 +196,35 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         languagesView.addSubview(languagesButtonStack)
     }
     
-    func setupConfigurationUI() {
-        let currentLanguage = NSLocale.preferredLanguages[0]
+    func setupLanguage() {
+        
+        let currentLanguage = UserDefaultsManager.shared.getLanguage()
         
         if currentLanguage == "en" {
-            engLanguageButton.layer.borderColor = UIColor.purple.cgColor
-            engLanguageButton.layer.borderWidth = 2
-            
-            rusLanguageButton.layer.borderColor = UIColor.clear.cgColor
-            rusLanguageButton.layer.borderWidth = 0
+            selectButton(button: engLanguageButton)
+            unselectButton(button: rusLanguageButton)
             
         } else if currentLanguage == "ru" {
-            rusLanguageButton.layer.borderColor = UIColor.purple.cgColor
-            rusLanguageButton.layer.borderWidth = 2
-            
-            engLanguageButton.layer.borderColor = UIColor.clear.cgColor
-            engLanguageButton.layer.borderWidth = 0
+            selectButton(button: rusLanguageButton)
+            unselectButton(button: engLanguageButton)
+        }
+    }
+
+    
+    func setupTheme() {
+        let currentTheme = UserDefaultsManager.shared.getTheme()
+        print(currentTheme)
+        switch currentTheme {
+        case "light":
+            selectView(view: lightThemeView)
+            unselectView(view: darkThemeView)
+        case "dark":
+            selectView(view: darkThemeView)
+            unselectView(view: lightThemeView)
+        default:
+            automaticSwitchTheme.isOn = true
+            unselectView(view: lightThemeView)
+            unselectView(view: darkThemeView)
         }
     }
     
@@ -349,6 +367,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
                         darkThemeView.layer.borderColor = UIColor.clear.cgColor
                         darkThemeView.layer.borderWidth = 0
                         automaticSwitchTheme.isOn = false
+                        UserDefaultsManager.shared.setCurrentTheme(theme: "light")
                         window.overrideUserInterfaceStyle = .light
                     }
                 }
@@ -357,6 +376,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
                     lightThemeView.layer.borderColor =  UIColor.clear.cgColor
                     lightThemeView.layer.borderWidth = 0
                     automaticSwitchTheme.isOn = false
+                    UserDefaultsManager.shared.setCurrentTheme(theme: "dark")
                     window.overrideUserInterfaceStyle = .dark
                 }
             }
@@ -368,6 +388,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             if sender.isOn {
                 // Использовать тему в зависимости от системы
                 if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+                    UserDefaultsManager.shared.setCurrentTheme(theme: "auto")
                     lightThemeView.layer.borderColor =  UIColor.clear.cgColor
                     lightThemeView.layer.borderWidth = 0
                     darkThemeView.layer.borderColor = UIColor.clear.cgColor
@@ -381,10 +402,12 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
                     if window.traitCollection.userInterfaceStyle == .dark {
                         darkThemeView.layer.borderColor = UIColor.purple.cgColor
                         darkThemeView.layer.borderWidth = 2
+                        UserDefaultsManager.shared.setCurrentTheme(theme: "dark")
                         window.overrideUserInterfaceStyle = .dark
                     } else {
                         lightThemeView.layer.borderColor = UIColor.purple.cgColor
                         lightThemeView.layer.borderWidth = 2
+                        UserDefaultsManager.shared.setCurrentTheme(theme: "light")
                         window.overrideUserInterfaceStyle = .light
                     }
                 }
@@ -394,20 +417,50 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     @objc func changeLanguage(sender: UIButton) {
         if sender.tag == 0 {
-            engLanguageButton.layer.borderColor = UIColor.purple.cgColor
-            engLanguageButton.layer.borderWidth = 2
-            
-            rusLanguageButton.layer.borderColor = UIColor.clear.cgColor
-            rusLanguageButton.layer.borderWidth = 0
+            selectButton(button: engLanguageButton)
+            unselectButton(button: rusLanguageButton)
+            UserDefaultsManager.shared.setCurrentLanguage(lang: "en")
+            updateInterfaceForLanguageChange()
+
         } else {
-            rusLanguageButton.layer.borderColor = UIColor.purple.cgColor
-            rusLanguageButton.layer.borderWidth = 2
-            
-            engLanguageButton.layer.borderColor = UIColor.clear.cgColor
-            engLanguageButton.layer.borderWidth = 2
+            selectButton(button: rusLanguageButton)
+            unselectButton(button: engLanguageButton)
+            UserDefaultsManager.shared.setCurrentLanguage(lang: "ru")
+            updateInterfaceForLanguageChange()
         }
     }
     
+    func updateInterfaceForLanguageChange() {
+        guard let window = UIApplication.shared.windows.first else {
+            return
+        }
+        
+        if let rootViewController = window.rootViewController {
+            window.rootViewController = CustomTabBarController()
+            rootViewController.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    
+    func selectButton(button: UIButton) {
+        button.layer.borderColor = UIColor.purple.cgColor
+        button.layer.borderWidth = 2
+    }
+    
+    func unselectButton(button: UIButton) {
+        button.layer.borderColor = UIColor.clear.cgColor
+        button.layer.borderWidth = 0
+    }
+    
+    func selectView(view: UIView) {
+        view.layer.borderColor = UIColor.purple.cgColor
+        view.layer.borderWidth = 2
+    }
+    
+    func unselectView(view: UIView) {
+        view.layer.borderColor = UIColor.clear.cgColor
+        view.layer.borderWidth = 0
+    }
     
         @objc
         func userHelpTapped() {
@@ -427,5 +480,4 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
                   present(alert, animated: true, completion: nil)
               }
           }
-    
 }

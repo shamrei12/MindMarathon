@@ -17,6 +17,8 @@ class UserDefaultsManager {
     private let userDefaults = UserDefaults()
     private let firstStartKey = "firstStart"
     private let userExpirienseKey = "userExpiriense"
+    private let currentTheme = "currentTheme"
+    private let currentLanguage = "currentLanguage"
     
     func checkFirstStart() {
 //        userDefaults.setValue(nil, forKey: userExpirienseKey)
@@ -41,7 +43,33 @@ class UserDefaultsManager {
         if let userExp = userDefaults.integer(forKey: userExpirienseKey) as Int? {
             return userExp
         }
-        
         return 0
+    }
+    
+    func setCurrentLanguage(lang: String?) {
+        userDefaults.setValue(lang, forKey: currentLanguage)
+    }
+    
+    func setCurrentTheme(theme: String?) {
+        userDefaults.setValue(theme, forKey: currentTheme)
+    }
+    
+    func getLanguage() -> String {
+        let lang = userDefaults.string(forKey: currentLanguage)
+        if lang != nil {
+            return lang ?? "en"
+        } else {
+            return "en"
+        }
+    }
+    
+    func getTheme() -> String {
+        let theme = userDefaults.string(forKey: currentTheme)
+        
+        if theme != nil {
+            return theme ?? "auto"
+        } else {
+            return "auto"
+        }
     }
 }

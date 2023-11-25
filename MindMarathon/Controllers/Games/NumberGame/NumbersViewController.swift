@@ -18,7 +18,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         let resultGame = WhiteBoardModel(nameGame: "Numbers".localize(), resultGame: "Win".localize(), countStep: "-", timerGame:  seconds)
         RealmManager.shared.saveResult(result: resultGame)
-        CheckTaskManager.shared.checkPlayGame(game: 5)
+        CheckTaskManager.shared.checkPlayGame(game: 4)
     }
     
     private let viewModel: NumbersViewModel
