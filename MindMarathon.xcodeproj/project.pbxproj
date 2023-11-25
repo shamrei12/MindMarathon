@@ -70,7 +70,7 @@
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
 		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
-		D8C11F282B029A1C00EA28D6 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */; };
+		D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */; };
 		D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
 		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
 		D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */; };
@@ -151,7 +151,7 @@
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
-		D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatiscticsCollectionView.swift; sourceTree = "<group>"; };
 		D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				D8C11F292B033DB500EA28D6 /* ProfileVC */,
-				D8C11F262B0299F700EA28D6 /* FeedBackVC */,
+				D8C11F262B0299F700EA28D6 /* SettingsVC */,
 				D8E3211F2B028E1E00674541 /* CustomTabBar */,
 				D8E321132B00A58400674541 /* Menu */,
 				D8E3211E2B00A79E00674541 /* WhiteBoardVC */,
@@ -415,12 +415,12 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		D8C11F262B0299F700EA28D6 /* FeedBackVC */ = {
+		D8C11F262B0299F700EA28D6 /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
-				D8C11F272B029A1C00EA28D6 /* SettingsVC.swift */,
+				D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */,
 			);
-			path = FeedBackVC;
+			path = SettingsVC;
 			sourceTree = "<group>";
 		};
 		D8C11F292B033DB500EA28D6 /* ProfileVC */ = {
@@ -739,7 +739,7 @@
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */,
-				D8C11F282B029A1C00EA28D6 /* SettingsVC.swift in Sources */,
+				D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */,

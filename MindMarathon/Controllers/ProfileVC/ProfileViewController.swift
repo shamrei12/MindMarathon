@@ -167,10 +167,12 @@ class ProfileViewController: UIViewController {
     }
     
     func getCurrentAndNextRank(exp: Int) -> (String, String?) {
+        progress.progress = 0
         var currentIndex = 0
         var nextIndex = 0
         var currentRank: String = "Нет звания"
         var nextRank: String?
+        
         let rankExperienceRequirements = [
             ("Новичок", 0...100),
             ("Ученик", 101...300),
@@ -239,7 +241,7 @@ class ProfileViewController: UIViewController {
     
     func mostFrequentWord(in words: [String]) -> String? {
         let wordCounts = words.reduce(into: [:]) { counts, word in counts[word, default: 0] += 1 }
-        return wordCounts.max { $0.1 < $1.1 }?.key
+        return wordCounts.max { $0.1 < $1.1 }?.key.localize()
     }
 
     func getWinStrike(massive: [String]) -> Int {

@@ -20,5 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let navigationController = UINavigationController(rootViewController: homeVC)
         self.window?.rootViewController = homeVC
         self.window?.makeKeyAndVisible()
+        
+        let currentTheme = UserDefaultsManager.shared.getTheme()
+        let currentLang = UserDefaultsManager.shared.getLanguage()
+        switch currentTheme {
+        case "dark":
+            window?.overrideUserInterfaceStyle = .dark
+        case "light":
+            window?.overrideUserInterfaceStyle = .light
+        default:
+            window?.overrideUserInterfaceStyle = .unspecified
+        }
     }
 }

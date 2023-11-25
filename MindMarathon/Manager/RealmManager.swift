@@ -48,6 +48,7 @@ class RealmManager {
     }
     
     func getTasks() -> [TasksManager] {
+//        clearRealmDatabase()
         var taskMassive = [TasksManager]()
         do {
             let realm = try Realm() // Получение экземпляра Realm

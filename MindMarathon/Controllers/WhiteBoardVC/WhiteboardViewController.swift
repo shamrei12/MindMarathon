@@ -112,12 +112,12 @@ extension WhiteboardViewController: UITableViewDataSource {
     private func configure(cell: GameTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         cell.createUI()
         let item = gameListArray[indexPath.row]
-        cell.gameName.text = item.nameGame
-        cell.gameResult.text = item.resultGame
+        cell.gameName.text = item.nameGame.localize()
+        cell.gameResult.text = item.resultGame.localize()
         cell.gameCount.text = item.countStep
         cell.gameTimer.text = TimeManager.shared.convertToMinutesWhiteBoard(seconds: item.timerGame)
-        
-        switch item.resultGame {
+
+        switch item.resultGame.localize() {
         case "Win".localize(): cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
         case "Draw".localize(): cell.mainView.backgroundColor = UIColor.systemYellow
         default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
