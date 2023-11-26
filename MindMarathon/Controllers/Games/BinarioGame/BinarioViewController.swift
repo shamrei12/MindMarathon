@@ -368,7 +368,7 @@ class BinarioViewController: UIViewController {
     
     @objc
     func rulesTapped() {
-        let rulesVC = RulesViewController(game: viewModel.game)
+        let rulesVC = CurrentRulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
         present(rulesVC, animated: true)
     }
@@ -402,7 +402,7 @@ class BinarioViewController: UIViewController {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 let resultGame = WhiteBoardModel(nameGame: "binario".localize(), resultGame: "Win".localize(), countStep: "-", timerGame: seconds)
-                CheckTaskManager.shared.checkPlayGame(game: 3)
+                CheckTaskManager.shared.checkPlayGame(game: 4)
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }

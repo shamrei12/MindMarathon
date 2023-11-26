@@ -11,7 +11,6 @@ class TasksTableView: UITableView, CustomCellDelegate {
     
     private var massiveTask = RealmManager.shared.getTasks()
 
-
     func buttonPressed(in cell: TasksTableViewCell) {
         let reward = massiveTask[cell.takeReward.tag].reward
         RealmManager.shared.awardReceived(index: cell.takeReward.tag)
@@ -20,6 +19,7 @@ class TasksTableView: UITableView, CustomCellDelegate {
         
         if let updatedCell = self.cellForRow(at: indexPath) as? TasksTableViewCell {
             updatedCell.setupData(data: massiveTask[indexPath.row])
+            updateAllCells()
         }
         
         if let profileViewController = UIApplication.shared.keyWindow?.rootViewController as? ProfileViewController {
@@ -49,6 +49,24 @@ class TasksTableView: UITableView, CustomCellDelegate {
         self.backgroundColor = .clear
     }
     
+    func updateAllCells() {
+        for indexPath in self.indexPathsForVisibleRows ?? [] {
+            if let cell = self.cellForRow(at: indexPath) as? TasksTableViewCell {
+                let task = massiveTask[indexPath.row]
+                cell.setupData(data: task)
+                cell.takeReward.tag = indexPath.row
+                cell.delegate = self
+                
+                if task.status && task.finishTime == 0 && !task.isRestartTime {
+                    cell.getRewardStatus()
+                } else if !task.status && task.finishTime == 0 && !task.isRestartTime {
+                    cell.inactiveButtonStatus()
+                } else if !task.status && task.finishTime != 0 && task.isRestartTime {
+                    cell.beforeRestartingStatus()
+                }
+            }
+        }
+    }
 }
 
 extension TasksTableView: UITableViewDataSource {
@@ -68,28 +86,20 @@ extension TasksTableView: UITableViewDataSource {
     
     private func configure(cell: TasksTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
         let task = massiveTask[indexPath.row]
-        print(task)
-        
         cell.setupData(data: task)
         cell.takeReward.tag = indexPath.row
         cell.delegate = self
         
-        
-        if task.status && task.finishTime == TimeInterval(0) && task.isRestartTime == false {
+        switch (task.status, task.finishTime, task.isRestartTime) {
+        case (true, 0, false):
             cell.getRewardStatus()
-        } else if task.status == false && task.finishTime == TimeInterval(0) && task.isRestartTime == false {
+        case (false, 0, false):
             cell.inactiveButtonStatus()
-        } else if task.status == false && task.finishTime != TimeInterval(0) && task.isRestartTime {
+        case (false, _, true):
             cell.beforeRestartingStatus()
+        default:
+            cell.inactiveButtonStatus()
         }
-        
-//        if task[indexPath.row].status {
-//            cell.getRewardStatus()
-//        } else if task[indexPath.row].isRestartTime == false && !task[indexPath.row].status {
-//            cell.inactiveButtonStatus()
-//        } else if task[indexPath.row].isRestartTime == true {
-//            cell.beforeRestartingStatus()
-//        }
         
         return cell
     }

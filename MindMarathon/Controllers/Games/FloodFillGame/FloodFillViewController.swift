@@ -178,7 +178,7 @@ class FloodFillViewController: UIViewController {
     }
     
     @objc func rulesTapped() {
-     let rulesVC = RulesViewController(game: viewModel.game)
+     let rulesVC = CurrentRulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
         present(rulesVC, animated: true)
     }
@@ -259,7 +259,7 @@ class FloodFillViewController: UIViewController {
 
             let resultGame = WhiteBoardModel(nameGame: "flood_fill".localize(), resultGame: "Win".localize(), countStep: "\(viewModel.gameResult())", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
-            CheckTaskManager.shared.checkPlayGame(game: 2)
+            CheckTaskManager.shared.checkPlayGame(game: 3)
         }
     }
     

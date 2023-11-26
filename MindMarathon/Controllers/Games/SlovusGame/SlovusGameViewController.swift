@@ -350,7 +350,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController(game: viewModel.game)
+        let rulesVC = CurrentRulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
         present(rulesVC, animated: true)
     }

@@ -2,70 +2,119 @@
 //  RulesViewController.swift
 //  MindMarathon
 //
-//  Created by Алексей Шамрей on 24.05.23.
+//  Created by Алексей Шамрей on 25.11.23.
 //
 
 import UIKit
-import SnapKit
 
-class RulesViewController: UIViewController {
-    let game: Game
+class RulesViewController: UIViewController, GameButtonDelegate {
     
-    init(game: Game) {
-        self.game = game
-        super.init(nibName: nil, bundle: nil)
+    func gameButtonDidTap(game: String) {
+            switch game {
+            case "bullcow".localize():
+                textView.text = "bullCow_rules".localize()
+            case "slovus".localize():
+                textView.text = "slovus_rules".localize()
+            case "flood_fill".localize():
+                textView.text = "floodFill_rules".localize()
+            case "tictactoe".localize():
+                textView.text = "tictactoe_rules".localize()
+            case "binario".localize():
+                textView.text = "binario_rules".localize()
+            case "Numbers".localize():
+                textView.text = "numbers_rules".localize()
+            default:
+                textView.text = ""
+            }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
+    private lazy var mainLabel: UILabel = {
+        let mainLabel = UILabel()
+        mainLabel.text = "Правила"
+        mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
+        mainLabel.textColor = .label
+        
+        return mainLabel
+    }()
     
+    private lazy var gameSelectionLabel: UILabel = {
+        let gameSelectionLabel = UILabel()
+        gameSelectionLabel.text = "chooseGame".localize()
+        gameSelectionLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 15), weight: .semiBold)
+        gameSelectionLabel.textColor = .label
+        
+        return gameSelectionLabel
+    }()
+    
+    private lazy var dropdownButton: DropdownButton = {
+        let dropdownButton = DropdownButton(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
+        dropdownButton.backgroundColor = UIColor(named: "gameElementColor" )
+        dropdownButton.layer.cornerRadius = 12
+        
+        dropdownButton.setTitle("chooseGame".localize(), for: .normal)
+        dropdownButton.setTitleColor(.label, for: .normal)
+        dropdownButton.gameList = ["chooseGame".localize(), "bullcow".localize(), "slovus".localize(), "flood_fill".localize(), "tictactoe".localize(), "binario".localize(), "Numbers".localize()]
+        
+        return dropdownButton
+    }()
+    
+    private lazy var rulesView: UIView = {
+        let rulesView = UIView()
+        rulesView.backgroundColor =  UIColor(named: "gameElementColor")
+        rulesView.layer.cornerRadius = 12
+        
+        return rulesView
+    }()
+    
+    private lazy var textView: UITextView = {
+        let textView = UITextView()
+        textView.font = UIFont.sfProText(ofSize: 20, weight: .regular)
+        textView.isEditable = false
+        textView.isSelectable = false
+        return textView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "viewColor")
-        rulesGame()
+        setupView()
+        makeConstraints()
+        dropdownButton.delegate = self
+        // Do any additional setup after loading the view.
     }
-
-    func rulesGame() {
-        let gameRules = UILabel()
-        let rulesLabel = UILabel()
-        
-        switch game.title {
-        case "Быки и Коровы".localize():
-            gameRules.text = game.rules
-        case "Словус".localize():
-            gameRules.text = game.rules
-        case "Крестики Нолики".localize():
-            gameRules.text = game.rules
-        case "Бинарио".localize():
-            gameRules.text = game.rules
-        case "Заливка".localize():
-            gameRules.text = game.rules
-        default: gameRules.text = game.rules
+    
+    func setupView() {
+        self.view.backgroundColor = UIColor(named: "viewColor")
+        self.view.addSubview(mainLabel)
+        self.view.addSubview(gameSelectionLabel)
+        self.view.addSubview(dropdownButton)
+        self.view.addSubview(rulesView)
+        self.rulesView.addSubview(textView)
+    }
+    
+    func makeConstraints() {
+        mainLabel.snp.makeConstraints { maker in
+            maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
         }
         
-        rulesLabel.text = "Правила игры".localize()
-        rulesLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30.0)
-        rulesLabel.textAlignment = .center
-        rulesLabel.textColor = .label
-        view.addSubview(rulesLabel)
-        
-        gameRules.font = UIFont(name: "HelveticaNeue-Light", size: 35.0)
-        gameRules.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameRules.minimumScaleFactor = 0.5
-        gameRules.textAlignment = .left
-        gameRules.numberOfLines = 0
-        gameRules.textColor = .label
-        view.addSubview(gameRules)
-        
-        rulesLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
-            maker.left.right.equalToSuperview().inset(10)
+        gameSelectionLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(mainLabel.snp.bottom).inset(-25)
+            maker.left.equalTo(self.view.safeAreaLayoutGuide).inset(25)
         }
         
-        gameRules.snp.makeConstraints { maker in
-            maker.top.equalTo(rulesLabel.snp.bottom).inset(-10)
-            maker.left.right.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+        dropdownButton.snp.makeConstraints { maker in
+            maker.top.equalTo(gameSelectionLabel.snp.bottom).inset(-25)
+            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.07)
         }
+        
+        rulesView.snp.makeConstraints { maker in
+            maker.top.equalTo(dropdownButton.snp.bottom).inset(-10)
+            maker.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(10)
+        }
+        textView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview().inset(5)
+        }
+        
     }
 }

@@ -89,6 +89,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense()!)
         getUserStatistics()
+        taskTableView.updateAllCells()
     }
     
     func setupUI() {

@@ -15,6 +15,7 @@
 "Win" = "Win";
 "Draw" = "Draw";
 "Lose" = "Defeat";
+"chooseGame" = "Choose a game";
 
 "Угадай загаданное число" = "Guess the mystery number";
 "В данной игре Вам необходимо угадать секретное слово за 6 попыток" = "Guess the word in 6 moves";

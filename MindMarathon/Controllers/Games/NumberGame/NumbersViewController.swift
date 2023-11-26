@@ -18,7 +18,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
         let resultGame = WhiteBoardModel(nameGame: "Numbers".localize(), resultGame: "Win".localize(), countStep: "-", timerGame:  seconds)
         RealmManager.shared.saveResult(result: resultGame)
-        CheckTaskManager.shared.checkPlayGame(game: 4)
+        CheckTaskManager.shared.checkPlayGame(game: 5)
     }
     
     private let viewModel: NumbersViewModel
@@ -226,7 +226,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     }
     
     @objc func rulesTapped() {
-        let rulesVC = RulesViewController(game: viewModel.game)
+        let rulesVC = CurrentRulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
         present(rulesVC, animated: true)
     }

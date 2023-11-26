@@ -17,7 +17,7 @@ class CustomTabBarController: UITabBarController {
     func setupTabBar() {
             
         let mainViewController = setupVC(viewController: ListGamesViewController(), title: "games_list".localize(), image: setupImage(named: "gamecontroller"))
-        let createViewController = setupVC(viewController: UIViewController(), title: "game_rules".localize(), image: setupImage(named: "book"))
+        let createViewController = setupVC(viewController: RulesViewController(), title: "game_rules".localize(), image: setupImage(named: "book"))
         let nocreateViewController = setupVC(viewController: WhiteboardViewController(), title: "games_history".localize(), image: setupImage(named: "clock.arrow.circlepath"))
         let profileViewController = setupVC(viewController: SettingsViewController(), title: "settings".localize(), image: setupImage(named: "gearshape"))
         let createViewControllerS = setupVC(viewController: ProfileViewController(), title: "profile".localize(), image: setupImage(named: "person"))

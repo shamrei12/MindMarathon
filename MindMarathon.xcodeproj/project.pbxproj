@@ -74,13 +74,15 @@
 		D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
 		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
 		D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */; };
-		D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */; };
+		D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */; };
 		D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
 		D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E321202B028EBC00674541 /* CustomTabBarController.swift */; };
 		D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */; };
+		D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E807282B11EAEB00D69D67 /* RulesViewController.swift */; };
+		D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E8072A2B12286100D69D67 /* DropToDownButton.swift */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,13 +157,15 @@
 		D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatiscticsCollectionView.swift; sourceTree = "<group>"; };
 		D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
-		D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRulesViewController.swift; sourceTree = "<group>"; };
 		D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewController.swift; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowTableViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		D8E321202B028EBC00674541 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTaskManager.swift; sourceTree = "<group>"; };
+		D8E807282B11EAEB00D69D67 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
+		D8E8072A2B12286100D69D67 /* DropToDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropToDownButton.swift; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
 		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -546,7 +550,9 @@
 		D8E3211D2B00A79000674541 /* RulesVC */ = {
 			isa = PBXGroup;
 			children = (
-				D8C167AB2A1DF19D00FC887D /* RulesViewController.swift */,
+				D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */,
+				D8E807282B11EAEB00D69D67 /* RulesViewController.swift */,
+				D8E8072A2B12286100D69D67 /* DropToDownButton.swift */,
 			);
 			path = RulesVC;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
 				D86EADD72AE54D4100FB19B6 /* FontsExtension.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
+				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
 				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
@@ -758,12 +765,13 @@
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
+				D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */,
 				D81C72E62ABF479A00B8D4F0 /* NumberCollectionViewController.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
 				D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */,
 				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
-				D8C167AD2A1DF19D00FC887D /* RulesViewController.swift in Sources */,
+				D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */,
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,

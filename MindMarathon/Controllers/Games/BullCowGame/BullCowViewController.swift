@@ -268,7 +268,7 @@ class BullCowViewController: UIViewController {
     
     @objc
     func rulesTapped() {
-        let rulesVC = RulesViewController(game: viewModel.game)
+        let rulesVC = CurrentRulesViewController(game: viewModel.game)
         rulesVC.modalPresentationStyle = .formSheet
         present(rulesVC, animated: true)
     }
