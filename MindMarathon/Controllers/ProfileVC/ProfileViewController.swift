@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
 
     private lazy var userView: UIView = {
         let userView = UIView()
-        userView.backgroundColor = .lightGray
+        userView.backgroundColor = .clear
         return userView
     }()
     
@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController {
     private lazy var userName: UILabel = {
         let userName = UILabel()
         userName.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
-        userName.textColor = UIColor(hex: 0x000000)
+        userName.textColor = .label
         userName.text = "Batonkmn"
         
         return userName
@@ -234,7 +234,7 @@ class ProfileViewController: UIViewController {
         favoriteGame = mostFrequentWord(in: labelGame) ?? "Нет данных"
         countWinStrike = getWinStrike(massive: massiveResultsGames)
         
-        statisctiView.dataMassive[0] = "\(TimeManager.shared.convertToMinutes(seconds: secondsTime))"
+        statisctiView.dataMassive[0] = "\(TimeManager.shared.convertToMinutesWhiteBoard(seconds: secondsTime))"
         statisctiView.dataMassive[1] = favoriteGame
         statisctiView.dataMassive[2] = "\(countWinStrike)"
         statisctiView.reloadData()
@@ -250,7 +250,7 @@ class ProfileViewController: UIViewController {
         var tempCountWinStrike = 0
         
         for i in massive {
-            if i == "Win" {
+            if i == "win" {
                 tempCountWinStrike += 1
                 countWinStrike = max(countWinStrike, tempCountWinStrike)
             } else {

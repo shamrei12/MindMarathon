@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class UserDefaultsManager {
     static var shared: UserDefaultsManager = {
         let instance = UserDefaultsManager()
@@ -21,16 +20,14 @@ class UserDefaultsManager {
     private let currentLanguage = "currentLanguage"
     
     func checkFirstStart() {
-//        userDefaults.setValue(nil, forKey: userExpirienseKey)
 //        userDefaults.setValue(nil, forKey: firstStartKey)
         if userDefaults.object(forKey: firstStartKey) == nil {
             userDefaults.setValue(true, forKey: firstStartKey)
+            RealmManager.shared.clearRealmDatabase()
         }
-        
         if userDefaults.object(forKey: userExpirienseKey) == nil {
             userDefaults.setValue(0, forKey: userExpirienseKey)
         }
-        
     }
     
     func addExpirience(exp: Int) {

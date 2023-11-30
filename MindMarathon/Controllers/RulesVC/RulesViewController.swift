@@ -31,20 +31,11 @@ class RulesViewController: UIViewController, GameButtonDelegate {
 
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
-        mainLabel.text = "Правила"
+        mainLabel.text = "Rules".localize()
         mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
         mainLabel.textColor = .label
         
         return mainLabel
-    }()
-    
-    private lazy var gameSelectionLabel: UILabel = {
-        let gameSelectionLabel = UILabel()
-        gameSelectionLabel.text = "chooseGame".localize()
-        gameSelectionLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 15), weight: .semiBold)
-        gameSelectionLabel.textColor = .label
-        
-        return gameSelectionLabel
     }()
     
     private lazy var dropdownButton: DropdownButton = {
@@ -80,13 +71,11 @@ class RulesViewController: UIViewController, GameButtonDelegate {
         setupView()
         makeConstraints()
         dropdownButton.delegate = self
-        // Do any additional setup after loading the view.
     }
     
     func setupView() {
         self.view.backgroundColor = UIColor(named: "viewColor")
         self.view.addSubview(mainLabel)
-        self.view.addSubview(gameSelectionLabel)
         self.view.addSubview(dropdownButton)
         self.view.addSubview(rulesView)
         self.rulesView.addSubview(textView)
@@ -97,13 +86,8 @@ class RulesViewController: UIViewController, GameButtonDelegate {
             maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
         }
         
-        gameSelectionLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(mainLabel.snp.bottom).inset(-25)
-            maker.left.equalTo(self.view.safeAreaLayoutGuide).inset(25)
-        }
-        
         dropdownButton.snp.makeConstraints { maker in
-            maker.top.equalTo(gameSelectionLabel.snp.bottom).inset(-25)
+            maker.top.equalTo(mainLabel.snp.bottom).inset(-25)
             maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
             maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.07)
         }

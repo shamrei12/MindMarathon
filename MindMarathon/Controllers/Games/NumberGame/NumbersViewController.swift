@@ -16,7 +16,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     func alertResult() {
         stopwatch?.invalidate()
         showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
-        let resultGame = WhiteBoardModel(nameGame: "Numbers".localize(), resultGame: "Win".localize(), countStep: "-", timerGame:  seconds)
+        let resultGame = WhiteBoardModel(nameGame: "Numbers", resultGame: "win", countStep: "-", timerGame:  seconds)
         RealmManager.shared.saveResult(result: resultGame)
         CheckTaskManager.shared.checkPlayGame(game: 5)
     }

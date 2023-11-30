@@ -17,13 +17,12 @@ class WhiteboardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupTableView()
-        setunNavigationBar()
-        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupTableView()
+        setunNavigationBar()
+        setupUI()
         loadGameList()
     }
     
@@ -65,7 +64,7 @@ class WhiteboardViewController: UIViewController {
     }
     
     func setupUI() {
-        let labelStackView = UIStackView(arrangedSubviews: [createLabelCategories(text: "Игра"), createLabelCategories(text: "Статус"), createLabelCategories(text: "Ходы"), createLabelCategories(text: "Время")])
+        let labelStackView = UIStackView(arrangedSubviews: [createLabelCategories(text: "gameLabel".localize()), createLabelCategories(text: "statusLabel".localize()), createLabelCategories(text: "stepsLabel".localize()), createLabelCategories(text: "timeLabel".localize())])
         labelStackView.axis = .horizontal
         labelStackView.distribution = .fillEqually
         labelStackView.spacing = 5
@@ -118,8 +117,9 @@ extension WhiteboardViewController: UITableViewDataSource {
         cell.gameTimer.text = TimeManager.shared.convertToMinutesWhiteBoard(seconds: item.timerGame)
 
         switch item.resultGame.localize() {
-        case "Win".localize(): cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
-        case "Draw".localize(): cell.mainView.backgroundColor = UIColor.systemYellow
+        case "win".localize():
+            cell.mainView.backgroundColor = UIColor(hex: 0x00ff7f)
+        case "draw".localize(): cell.mainView.backgroundColor = UIColor.systemYellow
         default: cell.mainView.backgroundColor = UIColor(hex: 0xfe6f5e)
         }
         

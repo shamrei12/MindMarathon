@@ -21,7 +21,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
     
     private lazy var dataText: UILabel = {
         let labelText = UILabel()
-        labelText.font = UIFont.sfProText(ofSize: 22, weight: .bold)
+        labelText.font = UIFont.sfProText(ofSize: 18, weight: .bold)
         labelText.textAlignment = .center
         labelText.textColor = .black
         labelText.numberOfLines = 0
@@ -57,7 +57,7 @@ class StatisticsCollectionViewCell: UICollectionViewCell {
         dataText.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.top.equalToSuperview().inset(5)
-            maker.left.right.equalToSuperview().inset(1)
+            maker.left.right.equalToSuperview().inset(5)
         }
         
         descriptionText.snp.makeConstraints { maker in
