@@ -8,26 +8,6 @@
 import UIKit
 
 class RulesViewController: UIViewController, GameButtonDelegate {
-    
-    func gameButtonDidTap(game: String) {
-            switch game {
-            case "bullcow".localize():
-                textView.text = "bullCow_rules".localize()
-            case "slovus".localize():
-                textView.text = "slovus_rules".localize()
-            case "flood_fill".localize():
-                textView.text = "floodFill_rules".localize()
-            case "tictactoe".localize():
-                textView.text = "tictactoe_rules".localize()
-            case "binario".localize():
-                textView.text = "binario_rules".localize()
-            case "Numbers".localize():
-                textView.text = "numbers_rules".localize()
-            default:
-                textView.text = ""
-            }
-    }
-    
 
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
@@ -52,7 +32,7 @@ class RulesViewController: UIViewController, GameButtonDelegate {
     
     private lazy var rulesView: UIView = {
         let rulesView = UIView()
-        rulesView.backgroundColor =  UIColor(named: "gameElementColor")
+        rulesView.backgroundColor = UIColor(named: "gameElementColor")
         rulesView.layer.cornerRadius = 12
         
         return rulesView
@@ -63,6 +43,7 @@ class RulesViewController: UIViewController, GameButtonDelegate {
         textView.font = UIFont.sfProText(ofSize: 20, weight: .regular)
         textView.isEditable = false
         textView.isSelectable = false
+        textView.backgroundColor = UIColor(named: "gameElementColor")
         return textView
     }()
 
@@ -99,6 +80,25 @@ class RulesViewController: UIViewController, GameButtonDelegate {
         textView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview().inset(5)
         }
-        
     }
+    
+    func gameButtonDidTap(game: String) {
+            switch game {
+            case "bullcow".localize():
+                textView.text = "bullCow_rules".localize()
+            case "slovus".localize():
+                textView.text = "slovus_rules".localize()
+            case "flood_fill".localize():
+                textView.text = "floodFill_rules".localize()
+            case "tictactoe".localize():
+                textView.text = "tictactoe_rules".localize()
+            case "binario".localize():
+                textView.text = "binario_rules".localize()
+            case "Numbers".localize():
+                textView.text = "numbers_rules".localize()
+            default:
+                textView.text = ""
+            }
+    }
+    
 }

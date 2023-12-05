@@ -56,8 +56,8 @@ class WhiteboardViewController: UIViewController {
     func createLabelCategories(text: String) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.textColor = UIColor.black
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 15.0)
+        label.textColor = UIColor.label
+        label.font = UIFont.sfProText(ofSize: 15, weight: .light)
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
