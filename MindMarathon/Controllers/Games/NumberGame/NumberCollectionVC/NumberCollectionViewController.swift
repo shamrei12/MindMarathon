@@ -64,8 +64,8 @@ extension NumberCollectionView: UICollectionViewDataSource {
         cell.numberLabel.text = numberMassive[indexPath.row]
         cell.backgroundColor = .systemGray
         if selectedCells.contains(indexPath) {
-            cell.backgroundColor = .black
-            cell.alpha = 0.2
+            cell.backgroundColor = .clear
+            cell.alpha = 0.1
             cell.tag = 0
             cell.isUserInteractionEnabled = false
             cell.numberLabel.textColor = .clear
@@ -137,11 +137,12 @@ extension NumberCollectionView: UICollectionViewDataSource {
                 selectedCells.append(highlightedCells[1])
             }
             
-            for i in selectedCells {
-                if let cell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell {
-                    cell.tag = 0
-                }
-            }
+//            for i in selectedCells {
+//                if let cell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell {
+//                    cell.backgroundColor = .clear
+//                    cell.alpha = 0.1
+//                }
+//            }
             
             if checkFinishGame() {
                 delegate?.alertResult()
@@ -181,7 +182,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
             }
         }
     }
-
     
     func checkAllCell() {
         allCells =  getVisibleCellIndexPaths()
@@ -284,7 +284,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
     func comparisonСell(firstCell: Int, secondCell: Int) -> Bool {
         let maxTag = max(firstCell, secondCell)
         let minTag = min(firstCell, secondCell)
-        
         let differenceNumbers = maxTag - minTag
         
 //        else if differenceNumbers % 10 == 0 {
@@ -388,10 +387,7 @@ extension NumberCollectionView: UICollectionViewDataSource {
         }
         
         allCells.append(contentsOf: newIndexPaths) // Добавляем новые IndexPath в allCells
-        
-        collectionView.performBatchUpdates({ // Обновляем коллекцию внутри блока performBatchUpdates
-            collectionView.insertItems(at: newIndexPaths) // Вставляем новые элементы в коллекцию
-        }, completion: nil)
+        collectionView.reloadData()
     }
 
     
@@ -447,7 +443,7 @@ extension NumberCollectionView: UICollectionViewDelegateFlowLayout {
         
         let collectionViewWidth = collectionView.bounds.width
         let itemWidth = collectionViewWidth * 0.10
-        let itemHeight = itemWidth 
+        let itemHeight = itemWidth
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
