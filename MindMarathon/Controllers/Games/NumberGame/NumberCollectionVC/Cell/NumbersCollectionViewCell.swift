@@ -41,7 +41,7 @@ class NumbersCollectionViewCell: UICollectionViewCell {
     }
     
     func hide() {
-        self.backgroundColor = .systemGray.withAlphaComponent(0.2)
+        self.backgroundColor = .systemGray.withAlphaComponent(0.15)
     }
     
     func helpSelected() {

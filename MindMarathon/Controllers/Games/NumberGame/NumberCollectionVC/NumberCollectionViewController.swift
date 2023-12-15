@@ -11,6 +11,7 @@ class NumberCollectionView: UIView, UICollectionViewDelegate {
     var highlightedCells: [IndexPath] = []
     var selectedCells: [IndexPath] = []
     var allCells: [IndexPath] = []
+    var allCellsMassive: [Bool] = []
     var firstLabel = String()
     var secondLabel = String()
     var counter = 0
@@ -22,6 +23,7 @@ class NumberCollectionView: UIView, UICollectionViewDelegate {
         
         for i in 0..<numberMassive.count {
             allCells.append(IndexPath(row: i, section: 0))
+            allCellsMassive.append(true)
         }
         
         let layout = UICollectionViewFlowLayout()
@@ -44,10 +46,11 @@ class NumberCollectionView: UIView, UICollectionViewDelegate {
         }
     }
 }
+
 extension NumberCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberMassive.count
+        return allCells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,32 +61,47 @@ extension NumberCollectionView: UICollectionViewDataSource {
     }
     
     private func configure(cell: NumbersCollectionViewCell, for indexPath: IndexPath) -> UICollectionViewCell {
-        
         cell.setupLabel()
         cell.numberLabel.text = numberMassive[indexPath.row]
         cell.backgroundColor = .systemGray
-        if selectedCells.contains(indexPath) {
-            cell.backgroundColor = .systemGray.withAlphaComponent(0.2)
-            cell.isUserInteractionEnabled = false
-            return cell
-        } else if posibleMove.contains(indexPath) {
-            cell.helpSelected()
-            cell.isUserInteractionEnabled = true
-            return cell
-        }
-        else {
-            cell.backgroundColor = .systemGray.withAlphaComponent(1)
-            cell.isUserInteractionEnabled = true
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
+        if !allCellsMassive[indexPath.row] {
+            cell.hide()
+            cell.isUserInteractionEnabled = false
+        } else if posibleMove.contains(indexPath) {
+            cell.isUserInteractionEnabled = true
+            cell.helpSelected()
+        } else {
+            cell.isUserInteractionEnabled = true
+            cell.deselect()
+        }
+        
+//        if selectedCells.contains(indexPath) {
+//            cell.hide()
+//            cell.numberLabel.textColor = .lightGray
+//            cell.isUserInteractionEnabled = false
+//        } else if posibleMove.contains(indexPath) {
+//            cell.isUserInteractionEnabled = true
+//            cell.helpSelected()
+//        } else {
+//            cell.isUserInteractionEnabled = true
+//            cell.deselect()
+//        }
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NumbersCollectionViewCell else {
+            return
+        }
+
+        guard highlightedCells.count < 2 else {
+            let firstCell = collectionView.cellForItem(at: highlightedCells[0]) as? NumbersCollectionViewCell
+            let secondCell = collectionView.cellForItem(at: highlightedCells[1]) as? NumbersCollectionViewCell
+            firstCell?.deselect()
+            secondCell?.deselect()
+            highlightedCells.removeAll()
             return
         }
         
@@ -94,9 +112,188 @@ extension NumberCollectionView: UICollectionViewDataSource {
             cell.select()
             highlightedCells.append(indexPath)
             print("Массив выделеных ячеек: \(highlightedCells)")
-            checkSelectedCells()
+        }
+        
+        if highlightedCells.count == 2 {
+            checkSelectedCells(highlightedCells[0], highlightedCells[1])
         }
     }
+    
+    func checkSelectedCells(_ firstIndexPath: IndexPath, _ secondIndexPath: IndexPath) {
+        let firstCell = collectionView.cellForItem(at: firstIndexPath) as? NumbersCollectionViewCell
+        let secondCell = collectionView.cellForItem(at: secondIndexPath) as? NumbersCollectionViewCell
+
+        guard firstCell != secondCell else {
+            return
+        }
+        
+        guard comparisonСell(firstCell: getIndexAllCell(indexPath: firstIndexPath), secondCell: getIndexAllCell(indexPath: secondIndexPath))  else {
+            firstCell?.deselect()
+            secondCell?.deselect()
+            highlightedCells.removeAll()
+            return
+        }
+        
+        guard let firstText = firstCell?.numberLabel.text,
+              let firstNumber = Int(firstText),
+              let secondText = secondCell?.numberLabel.text,
+              let secondNumber = Int(secondText) else {
+            
+            return
+        }
+
+        let sum = firstNumber + secondNumber
+        
+        if checkingSumEqualityConditions(sum: sum, first: firstNumber, second: secondNumber),
+           let firstCell = firstCell,
+           let secondCell = secondCell {
+            firstCell.hide()
+            secondCell.hide()
+            firstCell.isUserInteractionEnabled = false
+            secondCell.isUserInteractionEnabled = false
+            
+            if !selectedCells.contains(firstIndexPath) {
+                allCellsMassive[firstIndexPath.row] = false
+                selectedCells.append(firstIndexPath)
+            }
+            
+            if !selectedCells.contains(secondIndexPath) {
+                selectedCells.append(secondIndexPath)
+                allCellsMassive[secondIndexPath.row] = false
+            }
+            
+//            for i in selectedCells {
+//                if let cell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell {
+//                    cell.hide()
+//                    cell.numberLabel.textColor = .lightGray
+//                    cell.isSelected = true
+//                }
+//            }
+            
+            if checkFinishGame() {
+                delegate?.alertResult()
+            }
+        } else {
+            firstCell?.deselect()
+        }
+        
+        highlightedCells.removeAll()
+        posibleMove.removeAll()
+        
+        if !findEmptyRanges().isEmpty {
+            deleteEmptyRanges(findEmptyRanges())
+        }
+        
+    }
+    
+    func getIndexAllCell(indexPath: IndexPath) -> Int {
+        var index = 0
+        for i in 0..<allCells.count {
+            if allCells[i] == indexPath {
+                index = i
+            }
+        }
+        
+        return index
+    }
+    
+    func checkSelectedCell() {
+        for i in allCells {
+            if let cell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell,
+               cell.isUserInteractionEnabled,
+               selectedCells.contains(i) {
+                var updatedSelectedCells = selectedCells
+                updatedSelectedCells.removeAll { $0 == i }
+                selectedCells = updatedSelectedCells
+            }
+        }
+    }
+    
+    func getSelectedCells() -> [IndexPath] {
+        selectedCells.removeAll()
+        var newSelectedCell = [IndexPath]()
+        for i in 0..<allCellsMassive.count {
+            if !allCellsMassive[i] {
+                newSelectedCell.append(allCells[i])
+            }
+        }
+        return newSelectedCell
+    }
+    
+    func getNumberCell(indexPath: IndexPath) -> Int? {
+        if let cell = collectionView.cellForItem(at: indexPath) as? NumbersCollectionViewCell {
+            if let numberText = cell.numberLabel.text {
+                return Int(numberText)
+            }
+        }
+        return nil
+    }
+
+    func findEmptyRanges() -> [ClosedRange<Int>] {
+        let step = 9
+        var firstIndex = 0
+        var lastIndex = 8
+        var emptyRanges: [ClosedRange<Int>] = []
+        
+        while lastIndex < allCells.count {
+            let range = firstIndex...lastIndex
+            let cellsInRange = allCells[range]
+            
+            if cellsInRange.allSatisfy({ selectedCells.contains($0) }) {
+                emptyRanges.append(range)
+            }
+            
+            firstIndex += step
+            lastIndex += step
+        }
+        
+        return emptyRanges
+    }
+    
+    func deleteEmptyRanges(_ emptyRanges: [ClosedRange<Int>]) {
+        emptyRanges.reversed().forEach { range in
+            numberMassive.removeSubrange(range)
+            allCells.removeSubrange(range)
+            allCellsMassive.removeSubrange(range)
+            
+            let indexPathsToRemove = range.map { IndexPath(item: $0, section: 0) }
+            collectionView.deleteItems(at: indexPathsToRemove)
+        }
+//
+        allCells = getAllCellIndexPaths()
+        selectedCells = getSelectedCells()
+//        collectionView.reloadData()
+    }
+
+    func newAllCells() -> [IndexPath] {
+        allCells.removeAll()
+        var newCellsMassive = [IndexPath]()
+        for i in 0..<allCellsMassive.count {
+            newCellsMassive.append(IndexPath(index: i))
+        }
+        return newCellsMassive
+    }
+    
+    func getAllCellIndexPaths() -> [IndexPath] {
+        guard let collectionView = collectionView else {
+            return []
+        }
+        
+        var allIndexPaths: [IndexPath] = []
+        
+        for section in 0..<collectionView.numberOfSections {
+            let itemCount = collectionView.numberOfItems(inSection: section)
+            
+            for item in 0..<itemCount {
+                let indexPath = IndexPath(item: item, section: section)
+                allIndexPaths.append(indexPath)
+            }
+        }
+        
+        return allIndexPaths.sorted { $0.row < $1.row }
+    }
+
+
     
     func checkingSumEqualityConditions (sum: Int, first: Int, second: Int) -> Bool {
         if sum == 10 || first == second {
@@ -105,63 +302,10 @@ extension NumberCollectionView: UICollectionViewDataSource {
             return false
         }
     }
-    
-    func checkSelectedCells() {
-        guard highlightedCells.count == 2 else {
-            return
-        }
-        
-        let firstCell = collectionView.cellForItem(at: highlightedCells[0]) as? NumbersCollectionViewCell
-        let secondCell = collectionView.cellForItem(at: highlightedCells[1]) as? NumbersCollectionViewCell
-        
-        guard firstCell != secondCell else {
-            return
-        }
-        
-        guard comparisonСell(firstCell: highlightedCells[0].row, secondCell: highlightedCells[1].row) else {
-            firstCell?.deselect()
-            secondCell?.deselect()
-            highlightedCells.removeAll()
-            return
-        }
-        
-        let firstNumber = Int(numberMassive[highlightedCells[0].row]) ?? 0
-        let secondNumber = Int(numberMassive[highlightedCells[1].row]) ?? 0
-        
-        let sum = Int(numberMassive[highlightedCells[0].row])! + Int(numberMassive[highlightedCells[1].row])!
-        
-        if checkingSumEqualityConditions(sum: sum, first: firstNumber, second: secondNumber) {
-            firstCell?.hide()
-            secondCell?.hide()
-            firstCell?.isUserInteractionEnabled = false
-            secondCell?.isUserInteractionEnabled = false
-            
-            if !selectedCells.contains(highlightedCells[0]) {
-                selectedCells.append(highlightedCells[0])
-            }
-            
-            if !selectedCells.contains(highlightedCells[1]) {
-                selectedCells.append(highlightedCells[1])
-            }
-            
-            print("Массив использованых ячеек: \(selectedCells)")
-            //            сheckingEmptyLines()
-            if checkFinishGame() {
-                delegate?.alertResult()
-            }
-            
-        } else {
-            firstCell?.deselect()
-            secondCell?.deselect()
-        }
-        highlightedCells.removeAll()
-        posibleMove.removeAll()
-    }
-    
+
     func comparisonСell(firstCell: Int, secondCell: Int) -> Bool {
         let maxTag = max(firstCell, secondCell)
         let minTag = min(firstCell, secondCell)
-        
         let differenceNumbers = maxTag - minTag
         
 //        else if differenceNumbers % 10 == 0 {
@@ -180,23 +324,21 @@ extension NumberCollectionView: UICollectionViewDataSource {
     }
     
     func checkMassiveString(min: Int, max: Int) -> Bool {
-        for i in min + 1..<max where !selectedCells.contains(allCells[i]) {
-            return false
-        }
-        return true
-    }
-    
-    func checkMassiveRow(min: Int, max: Int) -> Bool {
-        if (max - min) % 9 == 0 {
-            for index in stride(from: min + 9, to: max - 1, by: 9) where !selectedCells.contains(allCells[index]) {
+            for i in min + 1..<max where !selectedCells.contains(allCells[i]) {
                 return false
             }
             return true
-        } else {
-            return false
         }
-    }
     
+    func checkMassiveRow(min: Int, max: Int) -> Bool {
+        for index in stride(from: min + 9, to: max - 1, by: 9) {
+            if !selectedCells.contains(allCells[index]) {
+                return false
+            }
+        }
+        return true
+    }
+
 //    func testingIncrementsEight(min: Int, max: Int) -> Bool {
 //        for index in stride(from: min + 8, to: max - 1, by: 8) {
 //            if !selectedCells.contains(allCells[index])  {
@@ -215,22 +357,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
 //        }
 //        return true
 //    }
-    
-    //    func сheckingEmptyLines() {
-    //        for i in mass {
-    //            let range = i[0]...i[1]
-    //            if collectionViewCellMassive[range].contains(where: { !$0.isUserInteractionEnabled }) {
-    //                var indexPathsToRemove: [IndexPath] = []
-    //                for j in range {
-    //                    indexPathsToRemove.append(IndexPath(row: j, section: 0))
-    //                }
-    //                collectionView.performBatchUpdates({
-    //                    collectionView.deleteItems(at: indexPathsToRemove)
-    //                }, completion: nil)
-    //                break
-    //            }
-    //        }
-    //    }
     
     func coloringCell(cell: UICollectionViewCell) {
         cell.backgroundColor = .red
@@ -257,61 +383,51 @@ extension NumberCollectionView: UICollectionViewDataSource {
     }
     
     func createMassiveWhenAddbuttonWasTapped() {
+        var newIndexPaths: [IndexPath] = []
+        
         for i in allCells {
             if !selectedCells.contains(i) {
-                numberMassive.append(numberMassive[i.row])
-                let indexPath = IndexPath(row: numberMassive.count - 1, section: 0)
-                allCells.append(indexPath)
-                collectionView.insertItems(at: [indexPath])
+                let newNumber = numberMassive[i.row]
+                numberMassive.append(newNumber)
+                let newIndexPath = IndexPath(row: numberMassive.count - 1, section: 0)
+                newIndexPaths.append(newIndexPath)
+                allCellsMassive.append(true)
             }
+            
         }
+        
+        allCells.append(contentsOf: newIndexPaths)
+        collectionView.reloadData()
     }
-    
-//    func showPossibleMoveWhenPossibleMoveWasTapped() {
-//        for i in allCells {
-//            if !selectedCells.contains(i) {
-//                for j in allCells where i != j {
-//                    if comparisonСell(firstCell: i.row, secondCell: j.row),
-//                       let firstNumber = Int(numberMassive[i.row]),
-//                       let secondNumber = Int(numberMassive[j.row]),
-//                       checkingSumEqualityConditions(sum: firstNumber + secondNumber, first: firstNumber, second: secondNumber) {
-//                        
-//                        if let firsCell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell,
-//                           let secondCell = collectionView.cellForItem(at: j) as? NumbersCollectionViewCell {
-//                            firsCell.helpSelected()
-//                            secondCell.helpSelected()
-//                        }
-//                        return // Прекращение работы функции
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
+
     func showPossibleMoveWhenPossibleMoveWasTapped() {
-        for i in allCells {
-            for j in allCells {
-                guard i != j, !selectedCells.contains(i), !selectedCells.contains(j) else {
+        for i in 0..<allCells.count {
+            for j in 0..<allCells.count {
+                guard i != j, !selectedCells.contains(allCells[i]), !selectedCells.contains(allCells[j]) else {
                     continue
                 }
                 
-                if comparisonСell(firstCell: i.row, secondCell: j.row),
-                   let firstNumber = Int(numberMassive[i.row]),
-                   let secondNumber = Int(numberMassive[j.row]),
-                   checkingSumEqualityConditions(sum: firstNumber + secondNumber, first: firstNumber, second: secondNumber) {
-                    
-                    if let firsCell = collectionView.cellForItem(at: i) as? NumbersCollectionViewCell,
-                       let secondCell = collectionView.cellForItem(at: j) as? NumbersCollectionViewCell {
-                        firsCell.helpSelected()
-                        secondCell.helpSelected()
-                        posibleMove.append(i)
-                        posibleMove.append(j)
+                if comparisonСell(firstCell: i, secondCell: j) {
+                    if let firstNumber = getNumberCell(indexPath: allCells[i]),
+                       let secondNumber = getNumberCell(indexPath: allCells[j]),
+                       checkingSumEqualityConditions(sum: firstNumber + secondNumber, first: firstNumber, second: secondNumber) {
+                        
+                        if let firstCell = collectionView.cellForItem(at: allCells[i]) as? NumbersCollectionViewCell,
+                           let secondCell = collectionView.cellForItem(at: allCells[j]) as? NumbersCollectionViewCell {
+
+                            firstCell.helpSelected()
+                            secondCell.helpSelected()
+                            posibleMove.append(allCells[i])
+                            posibleMove.append(allCells[j])
+                            
+                            print(posibleMove)
+                        }
+                        return
                     }
-                    return // Прекращение работы функции
                 }
             }
         }
-        
+
         if posibleMove.isEmpty {
             print(allCells.count)
             posibleMove.removeAll()
@@ -319,9 +435,8 @@ extension NumberCollectionView: UICollectionViewDataSource {
         }
     }
 
-
     func checkFinishGame() -> Bool {
-        return allCells.count == selectedCells.count
+        return !allCellsMassive.contains(true)
     }
     
     func clearCollectionView() {
@@ -336,8 +451,8 @@ extension NumberCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let collectionViewWidth = collectionView.bounds.width
-        let itemWidth = collectionViewWidth * 0.10 // 10% от ширины collectionView
-        let itemHeight = itemWidth // Предполагаем, что ячейка квадратная
+        let itemWidth = collectionViewWidth * 0.10
+        let itemHeight = itemWidth
         return CGSize(width: itemWidth, height: itemHeight)
     }
 }
