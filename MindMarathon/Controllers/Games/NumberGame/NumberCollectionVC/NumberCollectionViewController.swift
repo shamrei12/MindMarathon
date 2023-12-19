@@ -96,7 +96,7 @@ extension NumberCollectionView: UICollectionViewDataSource {
             return
         }
 
-        guard highlightedCells.count < 2 else {
+        guard highlightedCells.count <= 2 else {
             let firstCell = collectionView.cellForItem(at: highlightedCells[0]) as? NumbersCollectionViewCell
             let secondCell = collectionView.cellForItem(at: highlightedCells[1]) as? NumbersCollectionViewCell
             firstCell?.deselect()
@@ -138,7 +138,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
               let firstNumber = Int(firstText),
               let secondText = secondCell?.numberLabel.text,
               let secondNumber = Int(secondText) else {
-            
             return
         }
 
