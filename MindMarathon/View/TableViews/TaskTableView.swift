@@ -8,7 +8,6 @@
 import UIKit
 import StoreKit
 
-
 class TasksTableView: UITableView, CustomCellDelegate {
     
     private var massiveTask = RealmManager.shared.getTasks()
@@ -16,7 +15,7 @@ class TasksTableView: UITableView, CustomCellDelegate {
     func buttonPressed(in cell: TasksTableViewCell) {
         let reward = massiveTask[cell.takeReward.tag].reward
         RealmManager.shared.awardReceived(index: cell.takeReward.tag)
-        UserDefaultsManager.shared.addExpirience(exp: reward)
+//        UserDefaultsManager.shared.addExpirience(exp: reward)
         let indexPath = IndexPath(row: cell.takeReward.tag, section: 0)
         
         if let updatedCell = self.cellForRow(at: indexPath) as? TasksTableViewCell {
@@ -24,9 +23,9 @@ class TasksTableView: UITableView, CustomCellDelegate {
             updateAllCells()
         }
         
-        if let profileViewController = UIApplication.shared.keyWindow?.rootViewController as? ProfileViewController {
-            profileViewController.getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense() ?? 0)
-        }
+//        if let profileViewController = UIApplication.shared.keyWindow?.rootViewController as? ProfileViewController {
+//            profileViewController.getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense() ?? 0)
+//        }
     }
 
     init() {

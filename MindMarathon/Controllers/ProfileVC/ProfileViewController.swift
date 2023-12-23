@@ -11,6 +11,39 @@ class ProfileViewController: UIViewController {
     
     let statisctiView = StatiscticsCollectionView()
     let taskTableView = TasksTableView()
+    
+    private lazy var userCoinView: UIView = {
+        let userCoinView = UIView()
+        userCoinView.backgroundColor = .lightGray
+        userCoinView.layer.cornerRadius = 10
+        return userCoinView
+    }()
+    
+    private lazy var coinImageView: UIImageView = {
+        let coinImageView = UIImageView()
+        coinImageView.image = UIImage(named: "coin")
+        return coinImageView
+    }()
+    
+    private lazy var coinLabel: UILabel = {
+        let coinLabel = UILabel()
+        coinLabel.text = "10"
+        coinLabel.font = UIFont.sfProText(ofSize: 15, weight: .light)
+        return coinLabel
+    }()
+    
+    private lazy var diamondImageView: UIImageView = {
+        let diamondImageView = UIImageView()
+        diamondImageView.image = UIImage(named: "diamond")
+        return diamondImageView
+    }()
+    
+    private lazy var diamondLabel: UILabel = {
+        let diamondLabel = UILabel()
+        diamondLabel.text = "1"
+        diamondLabel.font = UIFont.sfProText(ofSize: 15, weight: .light)
+        return diamondLabel
+    }()
 
     private lazy var userView: UIView = {
         let userView = UIView()
@@ -25,7 +58,9 @@ class ProfileViewController: UIViewController {
         let image = UIImage(named: "userImage")
         userImage.image = image
         userImage.contentMode = .scaleToFill
-        userImage.backgroundColor = UIColor(hex: 0x000000, alpha: 1)
+        userImage.layer.borderColor = UIColor.gray.cgColor
+        userImage.layer.borderWidth = 2
+        
 
         return userImage
     }()
@@ -94,6 +129,12 @@ class ProfileViewController: UIViewController {
     
     func setupUI() {
         self.view.backgroundColor = CustomColor.viewColor.color
+        self.view.addSubview(userCoinView)
+        self.userCoinView.addSubview(coinImageView)
+        self.userCoinView.addSubview(coinLabel)
+        self.userCoinView.addSubview(diamondImageView)
+        self.userCoinView.addSubview(diamondLabel)
+        
         self.view.addSubview(userView)
         userView.addSubview(userImage)
         userView.addSubview(userName)
@@ -108,14 +149,43 @@ class ProfileViewController: UIViewController {
     
     func makeConstraints() {
         
+        userCoinView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+            maker.right.equalTo(self.view.safeAreaLayoutGuide).inset(10)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.04)
+        }
+        
+        coinImageView.snp.makeConstraints { maker in
+            maker.bottom.top.equalToSuperview().inset(1)
+            maker.left.equalToSuperview().inset(5)
+            maker.width.height.equalTo(userCoinView.snp.height).multipliedBy(0.9)
+        }
+        
+        coinLabel.snp.makeConstraints { maker in
+            maker.top.bottom.equalToSuperview().inset(5)
+            maker.left.equalTo(coinImageView.snp.right).inset(-5)
+        }
+        
+        diamondImageView.snp.makeConstraints { maker in
+            maker.bottom.top.equalToSuperview().inset(1)
+            maker.left.equalTo(coinLabel.snp.right).inset(-10)
+            maker.width.height.equalTo(userCoinView.snp.height).multipliedBy(0.9)
+        }
+        
+        diamondLabel.snp.makeConstraints { maker in
+            maker.top.bottom.equalToSuperview().inset(5)
+            maker.left.equalTo(diamondImageView.snp.right).inset(-5)
+            maker.right.equalToSuperview().inset(5)
+        }
+        
         userView.snp.makeConstraints { maker in
             maker.left.top.right.equalToSuperview()
         }
         
         userImage.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+            maker.top.equalTo(userCoinView.snp.bottom).inset(-15)
             maker.centerX.equalToSuperview()
-//            maker.width.height.equalTo(100)
+            maker.width.height.equalTo(100)
         }
         
         userImage.layoutIfNeeded()
