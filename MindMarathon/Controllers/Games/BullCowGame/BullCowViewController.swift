@@ -417,7 +417,7 @@ class BullCowViewController: UIViewController {
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleDiggit_message".localize() + "\(computerDiggit). " + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             let resultGame = WhiteBoardModel(nameGame: "bullcow", resultGame: "win", countStep: "\(viewModel.countStep)", timerGame: seconds)
             RealmManager.shared.saveResult(result: resultGame)
-            CheckTaskManager.shared.checkPlayGame(game: 0)
+            CheckTaskManager.shared.checkPlayGame(game: 5)
         }
     }
     

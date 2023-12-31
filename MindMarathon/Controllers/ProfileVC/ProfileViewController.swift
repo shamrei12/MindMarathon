@@ -9,9 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let statisctiView = StatiscticsCollectionView()
-    let taskTableView = TasksTableView()
-
+    let statiscticCollectionView = StatiscticsCollectionView()
+    
     private lazy var userView: UIView = {
         let userView = UIView()
         userView.backgroundColor = .clear
@@ -21,12 +20,12 @@ class ProfileViewController: UIViewController {
     private lazy var userImage: UIImageView = {
         let userImage = UIImageView()
         userImage.clipsToBounds = true
-
+        
         let image = UIImage(named: "userImage")
         userImage.image = image
         userImage.contentMode = .scaleToFill
-        userImage.backgroundColor = UIColor(hex: 0x000000, alpha: 1)
-
+//        userImage.layer.borderColor = UIColor(hex: 0xFFD700, alpha: 1).cgColor
+//        userImage.layer.borderWidth = 3
         return userImage
     }()
     
@@ -39,44 +38,47 @@ class ProfileViewController: UIViewController {
         return userName
     }()
     
+    private lazy var ratingPossitionLabel: UILabel = {
+        let ratingPossitionLabel = UILabel()
+        ratingPossitionLabel.backgroundColor = .lightGray
+        ratingPossitionLabel.text = "#5"
+        ratingPossitionLabel.textAlignment = .center
+        ratingPossitionLabel.tintColor = .white
+        ratingPossitionLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 17), weight: .semiBold)
+        ratingPossitionLabel.layer.cornerRadius = 5
+        ratingPossitionLabel.clipsToBounds = true
+        return ratingPossitionLabel
+    }()
+    
     private lazy var progress: UIProgressView = {
         let progress = UIProgressView()
+        progress.layer.cornerRadius = 8
+        progress.layer.cornerCurve = .continuous
+        progress.clipsToBounds = true
         progress.progress = 0
         return progress
         
     }()
     
-    private lazy var currentRank: UILabel = {
-        let currentRunk = UILabel()
-        currentRunk.font = UIFont.sfProText(ofSize: 11, weight: .light)
-        currentRunk.textColor = UIColor(hex: 0x000000)
-        currentRunk.text = "Новичок"
-        
-        return currentRunk
-    }()
-    
-    private lazy var nextRank: UILabel = {
-        let nextRunk = UILabel()
-        nextRunk.font = UIFont.sfProText(ofSize: 11, weight: .light)
-        nextRunk.textColor = UIColor(hex: 0x000000)
-        nextRunk.text = "Любитель"
-        return nextRunk
-    }()
-    
     private lazy var currentRankScore: UILabel = {
         let currentRankScore = UILabel()
-        currentRankScore.font = UIFont.sfProText(ofSize: 11, weight: .light)
-        currentRankScore.textColor = UIColor(hex: 0x000000)
+        currentRankScore.font = UIFont.sfProText(ofSize: 10, weight: .bold)
+        currentRankScore.textColor = .label
         currentRankScore.text = "0"
         
         return currentRankScore
     }()
     
-    private lazy var taskLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.sfProText(ofSize: 22, weight: .bold)
-        label.text = "Задания"
-        return label
+    private lazy var ratingButton: UIButton = {
+        let ratingButton = UIButton()
+        ratingButton.setTitle("Таблица лидеров", for: .normal)
+        ratingButton.setTitleColor(.label, for: .normal)
+        ratingButton.layer.cornerCurve = .circular
+        ratingButton.layer.cornerRadius = 16
+        ratingButton.setImage(UIImage(named: "rating"), for: .normal)
+        ratingButton.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .semiBold)
+        ratingButton.backgroundColor = UIColor(named: "gameElementColor")
+        return ratingButton
     }()
     
     override func viewDidLoad() {
@@ -87,35 +89,36 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUserExpiriense(exp: UserDefaultsManager.shared.getUserExpiriense()!)
+        refreshData()
+    }
+    
+    func refreshData() {
+        getCurrentAndNextRank(exp: UserDefaultsManager.shared.getUserExperience(), level: UserDefaultsManager.shared.getUserLevel())
         getUserStatistics()
-        taskTableView.updateAllCells()
     }
     
     func setupUI() {
         self.view.backgroundColor = CustomColor.viewColor.color
         self.view.addSubview(userView)
+        self.view.addSubview(statiscticCollectionView)
+        self.view.addSubview(ratingButton)
         userView.addSubview(userImage)
         userView.addSubview(userName)
+        userView.addSubview(ratingPossitionLabel)
         userView.addSubview(progress)
-        progress.addSubview(currentRank)
         progress.addSubview(currentRankScore)
-        progress.addSubview(nextRank)
-        userView.addSubview(statisctiView)
-        self.view.addSubview(taskLabel)
-        self.view.addSubview(taskTableView)
     }
     
     func makeConstraints() {
-        
         userView.snp.makeConstraints { maker in
-            maker.left.top.right.equalToSuperview()
+            maker.top.equalToSuperview()
+            maker.left.right.equalToSuperview()
         }
         
         userImage.snp.makeConstraints { maker in
-            maker.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+            maker.top.equalTo(view.safeAreaLayoutGuide).inset(15)
             maker.centerX.equalToSuperview()
-//            maker.width.height.equalTo(100)
+            maker.height.width.equalTo(userView.snp.width).multipliedBy(0.25)
         }
         
         userImage.layoutIfNeeded()
@@ -126,96 +129,65 @@ class ProfileViewController: UIViewController {
             maker.centerX.equalToSuperview()
         }
         
-        progress.snp.makeConstraints { maker in
-            maker.top.equalTo(userName.snp.bottom).inset(-15)
-            maker.height.equalTo(20)
-            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(10)
+        ratingPossitionLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(userName.snp.top)
+            maker.bottom.equalTo(userName.snp.bottom)
+            maker.left.equalTo(userName.snp.right).inset(-10)
+            maker.width.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.07)
         }
         
-        currentRank.snp.makeConstraints { maker in
-            maker.top.left.bottom.equalToSuperview().inset(5)
+        progress.snp.makeConstraints { maker in
+            maker.top.equalTo(userName.snp.bottom).inset(-15)
+            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(10)
+            maker.bottom.equalToSuperview().inset(15)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.03)
         }
         
         currentRankScore.snp.makeConstraints { maker in
+            maker.top.bottom.equalToSuperview().inset(5)
             maker.centerX.centerY.equalToSuperview()
         }
         
-        nextRank.snp.makeConstraints { maker in
-            maker.top.right.bottom.equalToSuperview().inset(5)
-        }
-        
-        statisctiView.snp.makeConstraints { maker in
-            maker.top.equalTo(progress.snp.bottom).inset(-25)
-            maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalTo(80)
-            maker.bottom.equalToSuperview().inset(15)
-        }
-        
-        taskLabel.snp.makeConstraints { maker in
+        statiscticCollectionView.snp.makeConstraints { maker in
             maker.top.equalTo(userView.snp.bottom).inset(-15)
-            maker.left.equalToSuperview().inset(16)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.22)
         }
         
-        taskTableView.snp.makeConstraints { maker in
-            maker.top.equalTo(taskLabel.snp.bottom).inset(-20)
-            maker.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        ratingButton.snp.makeConstraints { maker in
+            maker.top.equalTo(statiscticCollectionView.snp.bottom).inset(-15)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.08)
         }
     }
     
-    func getUserExpiriense(exp: Int) {
-        let currentRank = getCurrentAndNextRank(exp: exp)
-        getCurrentAndNextRank(current: currentRank.0, next: currentRank.1)
-    }
-    
-    func getCurrentAndNextRank(exp: Int) -> (String, String?) {
-        progress.progress = 0
-        var currentIndex = 0
-        var nextIndex = 0
-        var currentRank: String = "Нет звания"
-        var nextRank: String?
+    func getCurrentAndNextRank(exp: Int, level: Int) {
+        var maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
         
-        let rankExperienceRequirements = [
-            ("Новичок", 0...100),
-            ("Ученик", 101...300),
-            ("Любопытный", 301...600),
-            ("Опытный", 601...1000),
-            ("Сын маминой подруги", 1001...10000)
-        ]
-        
-        for i in 0..<rankExperienceRequirements.count {
-            if rankExperienceRequirements[i].1.contains(exp) {
-                currentIndex = i
-                nextIndex = i + 1
-                currentRank = rankExperienceRequirements[i].0
-            }
-        }
-        
-        if nextIndex > rankExperienceRequirements.count - 1 {
-            nextRank = nil
+        if exp > Int(maxRank) {
+            UserDefaultsManager.shared.changeExpirience(exp: exp - Int(maxRank))
+            UserDefaultsManager.shared.changeUserLebel(level: level + 1)
+            
+            let newLevel = UserDefaultsManager.shared.getUserLevel()
+            let newMaxRank: Double = Double(newLevel * 100) + (Double(newLevel) + 0.5)
+            let newExp = UserDefaultsManager.shared.getUserExperience()
+            
+            currentRankScore.text = "\(newLevel) level"
+            makeResultsForProgressBar(newExp: newExp, maxExp: newMaxRank)
         } else {
-           nextRank = rankExperienceRequirements[nextIndex].0
+            progress.progress = Float(exp) / Float(maxRank)
+            currentRankScore.text = "\(level) level"
+            makeResultsForProgressBar(newExp: exp, maxExp: maxRank)
         }
-        currentRankScore.text = "\(exp)"
-        makeResultsForProgressBar(newExp: exp, maxExp: rankExperienceRequirements[currentIndex].1.upperBound)
-        return (currentRank, nextRank)
     }
-
-    func makeResultsForProgressBar(newExp: Int, maxExp: Int) {
+    
+    func makeResultsForProgressBar(newExp: Int, maxExp: Double) {
         if newExp != 0 {
             let newExp: Float = Float(newExp) / Float(maxExp)
             progress.progress = newExp
         } else {
             progress.progress = 0
         }
-    }
-    
-    func getCurrentAndNextRank(current: String, next: String?) {
-        if next != nil {
-            nextRank.text = next
-        } else {
-            nextRank.text = ""
-        }
-        currentRank.text = current
     }
     
     func getUserStatistics() {
@@ -225,6 +197,7 @@ class ProfileViewController: UIViewController {
         var favoriteGame = ""
         var countWinStrike = 0
         var massiveResultsGames = [String]()
+        
         for i in userStatistics {
             secondsTime += i.timerGame
             labelGame.append(i.nameGame)
@@ -234,17 +207,21 @@ class ProfileViewController: UIViewController {
         favoriteGame = mostFrequentWord(in: labelGame) ?? "Нет данных"
         countWinStrike = getWinStrike(massive: massiveResultsGames)
         
-        statisctiView.dataMassive[0] = "\(TimeManager.shared.convertToMinutesWhiteBoard(seconds: secondsTime))"
-        statisctiView.dataMassive[1] = favoriteGame
-        statisctiView.dataMassive[2] = "\(countWinStrike)"
-        statisctiView.reloadData()
+        let newDataMassive: [String] = [
+            "\(TimeManager.shared.convertToMinutesWhiteBoard(seconds: secondsTime))",
+            "\(userStatistics.count)",
+            favoriteGame,
+            "\(countWinStrike)"
+        ]
+        statiscticCollectionView.dataMassive = newDataMassive
+        statiscticCollectionView.reloadData()
     }
     
     func mostFrequentWord(in words: [String]) -> String? {
         let wordCounts = words.reduce(into: [:]) { counts, word in counts[word, default: 0] += 1 }
         return wordCounts.max { $0.1 < $1.1 }?.key.localize()
     }
-
+    
     func getWinStrike(massive: [String]) -> Int {
         var countWinStrike = 0
         var tempCountWinStrike = 0

@@ -9,8 +9,9 @@ import UIKit
 
 class StatiscticsCollectionView: UICollectionView {
     
-    var dataMassive = ["", "", ""]
-    private let descriptionMassive = ["в игре", "Любимая игра", "Серия побед"]
+    var dataMassive = ["", "", "", ""]
+    private let descriptionMassive = ["Времени в игре", "Количество игр", "Любимая игра", "Серия побед"]
+    
     init() {
         let layout = UICollectionViewFlowLayout()
         super.init(frame: .zero, collectionViewLayout: layout)
@@ -22,12 +23,15 @@ class StatiscticsCollectionView: UICollectionView {
         commonInit()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: bounds.width / 3.2, height: bounds.height) // Размер элемента
-        }
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+//            layout.itemSize = CGSize(width: bounds.width / 2, height: bounds.height / 1)
+//            layout.minimumLineSpacing = 5
+//            layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+//            
+//        }
+//    }
     
     private func commonInit() {
         setup()
@@ -36,18 +40,14 @@ class StatiscticsCollectionView: UICollectionView {
     
     func setup() {
         self.dataSource = self
-        //        self.delegate = self
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        self.showsVerticalScrollIndicator = false
-        self.showsHorizontalScrollIndicator = false
-        
-        self.collectionViewLayout = layout
-        self.backgroundColor = .clear
+        self.delegate = self
+        self.backgroundColor = UIColor(named: "gameElementColor")
+        self.layer.cornerRadius = 12
+        self.scrollsToTop = false
+        self.isScrollEnabled = false
     }
 }
 
-// Расширение для реализации методов UICollectionViewDataSource
 extension StatiscticsCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataMassive.count
@@ -55,31 +55,25 @@ extension StatiscticsCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatisticsCollectionViewCell", for: indexPath) as? StatisticsCollectionViewCell else {
-            fatalError("Unable to dequeue AnimalCollectionViewCell")
+            fatalError("Unable to dequeue StatisticsCollectionViewCell")
         }
         return configure(cell: cell, for: indexPath)
     }
     
     private func configure(cell: StatisticsCollectionViewCell, for indexPath: IndexPath) -> UICollectionViewCell {
-
         cell.setup(data: dataMassive[indexPath.row], description: descriptionMassive[indexPath.row])
-
         return cell
     }
 }
 
-
-
 extension StatiscticsCollectionView: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 60, height: 60)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.width - 30) / 2
+        let height = collectionView.bounds.height / 2.2
+        return CGSize(width: width, height: height)
+    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == 0 {
-            return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-        } else {
-            return UIEdgeInsets.zero
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
 }

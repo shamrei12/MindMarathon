@@ -402,7 +402,7 @@ class BinarioViewController: UIViewController {
                 stopwatch.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 let resultGame = WhiteBoardModel(nameGame: "binario", resultGame: "win", countStep: "-", timerGame: seconds)
-                CheckTaskManager.shared.checkPlayGame(game: 4)
+                CheckTaskManager.shared.checkPlayGame(game: 5)
                 RealmManager.shared.saveResult(result: resultGame)
             }
         }
