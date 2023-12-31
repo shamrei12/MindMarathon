@@ -8,65 +8,66 @@
 import UIKit
 
 class UserDefaultsManager {
-    static var shared: UserDefaultsManager = {
-        let instance = UserDefaultsManager()
-        return instance
-    }()
+    static let shared = UserDefaultsManager()
     
     private let userDefaults = UserDefaults()
+    private let userLevelKey = "userLevel"
     private let firstStartKey = "firstStart"
-    private let userExpirienseKey = "userExpiriense"
-    private let currentTheme = "currentTheme"
-    private let currentLanguage = "currentLanguage"
+    private let userExperienceKey = "userExperience"
+    private let currentThemeKey = "currentTheme"
+    private let currentLanguageKey = "currentLanguage"
     
     func checkFirstStart() {
-//        userDefaults.setValue(nil, forKey: firstStartKey)
+        
+        if userDefaults.object(forKey: firstStartKey) == nil  {
+            userDefaults.set(0, forKey: userExperienceKey)
+        }
+        
+        if userDefaults.object(forKey: firstStartKey) == nil  {
+            userDefaults.set(1, forKey: userLevelKey)
+        }
+        
         if userDefaults.object(forKey: firstStartKey) == nil {
-            userDefaults.setValue(true, forKey: firstStartKey)
+            userDefaults.set(true, forKey: firstStartKey)
             RealmManager.shared.clearRealmDatabase()
         }
-        if userDefaults.object(forKey: userExpirienseKey) == nil {
-            userDefaults.setValue(0, forKey: userExpirienseKey)
-        }
     }
     
-    func addExpirience(exp: Int) {
-        var userExp = userDefaults.object(forKey: userExpirienseKey) as? Int
-        userExp! += exp
-        userDefaults.setValue(userExp, forKey: userExpirienseKey)
+    func addExperience(exp: Int) {
+        let userExp = userDefaults.integer(forKey: userExperienceKey)
+        userDefaults.set(userExp + exp, forKey: userExperienceKey)
     }
     
-    func getUserExpiriense() -> Int? {
-        if let userExp = userDefaults.integer(forKey: userExpirienseKey) as Int? {
-            return userExp
-        }
-        return 0
+    func getUserExperience() -> Int {
+        return userDefaults.integer(forKey: userExperienceKey)
+    }
+    
+    func getUserLevel() -> Int {
+        return userDefaults.integer(forKey: userLevelKey)
     }
     
     func setCurrentLanguage(lang: String?) {
-        userDefaults.setValue(lang, forKey: currentLanguage)
+        userDefaults.set(lang, forKey: currentLanguageKey)
     }
     
     func setCurrentTheme(theme: String?) {
-        userDefaults.setValue(theme, forKey: currentTheme)
+        userDefaults.set(theme, forKey: currentThemeKey)
     }
     
     func getLanguage() -> String {
-        let lang = userDefaults.string(forKey: currentLanguage)
-        if lang != nil {
-            return lang ?? "en"
-        } else {
-            return "en"
-        }
+        return userDefaults.string(forKey: currentLanguageKey) ?? "en"
     }
     
     func getTheme() -> String {
-        let theme = userDefaults.string(forKey: currentTheme)
-        
-        if theme != nil {
-            return theme ?? "auto"
-        } else {
-            return "auto"
-        }
+        return userDefaults.string(forKey: currentThemeKey) ?? "auto"
+    }
+    
+    func changeExpirience(exp: Int) {
+        userDefaults.set(exp, forKey: userExperienceKey)
+    }
+    
+    func changeUserLebel(level: Int) {
+        userDefaults.setValue(level, forKey: userLevelKey)
     }
 }
+

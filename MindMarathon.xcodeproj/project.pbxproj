@@ -193,6 +193,29 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D81A44CF2B3B39CD00DC0C49 /* StatisticsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StatisticsView;
+			sourceTree = "<group>";
+		};
+		D81A44D02B40638100DC0C49 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		D81A44D12B40638F00DC0C49 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D826CF092A10C69000263CEB /* AppDelegate.swift */,
+				D826CF0B2A10C69000263CEB /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
 		D81C72E32ABF477800B8D4F0 /* NumberCollectionVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +257,7 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
+				D81A44D02B40638100DC0C49 /* New Group */,
 				D86EADB52AE5477B00FB19B6 /* Fonts */,
 				D829AC362A7D5BB200A38F6E /* Helps */,
 				D829AC332A7D527E00A38F6E /* Settings */,
@@ -244,8 +268,7 @@
 				D848359D2A35B768008D2AB4 /* Model */,
 				D826CF202A10C71700263CEB /* View */,
 				D826CF1D2A10C6B500263CEB /* Extensions */,
-				D826CF092A10C69000263CEB /* AppDelegate.swift */,
-				D826CF0B2A10C69000263CEB /* SceneDelegate.swift */,
+				D81A44D12B40638F00DC0C49 /* Delegate */,
 				D826CF122A10C69200263CEB /* Assets.xcassets */,
 				D826CF172A10C69200263CEB /* Info.plist */,
 			);
@@ -264,6 +287,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D81A44CF2B3B39CD00DC0C49 /* StatisticsView */,
 				D84E51272B03A31E00CBA32F /* TableViews */,
 				D8C11F2C2B0360A800EA28D6 /* CollectionViews */,
 				D81F8DD32AB60F36007A6597 /* Views */,

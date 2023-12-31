@@ -363,7 +363,7 @@ class TicTacToeViewController: UIViewController {
             stopwatch.invalidate()
             showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: seconds))")
             saveResult(result: WhiteBoardModel(nameGame: "tictactoe", resultGame: "win", countStep: stepCount.description, timerGame:  seconds))
-            CheckTaskManager.shared.checkPlayGame(game: 3)
+            CheckTaskManager.shared.checkPlayGame(game: 5)
         } else {
             guard let position = viewModel.computerMove(board: board) else {
                 stopwatch.invalidate()
@@ -401,18 +401,15 @@ class TicTacToeViewController: UIViewController {
             drawComputerTurn(row: computerRow, col: computerCol)
             let isComputerWon = viewModel.checkForWinner(board: board, symbol: "O")
             if isComputerWon {
-                stopwatch.invalidate()
+                computerThinkingTimer?.invalidate()
                 showAlertAboutFinishGame(title: "End game".localize(), message: "defeat_message".localize() + "time_message".localize() + " \(TimeManager.shared.convertToMinutes(seconds: seconds))")
                 saveResult(result: WhiteBoardModel(nameGame: "tictactoe", resultGame: "lose", countStep: stepCount.description, timerGame:  seconds))
             } else {
                 computerThinkingTimer?.invalidate()
                 playerTurn()
             }
-            
         }
     }
-    
-    
     
     func drawUserTurn(row: Int, col: Int) {
         stepCount += 1

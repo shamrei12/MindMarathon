@@ -28,8 +28,8 @@
 "rateApp" = "Rate the app";
 "writeSupport" = "Write to support";
 "appLang" = "Application language";
-"rusLabel" = "RUS";
-"engLabel" = "ENG";
+"rusLabel" = "Russian";
+"engLabel" = "English";
 
 "win" = "Win";
 "draw" = "Draw";

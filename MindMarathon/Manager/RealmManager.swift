@@ -15,6 +15,7 @@ class RealmManager {
     }()
     
     func saveResult(result: WhiteBoardModel) {
+
         do {
             let realm = try Realm() // Доступ к хранилищу
 
@@ -34,6 +35,7 @@ class RealmManager {
     }
     
     func getUserStatistics() -> [WhiteBoardManager] {
+        
         var statisticsMassive = [WhiteBoardManager]()
         
         do {
@@ -48,7 +50,7 @@ class RealmManager {
     }
     
     func getTasks() -> [TasksManager] {
-//        clearRealmDatabase()
+        clearRealmDatabase()
         var taskMassive = [TasksManager]()
         do {
             let realm = try Realm() // Получение экземпляра Realm

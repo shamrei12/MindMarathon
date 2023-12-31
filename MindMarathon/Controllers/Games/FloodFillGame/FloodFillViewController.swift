@@ -259,7 +259,7 @@ class FloodFillViewController: UIViewController {
 
             let resultGame = WhiteBoardModel(nameGame: "flood_fill", resultGame: "win", countStep: "\(viewModel.gameResult())", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
-            CheckTaskManager.shared.checkPlayGame(game: 3)
+            CheckTaskManager.shared.checkPlayGame(game: 5)
         }
     }
     

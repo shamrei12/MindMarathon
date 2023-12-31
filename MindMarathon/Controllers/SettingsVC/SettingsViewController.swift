@@ -110,7 +110,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     private lazy var engLanguageButton: UIButton = {
         let engLanguageButton = UIButton()
         engLanguageButton.tag = 0
-        engLanguageButton.setTitle("engLabel".localize(), for: .normal)
+        engLanguageButton.setTitle("engLabel".localize().uppercased(), for: .normal)
         engLanguageButton.layer.cornerRadius = 12
         engLanguageButton.backgroundColor = UIColor(named: "viewColor")
         engLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
@@ -123,7 +123,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         let rusLanguageButton = UIButton()
         rusLanguageButton.tag = 1
         rusLanguageButton.layer.cornerRadius = 12
-        rusLanguageButton.setTitle("rusLabel".localize(), for: .normal)
+        rusLanguageButton.setTitle("rusLabel".localize().uppercased(), for: .normal)
         rusLanguageButton.backgroundColor = UIColor(named: "viewColor")
         rusLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         rusLanguageButton.setTitleColor(.label, for: .normal)
@@ -422,24 +422,12 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             selectButton(button: engLanguageButton)
             unselectButton(button: rusLanguageButton)
             UserDefaultsManager.shared.setCurrentLanguage(lang: "en")
-            updateInterfaceForLanguageChange()
-
+            UIApplication.shared.reloadRootViewController()
         } else {
             selectButton(button: rusLanguageButton)
             unselectButton(button: engLanguageButton)
             UserDefaultsManager.shared.setCurrentLanguage(lang: "ru")
-            updateInterfaceForLanguageChange()
-        }
-    }
-    
-    func updateInterfaceForLanguageChange() {
-        guard let window = UIApplication.shared.windows.first else {
-            return
-        }
-        
-        if let rootViewController = window.rootViewController {
-            window.rootViewController = CustomTabBarController()
-            rootViewController.dismiss(animated: true, completion: nil)
+            UIApplication.shared.reloadRootViewController()
         }
     }
 
