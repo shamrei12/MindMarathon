@@ -76,6 +76,7 @@ class ProfileViewController: UIViewController {
         ratingButton.layer.cornerCurve = .circular
         ratingButton.layer.cornerRadius = 16
         ratingButton.setImage(UIImage(named: "rating"), for: .normal)
+        ratingButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         ratingButton.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .semiBold)
         ratingButton.backgroundColor = UIColor(named: "gameElementColor")
         return ratingButton

@@ -99,22 +99,23 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         return languagesLabel
     }()
     
-    private lazy var languagesButtonStack: UIStackView = {
-        let languagesButtonStack = UIStackView()
-        languagesButtonStack.axis = .horizontal
-        languagesButtonStack.distribution = .fillEqually
-        languagesButtonStack.spacing = 25
-        return languagesButtonStack
-    }()
+//    private lazy var languagesButtonStack: UIStackView = {
+//        let languagesButtonStack = UIStackView()
+//        languagesButtonStack.axis = .horizontal
+//        languagesButtonStack.distribution = .fillEqually
+//        languagesButtonStack.spacing = 25
+//        return languagesButtonStack
+//    }()
     
     private lazy var engLanguageButton: UIButton = {
         let engLanguageButton = UIButton()
         engLanguageButton.tag = 0
-        engLanguageButton.setTitle("engLabel".localize().uppercased(), for: .normal)
-        engLanguageButton.layer.cornerRadius = 12
+//        engLanguageButton.setTitle("engLabel".localize().uppercased(), for: .normal)
+        engLanguageButton.layer.cornerRadius = 6
         engLanguageButton.backgroundColor = UIColor(named: "viewColor")
         engLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         engLanguageButton.setTitleColor(.label, for: .normal)
+        engLanguageButton.setImage(UIImage(named: "americanFlag"), for: .normal)
         engLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         return engLanguageButton
     }()
@@ -122,12 +123,13 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     private lazy var rusLanguageButton: UIButton = {
         let rusLanguageButton = UIButton()
         rusLanguageButton.tag = 1
-        rusLanguageButton.layer.cornerRadius = 12
-        rusLanguageButton.setTitle("rusLabel".localize().uppercased(), for: .normal)
+        rusLanguageButton.layer.cornerRadius = 6
+//        rusLanguageButton.setTitle("rusLabel".localize().uppercased(), for: .normal)
         rusLanguageButton.backgroundColor = UIColor(named: "viewColor")
         rusLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         rusLanguageButton.setTitleColor(.label, for: .normal)
         rusLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+        rusLanguageButton.setImage(UIImage(named: "russianFlag"), for: .normal)
         return rusLanguageButton
     }()
     
@@ -139,9 +141,10 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         rateGame.setTitleColor(.label, for: .normal)
         rateGame.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .semiBold)
         rateGame.contentHorizontalAlignment = .left
+        rateGame.setImage(UIImage(named: "arrowUP"), for: .normal)
+        rateGame.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         rateGame.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 10)
         rateGame.addTarget(self, action: #selector(openAppStoreForRating), for: .touchUpInside)
-
         return rateGame
     }()
     
@@ -153,7 +156,9 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         sendDeveloper.setTitleColor(.label, for: .normal)
         sendDeveloper.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .semiBold)
         sendDeveloper.contentHorizontalAlignment = .left
+        sendDeveloper.titleEdgeInsets.left = 5
         sendDeveloper.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 10)
+        sendDeveloper.setImage(UIImage(named: "message"), for: .normal)
         sendDeveloper.addTarget(self, action: #selector(userHelpTapped), for: .touchUpInside)
 
         return sendDeveloper
@@ -192,10 +197,10 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         automaticSwitchThemeView.addSubview(descriptionAutomaticSwitchThemeLabel)
         
         languagesView.addSubview(languagesLabel)
+
+        languagesView.addSubview(engLanguageButton)
+        languagesView.addSubview(rusLanguageButton)
         
-        languagesButtonStack.addArrangedSubview(engLanguageButton)
-        languagesButtonStack.addArrangedSubview(rusLanguageButton)
-        languagesView.addSubview(languagesButtonStack)
     }
     
     func setupLanguage() {
@@ -285,11 +290,17 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             maker.left.equalTo(languagesView).inset(25)
             
         }
-        
-        languagesButtonStack.snp.makeConstraints { maker in
+
+        engLanguageButton.snp.makeConstraints { maker in
             maker.top.equalTo(languagesLabel.snp.bottom).inset(-10)
-            maker.left.bottom.right.equalToSuperview().inset(10)
-            maker.height.equalTo(50)
+            maker.left.equalToSuperview().inset(50)
+            maker.bottom.equalToSuperview().inset(10)
+        }
+        
+        rusLanguageButton.snp.makeConstraints { maker in
+            maker.top.equalTo(languagesLabel.snp.bottom).inset(-10)
+            maker.right.equalToSuperview().inset(50)
+            maker.bottom.equalToSuperview().inset(10)
         }
         
         rateGame.snp.makeConstraints { maker in
@@ -342,9 +353,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         customView.addSubview(imageView)
-        
-
-        
+    
         imageView.snp.makeConstraints { maker in
             maker.top.left.right.equalToSuperview().inset(5)
             maker.height.equalTo(customView.snp.height).multipliedBy(0.7)
@@ -433,8 +442,8 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
 
     
     func selectButton(button: UIButton) {
-        button.layer.borderColor = UIColor.purple.cgColor
-        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1
     }
     
     func unselectButton(button: UIButton) {
