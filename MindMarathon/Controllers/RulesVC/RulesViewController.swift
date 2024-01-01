@@ -25,8 +25,6 @@ class RulesViewController: UIViewController, GameButtonDelegate {
         
         dropdownButton.setTitle("chooseGame".localize(), for: .normal)
         dropdownButton.setTitleColor(.label, for: .normal)
-        dropdownButton.gameList = ["chooseGame".localize(), "bullcow".localize(), "slovus".localize(), "flood_fill".localize(), "tictactoe".localize(), "binario".localize(), "Numbers".localize()]
-        
         return dropdownButton
     }()
     
@@ -52,6 +50,18 @@ class RulesViewController: UIViewController, GameButtonDelegate {
         setupView()
         makeConstraints()
         dropdownButton.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupText()
+        dropdownButton.gameList = ["chooseGame".localize(), "bullcow".localize(), "slovus".localize(), "flood_fill".localize(), "tictactoe".localize(), "binario".localize(), "Numbers".localize()]
+        
+    }
+    
+    func setupText() {
+        mainLabel.text = "Rules".localize()
+        dropdownButton.setTitle("chooseGame".localize(), for: .normal)
     }
     
     func setupView() {

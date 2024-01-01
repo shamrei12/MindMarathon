@@ -69,5 +69,9 @@ class UserDefaultsManager {
     func changeUserLebel(level: Int) {
         userDefaults.setValue(level, forKey: userLevelKey)
     }
+    
+    func synchronize() {
+        userDefaults.synchronize()
+    }
 }
 

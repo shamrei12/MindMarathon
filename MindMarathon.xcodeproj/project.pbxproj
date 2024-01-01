@@ -200,13 +200,6 @@
 			path = StatisticsView;
 			sourceTree = "<group>";
 		};
-		D81A44D02B40638100DC0C49 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		D81A44D12B40638F00DC0C49 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,7 +250,6 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
-				D81A44D02B40638100DC0C49 /* New Group */,
 				D86EADB52AE5477B00FB19B6 /* Fonts */,
 				D829AC362A7D5BB200A38F6E /* Helps */,
 				D829AC332A7D527E00A38F6E /* Settings */,

@@ -59,15 +59,14 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
     
-    func localized(_ lang: String) -> String {
-        
-        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    func localized() -> String? {
+        let lang = UserDefaultsManager.shared.getLanguage()
+        if let path = Bundle.main.path(forResource: lang, ofType: "lproj"), let baseBundle = Bundle(path: path) {
+            return NSLocalizedString(self, tableName: nil, bundle: baseBundle, value: "", comment: "")
+        }
+        return nil
     }
 }
-
 
 extension UIApplication {
     func reloadRootViewController() {

@@ -15,6 +15,14 @@ class WhiteboardViewController: UIViewController {
     private var gameListArray = [WhiteBoardManager]()
     let game = WhiteBoardManager()
     
+    private lazy var labelStackView: UIStackView = {
+        let labelStackView = UIStackView()
+        labelStackView.axis = .horizontal
+        labelStackView.distribution = .fillEqually
+        labelStackView.spacing = 5
+        return labelStackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -64,11 +72,12 @@ class WhiteboardViewController: UIViewController {
     }
     
     func setupUI() {
-        let labelStackView = UIStackView(arrangedSubviews: [createLabelCategories(text: "gameLabel".localize()), createLabelCategories(text: "statusLabel".localize()), createLabelCategories(text: "stepsLabel".localize()), createLabelCategories(text: "timeLabel".localize())])
-        labelStackView.axis = .horizontal
-        labelStackView.distribution = .fillEqually
-        labelStackView.spacing = 5
-        
+        for arrangedSubview in labelStackView.arrangedSubviews {
+                print(arrangedSubview)
+                arrangedSubview.removeFromSuperview()
+        }
+
+        labelStackView = UIStackView(arrangedSubviews: [createLabelCategories(text: "gameLabel".localize()), createLabelCategories(text: "statusLabel".localize()), createLabelCategories(text: "stepsLabel".localize()), createLabelCategories(text: "timeLabel".localize())])
         view.addSubview(labelStackView)
         
         labelStackView.snp.makeConstraints { maker in

@@ -11,7 +11,7 @@ import SnapKit
 class ListGamesViewController: UIViewController {
   
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    let gameList: [Game] = ListGamesViewController.createGames()
+    var gameList: [Game] = ListGamesViewController.createGames()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,18 @@ class ListGamesViewController: UIViewController {
         createUI()
         fisrStart()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
+    }
     
     func fisrStart() {
         UserDefaultsManager.shared.checkFirstStart()
+    }
+    
+    func refreshData() {
+        gameList = ListGamesViewController.createGames()
+        collectionView.reloadData()
     }
     
     func setupNavigationItem() {

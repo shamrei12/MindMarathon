@@ -14,7 +14,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
-        mainLabel.text = "settingLabel".localize()
+        mainLabel.text = "settingLabel".localized()!
         mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
         mainLabel.textColor = .label
         return mainLabel
@@ -29,7 +29,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     private lazy var themeLabel: UILabel = {
         let themeLabel = UILabel()
-        themeLabel.text = "themeLabel".localize()
+        themeLabel.text = "themeLabel".localized()
         themeLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 15), weight: .semiBold)
         themeLabel.textColor = .label
         return themeLabel
@@ -71,14 +71,14 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     private lazy var automaticSwitchThemeLabel: UILabel = {
         let automaticSwitchThemeLabel = UILabel()
-        automaticSwitchThemeLabel.text = "autoLabel".localize()
+        automaticSwitchThemeLabel.text = "autoLabel".localized()
         automaticSwitchThemeLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 15), weight: .bold)
         return automaticSwitchThemeLabel
     }()
     
     private lazy var descriptionAutomaticSwitchThemeLabel: UILabel = {
         let descriptionAutomaticSwitchThemeLabel = UILabel()
-        descriptionAutomaticSwitchThemeLabel.text = "descriptionAutoLabel".localize()
+        descriptionAutomaticSwitchThemeLabel.text = "descriptionAutoLabel".localized()
         descriptionAutomaticSwitchThemeLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 13), weight: .light)
         return descriptionAutomaticSwitchThemeLabel
     }()
@@ -93,29 +93,21 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     private lazy var languagesLabel: UILabel = {
         let languagesLabel = UILabel()
-        languagesLabel.text = "appLang".localize()
+        languagesLabel.text = "appLang".localized()
         languagesLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 15), weight: .semiBold)
         languagesLabel.textColor = .label
         return languagesLabel
     }()
     
-//    private lazy var languagesButtonStack: UIStackView = {
-//        let languagesButtonStack = UIStackView()
-//        languagesButtonStack.axis = .horizontal
-//        languagesButtonStack.distribution = .fillEqually
-//        languagesButtonStack.spacing = 25
-//        return languagesButtonStack
-//    }()
-    
     private lazy var engLanguageButton: UIButton = {
         let engLanguageButton = UIButton()
         engLanguageButton.tag = 0
-//        engLanguageButton.setTitle("engLabel".localize().uppercased(), for: .normal)
         engLanguageButton.layer.cornerRadius = 6
         engLanguageButton.backgroundColor = UIColor(named: "viewColor")
         engLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         engLanguageButton.setTitleColor(.label, for: .normal)
         engLanguageButton.setImage(UIImage(named: "americanFlag"), for: .normal)
+        engLanguageButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         engLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         return engLanguageButton
     }()
@@ -124,11 +116,11 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         let rusLanguageButton = UIButton()
         rusLanguageButton.tag = 1
         rusLanguageButton.layer.cornerRadius = 6
-//        rusLanguageButton.setTitle("rusLabel".localize().uppercased(), for: .normal)
         rusLanguageButton.backgroundColor = UIColor(named: "viewColor")
         rusLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         rusLanguageButton.setTitleColor(.label, for: .normal)
         rusLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
+        rusLanguageButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         rusLanguageButton.setImage(UIImage(named: "russianFlag"), for: .normal)
         return rusLanguageButton
     }()
@@ -137,7 +129,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         let rateGame = UIButton()
         rateGame.layer.cornerRadius = 12
         rateGame.backgroundColor = UIColor(named: "gameElementColor")
-        rateGame.setTitle("rateApp".localize(), for: .normal)
+        rateGame.setTitle("rateApp".localized(), for: .normal)
         rateGame.setTitleColor(.label, for: .normal)
         rateGame.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .semiBold)
         rateGame.contentHorizontalAlignment = .left
@@ -152,7 +144,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         let sendDeveloper = UIButton()
         sendDeveloper.layer.cornerRadius = 12
         sendDeveloper.backgroundColor = UIColor(named: "gameElementColor")
-        sendDeveloper.setTitle("writeSupport".localize(), for: .normal)
+        sendDeveloper.setTitle("writeSupport".localized(), for: .normal)
         sendDeveloper.setTitleColor(.label, for: .normal)
         sendDeveloper.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .semiBold)
         sendDeveloper.contentHorizontalAlignment = .left
@@ -203,10 +195,18 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         
     }
     
+    func setupText() {
+        mainLabel.text = "settingLabel".localized()
+        themeLabel.text = "themeLabel".localized()
+        automaticSwitchThemeLabel.text = "autoLabel".localized()
+        descriptionAutomaticSwitchThemeLabel.text = "descriptionAutoLabel".localized()
+        languagesLabel.text = "appLang".localized()
+        rateGame.setTitle("rateApp".localized(), for: .normal)
+        sendDeveloper.setTitle("writeSupport".localized(), for: .normal)
+    }
+    
     func setupLanguage() {
-        
         let currentLanguage = UserDefaultsManager.shared.getLanguage()
-        
         if currentLanguage == "en" {
             selectButton(button: engLanguageButton)
             unselectButton(button: rusLanguageButton)
@@ -217,7 +217,6 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         }
     }
 
-    
     func setupTheme() {
         let currentTheme = UserDefaultsManager.shared.getTheme()
         print(currentTheme)
@@ -320,26 +319,25 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     }
     
     func createThemeButton(text: String, image: UIImage?, tag: Int) -> UIView {
-        var customView = UIView()
-        
-        if tag == 0 {
-            customView = lightThemeView
-        } else {
-            customView = darkThemeView
-        }
-        
+        let customView = tag == 0 ? lightThemeView : darkThemeView
         customView.tag = tag
         customView.layer.cornerRadius = 12
-        
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(changeTheme))
         customView.addGestureRecognizer(tapGesture)
         customView.isUserInteractionEnabled = true
-        
+
         let label = UILabel()
         label.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 12), weight: .semiBold)
         label.text = text
         label.textAlignment = .center
+        label.textColor = tag == 0 ? .black : .white
         customView.addSubview(label)
+
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
+        customView.addSubview(imageView)
         
         if tag == 0 {
             customView.backgroundColor = UIColor(hex: 0xffffff)
@@ -348,22 +346,17 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             customView.backgroundColor = UIColor(hex: 0x313131)
             label.textColor = .white
         }
-        
-        let imageView = UIImageView()
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        customView.addSubview(imageView)
-    
+
         imageView.snp.makeConstraints { maker in
             maker.top.left.right.equalToSuperview().inset(5)
             maker.height.equalTo(customView.snp.height).multipliedBy(0.7)
         }
-        
+
         label.snp.makeConstraints { maker in
             maker.top.equalTo(imageView.snp.bottom)
             maker.left.bottom.right.equalToSuperview()
         }
-        
+
         return customView
     }
     
@@ -425,30 +418,31 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             }
         }
     }
-    
+        
     @objc func changeLanguage(sender: UIButton) {
         if sender.tag == 0 {
             selectButton(button: engLanguageButton)
             unselectButton(button: rusLanguageButton)
             UserDefaultsManager.shared.setCurrentLanguage(lang: "en")
-            UIApplication.shared.reloadRootViewController()
         } else {
             selectButton(button: rusLanguageButton)
             unselectButton(button: engLanguageButton)
             UserDefaultsManager.shared.setCurrentLanguage(lang: "ru")
-            UIApplication.shared.reloadRootViewController()
         }
+        
+        UserDefaultsManager.shared.synchronize()
+        setupText()
+//        UIApplication.shared.reloadRootViewController()
     }
 
-    
     func selectButton(button: UIButton) {
         button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 2
     }
     
     func unselectButton(button: UIButton) {
         button.layer.borderColor = UIColor.clear.cgColor
-        button.layer.borderWidth = 0
+        button.layer.borderWidth = 0.5
     }
     
     func selectView(view: UIView) {
@@ -494,6 +488,4 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
            print("Failed to open the App Store")
        }
    }
-
-
 }

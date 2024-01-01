@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, _) in
             guard granted else { return }
             self.notificationCenter.getNotificationSettings { (settings) in
                 guard settings.authorizationStatus == .authorized else { return }
@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         configureRealm()
+       
+        UserDefaultsManager.shared.synchronize()
+        
         
         return true
     }

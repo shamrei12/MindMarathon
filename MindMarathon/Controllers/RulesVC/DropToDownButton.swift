@@ -83,7 +83,7 @@ extension DropdownButton: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedGame = gameList[indexPath.row]
-        setTitle(selectedGame, for: .normal)
+        setTitle(selectedGame.localized(), for: .normal)
         delegate?.gameButtonDidTap(game: selectedGame)
         hideDropdown()
     }
