@@ -20,6 +20,15 @@
 
 //SettingsVC
 "settingLabel" = "Настройки";
+"listGames" = "Список игр";
+"historyGames" = "История игр";
+"profile" = "Профиль";
+"timeGame" = "Времени в игре";
+"countGames" = "Количество игр";
+"favorite game" = "Любимая игра";
+"level" = "Уровень";
+"leaderboard" = "Таблица лидеров";
+"seriesWin" = "Серия побед";
 "themeLabel" = "Оформление";
 "darkLabel" = "Темное";
 "tightLabel" = "Светлое";

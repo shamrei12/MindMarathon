@@ -14,7 +14,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
-        mainLabel.text = "settingLabel".localized()!
+        mainLabel.text = "settingLabel".localized()
         mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
         mainLabel.textColor = .label
         return mainLabel

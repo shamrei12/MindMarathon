@@ -9,17 +9,26 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController {
-  
+    
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     var gameList: [Game] = ListGamesViewController.createGames()
+  
+    private lazy var mainLabel: UILabel = {
+        let mainLabel = UILabel()
+        mainLabel.text = "listGames".localized()
+        mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
+        mainLabel.textColor = .label
+        return mainLabel
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationItem()
-        setupCollectionView()
-        createUI()
         fisrStart()
+        setup()
+        makeConstraints()
+        setupCollectionView()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshData()
@@ -29,21 +38,22 @@ class ListGamesViewController: UIViewController {
         UserDefaultsManager.shared.checkFirstStart()
     }
     
-    func refreshData() {
-        gameList = ListGamesViewController.createGames()
-        collectionView.reloadData()
+    func setup() {
+        self.view.backgroundColor = UIColor(named: "viewColor")
+        self.view.addSubview(collectionView)
+        self.view.addSubview(mainLabel)
     }
     
-    func setupNavigationItem() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        let titleLabel = UILabel()
-        titleLabel.text = "Список игр".localize()
+    func makeConstraints() {
+        mainLabel.snp.makeConstraints { maker in
+            maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+        }
         
-        titleLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
-        
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.minimumScaleFactor = 0.75
-        navigationItem.titleView = titleLabel
+        collectionView.snp.makeConstraints { maker in
+            maker.top.equalTo(mainLabel.snp.bottom).inset(-10)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.bottom.equalToSuperview().inset(10)
+        }
     }
     
     func setupCollectionView() {
@@ -53,23 +63,16 @@ class ListGamesViewController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         
         collectionView.register(UINib(nibName: "ListGameCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListGameCollectionViewCell")
-        
-        view.addSubview(collectionView)
-        
-        collectionView.snp.makeConstraints { maker in
-            maker.centerX.centerY.equalToSuperview()
-            maker.width.equalToSuperview().multipliedBy(0.95)
-            maker.top.equalTo(view.safeAreaLayoutGuide).inset(10)
-            maker.bottom.equalToSuperview().inset(10)
-        }
+    }
+    
+    func refreshData() {
+        mainLabel.text = "listGames".localized()
+        gameList = ListGamesViewController.createGames()
+        collectionView.reloadData()
     }
     
     static func createGames() -> [Game] {
         return [BullCowGame(title: "bullcow".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the mystery number".localize(), rules: "bullCow_rules".localize(), gameImage: "BullCow"), SlovusGame(title: "slovus".localize(), createdBy: "Aliaksei Shamrei", descripton: "Guess the word in 6 moves".localize(), rules: "slovus_rules".localize(), gameImage: "slovusImage"), FloodFillGame(title: "flood_fill".localize(), createdBy: "Aliaksei Shamrei", descripton: "Paint the field one color".localize(), rules: "floodFill_rules".localize(), gameImage: "floodFillImage"), TicTacToeGame(title: "tictactoe".localize(), createdBy: "Nikita Shakalov", descripton: "Collect a line of three symbols".localize(), rules: "tictactoe_rules".localize(), gameImage: "tikTakToeImage"), BinarioGame(title: "binario".localize(), createdBy: "Aliaksei Shamrei", descripton: "Arrange the blue and red blocks".localize(), rules: "binario_rules".localize(), gameImage: "binarioImage"), NumbersGame(title: "Numbers".localize(), createdBy: "Aliaksei Shamrei", descripton: "Remove all the numbers from the field".localize(), rules: "numbers_rules".localize(), gameImage: "numbersImage")]
-    }
-
-    func createUI() {
-        self.view.backgroundColor = UIColor(named: "viewColor")
     }
     
     @objc

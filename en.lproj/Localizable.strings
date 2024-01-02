@@ -20,6 +20,15 @@
 
 //SettingsVC
 "settingLabel" = "Settings";
+"listGames" = "List of games";
+"historyGames" = "History of Games";
+"profile" = "Profile";
+"timeGame" = "Time in game";
+"countGames" = "Number of games";
+"favourite game" = "favourite game";
+"seriesWin" = "Winning streak";
+"level" = "Level";
+"leaderboard" = "Leaderboard";
 "themeLabel" = "Design";
 "darkLabel" = "Dark";
 "tightLabel" = "Light";

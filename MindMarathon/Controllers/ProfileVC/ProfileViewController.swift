@@ -11,9 +11,19 @@ class ProfileViewController: UIViewController {
     
     let statiscticCollectionView = StatiscticsCollectionView()
     
+    private lazy var mainLabel: UILabel = {
+        let mainLabel = UILabel()
+        mainLabel.text = "profile".localized()
+        mainLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 25), weight: .bold)
+        mainLabel.textColor = .label
+        
+        return mainLabel
+    }()
+    
     private lazy var userView: UIView = {
         let userView = UIView()
         userView.backgroundColor = .clear
+        
         return userView
     }()
     
@@ -24,8 +34,7 @@ class ProfileViewController: UIViewController {
         let image = UIImage(named: "userImage")
         userImage.image = image
         userImage.contentMode = .scaleToFill
-//        userImage.layer.borderColor = UIColor(hex: 0xFFD700, alpha: 1).cgColor
-//        userImage.layer.borderWidth = 3
+        
         return userImage
     }()
     
@@ -47,6 +56,7 @@ class ProfileViewController: UIViewController {
         ratingPossitionLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 17), weight: .semiBold)
         ratingPossitionLabel.layer.cornerRadius = 5
         ratingPossitionLabel.clipsToBounds = true
+        
         return ratingPossitionLabel
     }()
     
@@ -56,8 +66,8 @@ class ProfileViewController: UIViewController {
         progress.layer.cornerCurve = .continuous
         progress.clipsToBounds = true
         progress.progress = 0
-        return progress
         
+        return progress
     }()
     
     private lazy var currentRankScore: UILabel = {
@@ -71,7 +81,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var ratingButton: UIButton = {
         let ratingButton = UIButton()
-        ratingButton.setTitle("Таблица лидеров", for: .normal)
+        ratingButton.setTitle("leaderboard".localized(), for: .normal)
         ratingButton.setTitleColor(.label, for: .normal)
         ratingButton.layer.cornerCurve = .circular
         ratingButton.layer.cornerRadius = 16
@@ -79,6 +89,7 @@ class ProfileViewController: UIViewController {
         ratingButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         ratingButton.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .semiBold)
         ratingButton.backgroundColor = UIColor(named: "gameElementColor")
+        
         return ratingButton
     }()
     
@@ -94,6 +105,8 @@ class ProfileViewController: UIViewController {
     }
     
     func refreshData() {
+        mainLabel.text = "profile".localized()
+        ratingButton.setTitle("leaderboard".localized(), for: .normal)
         getCurrentAndNextRank(exp: UserDefaultsManager.shared.getUserExperience(), level: UserDefaultsManager.shared.getUserLevel())
         getUserStatistics()
     }
@@ -103,6 +116,7 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(userView)
         self.view.addSubview(statiscticCollectionView)
         self.view.addSubview(ratingButton)
+        userView.addSubview(mainLabel)
         userView.addSubview(userImage)
         userView.addSubview(userName)
         userView.addSubview(ratingPossitionLabel)
@@ -116,8 +130,12 @@ class ProfileViewController: UIViewController {
             maker.left.right.equalToSuperview()
         }
         
+        mainLabel.snp.makeConstraints { maker in
+            maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+        }
+        
         userImage.snp.makeConstraints { maker in
-            maker.top.equalTo(view.safeAreaLayoutGuide).inset(15)
+            maker.top.equalTo(mainLabel.snp.bottom).inset(-10)
             maker.centerX.equalToSuperview()
             maker.height.width.equalTo(userView.snp.width).multipliedBy(0.25)
         }
@@ -173,11 +191,11 @@ class ProfileViewController: UIViewController {
             let newMaxRank: Double = Double(newLevel * 100) + (Double(newLevel) + 0.5)
             let newExp = UserDefaultsManager.shared.getUserExperience()
             
-            currentRankScore.text = "\(newLevel) level"
+            currentRankScore.text = "\(newLevel)" + " " + "level".localized()!
             makeResultsForProgressBar(newExp: newExp, maxExp: newMaxRank)
         } else {
             progress.progress = Float(exp) / Float(maxRank)
-            currentRankScore.text = "\(level) level"
+            currentRankScore.text = "\(level)" + " " + "level".localized()!
             makeResultsForProgressBar(newExp: exp, maxExp: maxRank)
         }
     }
@@ -215,6 +233,11 @@ class ProfileViewController: UIViewController {
             "\(countWinStrike)"
         ]
         statiscticCollectionView.dataMassive = newDataMassive
+        
+        guard let timeGame = "timeGame".localized(), let favorite = "favourite game".localized(), let countGames = "countGames".localized(), let seriesWin = "seriesWin".localized() else {
+            return
+        }
+        statiscticCollectionView.descriptionMassive = [timeGame, countGames, favorite, seriesWin]
         statiscticCollectionView.reloadData()
     }
     

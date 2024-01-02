@@ -23,10 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.sendEveningNotification()
             }
         }
-        configureRealm()
-       
-        UserDefaultsManager.shared.synchronize()
         
+        configureRealm()
         
         return true
     }

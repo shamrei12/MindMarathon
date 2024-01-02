@@ -81,7 +81,7 @@ class BinarioViewController: UIViewController {
         checkResultButton.setTitleColor(.white, for: .normal)
         checkResultButton.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         checkResultButton.addTarget(self, action: #selector(checkResultTapped), for: .touchUpInside)
-        checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        checkResultButton.titleLabel!.adjustsFontSizeToFitWidth = true
         checkResultButton.titleLabel!.minimumScaleFactor = 0.1
         checkResultButton.addShadow()
         view.addSubview(checkResultButton)
@@ -93,7 +93,7 @@ class BinarioViewController: UIViewController {
         clearMoves.setTitle("Очистить".localize(), for: .normal)
         clearMoves.setTitleColor(.white, for: .normal)
         clearMoves.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
+        clearMoves.titleLabel!.adjustsFontSizeToFitWidth = true
         clearMoves.titleLabel!.minimumScaleFactor = 0.1
         clearMoves.addTarget(self, action: #selector(clearColor), for: .touchUpInside)
         clearMoves.addShadow()
@@ -209,7 +209,7 @@ class BinarioViewController: UIViewController {
         
         createGameElement()
     }
-    // Cоздание view
+
     func createGameElement() {
         for i in 0..<gridSize {
             for j in 0..<gridSize {
