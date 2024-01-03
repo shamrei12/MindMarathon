@@ -17,13 +17,15 @@ class UserDefaultsManager {
     private let currentThemeKey = "currentTheme"
     private let currentLanguageKey = "currentLanguage"
     
-    func checkFirstStart() {
+    func checkFirstStart() -> Bool {
+        userDefaults.set(nil, forKey: firstStartKey)
+        return userDefaults.object(forKey: firstStartKey) == nil
+    }
+    
+    func setupDataUserDefaults() {
         
-        if userDefaults.object(forKey: firstStartKey) == nil  {
+        if userDefaults.object(forKey: firstStartKey) == nil {
             userDefaults.set(0, forKey: userExperienceKey)
-        }
-        
-        if userDefaults.object(forKey: firstStartKey) == nil  {
             userDefaults.set(1, forKey: userLevelKey)
         }
         
@@ -73,5 +75,11 @@ class UserDefaultsManager {
     func synchronize() {
         userDefaults.synchronize()
     }
+    
+    func getUIID() -> String {
+        let uuid = UUID().uuidString
+        return uuid
+    }
+
 }
 

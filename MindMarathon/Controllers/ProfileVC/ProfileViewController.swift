@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let statiscticCollectionView = StatiscticsCollectionView()
+    let firebase = FirebaseData()
     
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
@@ -102,6 +103,8 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshData()
+        firebase.saveIDPostUser(id: UserDefaultsManager.shared.getUIID())
+        
     }
     
     func refreshData() {

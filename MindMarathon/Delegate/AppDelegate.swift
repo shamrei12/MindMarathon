@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications
 import RealmSwift
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.sendEveningNotification()
             }
         }
-        
+        FirebaseApp.configure()
         configureRealm()
         
         return true

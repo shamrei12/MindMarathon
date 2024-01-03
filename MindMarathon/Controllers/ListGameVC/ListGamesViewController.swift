@@ -23,7 +23,6 @@ class ListGamesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fisrStart()
         setup()
         makeConstraints()
         setupCollectionView()
@@ -32,10 +31,16 @@ class ListGamesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshData()
+        fisrStart()
     }
     
     func fisrStart() {
-        UserDefaultsManager.shared.checkFirstStart()
+//        if UserDefaultsManager.shared.checkFirstStart() {
+//            UserDefaultsManager.shared.setupDataUserDefaults()
+//        } else {
+//            print("Уже не первый")
+//        }
+        print("Уже не первый")
     }
     
     func setup() {

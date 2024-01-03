@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
-		53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */; };
 		D80FE4202B44A007008292BD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE41F2B44A007008292BD /* Realm */; };
 		D80FE4222B44A007008292BD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE4212B44A007008292BD /* RealmSwift */; };
 		D80FE4252B44A151008292BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80FE4242B44A151008292BD /* GoogleService-Info.plist */; };
@@ -46,6 +45,7 @@
 		D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */; };
 		D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84BCAA12AC7723A00967444 /* Localizable.strings */; };
 		D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E51252B03645600CBA32F /* StatisticsModel.swift */; };
+		D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
@@ -72,13 +72,15 @@
 		D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */; };
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
 		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
+		D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */; };
-		D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
 		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
 		D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */; };
 		D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */; };
 		D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */; };
+		D8D611592B45D9D800962A52 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D8D611582B45D9D800962A52 /* Realm */; };
+		D8D6115B2B45D9D800962A52 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8D6115A2B45D9D800962A52 /* RealmSwift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
 		D8D788462A4B3FE00013FECC /* BullCowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D788442A4B3FE00013FECC /* BullCowTableViewCell.swift */; };
 		D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7884C2A4B49E80013FECC /* BullCowModel.swift */; };
@@ -87,13 +89,14 @@
 		D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E807282B11EAEB00D69D67 /* RulesViewController.swift */; };
 		D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E8072A2B12286100D69D67 /* DropToDownButton.swift */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
+		FBA0034C68F638FF75748FAE /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
-		5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
+		96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 		D80FE4242B44A151008292BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCollectionViewController.swift; sourceTree = "<group>"; };
 		D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -148,7 +151,7 @@
 		D86EADC92AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-RegularItalic.otf"; sourceTree = "<group>"; };
 		D86EADD62AE54D4100FB19B6 /* FontsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsExtension.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
-		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; };
+		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
+		D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +175,7 @@
 		D8E807282B11EAEB00D69D67 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8E8072A2B12286100D69D67 /* DropToDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropToDownButton.swift; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
-		E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
+		F4ED023B005D71A12915380D /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,11 +183,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D611592B45D9D800962A52 /* Realm in Frameworks */,
 				D84835A82A35C88E008D2AB4 /* RealmSwift in Frameworks */,
+				D8D6115B2B45D9D800962A52 /* RealmSwift in Frameworks */,
 				D84835A62A35C88E008D2AB4 /* Realm in Frameworks */,
 				D80FE4202B44A007008292BD /* Realm in Frameworks */,
 				D80FE4222B44A007008292BD /* RealmSwift in Frameworks */,
-				53199976E1D8831CB27C5D95 /* Pods_MindMarathon.framework in Frameworks */,
+				FBA0034C68F638FF75748FAE /* Pods_MindMarathon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,8 +199,8 @@
 		85A08474662A9AD57EA6C5D7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */,
-				5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */,
+				D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */,
+				F4ED023B005D71A12915380D /* Pods-MindMarathon.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -241,7 +247,7 @@
 				D826CF082A10C69000263CEB /* MindMarathon */,
 				D826CF072A10C69000263CEB /* Products */,
 				85A08474662A9AD57EA6C5D7 /* Pods */,
-				E003456EF9BDDAF33D197310 /* Frameworks */,
+				DF30E2CD7811564FF0B9BAEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +262,7 @@
 		D826CF082A10C69000263CEB /* MindMarathon */ = {
 			isa = PBXGroup;
 			children = (
+				D8B54D782B45DE8F008F2B46 /* Network */,
 				D80FE4242B44A151008292BD /* GoogleService-Info.plist */,
 				D86EADB52AE5477B00FB19B6 /* Fonts */,
 				D829AC362A7D5BB200A38F6E /* Helps */,
@@ -442,6 +449,14 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		D8B54D782B45DE8F008F2B46 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		D8C11F262B0299F700EA28D6 /* SettingsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,10 +611,10 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
-		E003456EF9BDDAF33D197310 /* Frameworks */ = {
+		DF30E2CD7811564FF0B9BAEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5ABE5BF2175B7491475DA19F /* Pods_MindMarathon.framework */,
+				96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -611,12 +626,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D826CF1A2A10C69200263CEB /* Build configuration list for PBXNativeTarget "MindMarathon" */;
 			buildPhases = (
-				A6B3E98E1476DADBB3BF43DA /* [CP] Check Pods Manifest.lock */,
+				1FAEBA69FDA71D06187A85B6 /* [CP] Check Pods Manifest.lock */,
 				D826CF022A10C69000263CEB /* Sources */,
 				D826CF032A10C69000263CEB /* Frameworks */,
 				D826CF042A10C69000263CEB /* Resources */,
-				A87028C03F1BF83348252077 /* [CP] Embed Pods Frameworks */,
 				D829AC302A6D0BBF00A38F6E /* ShellScript */,
+				74AE67341112040E8817F22A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -628,6 +643,8 @@
 				D84835A72A35C88E008D2AB4 /* RealmSwift */,
 				D80FE41F2B44A007008292BD /* Realm */,
 				D80FE4212B44A007008292BD /* RealmSwift */,
+				D8D611582B45D9D800962A52 /* Realm */,
+				D8D6115A2B45D9D800962A52 /* RealmSwift */,
 			);
 			productName = MindMarathon;
 			productReference = D826CF062A10C69000263CEB /* MindMarathon.app */;
@@ -704,7 +721,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A6B3E98E1476DADBB3BF43DA /* [CP] Check Pods Manifest.lock */ = {
+		1FAEBA69FDA71D06187A85B6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -726,7 +743,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A87028C03F1BF83348252077 /* [CP] Embed Pods Frameworks */ = {
+		74AE67341112040E8817F22A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -783,6 +800,7 @@
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
+				D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
 				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
@@ -799,6 +817,7 @@
 				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */,
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
+				D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
 				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
@@ -814,7 +833,6 @@
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
-				D8C11F2B2B033DD000EA28D6 /* ProfileViewController.swift in Sources */,
 				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
@@ -942,7 +960,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -965,7 +983,7 @@
 		};
 		D826CF1B2A10C69200263CEB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1EF9F8D6BA1B80527059208 /* Pods-MindMarathon.debug.xcconfig */;
+			baseConfigurationReference = D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1002,7 +1020,7 @@
 		};
 		D826CF1C2A10C69200263CEB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B5673161985C01C2486B6C5 /* Pods-MindMarathon.release.xcconfig */;
+			baseConfigurationReference = F4ED023B005D71A12915380D /* Pods-MindMarathon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1088,6 +1106,16 @@
 			productName = Realm;
 		};
 		D84835A72A35C88E008D2AB4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D84835A42A35C88E008D2AB4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		D8D611582B45D9D800962A52 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D84835A42A35C88E008D2AB4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D8D6115A2B45D9D800962A52 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D84835A42A35C88E008D2AB4 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
