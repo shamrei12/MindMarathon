@@ -18,7 +18,6 @@ class UserDefaultsManager {
     private let currentLanguageKey = "currentLanguage"
     
     func checkFirstStart() -> Bool {
-        userDefaults.set(nil, forKey: firstStartKey)
         return userDefaults.object(forKey: firstStartKey) == nil
     }
     

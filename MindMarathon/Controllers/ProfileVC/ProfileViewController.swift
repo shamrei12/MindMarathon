@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
         let currentRankScore = UILabel()
         currentRankScore.font = UIFont.sfProText(ofSize: 10, weight: .bold)
         currentRankScore.textColor = .label
-        currentRankScore.text = "0"
+        currentRankScore.text = "12"
         
         return currentRankScore
     }()
@@ -103,8 +103,6 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshData()
-        firebase.saveIDPostUser(id: UserDefaultsManager.shared.getUIID())
-        
     }
     
     func refreshData() {
@@ -226,7 +224,7 @@ class ProfileViewController: UIViewController {
             massiveResultsGames.append(i.resultGame)
         }
         
-        favoriteGame = mostFrequentWord(in: labelGame) ?? "Нет данных"
+        favoriteGame = mostFrequentWord(in: labelGame) ?? "isHaveData".localized()!
         countWinStrike = getWinStrike(massive: massiveResultsGames)
         
         let newDataMassive: [String] = [
@@ -237,7 +235,7 @@ class ProfileViewController: UIViewController {
         ]
         statiscticCollectionView.dataMassive = newDataMassive
         
-        guard let timeGame = "timeGame".localized(), let favorite = "favourite game".localized(), let countGames = "countGames".localized(), let seriesWin = "seriesWin".localized() else {
+        guard let timeGame = "timeGame".localized(), let favorite = "favoritegame".localized(), let countGames = "countGames".localized(), let seriesWin = "seriesWin".localized() else {
             return
         }
         statiscticCollectionView.descriptionMassive = [timeGame, countGames, favorite, seriesWin]

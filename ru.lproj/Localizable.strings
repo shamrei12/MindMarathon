@@ -26,6 +26,7 @@
 "timeGame" = "Времени в игре";
 "countGames" = "Количество игр";
 "favoritegame" = "Любимая игра";
+"isHaveData" = "Нет данных";
 "level" = "Уровень";
 "leaderboard" = "Таблица лидеров";
 "seriesWin" = "Серия побед";

@@ -35,12 +35,11 @@ class ListGamesViewController: UIViewController {
     }
     
     func fisrStart() {
-//        if UserDefaultsManager.shared.checkFirstStart() {
-//            UserDefaultsManager.shared.setupDataUserDefaults()
-//        } else {
-//            print("Уже не первый")
-//        }
-        print("Уже не первый")
+        if UserDefaultsManager.shared.checkFirstStart() {
+            UserDefaultsManager.shared.setupDataUserDefaults()
+        } else {
+            print("Уже не первый")
+        }
     }
     
     func setup() {

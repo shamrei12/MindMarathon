@@ -37,12 +37,12 @@ class WhiteboardViewController: UIViewController {
         setup()
         makeConstraints()
         setupTableView()
-        loadGameList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupData()
+        loadGameList()
     }
     
     func setup() {

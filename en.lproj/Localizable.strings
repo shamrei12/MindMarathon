@@ -25,7 +25,8 @@
 "profile" = "Profile";
 "timeGame" = "Time in game";
 "countGames" = "Number of games";
-"favourite game" = "favourite game";
+"favoritegame" = "favourite game";
+"isHaveData" = "No data";
 "seriesWin" = "Winning streak";
 "level" = "Level";
 "leaderboard" = "Leaderboard";

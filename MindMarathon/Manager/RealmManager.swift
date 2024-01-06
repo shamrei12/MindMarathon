@@ -15,7 +15,6 @@ class RealmManager {
     }()
     
     func saveResult(result: WhiteBoardModel) {
-
         do {
             let realm = try Realm() // Доступ к хранилищу
 
@@ -29,7 +28,6 @@ class RealmManager {
                 realm.add(resultGame)
             }
         } catch {
-            // Обработка ошибок
             print("Ошибка при доступе к хранилищу Realm: \(error)")
         }
     }
@@ -50,7 +48,6 @@ class RealmManager {
     }
     
     func getTasks() -> [TasksManager] {
-        clearRealmDatabase()
         var taskMassive = [TasksManager]()
         do {
             let realm = try Realm() // Получение экземпляра Realm
