@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct UserStatisticsModel {
     var hoursInGame: Int
     var favoriteGame: String
