@@ -90,6 +90,7 @@ class ProfileViewController: UIViewController {
         ratingButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         ratingButton.titleLabel?.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .semiBold)
         ratingButton.backgroundColor = UIColor(named: "gameElementColor")
+        ratingButton.addTarget(self, action: #selector(leaderboardTapped), for: .touchUpInside)
         
         return ratingButton
     }()
@@ -260,5 +261,13 @@ class ProfileViewController: UIViewController {
             }
         }
         return countWinStrike
+    }
+    
+    @objc
+    func leaderboardTapped() {
+        let viewController = RatingViewController()
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }

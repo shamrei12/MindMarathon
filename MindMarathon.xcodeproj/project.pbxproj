@@ -46,6 +46,10 @@
 		D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84BCAA12AC7723A00967444 /* Localizable.strings */; };
 		D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E51252B03645600CBA32F /* StatisticsModel.swift */; };
 		D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
+		D86602762B49B752001A913D /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602752B49B752001A913D /* RatingViewController.swift */; };
+		D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602792B49C43D001A913D /* RatingTableView.swift */; };
+		D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027B2B49C49C001A913D /* RatingTableViewCell.swift */; };
+		D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027D2B4B2F72001A913D /* ProfileModel.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
@@ -133,6 +137,10 @@
 		D84BCAA32AC772E600967444 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D84BCAA42AC7736900967444 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D84E51252B03645600CBA32F /* StatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsModel.swift; sourceTree = "<group>"; };
+		D86602752B49B752001A913D /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		D86602792B49C43D001A913D /* RatingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableView.swift; sourceTree = "<group>"; };
+		D866027B2B49C49C001A913D /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		D866027D2B4B2F72001A913D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
@@ -327,6 +335,7 @@
 		D826CF242A10C7A600263CEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D86602742B49B721001A913D /* RatingVC */,
 				D8C11F292B033DB500EA28D6 /* ProfileVC */,
 				D8C11F262B0299F700EA28D6 /* SettingsVC */,
 				D8E3211F2B028E1E00674541 /* CustomTabBar */,
@@ -396,6 +405,7 @@
 				D84E51252B03645600CBA32F /* StatisticsModel.swift */,
 				D8B108C12B03AFA700CD09A1 /* TasksModel.swift */,
 				D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */,
+				D866027D2B4B2F72001A913D /* ProfileModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,6 +417,32 @@
 				D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */,
 			);
 			path = TableViews;
+			sourceTree = "<group>";
+		};
+		D86602742B49B721001A913D /* RatingVC */ = {
+			isa = PBXGroup;
+			children = (
+				D86602772B49C408001A913D /* RatingTableView */,
+				D86602752B49B752001A913D /* RatingViewController.swift */,
+			);
+			path = RatingVC;
+			sourceTree = "<group>";
+		};
+		D86602772B49C408001A913D /* RatingTableView */ = {
+			isa = PBXGroup;
+			children = (
+				D86602782B49C41D001A913D /* RatingTableViewCell */,
+				D86602792B49C43D001A913D /* RatingTableView.swift */,
+			);
+			path = RatingTableView;
+			sourceTree = "<group>";
+		};
+		D86602782B49C41D001A913D /* RatingTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D866027B2B49C49C001A913D /* RatingTableViewCell.swift */,
+			);
+			path = RatingTableViewCell;
 			sourceTree = "<group>";
 		};
 		D86EADB52AE5477B00FB19B6 /* Fonts */ = {
@@ -797,7 +833,9 @@
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
 				D86EADD72AE54D4100FB19B6 /* FontsExtension.swift in Sources */,
+				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
+				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */,
@@ -817,6 +855,7 @@
 				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */,
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
+				D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */,
 				D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
@@ -836,6 +875,7 @@
 				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
+				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
 			);

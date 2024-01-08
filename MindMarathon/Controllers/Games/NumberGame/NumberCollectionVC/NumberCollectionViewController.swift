@@ -76,18 +76,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
             cell.deselect()
         }
         
-//        if selectedCells.contains(indexPath) {
-//            cell.hide()
-//            cell.numberLabel.textColor = .lightGray
-//            cell.isUserInteractionEnabled = false
-//        } else if posibleMove.contains(indexPath) {
-//            cell.isUserInteractionEnabled = true
-//            cell.helpSelected()
-//        } else {
-//            cell.isUserInteractionEnabled = true
-//            cell.deselect()
-//        }
-        
         return cell
     }
     
