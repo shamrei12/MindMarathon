@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ListGamesViewController: UIViewController {
-    
+class ListGamesViewController: UIViewController, UserCreateDelegate {
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     var gameList: [Game] = ListGamesViewController.createGames()
-  
+    let createUserView = CreateUserView()
+
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
         mainLabel.text = "listGames".localized()
@@ -23,6 +23,7 @@ class ListGamesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        createUserView.delegate = self
         setup()
         makeConstraints()
         setupCollectionView()
@@ -37,11 +38,46 @@ class ListGamesViewController: UIViewController {
     func fisrStart() {
         if UserDefaultsManager.shared.checkFirstStart() {
             UserDefaultsManager.shared.setupDataUserDefaults()
+            RealmManager.shared.clearRealmDatabase()
+            setupCreateUserView()
         } else {
             print("Уже не первый")
         }
+        
     }
     
+    func setupCreateUserView() {
+        self.view.addSubview(createUserView)
+        disableTabBarInteractions()
+        createUserView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
+    }
+    
+    func disableTabBarInteractions() {
+        guard let customTabBarController = self.tabBarController as? CustomTabBarController else { return }
+        
+        for view in customTabBarController.tabBar.subviews {
+            if let button = view as? UIControl {
+                button.isEnabled = false
+            }
+        }
+    }
+
+    func enableTabBar() {
+        EnableTabBarInteractions()
+    }
+    
+    func EnableTabBarInteractions() {
+        guard let customTabBarController = self.tabBarController as? CustomTabBarController else { return }
+        
+        for view in customTabBarController.tabBar.subviews {
+            if let button = view as? UIControl {
+                button.isEnabled = true
+            }
+        }
+    }
+
     func setup() {
         self.view.backgroundColor = UIColor(named: "viewColor")
         self.view.addSubview(collectionView)

@@ -127,5 +127,83 @@ class RealmManager {
             print("Error \(error)")
         }
     }
-
+    
+    func firstCreateUserProfile(userName: String) {
+        var profileMassive = [ProfileManager]()
+        
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+            
+            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0)]
+            
+            try realm.write {
+                realm.add(profileMassive)
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    
+    func actualityProfileData() {
+        let userStatistics = getUserStatistics()
+        var resultGame = userStatistics.map { $0.resultGame }
+        var seconds = 0
+        var labelGame = userStatistics.map { $0.nameGame }
+        
+        for i in userStatistics {
+            seconds += i.timerGame
+        }
+       
+        let favoriteGame  = mostFrequentWord(in: labelGame) ?? "isHaveData"
+        let countWinStrike = getWinStrike(massive: resultGame)
+        
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].favoriteGame = favoriteGame
+                tasks[0].timeInGame = seconds
+                tasks[0].countGames = userStatistics.count
+                tasks[0].winStrike = countWinStrike
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func getWinStrike(massive: [String]) -> Int {
+        var countWinStrike = 0
+        var tempCountWinStrike = 0
+        
+        for i in massive {
+            if i == "win" {
+                tempCountWinStrike += 1
+                countWinStrike = max(countWinStrike, tempCountWinStrike)
+            } else {
+                tempCountWinStrike = 0
+            }
+        }
+        return countWinStrike
+    }
+    
+    func mostFrequentWord(in words: [String]) -> String? {
+        let wordCounts = words.reduce(into: [:]) { counts, word in counts[word, default: 0] += 1 }
+        return wordCounts.max { $0.1 < $1.1 }?.key.localize()
+    }
+    
+    func getUserProfileData() -> [ProfileManager] {
+        var userProfile = [ProfileManager]()
+        
+        do {
+            let realm = try Realm()
+            let statistics = realm.objects(ProfileManager.self)
+            userProfile = Array(statistics)
+        } catch {
+            print("Error: \(error)")
+        }
+        return userProfile
+    }
 }

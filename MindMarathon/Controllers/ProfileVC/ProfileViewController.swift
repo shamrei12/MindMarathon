@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
         let userName = UILabel()
         userName.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
         userName.textColor = .label
-        userName.text = "Batonkmn"
+        userName.text = "Unknown"
         
         return userName
     }()
@@ -109,8 +109,7 @@ class ProfileViewController: UIViewController {
     func refreshData() {
         mainLabel.text = "profile".localized()
         ratingButton.setTitle("leaderboard".localized(), for: .normal)
-        getCurrentAndNextRank(exp: UserDefaultsManager.shared.getUserExperience(), level: UserDefaultsManager.shared.getUserLevel())
-        getUserStatistics()
+        getUserProfileData()
     }
     
     func setupUI() {
@@ -185,6 +184,9 @@ class ProfileViewController: UIViewController {
     func getCurrentAndNextRank(exp: Int, level: Int) {
         var maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
         
+        if exp > Int(maxRank) {}
+        
+        
         if exp > Int(maxRank) {
             UserDefaultsManager.shared.changeExpirience(exp: exp - Int(maxRank))
             UserDefaultsManager.shared.changeUserLebel(level: level + 1)
@@ -211,30 +213,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func getUserStatistics() {
-        let userStatistics = RealmManager.shared.getUserStatistics()
-        var secondsTime = 0
-        var labelGame = [String]()
-        var favoriteGame = ""
-        var countWinStrike = 0
-        var massiveResultsGames = [String]()
-        
-        for i in userStatistics {
-            secondsTime += i.timerGame
-            labelGame.append(i.nameGame)
-            massiveResultsGames.append(i.resultGame)
-        }
-        
-        favoriteGame = mostFrequentWord(in: labelGame) ?? "isHaveData".localized()!
-        countWinStrike = getWinStrike(massive: massiveResultsGames)
-        
-        let newDataMassive: [String] = [
-            "\(TimeManager.shared.convertToMinutesWhiteBoard(seconds: secondsTime))",
-            "\(userStatistics.count)",
-            favoriteGame,
-            "\(countWinStrike)"
-        ]
-        statiscticCollectionView.dataMassive = newDataMassive
+    func getUserStatistics(massive: [ProfileManager]) {
+        let timeInGame = String(massive[0].timeInGame)
+        let countGames = String(massive[0].countGames)
+        let favoriteGame = String(massive[0].favoriteGame).localized()
+        let winStrike = String(massive[0].winStrike)
+        statiscticCollectionView.dataMassive = [timeInGame, countGames, favoriteGame!, winStrike]
         
         guard let timeGame = "timeGame".localized(), let favorite = "favoritegame".localized(), let countGames = "countGames".localized(), let seriesWin = "seriesWin".localized() else {
             return
@@ -261,6 +245,15 @@ class ProfileViewController: UIViewController {
             }
         }
         return countWinStrike
+    }
+    
+    func getUserProfileData() {
+        RealmManager.shared.actualityProfileData()
+        let userProfiledata = RealmManager.shared.getUserProfileData()
+        userName.text = userProfiledata[0].username
+        currentRankScore.text = "\(userProfiledata[0].userLevel)" + " " + "level".localized()!
+        getCurrentAndNextRank(exp: userProfiledata[0].userExpirience, level: userProfiledata[0].userLevel)
+        getUserStatistics(massive: userProfiledata)
     }
     
     @objc

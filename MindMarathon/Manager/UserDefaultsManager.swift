@@ -22,17 +22,20 @@ class UserDefaultsManager {
     }
     
     func setupDataUserDefaults() {
-        
-        if userDefaults.object(forKey: firstStartKey) == nil {
-            userDefaults.set(0, forKey: userExperienceKey)
-            userDefaults.set(1, forKey: userLevelKey)
-        }
-        
         if userDefaults.object(forKey: firstStartKey) == nil {
             userDefaults.set(true, forKey: firstStartKey)
-            RealmManager.shared.clearRealmDatabase()
         }
     }
+//        if userDefaults.object(forKey: firstStartKey) == nil {
+//            userDefaults.set(0, forKey: userExperienceKey)
+//            userDefaults.set(1, forKey: userLevelKey)
+//        }
+//        
+//        if userDefaults.object(forKey: firstStartKey) == nil {
+//            userDefaults.set(true, forKey: firstStartKey)
+//            RealmManager.shared.clearRealmDatabase()
+//        }
+    
     
     func addExperience(exp: Int) {
         let userExp = userDefaults.integer(forKey: userExperienceKey)

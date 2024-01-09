@@ -8,6 +8,7 @@
 import UIKit
 
 class CustomTabBarController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
@@ -52,9 +53,8 @@ class CustomTabBarController: UITabBarController {
     }
     
     func selectTab(at index: Int) {
-         if index < viewControllers?.count ?? 0 {
-             selectedIndex = 2
-         }
-     }
-
+        if index < viewControllers?.count ?? 0 {
+            selectedIndex = 2
+        }
+    }
 }
