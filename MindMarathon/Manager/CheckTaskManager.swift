@@ -16,5 +16,6 @@ class CheckTaskManager {
     
     func checkPlayGame(game: Int) {
         RealmManager.shared.addUserExpirience(exp: game)
+        RealmManager.shared.addUserscore(score: game * 3)
     }
 }
