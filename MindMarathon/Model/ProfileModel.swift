@@ -21,6 +21,7 @@ struct ProfileModel {
     var winStrike: Int
     var premiumStatus: TimeInterval
     var userID: UUID
+    var userScore: Int
 }
 
 class ProfileManager: Object {
@@ -36,8 +37,9 @@ class ProfileManager: Object {
     @objc dynamic var winStrike = 0
     @objc dynamic var premiumStatus = TimeInterval(0)
     @objc dynamic var userID = ""
+    @objc dynamic var userScore = 0
     
-    convenience init(username: String, nationality: String, userImage: String, userLevel: Int, userExpirience: Int, dateUpdate: TimeInterval, timeInGame: TimeInterval, countGames: Int, favoriteGame: String, winStrike: Int, premiumStatus: TimeInterval, userID: String) {
+    convenience init(username: String, nationality: String, userImage: String, userLevel: Int, userExpirience: Int, dateUpdate: TimeInterval, timeInGame: TimeInterval, countGames: Int, favoriteGame: String, winStrike: Int, premiumStatus: TimeInterval, userID: String, userScore: Int) {
         self.init()
         self.username = username
         self.nationality = nationality
@@ -51,5 +53,6 @@ class ProfileManager: Object {
         self.winStrike = winStrike
         self.premiumStatus = premiumStatus
         self.userID = userID
+        self.userScore = userScore
     }
 }

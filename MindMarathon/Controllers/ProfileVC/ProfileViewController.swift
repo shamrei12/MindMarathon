@@ -48,17 +48,17 @@ class ProfileViewController: UIViewController {
         return userName
     }()
     
-    private lazy var ratingPossitionLabel: UILabel = {
-        let ratingPossitionLabel = UILabel()
-        ratingPossitionLabel.backgroundColor = .lightGray
-        ratingPossitionLabel.text = "#5"
-        ratingPossitionLabel.textAlignment = .center
-        ratingPossitionLabel.tintColor = .white
-        ratingPossitionLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 17), weight: .semiBold)
-        ratingPossitionLabel.layer.cornerRadius = 5
-        ratingPossitionLabel.clipsToBounds = true
+    private lazy var expLabel: UILabel = {
+        let expLabel = UILabel()
+        expLabel.backgroundColor = UIColor(named: "gameElementColor")
+        expLabel.text = "800 exp"
+        expLabel.textAlignment = .center
+        expLabel.tintColor = .white
+        expLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 14), weight: .regular)
+        expLabel.layer.cornerRadius = 5
+        expLabel.clipsToBounds = true
         
-        return ratingPossitionLabel
+        return expLabel
     }()
     
     private lazy var progress: UIProgressView = {
@@ -122,7 +122,7 @@ class ProfileViewController: UIViewController {
         userView.addSubview(mainLabel)
         userView.addSubview(userImage)
         userView.addSubview(userName)
-        userView.addSubview(ratingPossitionLabel)
+        userView.addSubview(expLabel)
         userView.addSubview(progress)
         progress.addSubview(currentRankScore)
     }
@@ -152,11 +152,11 @@ class ProfileViewController: UIViewController {
             maker.centerX.equalToSuperview()
         }
         
-        ratingPossitionLabel.snp.makeConstraints { maker in
+        expLabel.snp.makeConstraints { maker in
             maker.top.equalTo(userName.snp.top)
             maker.bottom.equalTo(userName.snp.bottom)
             maker.left.equalTo(userName.snp.right).inset(-10)
-            maker.width.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.07)
+            
         }
         
         progress.snp.makeConstraints { maker in
@@ -256,6 +256,7 @@ class ProfileViewController: UIViewController {
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
         getUserStatistics(massive: [userProfile])
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
+        expLabel.text = "\(userProfile.userScore)" + " exp"
         print(userProfile.premiumStatus)
         print(userProfile.userID)
         
@@ -287,6 +288,7 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
     
     @objc
     func leaderboardTapped() {

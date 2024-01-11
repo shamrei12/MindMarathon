@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configureRealm() {
         let config = Realm.Configuration(
             // Указываем новую версию схемы базы данных
-            schemaVersion: 25,
+            schemaVersion: 26,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion <= 24 {
+                if oldSchemaVersion <= 25 {
                     // Выполняем необходимые действия для изменения схемы
                     migration.enumerateObjects(ofType: WhiteBoardManager.className()) { oldObject, newObject in
                         if let oldTimerGame = oldObject?["timerGame"] as? String {

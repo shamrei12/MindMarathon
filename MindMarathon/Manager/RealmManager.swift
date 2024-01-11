@@ -134,7 +134,7 @@ class RealmManager {
             let realm = try Realm()
             let tasks = realm.objects(ProfileManager.self)
             
-            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0, premiumStatus: TimeInterval(0), userID: "\(UserDefaultsManager.shared.getUIID())")]
+            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0, premiumStatus: TimeInterval(0), userID: "\(UserDefaultsManager.shared.getUIID())", userScore: 800)]
             
             try realm.write {
                 realm.add(profileMassive)
@@ -225,6 +225,7 @@ class RealmManager {
          
             try realm.write {
                 tasks[0].premiumStatus = status
+                tasks[0].userScore += 800
             }
         } catch {
             print("error")

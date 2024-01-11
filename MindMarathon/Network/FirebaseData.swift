@@ -35,7 +35,8 @@ class FirebaseData: FirebaseProtocol {
                 "favoriteGame": profile[0].favoriteGame,
                 "winStrike": profile[0].winStrike,
                 "premiumStatus": profile[0].premiumStatus,
-                "userID": profile[0].userID
+                "userID": profile[0].userID,
+                "userScore": profile[0].userScore
             ]
             ref.setValue(userData) { (error, _) in
                 if let error = error {
@@ -54,24 +55,59 @@ class FirebaseData: FirebaseProtocol {
         let ref = Database.database().reference().child("users").child("\(id)")
         
         ref.observeSingleEvent(of: .value) { snap in
-            if snap.children.allObjects is [DataSnapshot] {
-                if let profile = snap.value as? Dictionary<String, AnyObject> {
-                    let username = profile["username"] as? String ?? ""
-                    let nationality = profile["nationality"] as? String ?? ""
-                    let userImage = profile["userImage"] as? String ?? ""
-                    let userExperience = profile["userExperience"] as? Int ?? 0
-                    let userLevel = profile["userLevel"] as? Int ?? 0
-                    let dateUpdate = profile["dateUpdate"] as? TimeInterval ?? 0
-                    let timeInGame = profile["timeInGame"] as? TimeInterval ?? 0
-                    let countGames = profile["countGames"] as? Int ?? 0
-                    let favoriteGame = profile["favoriteGame"] as? String ?? ""
-                    let winStrike = profile["winStrike"] as? Int ?? 0
-                    let premiumStatus = profile["premiumStatus"] as? TimeInterval ?? TimeInterval(0)
-                    let userID = profile["userID"] as? String ?? ""
-                    
-                    let profileManager = ProfileManager(username: username, nationality: nationality, userImage: userImage, userLevel: userLevel, userExpirience: userExperience, dateUpdate: dateUpdate, timeInGame: timeInGame, countGames: countGames, favoriteGame: favoriteGame, winStrike: winStrike, premiumStatus: premiumStatus, userID: userID)
-                    
-                    resultMass.append(profileManager)
+            if let snapshots = snap.children.allObjects as? [DataSnapshot] {
+                if snap.children.allObjects is [DataSnapshot] {
+                    if let profile = snap.value as? Dictionary<String, AnyObject> {
+                        let username = profile["username"] as? String ?? ""
+                        let nationality = profile["nationality"] as? String ?? ""
+                        let userImage = profile["userImage"] as? String ?? ""
+                        let userExperience = profile["userExperience"] as? Int ?? 0
+                        let userLevel = profile["userLevel"] as? Int ?? 0
+                        let dateUpdate = profile["dateUpdate"] as? TimeInterval ?? 0
+                        let timeInGame = profile["timeInGame"] as? TimeInterval ?? 0
+                        let countGames = profile["countGames"] as? Int ?? 0
+                        let favoriteGame = profile["favoriteGame"] as? String ?? ""
+                        let winStrike = profile["winStrike"] as? Int ?? 0
+                        let premiumStatus = profile["premiumStatus"] as? TimeInterval ?? TimeInterval(0)
+                        let userID = profile["userID"] as? String ?? ""
+                        let userScore = profile["userScore"] as? Int ?? 0
+                        
+                        let profileManager = ProfileManager(username: username, nationality: nationality, userImage: userImage, userLevel: userLevel, userExpirience: userExperience, dateUpdate: dateUpdate, timeInGame: timeInGame, countGames: countGames, favoriteGame: favoriteGame, winStrike: winStrike, premiumStatus: premiumStatus, userID: userID, userScore: userScore)
+                        
+                        resultMass.append(profileManager)
+                    }
+                }
+            }
+            completion(resultMass)
+        }
+    }
+    
+    func getUserProfiles(completion: @escaping ([ProfileManager]) -> Void) {
+        var resultMass = [ProfileManager]()
+        let ref = Database.database().reference().child("users")
+        
+        ref.observeSingleEvent(of: .value) { snap in
+            if let snapshots = snap.children.allObjects as? [DataSnapshot] {
+                for snap in snapshots {
+                    if let profile = snap.value as? Dictionary<String, AnyObject> {
+                        let username = profile["username"] as? String ?? ""
+                        let nationality = profile["nationality"] as? String ?? ""
+                        let userImage = profile["userImage"] as? String ?? ""
+                        let userExperience = profile["userExperience"] as? Int ?? 0
+                        let userLevel = profile["userLevel"] as? Int ?? 0
+                        let dateUpdate = profile["dateUpdate"] as? TimeInterval ?? 0
+                        let timeInGame = profile["timeInGame"] as? TimeInterval ?? 0
+                        let countGames = profile["countGames"] as? Int ?? 0
+                        let favoriteGame = profile["favoriteGame"] as? String ?? ""
+                        let winStrike = profile["winStrike"] as? Int ?? 0
+                        let premiumStatus = profile["premiumStatus"] as? TimeInterval ?? TimeInterval(0)
+                        let userID = profile["userID"] as? String ?? ""
+                        let userScore = profile["userScore"] as? Int ?? 0
+                        
+                        let profileManager = ProfileManager(username: username, nationality: nationality, userImage: userImage, userLevel: userLevel, userExpirience: userExperience, dateUpdate: dateUpdate, timeInGame: timeInGame, countGames: countGames, favoriteGame: favoriteGame, winStrike: winStrike, premiumStatus: premiumStatus, userID: userID, userScore: userScore)
+                        
+                        resultMass.append(profileManager)
+                    }
                 }
             }
             completion(resultMass)

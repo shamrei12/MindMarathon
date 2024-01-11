@@ -9,12 +9,14 @@ import UIKit
 
 
 class RatingTableView: UITableView {
-    
+    let firebase = FirebaseData()
+    var userLists = [ProfileManager]()
     private let massiveLabel = ["Приюты для животных", "Ветклиники", "Магазины"]
 
     init() {
         super.init(frame: .zero, style: .plain)
         commonInit()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,6 +25,7 @@ class RatingTableView: UITableView {
     }
     
     private func commonInit() {
+        getUserList()
         setup()
         self.register(RatingTableViewCell.self, forCellReuseIdentifier: "RatingTableViewCell")
     }
@@ -33,11 +36,23 @@ class RatingTableView: UITableView {
         self.separatorStyle = .none
         self.backgroundColor = .clear
     }
+    
+    func getUserList() {
+        firebase.getUserProfiles { profile in
+            DispatchQueue.global().async {
+                DispatchQueue.main.sync {
+                    self.userLists = profile
+                    self.userLists.sort {$0.userScore > $1.userScore}
+                    self.reloadData()
+                }
+            }
+        }
+    }
 }
 
 extension RatingTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 3
+        return userLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,7 +66,7 @@ extension RatingTableView: UITableViewDataSource {
     }
     
     private func configure(cell: RatingTableViewCell, for indexPath: IndexPath) -> UITableViewCell {
-        cell.setupCell(rating: indexPath.row + 1)
+        cell.setupCell(data: userLists[indexPath.row], rating: indexPath.row + 1)
         return cell
     }
 }

@@ -66,10 +66,15 @@ class RatingTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func setupCell(rating: Int) {
+    func setupCell(data: ProfileManager, rating: Int) {
         setup()
         makeConstraints()
+        coutryLabel.text = "\(data.nationality)"
+        username.text = "\(data.username)"
+        userImage.image = UIImage(named: data.userImage)
+        scoreUser.text = "\(data.userScore)"
         ratingLabel.text = "#\(rating)"
+        
     }
     
     func setup() {
