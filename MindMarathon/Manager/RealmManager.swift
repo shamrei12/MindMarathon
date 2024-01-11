@@ -16,8 +16,8 @@ class RealmManager {
 
     func saveResult(result: WhiteBoardModel) {
         do {
-            let realm = try Realm() // Доступ к хранилищу
-
+            let realm = try Realm()
+            
             let resultGame = WhiteBoardManager()
             resultGame.nameGame = result.nameGame
             resultGame.timerGame = result.timerGame
@@ -226,6 +226,33 @@ class RealmManager {
             try realm.write {
                 tasks[0].premiumStatus = status
                 tasks[0].userScore += 800
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func getUserId() -> String {
+        var statisticsMassive = String()
+        
+        do {
+            let realm = try Realm()
+            let statistics = realm.objects(ProfileManager.self)
+            statisticsMassive = statistics[0].userID
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        return statisticsMassive
+    }
+    
+    func addUserscore(score: Int) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].userScore += score
             }
         } catch {
             print("error")

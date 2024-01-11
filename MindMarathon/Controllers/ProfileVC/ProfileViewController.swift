@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
         let currentRankScore = UILabel()
         currentRankScore.font = UIFont.sfProText(ofSize: 10, weight: .bold)
         currentRankScore.textColor = .label
-        currentRankScore.text = "12"
+        currentRankScore.text = ""
         
         return currentRankScore
     }()
@@ -256,7 +256,7 @@ class ProfileViewController: UIViewController {
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
         getUserStatistics(massive: [userProfile])
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
-        expLabel.text = "\(userProfile.userScore)" + " exp"
+        expLabel.text = " \(userProfile.userScore)" + " exp "
         print(userProfile.premiumStatus)
         print(userProfile.userID)
         

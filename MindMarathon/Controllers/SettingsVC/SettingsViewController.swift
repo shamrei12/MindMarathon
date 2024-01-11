@@ -20,6 +20,18 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         return mainLabel
     }()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView(frame: .zero)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isPagingEnabled = true
+        return scrollView
+    }()
+    
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        return contentView
+    }()
+    
     private lazy var themeView: UIView = {
         let themeView = UIView()
         themeView.layer.cornerRadius = 12
@@ -156,6 +168,17 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         return sendDeveloper
     }()
     
+    private lazy var appInfo: UITextView = {
+        let appInfo = UITextView()
+        appInfo.isScrollEnabled = false
+        appInfo.isEditable = false
+        appInfo.isSelectable = false
+        appInfo.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 14), weight: .regular)
+        appInfo.textColor = .label
+        appInfo.backgroundColor = .clear
+        return appInfo
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -171,16 +194,17 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         createStackView()
         setupUI()
         makeConstaints()
+        createTextAppInfo()
     }
     
     func setupUI() {
         self.view.backgroundColor = UIColor(named: "viewColor")
-        
-        self.view.addSubview(themeView)
-        self.view.addSubview(languagesView)
         self.view.addSubview(mainLabel)
-        self.view.addSubview(rateGame)
-        self.view.addSubview(sendDeveloper)
+        self.view.addSubview(scrollView)
+        
+        self.scrollView.addSubview(contentView)
+        
+        self.contentView.addSubview(themeView)
         themeView.addSubview(themeLabel)
         themeView.addSubview(themeButtonStack)
         themeView.addSubview(automaticSwitchThemeView)
@@ -188,11 +212,16 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         automaticSwitchThemeView.addSubview(automaticSwitchThemeLabel)
         automaticSwitchThemeView.addSubview(descriptionAutomaticSwitchThemeLabel)
         
+        self.contentView.addSubview(languagesView)
         languagesView.addSubview(languagesLabel)
-
         languagesView.addSubview(engLanguageButton)
         languagesView.addSubview(rusLanguageButton)
         
+        self.contentView.addSubview(rateGame)
+        self.contentView.addSubview(sendDeveloper)
+        
+        self.contentView.addSubview(appInfo)
+
     }
     
     func setupText() {
@@ -203,6 +232,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         languagesLabel.text = "appLang".localized()
         rateGame.setTitle("rateApp".localized(), for: .normal)
         sendDeveloper.setTitle("writeSupport".localized(), for: .normal)
+        createTextAppInfo()
     }
     
     func setupLanguage() {
@@ -240,13 +270,24 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
         }
         
+        scrollView.snp.makeConstraints { maker in
+            maker.top.equalTo(mainLabel.snp.bottom).inset(-5)
+            maker.left.right.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+            maker.width.equalTo(scrollView)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        
         themeView.snp.makeConstraints { maker in
-            maker.top.equalTo(mainLabel.snp.bottom).inset(-10)
-            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
+            maker.top.equalTo(contentView).inset(5)
+            maker.left.right.equalToSuperview().inset(5)
         }
         
         themeLabel.snp.makeConstraints { maker in
-            maker.top.equalTo(mainLabel.snp.bottom).inset(-15)
+            maker.top.equalTo(themeView).inset(15)
             maker.left.equalTo(themeView).inset(25)
         }
         
@@ -287,7 +328,6 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         languagesLabel.snp.makeConstraints { maker in
             maker.top.equalTo(languagesView).inset(10)
             maker.left.equalTo(languagesView).inset(25)
-            
         }
 
         engLanguageButton.snp.makeConstraints { maker in
@@ -310,6 +350,12 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         sendDeveloper.snp.makeConstraints { maker in
             maker.top.equalTo(rateGame.snp.bottom).inset(-10)
             maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
+        }
+        
+        appInfo.snp.makeConstraints { maker in
+            maker.top.equalTo(sendDeveloper.snp.bottom).inset(-10)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalToSuperview().multipliedBy(0.2)
         }
     }
     
@@ -488,4 +534,20 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
            print("Failed to open the App Store")
        }
    }
+    
+    func createTextAppInfo() {
+        var version = ""
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            version = appVersion
+        } else {
+           version = "no info"
+        }
+
+        let userID = RealmManager.shared.getUserId()
+        let systemVersion = UIDevice.current.systemVersion
+
+        let appVersion = "Версия приложения: \(version)\nID пользователя: \n\(userID)\nВерсия iOS: \(systemVersion)"
+
+        appInfo.text = appVersion
+    }
 }
