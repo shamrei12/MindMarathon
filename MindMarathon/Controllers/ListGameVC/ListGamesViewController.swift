@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController, UserCreateDelegate {
+    
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     var gameList: [Game] = ListGamesViewController.createGames()
     let createUserView = CreateUserView()
@@ -37,13 +38,10 @@ class ListGamesViewController: UIViewController, UserCreateDelegate {
     
     func fisrStart() {
         if UserDefaultsManager.shared.checkFirstStart() {
-            UserDefaultsManager.shared.setupDataUserDefaults()
-            RealmManager.shared.clearRealmDatabase()
             setupCreateUserView()
         } else {
             print("Уже не первый")
         }
-        
     }
     
     func setupCreateUserView() {
@@ -66,6 +64,10 @@ class ListGamesViewController: UIViewController, UserCreateDelegate {
 
     func enableTabBar() {
         EnableTabBarInteractions()
+    }
+    
+    func userCreate() {
+        UserDefaultsManager.shared.setupDataUserDefaults()
     }
     
     func EnableTabBarInteractions() {

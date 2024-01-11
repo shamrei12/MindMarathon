@@ -10,11 +10,12 @@ import SnapKit
 
 protocol UserCreateDelegate: AnyObject {
     func enableTabBar()
+    func userCreate()
 }
-
 
 class CreateUserView: UIView, UITextFieldDelegate {
     weak var delegate: UserCreateDelegate?
+    var firebase = FirebaseData()
     
     private lazy var mainView: UIView = {
         let mainView = UIView()
@@ -32,9 +33,13 @@ class CreateUserView: UIView, UITextFieldDelegate {
     
     private lazy var userNameTextField: UITextField = {
         let userNameTextField = UITextField()
-        userNameTextField.placeholder = "Введите никнейм"
+        userNameTextField.placeholder = "Username"
         userNameTextField.backgroundColor = CustomColor.gameElement.color
         userNameTextField.layer.cornerRadius = 12
+        let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: userNameTextField.frame.height))
+        userNameTextField.leftView = leftPaddingView
+        userNameTextField.leftViewMode = .always
+
         return userNameTextField
     }()
     
@@ -58,6 +63,7 @@ class CreateUserView: UIView, UITextFieldDelegate {
     }
     
     func setup() {
+        self.hideKeyboardWhenTappedAround()
         userNameTextField.delegate = self
         acceptButton.backgroundColor = .systemGray
         acceptButton.isEnabled = false
@@ -96,17 +102,39 @@ class CreateUserView: UIView, UITextFieldDelegate {
     @objc
     func exit() {
         if userNameTextField.text!.count > 1 {
+            let userActivity: [WhiteBoardManager] = RealmManager.shared.getUserStatistics()
+            RealmManager.shared.clearRealmDatabase()
             RealmManager.shared.firstCreateUserProfile(userName: userNameTextField.text ?? "")
+            
+            print(userActivity.count)
+            print(userActivity.isEmpty)
+            
+            guard userActivity.isEmpty else {
+                RealmManager.shared.addPremiumStatus(status: TimeManager.shared.getEndlessPremium())
+                return
+            }
+
+            let realmData = RealmManager.shared.getUserProfileData()
+            firebase.refGetData(from: realmData)
             delegate?.enableTabBar()
+            delegate?.userCreate()
             self.removeFromSuperview()
         }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if userNameTextField.text!.count > 1 {
+            acceptButton.backgroundColor = .systemGreen
+            acceptButton.isEnabled = true
+        }
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if userNameTextField.text!.count > 1 {
             acceptButton.backgroundColor = .systemGreen
             acceptButton.isEnabled = true
-            
+        } else {
+            acceptButton.backgroundColor = .systemGray
+            acceptButton.isEnabled = false
         }
     }
     

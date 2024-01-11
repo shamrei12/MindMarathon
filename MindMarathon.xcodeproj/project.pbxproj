@@ -215,13 +215,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		D81A44CF2B3B39CD00DC0C49 /* StatisticsView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StatisticsView;
-			sourceTree = "<group>";
-		};
 		D81A44D12B40638F00DC0C49 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				D866027F2B4C3C03001A913D /* CreateUserNameView */,
-				D81A44CF2B3B39CD00DC0C49 /* StatisticsView */,
 				D84E51272B03A31E00CBA32F /* TableViews */,
 				D8C11F2C2B0360A800EA28D6 /* CollectionViews */,
 				D81F8DD32AB60F36007A6597 /* Views */,

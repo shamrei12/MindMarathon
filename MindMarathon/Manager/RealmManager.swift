@@ -8,12 +8,12 @@
 import Foundation
 import RealmSwift
 
-class RealmManager {
+class RealmManager {    
     static var shared: RealmManager = {
         let instance = RealmManager()
         return instance
     }()
-    
+
     func saveResult(result: WhiteBoardModel) {
         do {
             let realm = try Realm() // Доступ к хранилищу
@@ -32,8 +32,7 @@ class RealmManager {
         }
     }
     
-    func getUserStatistics() -> [WhiteBoardManager] {
-        
+    func getUserStatistics() -> [WhiteBoardManager] {        
         var statisticsMassive = [WhiteBoardManager]()
         
         do {
@@ -50,7 +49,7 @@ class RealmManager {
     func getTasks() -> [TasksManager] {
         var taskMassive = [TasksManager]()
         do {
-            let realm = try Realm() // Получение экземпляра Realm
+            let realm = try Realm() 
             let tasks = realm.objects(TasksManager.self)
             
             if tasks.isEmpty {
@@ -135,7 +134,7 @@ class RealmManager {
             let realm = try Realm()
             let tasks = realm.objects(ProfileManager.self)
             
-            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0)]
+            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0, premiumStatus: TimeInterval(0), userID: "\(UserDefaultsManager.shared.getUIID())")]
             
             try realm.write {
                 realm.add(profileMassive)
@@ -145,18 +144,17 @@ class RealmManager {
         }
     }
     
-    
     func actualityProfileData() {
         let userStatistics = getUserStatistics()
-        var resultGame = userStatistics.map { $0.resultGame }
+        let resultGame = userStatistics.map { $0.resultGame }
         var seconds = 0
-        var labelGame = userStatistics.map { $0.nameGame }
+        let labelGame = userStatistics.map { $0.nameGame }
         
         for i in userStatistics {
             seconds += i.timerGame
         }
        
-        let favoriteGame  = mostFrequentWord(in: labelGame) ?? "isHaveData"
+        let favoriteGame = mostFrequentWord(in: labelGame) ?? "isHaveData"
         let countWinStrike = getWinStrike(massive: resultGame)
         
         do {
@@ -205,5 +203,31 @@ class RealmManager {
             print("Error: \(error)")
         }
         return userProfile
+    }
+    
+    func addUserExpirience(exp: Int) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].userExpirience += exp
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func addPremiumStatus(status: TimeInterval) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].premiumStatus = status
+            }
+        } catch {
+            print("error")
+        }
     }
 }

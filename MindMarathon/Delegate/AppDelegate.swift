@@ -33,15 +33,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configureRealm() {
         let config = Realm.Configuration(
             // Указываем новую версию схемы базы данных
-            schemaVersion: 21,
+            schemaVersion: 25,
             migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion <= 11 {
+                if oldSchemaVersion <= 24 {
                     // Выполняем необходимые действия для изменения схемы
                     migration.enumerateObjects(ofType: WhiteBoardManager.className()) { oldObject, newObject in
                         if let oldTimerGame = oldObject?["timerGame"] as? String {
                             if let newTimerGame = Int(oldTimerGame) {
                                 newObject?["timerGame"] = newTimerGame
                             }
+                        }
+                    }
+                    
+                    migration.enumerateObjects(ofType: ProfileManager.className()) { oldObject, newObject in
+                        if let premium = oldObject?["premiumStatus"] as? Bool {
+                            // Преобразование Bool в TimeInterval
+                            let newPremium: TimeInterval = premium ? 1.0 : 0.0
+                            
+                            newObject?["premiumStatus"] = newPremium
                         }
                     }
                 }

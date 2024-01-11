@@ -15,6 +15,6 @@ class CheckTaskManager {
     }()
     
     func checkPlayGame(game: Int) {
-        UserDefaultsManager.shared.addExperience(exp: game)
+        RealmManager.shared.addUserExpirience(exp: game)
     }
 }

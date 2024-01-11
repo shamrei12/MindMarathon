@@ -76,4 +76,17 @@ class TimeManager {
     func chechConditionTime(finishTime: TimeInterval) -> Bool {
         return finishTime <= getCurrentTime() ? true : false
     }
+    
+    func getEndlessPremium() -> TimeInterval {
+        let startOfYear1970 = Date(timeIntervalSince1970: 0) // Начало Unix time
+
+        let yearsToAdd = 100
+        let secondsInAYear = 365.25 * 24 * 60 * 60 // Среднее количество секунд в году (учитывая високосные года)
+        let secondsIn100Years = Double(yearsToAdd) * secondsInAYear
+
+        let dateIn100Years = startOfYear1970.addingTimeInterval(secondsIn100Years)
+        let unixTimeIn100Years = dateIn100Years.timeIntervalSince1970
+
+        return unixTimeIn100Years
+    }
 }

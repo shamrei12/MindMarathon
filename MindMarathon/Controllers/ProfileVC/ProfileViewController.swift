@@ -99,6 +99,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         makeConstraints()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +111,7 @@ class ProfileViewController: UIViewController {
         mainLabel.text = "profile".localized()
         ratingButton.setTitle("leaderboard".localized(), for: .normal)
         getUserProfileData()
+        updateUserStatus()
     }
     
     func setupUI() {
@@ -126,6 +128,7 @@ class ProfileViewController: UIViewController {
     }
     
     func makeConstraints() {
+        
         userView.snp.makeConstraints { maker in
             maker.top.equalToSuperview()
             maker.left.right.equalToSuperview()
@@ -182,21 +185,15 @@ class ProfileViewController: UIViewController {
     }
     
     func getCurrentAndNextRank(exp: Int, level: Int) {
-        var maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
-        
-        if exp > Int(maxRank) {}
-        
+        let maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
         
         if exp > Int(maxRank) {
-            UserDefaultsManager.shared.changeExpirience(exp: exp - Int(maxRank))
-            UserDefaultsManager.shared.changeUserLebel(level: level + 1)
-            
-            let newLevel = UserDefaultsManager.shared.getUserLevel()
+            let newUserExpirience = Double(exp) - maxRank
+            let newLevel = level + 1
             let newMaxRank: Double = Double(newLevel * 100) + (Double(newLevel) + 0.5)
-            let newExp = UserDefaultsManager.shared.getUserExperience()
-            
             currentRankScore.text = "\(newLevel)" + " " + "level".localized()!
-            makeResultsForProgressBar(newExp: newExp, maxExp: newMaxRank)
+            makeResultsForProgressBar(newExp: Int(newUserExpirience), maxExp: newMaxRank)
+            RealmManager.shared.addUserExpirience(exp: Int(newUserExpirience))
         } else {
             progress.progress = Float(exp) / Float(maxRank)
             currentRankScore.text = "\(level)" + " " + "level".localized()!
@@ -249,11 +246,46 @@ class ProfileViewController: UIViewController {
     
     func getUserProfileData() {
         RealmManager.shared.actualityProfileData()
-        let userProfiledata = RealmManager.shared.getUserProfileData()
-        userName.text = userProfiledata[0].username
-        currentRankScore.text = "\(userProfiledata[0].userLevel)" + " " + "level".localized()!
-        getCurrentAndNextRank(exp: userProfiledata[0].userExpirience, level: userProfiledata[0].userLevel)
-        getUserStatistics(massive: userProfiledata)
+        
+        guard let userProfile = RealmManager.shared.getUserProfileData().first else {
+            return
+        }
+        
+        userName.text = userProfile.username
+        currentRankScore.text = "\(userProfile.userLevel) level".localized()
+        getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
+        getUserStatistics(massive: [userProfile])
+        getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
+        print(userProfile.premiumStatus)
+        print(userProfile.userID)
+        
+        if userProfile.premiumStatus > TimeManager.shared.getCurrentTime() {
+            userImage.layer.borderColor = UIColor.systemYellow.cgColor
+            userImage.layer.borderWidth = 3
+        } else {
+            userImage.layer.borderColor = UIColor.clear.cgColor
+            userImage.layer.borderWidth = 0
+        }
+        
+        firebase.refGetData(from: [userProfile])
+    }
+    
+    func updateUserStatus() {
+        var userProfiledata = RealmManager.shared.getUserProfileData()
+        firebase.getUserProfile(id: userProfiledata[0].userID) { profileData in
+            DispatchQueue.global().async {
+                DispatchQueue.main.sync {
+                    if userProfiledata[0].premiumStatus != profileData[0].premiumStatus {
+                        print(profileData[0].userID)
+                        print(userProfiledata[0].premiumStatus)
+                        RealmManager.shared.addPremiumStatus(status: profileData[0].premiumStatus)
+                        self.getUserProfileData()
+                    } else {
+                        self.getUserProfileData()
+                    }
+                }
+            }
+        }
     }
     
     @objc

@@ -18,24 +18,16 @@ class UserDefaultsManager {
     private let currentLanguageKey = "currentLanguage"
     
     func checkFirstStart() -> Bool {
+//        userDefaults.set(nil, forKey: firstStartKey)
         return userDefaults.object(forKey: firstStartKey) == nil
     }
     
     func setupDataUserDefaults() {
+       
         if userDefaults.object(forKey: firstStartKey) == nil {
             userDefaults.set(true, forKey: firstStartKey)
         }
     }
-//        if userDefaults.object(forKey: firstStartKey) == nil {
-//            userDefaults.set(0, forKey: userExperienceKey)
-//            userDefaults.set(1, forKey: userLevelKey)
-//        }
-//        
-//        if userDefaults.object(forKey: firstStartKey) == nil {
-//            userDefaults.set(true, forKey: firstStartKey)
-//            RealmManager.shared.clearRealmDatabase()
-//        }
-    
     
     func addExperience(exp: Int) {
         let userExp = userDefaults.integer(forKey: userExperienceKey)
