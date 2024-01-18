@@ -211,7 +211,20 @@ class RealmManager {
             let tasks = realm.objects(ProfileManager.self)
          
             try realm.write {
-                tasks[0].userExpirience += exp
+                tasks[0].userExpirience = exp
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func changeUserLevel(level: Int) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].userLevel = level
             }
         } catch {
             print("error")
@@ -253,6 +266,19 @@ class RealmManager {
          
             try realm.write {
                 tasks[0].userScore += score
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func changeUserNationality(country: String) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].nationality = country
             }
         } catch {
             print("error")

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FlagKit
 
 class ProfileViewController: UIViewController {
     
@@ -48,17 +49,17 @@ class ProfileViewController: UIViewController {
         return userName
     }()
     
-    private lazy var expLabel: UILabel = {
-        let expLabel = UILabel()
-        expLabel.backgroundColor = UIColor(named: "gameElementColor")
-        expLabel.text = "800 exp"
-        expLabel.textAlignment = .center
-        expLabel.tintColor = .white
-        expLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 14), weight: .regular)
-        expLabel.layer.cornerRadius = 5
-        expLabel.clipsToBounds = true
+    private lazy var userCountry: UIImageView = {
+        let userCountry = UIImageView()
+        //        expLabel.backgroundColor = UIColor(named: "gameElementColor")
+        //        expLabel.text = "800 exp"
+        //        expLabel.textAlignment = .center
+        //        expLabel.tintColor = .white
+        //        expLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 14), weight: .regular)
+        //        expLabel.layer.cornerRadius = 5
+        //        expLabel.clipsToBounds = true
         
-        return expLabel
+        return userCountry
     }()
     
     private lazy var progress: UIProgressView = {
@@ -95,6 +96,14 @@ class ProfileViewController: UIViewController {
         return ratingButton
     }()
     
+    private lazy var editProfileButton: UIButton = {
+        let editProfileButton = UIButton()
+        editProfileButton.setTitle("Ред.", for: .normal)
+        editProfileButton.setTitleColor(.systemBlue, for: .normal)
+        editProfileButton.addTarget(self, action: #selector(editViewTapped), for: .touchUpInside)
+        return editProfileButton
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -120,10 +129,12 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(statiscticCollectionView)
         self.view.addSubview(ratingButton)
         userView.addSubview(mainLabel)
+        userView.addSubview(editProfileButton)
         userView.addSubview(userImage)
         userView.addSubview(userName)
-        userView.addSubview(expLabel)
+        userView.addSubview(userCountry)
         userView.addSubview(progress)
+        
         progress.addSubview(currentRankScore)
     }
     
@@ -136,6 +147,10 @@ class ProfileViewController: UIViewController {
         
         mainLabel.snp.makeConstraints { maker in
             maker.left.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
+        }
+        
+        editProfileButton.snp.makeConstraints { maker in
+            maker.right.top.equalTo(self.view.safeAreaLayoutGuide).inset(15)
         }
         
         userImage.snp.makeConstraints { maker in
@@ -152,11 +167,12 @@ class ProfileViewController: UIViewController {
             maker.centerX.equalToSuperview()
         }
         
-        expLabel.snp.makeConstraints { maker in
+        userCountry.snp.makeConstraints { maker in
             maker.top.equalTo(userName.snp.top)
             maker.bottom.equalTo(userName.snp.bottom)
             maker.left.equalTo(userName.snp.right).inset(-10)
-            
+            maker.width.equalTo(21)
+            maker.height.equalTo(15)
         }
         
         progress.snp.makeConstraints { maker in
@@ -186,7 +202,9 @@ class ProfileViewController: UIViewController {
     
     func getCurrentAndNextRank(exp: Int, level: Int) {
         let maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
-        
+        print(maxRank)
+        print(exp)
+        print(level)
         if exp > Int(maxRank) {
             let newUserExpirience = Double(exp) - maxRank
             let newLevel = level + 1
@@ -194,11 +212,15 @@ class ProfileViewController: UIViewController {
             currentRankScore.text = "\(newLevel)" + " " + "level".localized()!
             makeResultsForProgressBar(newExp: Int(newUserExpirience), maxExp: newMaxRank)
             RealmManager.shared.addUserExpirience(exp: Int(newUserExpirience))
+            RealmManager.shared.changeUserLevel(level: newLevel)
         } else {
             progress.progress = Float(exp) / Float(maxRank)
             currentRankScore.text = "\(level)" + " " + "level".localized()!
             makeResultsForProgressBar(newExp: exp, maxExp: maxRank)
         }
+        
+        
+
     }
     
     func makeResultsForProgressBar(newExp: Int, maxExp: Double) {
@@ -250,14 +272,23 @@ class ProfileViewController: UIViewController {
         guard let userProfile = RealmManager.shared.getUserProfileData().first else {
             return
         }
-        
         userName.text = userProfile.username
         currentRankScore.text = "\(userProfile.userLevel) level".localized()
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
         getUserStatistics(massive: [userProfile])
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
-        expLabel.text = " \(userProfile.userScore)" + " exp "
-        print(userProfile.premiumStatus)
+        
+        if userProfile.nationality == "world" {
+            userCountry.backgroundColor = .systemBlue
+        } else {
+            let image = Flag(countryCode: userProfile.nationality)
+            let styledImage = image!.image(style: .none)
+            let originalImage = image!.originalImage
+            userCountry.image = originalImage
+        }
+        RealmManager.shared.changeUserNationality(country: "BY")
+        
+        
         print(userProfile.userID)
         
         if userProfile.premiumStatus > TimeManager.shared.getCurrentTime() {
@@ -289,12 +320,16 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    
     @objc
     func leaderboardTapped() {
         let viewController = RatingViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
+    }
+    
+    @objc
+    func editViewTapped() {
+        print(1)
     }
 }

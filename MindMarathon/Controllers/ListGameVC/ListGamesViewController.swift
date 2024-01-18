@@ -9,10 +9,11 @@ import UIKit
 import SnapKit
 
 class ListGamesViewController: UIViewController, UserCreateDelegate {
+    let firebase = FirebaseData()
     
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     var gameList: [Game] = ListGamesViewController.createGames()
-    let createUserView = CreateUserView()
+//    let createUserView = CreateUserView()
 
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
@@ -24,7 +25,7 @@ class ListGamesViewController: UIViewController, UserCreateDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createUserView.delegate = self
+//        createUserView.delegate = self
         setup()
         makeConstraints()
         setupCollectionView()
@@ -38,19 +39,25 @@ class ListGamesViewController: UIViewController, UserCreateDelegate {
     
     func fisrStart() {
         if UserDefaultsManager.shared.checkFirstStart() {
-            setupCreateUserView()
+            let userActivity: [WhiteBoardManager] = RealmManager.shared.getUserStatistics()
+            RealmManager.shared.clearRealmDatabase()
+            RealmManager.shared.firstCreateUserProfile(userName: generateNickname())
+            let realmData = RealmManager.shared.getUserProfileData()
+            firebase.refGetData(from: realmData)
+            UserDefaultsManager.shared.setupDataUserDefaults()
         } else {
             print("Уже не первый")
         }
     }
     
-    func setupCreateUserView() {
-        self.view.addSubview(createUserView)
-        disableTabBarInteractions()
-        createUserView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
+    func generateNickname() -> String {
+        let uuid = UUID().uuidString
+        let lastFourCharacters = String(uuid.suffix(4))
+        let nickname = "User" + lastFourCharacters
+        return nickname
     }
+
+    
     
     func disableTabBarInteractions() {
         guard let customTabBarController = self.tabBarController as? CustomTabBarController else { return }

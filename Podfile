@@ -6,10 +6,11 @@ target 'MindMarathon' do
   pod 'SnapKit'
   pod 'SwiftLint'
   pod 'SwiftGen'
-pod 'FirebaseAnalytics'
-pod 'FirebaseAuth'
-pod 'FirebaseFirestore'
-pod 'FirebaseStorage'
-pod 'FirebaseDatabase'
+  pod 'FlagKit'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseStorage'
+  pod 'FirebaseDatabase'
   
 end
