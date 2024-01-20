@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ListGamesViewController: UIViewController, UserCreateDelegate {
+class ListGamesViewController: UIViewController {
     let firebase = FirebaseData()
     
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())

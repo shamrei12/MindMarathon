@@ -51,6 +51,8 @@
 		D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027B2B49C49C001A913D /* RatingTableViewCell.swift */; };
 		D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027D2B4B2F72001A913D /* ProfileModel.swift */; };
 		D86602812B4C3C43001A913D /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602802B4C3C43001A913D /* CreateUserView.swift */; };
+		D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB62B59816F00B54B06 /* CountryDropButton.swift */; };
+		D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB92B59820B00B54B06 /* CountryManager.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
@@ -143,6 +145,8 @@
 		D866027B2B49C49C001A913D /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		D866027D2B4B2F72001A913D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		D86602802B4C3C43001A913D /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
+		D8662DB62B59816F00B54B06 /* CountryDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDropButton.swift; sourceTree = "<group>"; };
+		D8662DB92B59820B00B54B06 /* CountryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryManager.swift; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8662DB52B59814A00B54B06 /* CountryDropButton */,
 				D866027F2B4C3C03001A913D /* CreateUserNameView */,
 				D84E51272B03A31E00CBA32F /* TableViews */,
 				D8C11F2C2B0360A800EA28D6 /* CollectionViews */,
@@ -378,6 +383,7 @@
 			children = (
 				D884F7502A9E3E1700271263 /* GameRules.swift */,
 				D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */,
+				D8662DB92B59820B00B54B06 /* CountryManager.swift */,
 			);
 			path = Helps;
 			sourceTree = "<group>";
@@ -446,6 +452,14 @@
 				D86602802B4C3C43001A913D /* CreateUserView.swift */,
 			);
 			path = CreateUserNameView;
+			sourceTree = "<group>";
+		};
+		D8662DB52B59814A00B54B06 /* CountryDropButton */ = {
+			isa = PBXGroup;
+			children = (
+				D8662DB62B59816F00B54B06 /* CountryDropButton.swift */,
+			);
+			path = CountryDropButton;
 			sourceTree = "<group>";
 		};
 		D86EADB52AE5477B00FB19B6 /* Fonts */ = {
@@ -839,6 +853,7 @@
 				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
+				D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */,
@@ -861,6 +876,7 @@
 				D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */,
 				D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
+				D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
 				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
 				D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */,

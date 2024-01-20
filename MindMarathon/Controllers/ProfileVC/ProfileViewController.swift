@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     
     let statiscticCollectionView = StatiscticsCollectionView()
     let firebase = FirebaseData()
+    let editUserView = EditUserView()
     
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
@@ -282,12 +283,10 @@ class ProfileViewController: UIViewController {
             userCountry.backgroundColor = .systemBlue
         } else {
             let image = Flag(countryCode: userProfile.nationality)
-            let styledImage = image!.image(style: .none)
+//            let styledImage = image!.image(style: .none)
             let originalImage = image!.originalImage
             userCountry.image = originalImage
         }
-        RealmManager.shared.changeUserNationality(country: "BY")
-        
         
         print(userProfile.userID)
         
@@ -330,6 +329,10 @@ class ProfileViewController: UIViewController {
     
     @objc
     func editViewTapped() {
-        print(1)
+        self.view.addSubview(editUserView)
+        
+        editUserView.snp.makeConstraints { maker in
+            maker.edges.equalToSuperview()
+        }
     }
 }

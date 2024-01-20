@@ -13,6 +13,10 @@ class RealmManager {
         let instance = RealmManager()
         return instance
     }()
+    
+    enum TypeData {
+        case userLevel
+    }
 
     func saveResult(result: WhiteBoardModel) {
         do {
@@ -284,4 +288,37 @@ class RealmManager {
             print("error")
         }
     }
+    
+    func changeUserData(typeData: TypeData, data: Any) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+            
+            try realm.write {
+                if typeData == .userLevel {
+                    if let level = data as? Int {
+                        tasks[0].userLevel = level
+                    }
+                }
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
+    func changeUsername(name: String) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].username = name
+            }
+        } catch {
+            print("error")
+        }
+
+    }
 }
+
+

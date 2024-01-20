@@ -8,14 +8,12 @@
 import UIKit
 import SnapKit
 
-protocol UserCreateDelegate: AnyObject {
-    func enableTabBar()
-    func userCreate()
-}
-
-class CreateUserView: UIView, UITextFieldDelegate {
-    weak var delegate: UserCreateDelegate?
-    var firebase = FirebaseData()
+class EditUserView: UIView, UITextFieldDelegate {
+    
+//    weak var delegate: UserCreateDelegate?
+//    var firebase = FirebaseData()
+    
+    private var choiceCountryButton = CountryDropdownButton()
     
     private lazy var mainView: UIView = {
         let mainView = UIView()
@@ -24,9 +22,21 @@ class CreateUserView: UIView, UITextFieldDelegate {
         return mainView
     }()
     
+    private lazy var closeViewButton: UIButton = {
+        let closeViewButton = UIButton()
+        closeViewButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        closeViewButton.backgroundColor = UIColor.systemRed
+        closeViewButton.tintColor = .white
+        closeViewButton.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+        closeViewButton.configuration?.cornerStyle = .dynamic
+        closeViewButton.clipsToBounds = true
+
+        return closeViewButton
+    }()
+    
     private lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.text = "Введите ваш никнейм"
+        usernameLabel.text = "Введите новый никнейм"
         usernameLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .bold)
         return usernameLabel
     }()
@@ -43,6 +53,13 @@ class CreateUserView: UIView, UITextFieldDelegate {
         return userNameTextField
     }()
     
+    private lazy var countryLabel: UILabel = {
+        let countryLabel = UILabel()
+        countryLabel.text = "Ввыберите страну"
+        countryLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .bold)
+        return countryLabel
+    }()
+
     private lazy var acceptButton: UIButton = {
         let acceptButton = UIButton()
         acceptButton.backgroundColor = .systemGreen
@@ -68,10 +85,17 @@ class CreateUserView: UIView, UITextFieldDelegate {
         acceptButton.backgroundColor = .systemGray
         acceptButton.isEnabled = false
         self.backgroundColor = UIColor.systemGray.withAlphaComponent(0.5)
+        self.mainView.addSubview(closeViewButton)
 //        CustomTabBarController().enableTabBar()
         self.addSubview(mainView)
         self.mainView.addSubview(usernameLabel)
         self.mainView.addSubview(userNameTextField)
+        self.mainView.addSubview(countryLabel)
+        choiceCountryButton.gameList = CountryManager().country
+        choiceCountryButton.backgroundColor = .white
+        choiceCountryButton.titleLabel?.textColor = .label
+        choiceCountryButton.layer.cornerRadius = 12
+        self.addSubview(choiceCountryButton)
         self.mainView.addSubview(acceptButton)
     }
     
@@ -79,9 +103,18 @@ class CreateUserView: UIView, UITextFieldDelegate {
         mainView.snp.makeConstraints { maker in
             maker.centerY.equalToSuperview()
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalToSuperview().multipliedBy(0.3)
         }
         
+        closeViewButton.snp.makeConstraints { maker in
+            maker.top.right.equalToSuperview().inset(10)
+            maker.height.width.equalTo(35)
+        }
+
+        closeViewButton.layoutIfNeeded()
+
+        closeViewButton.layer.cornerRadius = closeViewButton.bounds.width / 2
+        closeViewButton.layer.masksToBounds = true
+
         usernameLabel.snp.makeConstraints { maker in
             maker.left.right.top.equalToSuperview().inset(20)
         }
@@ -89,37 +122,50 @@ class CreateUserView: UIView, UITextFieldDelegate {
         userNameTextField.snp.makeConstraints { maker in
             maker.top.equalTo(usernameLabel.snp.bottom).inset(-20)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalToSuperview().multipliedBy(0.2)
+            maker.height.equalToSuperview().multipliedBy(0.15)
+        }
+        
+        countryLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(userNameTextField.snp.bottom).inset(-20)
+            maker.left.right.equalToSuperview().inset(20)
+        }
+        
+        choiceCountryButton.snp.makeConstraints { maker in
+            maker.top.equalTo(countryLabel.snp.bottom).inset(-20)
+            maker.left.right.equalTo(mainView).inset(10)
+            maker.height.equalTo(mainView.snp.height).multipliedBy(0.15)
         }
         
         acceptButton.snp.makeConstraints { maker in
-            maker.top.equalTo(userNameTextField.snp.bottom).inset(-25)
+            maker.top.equalTo(choiceCountryButton.snp.bottom).inset(-25)
             maker.left.right.equalToSuperview().inset(10)
-            maker.height.equalToSuperview().multipliedBy(0.2)
+            maker.bottom.equalToSuperview().inset(10)
+            maker.height.equalToSuperview().multipliedBy(0.15)
         }
     }
     
     @objc
     func exit() {
         if userNameTextField.text!.count > 1 {
-            let userActivity: [WhiteBoardManager] = RealmManager.shared.getUserStatistics()
-            RealmManager.shared.clearRealmDatabase()
-            RealmManager.shared.firstCreateUserProfile(userName: userNameTextField.text ?? "")
-            
-            print(userActivity.count)
-            print(userActivity.isEmpty)
-            
-            guard userActivity.isEmpty else {
-                RealmManager.shared.addPremiumStatus(status: TimeManager.shared.getEndlessPremium())
-                return
-            }
-
-            let realmData = RealmManager.shared.getUserProfileData()
-            firebase.refGetData(from: realmData)
-            delegate?.enableTabBar()
-            delegate?.userCreate()
-            self.removeFromSuperview()
+            let newUserName = userNameTextField.text
+            RealmManager.shared.changeUsername(name: newUserName ?? "")
         }
+        
+        if let country = choiceCountryButton.titleLabel!.text {
+            var userID = ""
+            for i in CountryManager().country {
+                if i[1] == country {
+                    userID = i.first ?? ""
+                }
+            }
+            
+            RealmManager.shared.changeUserNationality(country: userID)
+        }
+        
+        let profile = ProfileViewController()
+        profile.getUserProfileData()
+        
+        self.removeFromSuperview()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -141,5 +187,10 @@ class CreateUserView: UIView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         userNameTextField.resignFirstResponder()
         return true
+    }
+    
+    @objc
+    func closeVC() {
+        self.removeFromSuperview()
     }
 }
