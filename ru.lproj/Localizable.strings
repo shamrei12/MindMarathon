@@ -41,6 +41,10 @@
 "rusLabel" = "Русский";
 "engLabel" = "Английский";
 
+"versionApp" = "Версия приложения";
+"IDuser" = "ID пользователя";
+"iosVersion" = "Версия iOS";
+
 
 "win" = "Победа";
 "draw" = "Ничья";

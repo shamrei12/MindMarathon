@@ -543,10 +543,13 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
            version = "no info"
         }
 
-        let userID = RealmManager.shared.getUserId()
+        let id = RealmManager.shared.getUserId()
         let systemVersion = UIDevice.current.systemVersion
+        let versionApp = "versionApp".localized()! + ": " + version + "\n"
+        let userID = "IDuser".localized()! + ": \n" + "\(id)\n"
+        let iosVersion = "iosVersion".localized()! + ": " + "\(systemVersion)\n"
 
-        let appVersion = "Версия приложения: \(version)\nID пользователя: \n\(userID)\nВерсия iOS: \(systemVersion)"
+        let appVersion = versionApp + userID  + iosVersion
 
         appInfo.text = appVersion
     }

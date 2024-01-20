@@ -26,7 +26,6 @@ class RatingTableViewCell: UITableViewCell {
     
     private lazy var ratingLabel: UILabel = {
         let ratingLabel = UILabel()
-        ratingLabel.text = "1."
         ratingLabel.font = UIFont.sfProText(ofSize: 17, weight: .regular)
         ratingLabel.textColor = .label
         return ratingLabel

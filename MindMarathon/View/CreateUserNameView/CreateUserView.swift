@@ -158,12 +158,8 @@ class EditUserView: UIView, UITextFieldDelegate {
                     userID = i.first ?? ""
                 }
             }
-            
             RealmManager.shared.changeUserNationality(country: userID)
         }
-        
-        let profile = ProfileViewController()
-        profile.getUserProfileData()
         
         self.removeFromSuperview()
     }
