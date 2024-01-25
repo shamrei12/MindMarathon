@@ -16,6 +16,7 @@ class UserDefaultsManager {
     private let userExperienceKey = "userExperience"
     private let currentThemeKey = "currentTheme"
     private let currentLanguageKey = "currentLanguage"
+    private let editUserKey = "editUserKey"
     
     func checkFirstStart() -> Bool {
 //        userDefaults.set(nil, forKey: firstStartKey)
@@ -73,6 +74,18 @@ class UserDefaultsManager {
     func getUIID() -> String {
         let uuid = UUID().uuidString
         return uuid
+    }
+    
+    func changeUserKey(type: Bool) {
+        if userDefaults.object(forKey: editUserKey) != nil {
+            userDefaults.set(type, forKey: editUserKey)
+        } else {
+            userDefaults.set(false, forKey: editUserKey)
+        }
+    }
+    
+    func getUserKey() -> Bool {
+        return userDefaults.bool(forKey: editUserKey)
     }
 
 }

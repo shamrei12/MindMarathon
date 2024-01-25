@@ -10,9 +10,6 @@ import SnapKit
 
 class EditUserView: UIView, UITextFieldDelegate {
     
-//    weak var delegate: UserCreateDelegate?
-//    var firebase = FirebaseData()
-    
     private var choiceCountryButton = CountryDropdownButton()
     
     private lazy var mainView: UIView = {
@@ -36,7 +33,6 @@ class EditUserView: UIView, UITextFieldDelegate {
     
     private lazy var usernameLabel: UILabel = {
         let usernameLabel = UILabel()
-        usernameLabel.text = "Введите новый никнейм"
         usernameLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .bold)
         return usernameLabel
     }()
@@ -55,7 +51,7 @@ class EditUserView: UIView, UITextFieldDelegate {
     
     private lazy var countryLabel: UILabel = {
         let countryLabel = UILabel()
-        countryLabel.text = "Ввыберите страну"
+        countryLabel.text = "editCountry".localized()
         countryLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 20), weight: .bold)
         return countryLabel
     }()
@@ -64,7 +60,7 @@ class EditUserView: UIView, UITextFieldDelegate {
         let acceptButton = UIButton()
         acceptButton.backgroundColor = .systemGreen
         acceptButton.layer.cornerRadius = 12
-        acceptButton.setTitle("Подтвердить", for: .normal)
+        acceptButton.setTitle("acceptButton".localized(), for: .normal)
         acceptButton.addTarget(self, action: #selector(exit), for: .touchUpInside)
         return acceptButton
     }()
@@ -144,6 +140,11 @@ class EditUserView: UIView, UITextFieldDelegate {
         }
     }
     
+    func updateView() {
+        usernameLabel.text = "editNickname".localized()
+        countryLabel.text = "editCountry".localized()
+        acceptButton.setTitle("acceptButton".localized(), for: .normal)
+    }
     @objc
     func exit() {
         if userNameTextField.text!.count > 1 {
@@ -187,6 +188,7 @@ class EditUserView: UIView, UITextFieldDelegate {
     
     @objc
     func closeVC() {
+        
         self.removeFromSuperview()
     }
 }

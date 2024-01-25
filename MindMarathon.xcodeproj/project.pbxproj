@@ -50,9 +50,10 @@
 		D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602792B49C43D001A913D /* RatingTableView.swift */; };
 		D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027B2B49C49C001A913D /* RatingTableViewCell.swift */; };
 		D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866027D2B4B2F72001A913D /* ProfileModel.swift */; };
-		D86602812B4C3C43001A913D /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602802B4C3C43001A913D /* CreateUserView.swift */; };
+		D86602812B4C3C43001A913D /* EditUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86602802B4C3C43001A913D /* EditUserView.swift */; };
 		D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB62B59816F00B54B06 /* CountryDropButton.swift */; };
 		D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB92B59820B00B54B06 /* CountryManager.swift */; };
+		D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DBB2B625F1300B54B06 /* EditUserDataView.swift */; };
 		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
@@ -144,9 +145,10 @@
 		D86602792B49C43D001A913D /* RatingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableView.swift; sourceTree = "<group>"; };
 		D866027B2B49C49C001A913D /* RatingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		D866027D2B4B2F72001A913D /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
-		D86602802B4C3C43001A913D /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
+		D86602802B4C3C43001A913D /* EditUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserView.swift; sourceTree = "<group>"; };
 		D8662DB62B59816F00B54B06 /* CountryDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDropButton.swift; sourceTree = "<group>"; };
 		D8662DB92B59820B00B54B06 /* CountryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryManager.swift; sourceTree = "<group>"; };
+		D8662DBB2B625F1300B54B06 /* EditUserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataView.swift; sourceTree = "<group>"; };
 		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
@@ -449,7 +451,8 @@
 		D866027F2B4C3C03001A913D /* CreateUserNameView */ = {
 			isa = PBXGroup;
 			children = (
-				D86602802B4C3C43001A913D /* CreateUserView.swift */,
+				D86602802B4C3C43001A913D /* EditUserView.swift */,
+				D8662DBB2B625F1300B54B06 /* EditUserDataView.swift */,
 			);
 			path = CreateUserNameView;
 			sourceTree = "<group>";
@@ -863,6 +866,7 @@
 				D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */,
 				D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
+				D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
 				D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */,
@@ -897,7 +901,7 @@
 				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
-				D86602812B4C3C43001A913D /* CreateUserView.swift in Sources */,
+				D86602812B4C3C43001A913D /* EditUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

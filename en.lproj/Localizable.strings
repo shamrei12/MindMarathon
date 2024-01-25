@@ -45,6 +45,11 @@
 "IDuser" = "User ID";
 "iosVersion" = "iOS Version";
 
+"editNickname" = "Enter a new nickname";
+"editCountry" = "Select Country";
+"acceptButton" = "Confirm";
+"editProfile" = "Edit";
+
 "win" = "Win";
 "draw" = "Draw";
 "lose" = "Defeat";

@@ -7,12 +7,14 @@
 
 import UIKit
 import FlagKit
+import SwiftUI
 
 class ProfileViewController: UIViewController {
     
     let statiscticCollectionView = StatiscticsCollectionView()
     let firebase = FirebaseData()
     let editUserView = EditUserView()
+    var hostingController: UIHostingController<ContentView>?
     
     private lazy var mainLabel: UILabel = {
         let mainLabel = UILabel()
@@ -52,13 +54,8 @@ class ProfileViewController: UIViewController {
     
     private lazy var userCountry: UIImageView = {
         let userCountry = UIImageView()
-        //        expLabel.backgroundColor = UIColor(named: "gameElementColor")
-        //        expLabel.text = "800 exp"
-        //        expLabel.textAlignment = .center
-        //        expLabel.tintColor = .white
-        //        expLabel.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 14), weight: .regular)
-        //        expLabel.layer.cornerRadius = 5
-        //        expLabel.clipsToBounds = true
+        userCountry.layer.borderColor = UIColor.black.cgColor
+        userCountry.layer.borderWidth = 1
         
         return userCountry
     }()
@@ -99,7 +96,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var editProfileButton: UIButton = {
         let editProfileButton = UIButton()
-        editProfileButton.setTitle("Ред.", for: .normal)
+        editProfileButton.setTitle("editProfile".localized(), for: .normal)
         editProfileButton.setTitleColor(.systemBlue, for: .normal)
         editProfileButton.addTarget(self, action: #selector(editViewTapped), for: .touchUpInside)
         return editProfileButton
@@ -120,6 +117,7 @@ class ProfileViewController: UIViewController {
     func refreshData() {
         mainLabel.text = "profile".localized()
         ratingButton.setTitle("leaderboard".localized(), for: .normal)
+        editProfileButton.setTitle("editProfile".localized(), for: .normal)
         getUserProfileData()
         updateUserStatus()
     }
@@ -172,12 +170,12 @@ class ProfileViewController: UIViewController {
             maker.top.equalTo(userName.snp.top)
             maker.bottom.equalTo(userName.snp.bottom)
             maker.left.equalTo(userName.snp.right).inset(-10)
-            maker.width.equalTo(21)
-            maker.height.equalTo(15)
+            maker.width.equalTo(30)
+//            maker.height.equalTo(15)
         }
         
         progress.snp.makeConstraints { maker in
-            maker.top.equalTo(userName.snp.bottom).inset(-15)
+            maker.top.equalTo(userName.snp.bottom).inset(-20)
             maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(10)
             maker.bottom.equalToSuperview().inset(15)
             maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.03)
@@ -329,10 +327,14 @@ class ProfileViewController: UIViewController {
     
     @objc
     func editViewTapped() {
-        self.view.addSubview(editUserView)
+        let view = ContentView(dismisAction: {
+            self.dismiss(animated: true)
+            self.refreshData()
+        })
+        let hostingController = UIHostingController(rootView: view)
+        self.view.addSubview(hostingController.view)
+        hostingController.view.backgroundColor = .clear
+        self.present(hostingController, animated: true)
         
-        editUserView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview()
-        }
     }
 }

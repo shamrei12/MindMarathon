@@ -45,6 +45,11 @@
 "IDuser" = "ID пользователя";
 "iosVersion" = "Версия iOS";
 
+"editNickname" = "Введите новый никнейм";
+"editCountry" = "Выберите страну";
+"acceptButton" = "Подтвердить";
+"editProfile" = "Ред.";
+
 
 "win" = "Победа";
 "draw" = "Ничья";
