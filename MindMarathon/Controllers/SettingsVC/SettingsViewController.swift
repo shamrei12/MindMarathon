@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import MessageUI
 import StoreKit
+import SwiftUI
 
 final class SettingsViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
@@ -168,6 +169,22 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         return sendDeveloper
     }()
     
+    private lazy var changeCountry: UIButton = {
+        let changeCountry = UIButton()
+        changeCountry.layer.cornerRadius = 12
+        changeCountry.backgroundColor = UIColor(named: "gameElementColor")
+        changeCountry.setTitle("changeCountry".localized(), for: .normal)
+        changeCountry.setTitleColor(.label, for: .normal)
+        changeCountry.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .semiBold)
+        changeCountry.contentHorizontalAlignment = .left
+        changeCountry.titleEdgeInsets.left = 5
+        changeCountry.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 10)
+        changeCountry.setImage(UIImage(named: "globe"), for: .normal)
+        changeCountry.addTarget(self, action: #selector(addCountryView), for: .touchUpInside)
+
+        return changeCountry
+    }()
+    
     private lazy var appInfo: UITextView = {
         let appInfo = UITextView()
         appInfo.isScrollEnabled = false
@@ -219,6 +236,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         
         self.contentView.addSubview(rateGame)
         self.contentView.addSubview(sendDeveloper)
+        self.contentView.addSubview(changeCountry)
         
         self.contentView.addSubview(appInfo)
 
@@ -352,8 +370,13 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
         }
         
-        appInfo.snp.makeConstraints { maker in
+        changeCountry.snp.makeConstraints { maker in
             maker.top.equalTo(sendDeveloper.snp.bottom).inset(-10)
+            maker.left.right.equalTo(self.view.safeAreaLayoutGuide).inset(5)
+        }
+        
+        appInfo.snp.makeConstraints { maker in
+            maker.top.equalTo(changeCountry.snp.bottom).inset(-10)
             maker.left.right.equalToSuperview().inset(10)
             maker.height.equalToSuperview().multipliedBy(0.2)
         }
@@ -552,5 +575,14 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         let appVersion = versionApp + userID  + iosVersion
 
         appInfo.text = appVersion
+    }
+    
+    @objc func  addCountryView() {
+        let view = ChangeCountryView(dismisAction: {
+            self.dismiss(animated: true)
+        })
+        let hostingController = UIHostingController(rootView: view)
+        self.view.addSubview(hostingController.view)
+        self.present(hostingController, animated: true)
     }
 }

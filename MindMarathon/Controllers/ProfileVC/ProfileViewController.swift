@@ -170,8 +170,8 @@ class ProfileViewController: UIViewController {
             maker.top.equalTo(userName.snp.top)
             maker.bottom.equalTo(userName.snp.bottom)
             maker.left.equalTo(userName.snp.right).inset(-10)
-            maker.width.equalTo(30)
-//            maker.height.equalTo(15)
+            maker.width.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(0.08)
+
         }
         
         progress.snp.makeConstraints { maker in
@@ -334,6 +334,7 @@ class ProfileViewController: UIViewController {
         let hostingController = UIHostingController(rootView: view)
         self.view.addSubview(hostingController.view)
         hostingController.view.backgroundColor = .clear
+        hostingController.modalPresentationStyle = .overFullScreen
         self.present(hostingController, animated: true)
         
     }

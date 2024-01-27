@@ -34,6 +34,7 @@
 		D83161962A1A583400087769 /* UserMistakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83161952A1A583400087769 /* UserMistakeView.swift */; };
 		D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83161972A1A584F00087769 /* UserMistakeView.xib */; };
 		D831619B2A1B5A4600087769 /* ru_RU in Resources */ = {isa = PBXBuildFile; fileRef = D831619A2A1B5A4600087769 /* ru_RU */; };
+		D844C5942B63FE87007F397A /* ChangeCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D844C5932B63FE87007F397A /* ChangeCountryView.swift */; };
 		D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */; };
 		D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */; };
 		D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */; };
@@ -130,6 +131,7 @@
 		D83161952A1A583400087769 /* UserMistakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMistakeView.swift; sourceTree = "<group>"; };
 		D83161972A1A584F00087769 /* UserMistakeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMistakeView.xib; sourceTree = "<group>"; };
 		D831619A2A1B5A4600087769 /* ru_RU */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ru_RU; sourceTree = "<group>"; };
+		D844C5932B63FE87007F397A /* ChangeCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCountryView.swift; sourceTree = "<group>"; };
 		D84509272B03D6F900C3C2E7 /* UserStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatisticsModel.swift; sourceTree = "<group>"; };
 		D845092C2B07C24900C3C2E7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		D84835992A35B542008D2AB4 /* WhiteboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D844C5922B63FE67007F397A /* ChangeCountryView */,
 				D8662DB52B59814A00B54B06 /* CountryDropButton */,
 				D866027F2B4C3C03001A913D /* CreateUserNameView */,
 				D84E51272B03A31E00CBA32F /* TableViews */,
@@ -397,6 +400,14 @@
 				D86D0A782A28A62800AB6789 /* singular */,
 			);
 			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		D844C5922B63FE67007F397A /* ChangeCountryView */ = {
+			isa = PBXGroup;
+			children = (
+				D844C5932B63FE87007F397A /* ChangeCountryView.swift */,
+			);
+			path = ChangeCountryView;
 			sourceTree = "<group>";
 		};
 		D848359D2A35B768008D2AB4 /* Model */ = {
@@ -856,6 +867,7 @@
 				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
+				D844C5942B63FE87007F397A /* ChangeCountryView.swift in Sources */,
 				D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,

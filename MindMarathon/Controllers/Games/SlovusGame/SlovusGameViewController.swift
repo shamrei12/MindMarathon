@@ -527,7 +527,7 @@ extension SlovusGameViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-} //531
+}
 
 
 
