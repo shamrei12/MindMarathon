@@ -82,6 +82,7 @@
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
 		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
 		D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */; };
+		D8BB7B6B2B684BEE0034151C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB7B6A2B684BEE0034151C /* Preview.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */; };
 		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
@@ -178,6 +179,7 @@
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
 		D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		D8BB7B6A2B684BEE0034151C /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8BB7B692B684B190034151C /* PreviewView */,
 				D844C5922B63FE67007F397A /* ChangeCountryView */,
 				D8662DB52B59814A00B54B06 /* CountryDropButton */,
 				D866027F2B4C3C03001A913D /* CreateUserNameView */,
@@ -522,6 +525,14 @@
 				D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D8BB7B692B684B190034151C /* PreviewView */ = {
+			isa = PBXGroup;
+			children = (
+				D8BB7B6A2B684BEE0034151C /* Preview.swift */,
+			);
+			path = PreviewView;
 			sourceTree = "<group>";
 		};
 		D8C11F262B0299F700EA28D6 /* SettingsVC */ = {
@@ -877,6 +888,7 @@
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */,
 				D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */,
+				D8BB7B6B2B684BEE0034151C /* Preview.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,

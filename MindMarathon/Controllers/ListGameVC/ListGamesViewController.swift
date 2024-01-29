@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 class ListGamesViewController: UIViewController {
     let firebase = FirebaseData()
@@ -34,17 +35,24 @@ class ListGamesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         fisrStart()
     }
     
     func fisrStart() {
         if UserDefaultsManager.shared.checkFirstStart() {
-            let userActivity: [WhiteBoardManager] = RealmManager.shared.getUserStatistics()
-            RealmManager.shared.clearRealmDatabase()
-            RealmManager.shared.firstCreateUserProfile(userName: generateNickname())
-            let realmData = RealmManager.shared.getUserProfileData()
-            firebase.refGetData(from: realmData)
-            UserDefaultsManager.shared.setupDataUserDefaults()
+            let view = Preview(dismisAction: {
+                self.dismiss(animated: true)
+            })
+            
+            let hostingVC = UIHostingController(rootView: view)
+            hostingVC.view.backgroundColor = .clear
+            hostingVC.modalPresentationStyle = .overFullScreen
+            
+            present(hostingVC, animated: true)
         } else {
             print("Уже не первый")
         }

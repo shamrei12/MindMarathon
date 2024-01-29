@@ -19,7 +19,7 @@ class UserDefaultsManager {
     private let editUserKey = "editUserKey"
     
     func checkFirstStart() -> Bool {
-//        userDefaults.set(nil, forKey: firstStartKey)
+        userDefaults.set(nil, forKey: firstStartKey)
         return userDefaults.object(forKey: firstStartKey) == nil
     }
     
