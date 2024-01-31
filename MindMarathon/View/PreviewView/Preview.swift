@@ -38,7 +38,7 @@ struct PreviewSecondView: View {
 
 struct HeaderText: View {
     var body: some View {
-        Text("От Разработчиков")
+        Text("fromDeveloper".localize())
             .padding(.top, 10)
             .foregroundColor(.black)
             .font(.init(UIFont.sfProText(ofSize: 20, weight: .regular)))
@@ -49,9 +49,9 @@ struct MessageText: View {
     let type: Bool
     var body: some View {
         if type {
-            CustomText(message: "Привет. Я очень рад видеть тебя после обновления. Произошел ряд изменений, которые тебе понравятся. Для тебя у меня есть подарок. Я дарю тебе премиум доступ. В дальнейшем он тебе очень поможет и откроет много нового. Удачной игры!")
+            CustomText(message: "premiumText".localize())
         } else {
-            CustomText(message: "Привет. Я очень рад видеть тебя здесь. У меня есть несколько игр для тебя, чтобы провести весело время. Если увидишь ошибки или пожелания, то пиши мне на почту, которая есть в настройках. Удачной игры!")
+            CustomText(message: "defaultText".localize())
         }
     }
 }
@@ -71,7 +71,7 @@ struct ThankYouButton: View {
     var dismisAction: (() -> Void)
 
     var body: some View {
-        Button("Спасибо!") {
+        Button("thanksButton".localize()) {
             performActions(dissmis: dismisAction)
         }
         .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.01)
@@ -89,11 +89,12 @@ struct ThankYouButton: View {
         
         let firebase = FirebaseData()
         let userActivity: [WhiteBoardManager] = RealmManager.shared.getUserStatistics()
+        RealmManager.shared.clearRealmDatabase()
+        RealmManager.shared.firstCreateUserProfile(userName: userName)
         if !userActivity.isEmpty {
             RealmManager.shared.addPremiumStatus(status: 10000000000000000000)
         }
-        RealmManager.shared.clearRealmDatabase()
-        RealmManager.shared.firstCreateUserProfile(userName: userName)
+        
         let realmData = RealmManager.shared.getUserProfileData()
         firebase.refGetData(from: realmData)
         UserDefaultsManager.shared.setupDataUserDefaults()

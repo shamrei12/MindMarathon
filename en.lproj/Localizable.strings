@@ -42,6 +42,19 @@
 "rusLabel" = "Russian";
 "engLabel" = "English";
 
+"changeCountry" = "Change country";
+
+"enterNickname" = "Enter a new nickname";
+"symbolsError" ="Nickname must be less than 15 characters";
+"cancelButton" = "Cancel";
+"confirmButton" = "Accept";
+"clearButton" = "Clear";
+
+"premiumText" = "Hello. I'm very glad to see you after the update. There have been a number of changes that you will like. I have a gift for you. I'm giving you premium access. It will help you a lot in the future and open up a lot of new things. Happy gaming! ";
+"defaultText" = "Hello. I'm very glad to see you here. I have some games for you to have fun. If you see any bugs or suggestions, write to me at the email that is in the settings. Have a good game!";
+"fromDeveloper" = "From Developer";
+"thanksButton" = "Thanks";
+
 "versionApp" = "Application Version";
 "IDuser" = "User ID";
 "iosVersion" = "iOS Version";

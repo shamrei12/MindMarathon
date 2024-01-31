@@ -32,17 +32,17 @@ struct MySecondView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Введите новый никнейм")
+            Text("enterNickname".localize())
                 .frame(alignment: .trailing)
                 .font(.init(UIFont.sfProText(ofSize: 15, weight: .regular)))
                 .padding([.trailing, .leading, .top], 15)
             
-            TextField("Введите никнейм", text: $myProperty)
+            TextField("enterNickname".localize(), text: $myProperty)
                 .textFieldStyle(.roundedBorder)
                 .padding([.leading, .trailing], 10)
             
             if myProperty.count > 15 {
-                Text("Никнейм должен быть меньше 15 символов")
+                Text("symbolsError".localize())
                     .frame(alignment: .trailing)
                     .font(.init(UIFont.sfProText(ofSize: 10, weight: .light)))
                     .foregroundColor(.red)
@@ -50,7 +50,7 @@ struct MySecondView: View {
             }
             
             if myProperty.isEmpty {
-                Button("Отмена", action: {
+                Button("cancelButton".localize(), action: {
                     self.dismisAction()
                 })
                 .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.width * 0.08)
@@ -59,7 +59,7 @@ struct MySecondView: View {
                 .padding()
                 .cornerRadius(12)
             } else if !myProperty.isEmpty && myProperty.count <= 15 {
-                Button("Принять", action: {
+                Button("confirmButton".localize(), action: {
                     RealmManager.shared.changeUsername(name: myProperty)
                     self.dismisAction()
                 })
@@ -70,7 +70,7 @@ struct MySecondView: View {
                 .padding()
                 
             } else {
-                Button("Очистить", action: {
+                Button("clearButton".localize(), action: {
                     myProperty = ""
                 })
                 .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.width * 0.08)

@@ -208,10 +208,10 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     }
     
     func setup() {
-        createStackView()
         setupUI()
         makeConstaints()
         createTextAppInfo()
+        setupText()
     }
     
     func setupUI() {
@@ -250,7 +250,9 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         languagesLabel.text = "appLang".localized()
         rateGame.setTitle("rateApp".localized(), for: .normal)
         sendDeveloper.setTitle("writeSupport".localized(), for: .normal)
+        changeCountry.setTitle("changeCountry".localized(), for: .normal)
         createTextAppInfo()
+        createStackView()
     }
     
     func setupLanguage() {
@@ -296,7 +298,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         contentView.snp.makeConstraints { maker in
             maker.edges.equalToSuperview()
             maker.width.equalTo(scrollView)
-            maker.height.equalTo(self.view.safeAreaLayoutGuide)
+            maker.height.equalTo(self.view.safeAreaLayoutGuide).multipliedBy(1.1)
         }
         
         themeView.snp.makeConstraints { maker in
@@ -329,7 +331,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         
         descriptionAutomaticSwitchThemeLabel.snp.makeConstraints { maker in
             maker.top.equalTo(automaticSwitchThemeLabel.snp.bottom).inset(-4)
-            maker.left.equalTo(self.view.safeAreaLayoutGuide ).inset(25)
+            maker.left.equalTo(self.view.safeAreaLayoutGuide).inset(25)
             maker.bottom.equalToSuperview().inset(10)
         }
         
@@ -383,8 +385,15 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
     }
     
     func createStackView() {
-        themeButtonStack.addArrangedSubview(createThemeButton(text: "tightLabel".localize(), image: UIImage(named: "icon_light"), tag: 0))
-        themeButtonStack.addArrangedSubview(createThemeButton(text: "darkLabel".localize(), image: UIImage(named: "icon_dark"), tag: 1))
+        for view in themeButtonStack.arrangedSubviews {
+              for subview in view.subviews {
+                  subview.removeFromSuperview()
+              }
+              view.removeFromSuperview()
+          }
+        
+        themeButtonStack.addArrangedSubview(createThemeButton(text: "tightLabel".localized()!, image: UIImage(named: "icon_light"), tag: 0))
+        themeButtonStack.addArrangedSubview(createThemeButton(text: "darkLabel".localized()!, image: UIImage(named: "icon_dark"), tag: 1))
     }
     
     func createThemeButton(text: String, image: UIImage?, tag: Int) -> UIView {
@@ -582,7 +591,6 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
             self.dismiss(animated: true)
         })
         let hostingController = UIHostingController(rootView: view)
-        self.view.addSubview(hostingController.view)
         self.present(hostingController, animated: true)
     }
 }

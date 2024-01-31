@@ -59,7 +59,7 @@ struct ChangeCountryView: View {
                     }
                     .background(Color.clear)
             }
-            .navigationTitle("Смена страны")
+            .navigationTitle("changeCountry".localized()!)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear() {
                 self.countriesLists = self.countries.map { Countries(image: $0[0], countryName: $0[1], showMark: false) }
