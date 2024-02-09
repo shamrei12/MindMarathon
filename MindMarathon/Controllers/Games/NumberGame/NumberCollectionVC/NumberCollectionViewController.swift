@@ -99,7 +99,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
         } else {
             cell.select()
             highlightedCells.append(indexPath)
-            print("Массив выделеных ячеек: \(highlightedCells)")
         }
         
         if highlightedCells.count == 2 {
@@ -406,8 +405,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
                             secondCell.helpSelected()
                             posibleMove.append(allCells[i])
                             posibleMove.append(allCells[j])
-                            
-                            print(posibleMove)
                         }
                         return
                     }
@@ -416,7 +413,6 @@ extension NumberCollectionView: UICollectionViewDataSource {
         }
 
         if posibleMove.isEmpty {
-            print(allCells.count)
             posibleMove.removeAll()
             createAlertMessage()
         }

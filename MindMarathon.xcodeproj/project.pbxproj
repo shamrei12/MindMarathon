@@ -78,6 +78,7 @@
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
+		D898EFB32B73971800D10EA0 /* ChangeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898EFB22B73971800D10EA0 /* ChangeImageView.swift */; };
 		D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */; };
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
 		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
@@ -175,6 +176,7 @@
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
+		D898EFB22B73971800D10EA0 /* ChangeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageView.swift; sourceTree = "<group>"; };
 		D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 		D826CF202A10C71700263CEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D898EFB12B73970400D10EA0 /* ChangeImageView */,
 				D8BB7B692B684B190034151C /* PreviewView */,
 				D844C5922B63FE67007F397A /* ChangeCountryView */,
 				D8662DB52B59814A00B54B06 /* CountryDropButton */,
@@ -509,6 +512,14 @@
 				D8E807242B088F2D00D69D67 /* CheckTaskManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D898EFB12B73970400D10EA0 /* ChangeImageView */ = {
+			isa = PBXGroup;
+			children = (
+				D898EFB22B73971800D10EA0 /* ChangeImageView.swift */,
+			);
+			path = ChangeImageView;
 			sourceTree = "<group>";
 		};
 		D8B108BE2B03AAE700CD09A1 /* cell */ = {
@@ -915,6 +926,7 @@
 				D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */,
 				D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */,
 				D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */,
+				D898EFB32B73971800D10EA0 /* ChangeImageView.swift in Sources */,
 				D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,

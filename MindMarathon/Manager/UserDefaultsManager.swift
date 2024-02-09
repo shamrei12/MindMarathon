@@ -17,6 +17,7 @@ class UserDefaultsManager {
     private let currentThemeKey = "currentTheme"
     private let currentLanguageKey = "currentLanguage"
     private let editUserKey = "editUserKey"
+    private let userimagekey = "userimagekey"
     
     func checkFirstStart() -> Bool {
 //        userDefaults.set(nil, forKey: firstStartKey)
@@ -88,5 +89,6 @@ class UserDefaultsManager {
         return userDefaults.bool(forKey: editUserKey)
     }
 
+    
 }
 

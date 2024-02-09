@@ -133,12 +133,13 @@ class RealmManager {
     
     func firstCreateUserProfile(userName: String) {
         var profileMassive = [ProfileManager]()
+        var randomNumber = Int.random(in: 0...2)
         
         do {
             let realm = try Realm()
             let tasks = realm.objects(ProfileManager.self)
             
-            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0, premiumStatus: TimeInterval(0), userID: "\(UserDefaultsManager.shared.getUIID())", userScore: 800)]
+            profileMassive = [ProfileManager(username: userName, nationality: "world", userImage: "userImage\(randomNumber)", userLevel: 1, userExpirience: 0, dateUpdate: 0, timeInGame: 0, countGames: 0, favoriteGame: "isHaveData", winStrike: 0, premiumStatus: TimeInterval(0), userID: "\(UserDefaultsManager.shared.getUIID())", userScore: 800)]
             
             try realm.write {
                 realm.add(profileMassive)
@@ -209,7 +210,7 @@ class RealmManager {
         return userProfile
     }
     
-    func addUserExpirience(exp: Int) {
+    func resetUserExpirience(exp: Int) {
         do {
             let realm = try Realm()
             let tasks = realm.objects(ProfileManager.self)
@@ -221,6 +222,19 @@ class RealmManager {
             print("error")
         }
     }
+    func addUserExpirience(exp: Int) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].userExpirience += exp
+            }
+        } catch {
+            print("error")
+        }
+    }
+    
     
     func changeUserLevel(level: Int) {
         do {
@@ -319,6 +333,22 @@ class RealmManager {
         }
 
     }
+    
+    func changeUserImage(image: String) {
+        do {
+            let realm = try Realm()
+            let tasks = realm.objects(ProfileManager.self)
+         
+            try realm.write {
+                tasks[0].userImage = image
+            }
+        } catch {
+            print("error")
+        }
+
+    }
 }
+
+
 
 

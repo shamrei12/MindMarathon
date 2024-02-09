@@ -19,7 +19,7 @@ class TimeManager {
     func convertToMinutes(seconds: Int) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
+        formatter.unitsStyle = .short
         let formattedString = formatter.string(from: TimeInterval(seconds))!
         return formattedString
     }

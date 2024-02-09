@@ -23,6 +23,7 @@ struct EditUserDataView: View {
             BlurView()
             MySecondView(myProperty: "",  dismisAction: dismisAction)
         }
+        .ignoresSafeArea()
     }
 }
 

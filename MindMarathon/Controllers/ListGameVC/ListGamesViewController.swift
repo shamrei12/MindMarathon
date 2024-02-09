@@ -53,9 +53,7 @@ class ListGamesViewController: UIViewController {
             hostingVC.modalPresentationStyle = .overFullScreen
             
             present(hostingVC, animated: true)
-        } else {
-            print("Уже не первый")
-        }
+        } 
     }
     
     func generateNickname() -> String {

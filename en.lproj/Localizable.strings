@@ -93,7 +93,7 @@
 "ОТПРАВИТЬ" = "SEND";
 "Добавить" = "Add";
 
-"Конец игры" = "End game";
+"End_game" = "End game";
 "Внимание!" = "Attention!";
 
 "Вы действительно хотите закончить игру?" = "Do you really want to finish the game?";

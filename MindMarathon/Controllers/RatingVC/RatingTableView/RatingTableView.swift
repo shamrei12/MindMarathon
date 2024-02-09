@@ -71,12 +71,3 @@ extension RatingTableView: UITableViewDataSource {
     }
 }
 
-//extension RatingTableView: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("ldfjof")
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 227
-//    }
-//}

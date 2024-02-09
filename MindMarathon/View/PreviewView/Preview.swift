@@ -17,6 +17,7 @@ struct Preview: View {
                 .background(Color(UIColor.white))
                 .cornerRadius(10)
         }
+        .ignoresSafeArea()
     }
 }
 
@@ -33,7 +34,6 @@ struct PreviewSecondView: View {
             ThankYouButton(dismisAction: dismisAction)
         }
     }
-
 }
 
 struct HeaderText: View {
@@ -67,17 +67,21 @@ struct CustomText: View {
     }
 }
 
+
 struct ThankYouButton: View {
     var dismisAction: (() -> Void)
 
     var body: some View {
-        Button("thanksButton".localize()) {
+        Button( action:  {
             performActions(dissmis: dismisAction)
+        }) {
+            Text("thanksButton".localize())
+                .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.01)
+                .foregroundColor(.white)
         }
         .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.01)
         .padding()
         .background(Color(UIColor.lightGray))
-        .tint(.black)
         .cornerRadius(12)
         .padding(.bottom, 10)
     }
@@ -92,7 +96,7 @@ struct ThankYouButton: View {
         RealmManager.shared.clearRealmDatabase()
         RealmManager.shared.firstCreateUserProfile(userName: userName)
         if !userActivity.isEmpty {
-            RealmManager.shared.addPremiumStatus(status: 10000000000000000000)
+            RealmManager.shared.addPremiumStatus(status: 100000000000000000)
         }
         
         let realmData = RealmManager.shared.getUserProfileData()
@@ -111,7 +115,3 @@ struct NewBlurView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {}
 }
-
-//#Preview {
-//    Preview()
-//}

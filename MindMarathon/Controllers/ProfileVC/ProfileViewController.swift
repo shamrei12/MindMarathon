@@ -35,14 +35,12 @@ class ProfileViewController: UIViewController {
     private lazy var userImage: UIImageView = {
         let userImage = UIImageView()
         userImage.clipsToBounds = true
-        
-        let image = UIImage(named: "userImage")
-        userImage.image = image
-        userImage.contentMode = .scaleToFill
-        
+        userImage.contentMode = .scaleAspectFill
+        userImage.isUserInteractionEnabled = true
+        userImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChangeImageView)))
         return userImage
     }()
-    
+
     private lazy var userName: UILabel = {
         let userName = UILabel()
         userName.font = UIFont.sfProText(ofSize: FontAdaptation.addaptationFont(sizeFont: 18), weight: .bold)
@@ -201,35 +199,27 @@ class ProfileViewController: UIViewController {
     
     func getCurrentAndNextRank(exp: Int, level: Int) {
         let maxRank: Double = Double(level * 100) + (Double(level) + 0.5)
-        print(maxRank)
-        print(exp)
-        print(level)
-        if exp > Int(maxRank) {
-            let newUserExpirience = Double(exp) - maxRank
-            let newLevel = level + 1
-            let newMaxRank: Double = Double(newLevel * 100) + (Double(newLevel) + 0.5)
-            currentRankScore.text = "\(newLevel)" + " " + "level".localized()!
-            makeResultsForProgressBar(newExp: Int(newUserExpirience), maxExp: newMaxRank)
-            RealmManager.shared.addUserExpirience(exp: Int(newUserExpirience))
-            RealmManager.shared.changeUserLevel(level: newLevel)
-        } else {
-            progress.progress = Float(exp) / Float(maxRank)
-            currentRankScore.text = "\(level)" + " " + "level".localized()!
-            makeResultsForProgressBar(newExp: exp, maxExp: maxRank)
-        }
-        
-        
+        var newUserExperience = Double(exp)
+        var newLevel = level
+        var newMaxRank = maxRank
 
-    }
-    
-    func makeResultsForProgressBar(newExp: Int, maxExp: Double) {
-        if newExp != 0 {
-            let newExp: Float = Float(newExp) / Float(maxExp)
-            progress.progress = newExp
-        } else {
-            progress.progress = 0
+        if exp > Int(maxRank) {
+            newUserExperience -= maxRank
+            newLevel += 1
+            newMaxRank = Double(newLevel * 100) + (Double(newLevel) + 0.5)
+            RealmManager.shared.resetUserExpirience(exp: Int(newUserExperience))
+            RealmManager.shared.changeUserLevel(level: newLevel)
         }
+
+        currentRankScore.text = "\(newLevel)" + " " + "level".localized()!
+        makeResultsForProgressBar(newExp: Int(newUserExperience), maxExp: newMaxRank)
     }
+
+    func makeResultsForProgressBar(newExp: Int, maxExp: Double) {
+        let progressValue: Float = Float(newExp) / Float(maxExp)
+        progress.progress = progressValue
+    }
+
     
     func getUserStatistics(massive: [ProfileManager]) {
         let timeInGame = String(massive[0].timeInGame)
@@ -272,6 +262,7 @@ class ProfileViewController: UIViewController {
             return
         }
         userName.text = userProfile.username
+        userImage.image = UIImage(named: userProfile.userImage)
         currentRankScore.text = "\(userProfile.userLevel) level".localized()
         getCurrentAndNextRank(exp: userProfile.userExpirience, level: userProfile.userLevel)
         getUserStatistics(massive: [userProfile])
@@ -285,8 +276,6 @@ class ProfileViewController: UIViewController {
             let originalImage = image!.originalImage
             userCountry.image = originalImage
         }
-        
-        print(userProfile.userID)
         
         if userProfile.premiumStatus > TimeManager.shared.getCurrentTime() {
             userImage.layer.borderColor = UIColor.systemYellow.cgColor
@@ -305,8 +294,6 @@ class ProfileViewController: UIViewController {
             DispatchQueue.global().async {
                 DispatchQueue.main.sync {
                     if userProfiledata[0].premiumStatus != profileData[0].premiumStatus {
-                        print(profileData[0].userID)
-                        print(userProfiledata[0].premiumStatus)
                         RealmManager.shared.addPremiumStatus(status: profileData[0].premiumStatus)
                         self.getUserProfileData()
                     } else {
@@ -337,5 +324,15 @@ class ProfileViewController: UIViewController {
         hostingController.modalPresentationStyle = .overFullScreen
         self.present(hostingController, animated: true)
         
+    }
+    
+    @objc
+    func showChangeImageView() {
+        let view = ChangeImageView(dismisAction: {
+            self.dismiss(animated: true)
+            self.refreshData()
+        })
+        let hostingController = UIHostingController(rootView: view)
+        self.present(hostingController, animated: true)
     }
 }

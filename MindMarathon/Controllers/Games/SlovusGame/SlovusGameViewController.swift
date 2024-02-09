@@ -282,7 +282,6 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         createTimer()
         gameCondition(.started)
         puzzleWord = getPuzzleWord()
-        print(puzzleWord)
         playButton.setImage(Icons.pauseFill, for: .normal)
         createPlaceGame()
     }
@@ -448,13 +447,13 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         if checkCorrctAnswer(massiveAnswer: massiveAnswer) {
             stopwatch?.invalidate()
             let time = TimeManager.shared.convertToMinutes(seconds: seconds)
-            showAlertAboutFinishGame(title: "End game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
+            showAlertAboutFinishGame(title: "End_game".localize(), message: "congratulations_message".localize() + "puzzleWord_message".localize() + "\(puzzleWord). " + "time_message".localize() + "\(time)")
             let resultGame = WhiteBoardModel(nameGame: "slovus", resultGame: "win", countStep: "\(viewModel.step)", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
             CheckTaskManager.shared.checkPlayGame(game: 5)
         } else if viewModel.step == 6 {
             stopwatch?.invalidate()
-            showAlertAboutFinishGame(title: NSLocalizedString("End game", comment: ""), message: String(format: NSLocalizedString("The moves are over! We made a word %@. Will you try again?", comment: ""), puzzleWord))
+            showAlertAboutFinishGame(title: "End_game".localize(), message: String(format: NSLocalizedString("The moves are over! We made a word %@. Will you try again?", comment: ""), puzzleWord))
             let resultGame = WhiteBoardModel(nameGame: "slovus", resultGame: "lose", countStep: "\(viewModel.step)", timerGame:  seconds)
             RealmManager.shared.saveResult(result: resultGame)
         }

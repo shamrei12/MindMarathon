@@ -269,7 +269,6 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
 
     func setupTheme() {
         let currentTheme = UserDefaultsManager.shared.getTheme()
-        print(currentTheme)
         switch currentTheme {
         case "light":
             selectView(view: lightThemeView)
