@@ -18,7 +18,15 @@ class TimeManager {
     
     func convertToMinutes(seconds: Int) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.minute, .second]
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .short
+        let formattedString = formatter.string(from: TimeInterval(seconds))!
+        return formattedString
+    }
+    
+    func convertToMinutesWhiteBoard(seconds: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .short
         let formattedString = formatter.string(from: TimeInterval(seconds))!
         return formattedString
@@ -44,5 +52,41 @@ class TimeManager {
         dateFormater.dateFormat = "HH:mm"
         let formattedString = dateFormater.string(from: date)
         return formattedString
+    }
+    
+    func getFinishTimeForTask(taskTime: TimeInterval) -> Int {
+        let currentTimeInterval = getCurrentTime()
+        let finishTimeInterval = getFinishTime(restartTime: taskTime)
+        
+        return Int(finishTimeInterval - currentTimeInterval)
+    }
+    
+    func getFinishTimeForTimer(finishTime: TimeInterval) -> Int {
+        return Int(finishTime - getCurrentTime())
+    }
+    
+    func getFinishTime(restartTime: TimeInterval) -> TimeInterval {
+        return getCurrentTime() + restartTime
+    }
+    
+    func getCurrentTime() -> TimeInterval {
+        return Date().timeIntervalSince1970
+    }
+    
+    func chechConditionTime(finishTime: TimeInterval) -> Bool {
+        return finishTime <= getCurrentTime() ? true : false
+    }
+    
+    func getEndlessPremium() -> TimeInterval {
+        let startOfYear1970 = Date(timeIntervalSince1970: 0) // Начало Unix time
+
+        let yearsToAdd = 100
+        let secondsInAYear = 365.25 * 24 * 60 * 60 // Среднее количество секунд в году (учитывая високосные года)
+        let secondsIn100Years = Double(yearsToAdd) * secondsInAYear
+
+        let dateIn100Years = startOfYear1970.addingTimeInterval(secondsIn100Years)
+        let unixTimeIn100Years = dateIn100Years.timeIntervalSince1970
+
+        return unixTimeIn100Years
     }
 }

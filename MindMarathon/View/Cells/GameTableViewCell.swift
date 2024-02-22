@@ -17,12 +17,14 @@ class GameTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
-        self.backgroundColor = UIColor.clear
-        createUI()
+
     }
     
     func createUI() {
+        
+        self.selectionStyle = .none
+        self.backgroundColor = UIColor.clear
+        
         mainView.layer.cornerRadius = 10
         mainView.heightAnchor.constraint(equalToConstant: 55).isActive = true
         mainView.layer.shadowColor = UIColor.label.cgColor

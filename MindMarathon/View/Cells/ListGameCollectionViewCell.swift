@@ -6,7 +6,6 @@ class ListGameCollectionViewCell: UICollectionViewCell {
     let gameImageView = UIImageView()
     let gameNameLabel = UILabel()
     let aboutGameLabel = UILabel()
-    let gameNameStackView = UIStackView()
     let gameInfoStackView = UIStackView()
     
     override func awakeFromNib() {
@@ -18,55 +17,68 @@ class ListGameCollectionViewCell: UICollectionViewCell {
     }
     
     func setupUI() {
+        createCintainerView()
+        
+        createGameInfoStackView()
+    
+        gameImageView.contentMode = .scaleAspectFit
+        containerView.addSubview(gameImageView)
+
+    }
+    
+    func createCintainerView() {
         containerView.backgroundColor = CustomColor.gameElement.color
         containerView.addShadowView()
         contentView.addSubview(containerView)
-        
-        gameNameStackView.axis = .horizontal
-        gameNameStackView.distribution = .fillEqually
-        gameNameStackView.spacing = 1
-        containerView.addSubview(gameNameStackView)
-        
-        gameImageView.contentMode = .scaleAspectFit
-        containerView.addSubview(gameImageView)
-        
-        gameNameLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 40.0)
-        gameNameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        gameNameLabel.minimumScaleFactor = 0.1
-
-        gameNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-        gameNameStackView.addArrangedSubview(gameNameLabel)
-        
-        aboutGameLabel.numberOfLines = 0
-        aboutGameLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)
-        aboutGameLabel.adjustsFontSizeToFitWidth = true // автоматическая настройка размера шрифта
-        aboutGameLabel.minimumScaleFactor = 0.5
-        containerView.addSubview(aboutGameLabel)
-        
-        gameInfoStackView.addArrangedSubview(gameNameStackView)
-        gameInfoStackView.addArrangedSubview(aboutGameLabel)
+    }
+    
+    func createGameInfoStackView() {
         gameInfoStackView.axis = .vertical
-        gameInfoStackView.distribution = .fillEqually
-        gameInfoStackView.spacing = 5
+        gameInfoStackView.distribution = .fill
+        gameInfoStackView.spacing = 1
+        gameInfoStackView.addArrangedSubview(createGameNameLabel())
+        gameInfoStackView.addArrangedSubview(createAboutGameLabel())
         containerView.addSubview(gameInfoStackView)
+    }
+    
+    func createGameNameLabel() -> UILabel {
+        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
+            gameNameLabel.font = UIFont.sfProText(ofSize: 16, weight: .semiBold)
+        } else {
+            gameNameLabel.font = UIFont.sfProText(ofSize: 40, weight: .semiBold)
+        }
+        gameNameLabel.numberOfLines = 0
+        gameNameLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return gameNameLabel
+    }
+    
+    func createAboutGameLabel() -> UILabel {
+        aboutGameLabel.numberOfLines = 0
+        if UIScreen.main.bounds.size.width <= 414 { // Для экранов iPhone с диагональю до 5.5 дюйма
+            aboutGameLabel.font = UIFont.sfProText(ofSize: 12, weight: .light)
+        } else {
+            aboutGameLabel.font = UIFont.sfProText(ofSize: 32, weight: .light)
+        }
+        
+        return aboutGameLabel
     }
     
     func setupConstraints() {
         containerView.snp.makeConstraints { maker in
-            maker.edges.equalToSuperview().inset(UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1))
+            maker.edges.equalToSuperview().inset(1)
         }
         
         gameImageView.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().inset(1)
-            maker.left.right.equalToSuperview().inset(5)
-            maker.height.equalTo(self.safeAreaLayoutGuide).multipliedBy(0.8)
+            maker.top.equalToSuperview().inset(5)
+            maker.left.right.equalToSuperview().inset(10)
+            maker.height.equalTo(self.safeAreaLayoutGuide).multipliedBy(0.7)
             maker.centerY.equalToSuperview()
         }
         
         gameInfoStackView.snp.makeConstraints { make in
-            make.top.equalTo(gameImageView.snp.bottom).inset(5)
-            make.left.right.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(7)
+            make.top.equalTo(gameImageView.snp.bottom).inset(-5)
+            make.left.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(2)
         }
     }
 

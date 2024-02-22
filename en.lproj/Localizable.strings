@@ -1,13 +1,73 @@
-"Список игр" = "Game list";
-"Статистика игр" = "Game stats";
+"games_list" = "Games";
+"game_rules" = "Rules";
+"games_history" = "History";
+"settings" = "Settings";
+"profile" = "Profile";
 
 //List Game ViewController
-"Быки и Коровы" = "Bulls and Cows";
-"Словус" = "Slovus";
-"Заливка" = "Flood Fill";
-"Крестики Нолики" = "Tic Tac Toe";
-"Бинарио" = "Binario";
-"Цифры" = "Numbers";
+"bullcow" = "Bulls and Cows";
+"slovus" = "Slovus";
+"flood_fill" = "Flood Fill";
+"tictactoe" = "Tic Tac Toe";
+"binario" = "Binario";
+"Numbers" = "Numbers";
+
+// WhiteBoardVC
+"gameLabel" = "Game";
+"statusLabel" = "Status";
+"stepsLabel" = "Moves";
+"timeLabel" = "Time";
+
+//SettingsVC
+"settingLabel" = "Settings";
+"listGames" = "List of games";
+"historyGames" = "History of Games";
+"profile" = "Profile";
+"timeGame" = "Time in game";
+"countGames" = "Number of games";
+"favoritegame" = "favourite game";
+"isHaveData" = "No data";
+"seriesWin" = "Winning streak";
+"level" = "Level";
+"leaderboard" = "Leaderboard";
+"themeLabel" = "Design";
+"darkLabel" = "Dark";
+"tightLabel" = "Light";
+"autoLabel" = "Automatic";
+"descriptionAutoLabel" = "From system settings";
+"rateApp" = "Rate the app";
+"writeSupport" = "Write to support";
+"changeCountry" = "Change country";
+"appLang" = "Application language";
+"rusLabel" = "Russian";
+"engLabel" = "English";
+
+"changeCountry" = "Change country";
+
+"enterNickname" = "Enter a new nickname";
+"symbolsError" ="Nickname must be less than 15 characters";
+"cancelButton" = "Cancel";
+"confirmButton" = "Accept";
+"clearButton" = "Clear";
+
+"premiumText" = "Hello. I'm very glad to see you after the update. There have been a number of changes that you will like. I have a gift for you. I'm giving you premium access. It will help you a lot in the future and open up a lot of new things. Happy gaming! ";
+"defaultText" = "Hello. I'm very glad to see you here. I have some games for you to have fun. If you see any bugs or suggestions, write to me at the email that is in the settings. Have a good game!";
+"fromDeveloper" = "From Developer";
+"thanksButton" = "Thanks";
+
+"versionApp" = "Application Version";
+"IDuser" = "User ID";
+"iosVersion" = "iOS Version";
+
+"editNickname" = "Enter a new nickname";
+"editCountry" = "Select Country";
+"acceptButton" = "Confirm";
+"editProfile" = "Edit";
+
+"win" = "Win";
+"draw" = "Draw";
+"lose" = "Defeat";
+"chooseGame" = "Choose a game";
 
 "Угадай загаданное число" = "Guess the mystery number";
 "В данной игре Вам необходимо угадать секретное слово за 6 попыток" = "Guess the word in 6 moves";
@@ -18,12 +78,12 @@
 
 "Правила игры" = "Game rules";
 "Правила" = "Rules";
-"bullCow_rules" = "1. You select the number of digits in the number and press the Play button. The game can be paused. \n\n\n2. You have to guess a number chosen by the computer. The number can start from zero. \n\n\n3. You make an attempt by entering a number. \n\n\n4. The computer tells you how many digits in your attempt match the guessed number and are in the same place (these digits are called \"bulls\"), and how many digits match the guessed number but are in a different place (these digits are called \"cows\").\n\n5. You use this information for the next attempt, and so on until you guess a number.\n\n\n6. The game continues until you guess the number. \n\n\n7. You can start a new game after the previous game ends.";
-"slovus_rules" = "1. You must guess a word that the computer has guessed. The word may contain repeated letters. You make an attempt by typing the word.\n\n\n2. The computer checks each letter in your attempt and highlights its color:\n- If the letter is green, it means that the letter is in the word and in its place.\n- If the letter is yellow, it means that the letter is in the word but not in its place.\n\n\n3. You get feedback from the computer and use this information to make your next attempt.\n\n\n4. You can take up to 6 tries to guess a word. \n\n\n5. If you guess the word in the least number of tries, you win. If you haven't guessed the word in 6 tries, the game is over.\n\n\n7. You can start a new game after the previous game ends.";
-"floodFill_rules" = "1. There are cells of different colors on the board. The colors can be repeated. \n2. The player starts at the top left corner and progresses line by line by selecting one of the colored squares at the bottom of the screen.\n3. When the player changes the current color of an area, each adjacent square of the same color also changes color.\n4. The goal of the game is to paint all the cells on the board with the same color.\n5. The game ends when all the cells on the board become the same color.\n6. A player must paint cells so that he can paint all the cells on the board.\n";
-"tictactoe_rules" = "1. There is a square of 3x3 squares on the board. \n\n\n2. A player is playing against a computer. The player plays crosses, the computer plays zeros.\n\n\n3. The goal of the game is to collect three of your symbols in a row (horizontally, vertically or diagonally).\n\n\n4. Players take turns placing their symbol on an empty square. A player can only place his symbol on an empty square.\n\n\n6. The game ends when one player has collected three of his symbols in a row or when all squares are filled and no player has collected three of his symbols in a row.\n\n\n7. If a player has collected three of his symbols in a row, he wins, if no player has collected three of his symbols in a row, then the game ends in a draw.";
-"binario_rules" = "1. The grid has cells of different colors: red, blue and empty cells.\n\n2. The goal of the game is to fill the grid so that the following conditions are met:\n- No row or column must contain repeating colors.\n- Each row and column must contain the same number of red and blue cells.\n\n\n3. The player can fill the grid by clicking on the cells to change their color.\n\n\n4. If all the rules are followed and the grid is completely filled, the player wins.";
-"numbers_rules" = "1. On the game board there is a grid consisting of cells. In each cell there is a digit from 0 to 9.\n2. The goal of the game - to remove all the digits from the field, connecting pairs of digits, the sum of which is 10.\n3. The player can connect digits if they are next to each other horizontally or vertically.\n4. To remove digits, the player must choose a pair of digits, the sum of which is 10, and click on them. After that the digits will be removed from the field.\n5. The player can connect only neighboring digits that are next to each other horizontally or vertically.\n6. A player can get bonus points if he removes several pairs of digits in a row without gaps.";
+"bullCow_rules" = "1. You select the number of digits in the number and press the Play button. The game can be paused. \n\n\n2. You have to guess a number chosen by the computer. The number can start from zero. \n\n\n3. You try by entering a number. \n\n\n4. The computer tells you how many digits in your attempt match the guessed number and are in the same place (these digits are called \"bulls\"), and how many digits match the guessed number but are in a different place (these digits are called \"cows\").\n\n5. You use this information for the next attempt, and so on until you guess a number.\n\n\n6. The game continues until you guess the number. \n\n\n7. You can start a new game after finishing the previous one.";
+"slovus_rules" = "1. You must guess a word guessed by the computer. The word may contain repeated letters. You make an attempt by typing the word.\n\n\n2. The computer checks each letter in your attempt and highlights its colour:\n- If the letter is green, it means that the letter is in the word and in its place.\n- If the letter is yellow, it means that the letter is in the word but not in its place.\n\n\n3. You get feedback from the computer and use this information to make your next attempt.\n\n4. You can take up to 6 tries to guess a word. \n\n\n5. If you guess the word in the least number of attempts, you win. If you haven't guessed the word in 6 tries, the game is over.\n\n\n7. You can start a new game after finishing the previous one.";
+"floodFill_rules" = "1. There are cells of different colours on the board. The colours can be repeated.\n\n\n2. The player starts at the top left corner and progresses line by line, selecting one of the coloured squares at the bottom of the screen.\n\n\n3. When the player changes the current colour of an area, each adjacent square of the same colour also changes colour.\n\n\n4. The aim of the game is to paint all the cells on the board with the same colour.\n\n\n5. The game ends when all the cells on the board become the same colour.\n\n\n6. A player must colour the cells so that he can colour all the cells on the board.\n";
+"tictactoe_rules" = "1. There is a square of 3x3 cells on the board.\n\n\n2. A player plays against the computer. The player plays with crosses, the computer with zeros.\n\n\n3. The aim of the game is to collect three of your symbols in a row (horizontally, vertically or diagonally).\n\n\n4. Players take turns placing their symbol on an empty square. A player can only place his symbol on an empty square.\n\n\n6. The game ends when one player has collected three of his symbols in a row or when all squares are filled and no player has collected three of his symbols in a row.\n\n\n7. If a player has collected three of his symbols in a row, he wins; if no player has collected three of his symbols in a row, the game ends in a draw.";
+"binario_rules" = "1. There are cells of different colours in the grid: red, blue and empty cells. \n\n\n2. The aim of the game is to fill the grid so that the following conditions are met:\n- No row or column must contain repeating colours.\n- Each row and column must contain the same number of red and blue cells.\n\n\n3. The player can fill the grid by clicking on the cells to change their colour.\n\n\n4. If all rules are followed and the grid is completely filled, the player wins.";
+"numbers_rules" = "1. On the game board there is a grid consisting of cells. In each cell is a number from 0 to 9. \n\n\n2. The aim of the game is to remove all digits from the field by connecting pairs of digits whose sum is 10.\n\n\n3. The player can connect digits if they are next to each other horizontally or vertically.\n\n\n4. To remove digits, the player must choose a pair of digits, the sum of which is 10, and click on them. After that the digits will be removed from the field.\n\n\n5. The player can connect only neighbouring digits that are next to each other horizontally or vertically.\n\n\n6. A player can get bonus points if he removes several pairs of digits in a row without gaps.";
 
 //Games
 
@@ -33,7 +93,7 @@
 "ОТПРАВИТЬ" = "SEND";
 "Добавить" = "Add";
 
-"Конец игры" = "End game";
+"End_game" = "End game";
 "Внимание!" = "Attention!";
 
 "Вы действительно хотите закончить игру?" = "Do you really want to finish the game?";
