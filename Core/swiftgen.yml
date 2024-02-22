@@ -1,3 +1,12 @@
+fonts:
+  inputs: UIKit/Resources/Fonts
+  outputs:
+    templateName: swift5
+    output: UIKit/Generated/Fonts.generated.swift
+    params:
+      enumName: PFFontFamily
+      publicAccess: 1
+
 xcassets:
   inputs: UIKit/Resources/Assets.xcassets
   outputs:
@@ -6,3 +15,4 @@ xcassets:
     params:
       enumName: PFAssets
       publicAccess: 1
+      

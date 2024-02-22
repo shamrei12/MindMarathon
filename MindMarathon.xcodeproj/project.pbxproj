@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
+		D80A6FA22B87D404007B030B /* Fonts.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA12B87D404007B030B /* Fonts.generated.swift */; };
 		D80FE4202B44A007008292BD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE41F2B44A007008292BD /* Realm */; };
 		D80FE4222B44A007008292BD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE4212B44A007008292BD /* RealmSwift */; };
 		D80FE4252B44A151008292BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80FE4242B44A151008292BD /* GoogleService-Info.plist */; };
@@ -110,6 +111,7 @@
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
+		D80A6FA12B87D404007B030B /* Fonts.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.generated.swift; sourceTree = "<group>"; };
 		D80FE4242B44A151008292BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCollectionViewController.swift; sourceTree = "<group>"; };
 		D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +231,25 @@
 				F4ED023B005D71A12915380D /* Pods-MindMarathon.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D80A6FA02B87D1F6007B030B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D86EADC42AE549B400FB19B6 /* SF-Pro-Text-Bold.otf */,
+				D86EADC12AE549B400FB19B6 /* SF-Pro-Text-BoldItalic.otf */,
+				D86EADBE2AE549B300FB19B6 /* SF-Pro-Text-Heavy.otf */,
+				D86EADC22AE549B400FB19B6 /* SF-Pro-Text-HeavyItalic.otf */,
+				D86EADBF2AE549B400FB19B6 /* SF-Pro-Text-Light.otf */,
+				D86EADC02AE549B400FB19B6 /* SF-Pro-Text-LightItalic.otf */,
+				D86EADC32AE549B400FB19B6 /* SF-Pro-Text-Medium.otf */,
+				D86EADC72AE549B400FB19B6 /* SF-Pro-Text-MediumItalic.otf */,
+				D86EADC82AE549B400FB19B6 /* SF-Pro-Text-Regular.otf */,
+				D86EADC92AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf */,
+				D86EADC52AE549B400FB19B6 /* SF-Pro-Text-Semibold.otf */,
+				D86EADC62AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D81A44D12B40638F00DC0C49 /* Delegate */ = {
@@ -405,6 +426,7 @@
 		D828F61B2B87BD130056FEC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D80A6FA02B87D1F6007B030B /* Fonts */,
 				D828F61D2B87BD420056FEC4 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -413,6 +435,7 @@
 		D828F61C2B87BD1F0056FEC4 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				D80A6FA12B87D404007B030B /* Fonts.generated.swift */,
 				D828F61F2B87BEA10056FEC4 /* AssetConstants.generated.swift */,
 			);
 			path = Generated;
@@ -523,18 +546,6 @@
 		D86EADB52AE5477B00FB19B6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D86EADC42AE549B400FB19B6 /* SF-Pro-Text-Bold.otf */,
-				D86EADC12AE549B400FB19B6 /* SF-Pro-Text-BoldItalic.otf */,
-				D86EADBE2AE549B300FB19B6 /* SF-Pro-Text-Heavy.otf */,
-				D86EADC22AE549B400FB19B6 /* SF-Pro-Text-HeavyItalic.otf */,
-				D86EADBF2AE549B400FB19B6 /* SF-Pro-Text-Light.otf */,
-				D86EADC02AE549B400FB19B6 /* SF-Pro-Text-LightItalic.otf */,
-				D86EADC32AE549B400FB19B6 /* SF-Pro-Text-Medium.otf */,
-				D86EADC72AE549B400FB19B6 /* SF-Pro-Text-MediumItalic.otf */,
-				D86EADC82AE549B400FB19B6 /* SF-Pro-Text-Regular.otf */,
-				D86EADC92AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf */,
-				D86EADC52AE549B400FB19B6 /* SF-Pro-Text-Semibold.otf */,
-				D86EADC62AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -928,6 +939,7 @@
 				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
+				D80A6FA22B87D404007B030B /* Fonts.generated.swift in Sources */,
 				D844C5942B63FE87007F397A /* ChangeCountryView.swift in Sources */,
 				D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
