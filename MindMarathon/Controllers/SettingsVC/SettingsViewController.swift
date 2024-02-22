@@ -119,7 +119,7 @@ final class SettingsViewController: UIViewController, MFMailComposeViewControlle
         engLanguageButton.backgroundColor = UIColor(named: "viewColor")
         engLanguageButton.titleLabel?.font = UIFont.sfProText(ofSize: 15, weight: .medium)
         engLanguageButton.setTitleColor(.label, for: .normal)
-        engLanguageButton.setImage(UIImage(named: "americanFlag"), for: .normal)
+        engLanguageButton.setImage(PFAssets.americanFlag.image, for: .normal)
         engLanguageButton.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         engLanguageButton.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
         return engLanguageButton

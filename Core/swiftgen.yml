@@ -1,0 +1,8 @@
+xcassets:
+  inputs: UIKit/Resources/Assets.xcassets
+  outputs:
+    templateName: swift5
+    output: UIKit/Generated/AssetConstants.generated.swift
+    params:
+      enumName: PFAssets
+      publicAccess: 1

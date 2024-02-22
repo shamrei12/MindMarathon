@@ -21,13 +21,15 @@
 		D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DE62ABF1573007A6597 /* NumbersViewModel.swift */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
 		D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF0B2A10C69000263CEB /* SceneDelegate.swift */; };
-		D826CF132A10C69200263CEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D826CF122A10C69200263CEB /* Assets.xcassets */; };
 		D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D826CF142A10C69200263CEB /* LaunchScreen.storyboard */; };
 		D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF1E2A10C6DA00263CEB /* Extension.swift */; };
 		D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF252A10C7DA00263CEB /* MenuViewController.swift */; };
 		D826CF2B2A10CAA000263CEB /* BullCowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF292A10CAA000263CEB /* BullCowViewController.swift */; };
 		D826CF2E2A10F84300263CEB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D826CF2D2A10F84300263CEB /* Podfile */; };
 		D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF302A11282F00263CEB /* BullCowViewModel.swift */; };
+		D828F6192B87BCFB0056FEC4 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = D828F6182B87BCFB0056FEC4 /* swiftgen.yml */; };
+		D828F61E2B87BD420056FEC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D828F61D2B87BD420056FEC4 /* Assets.xcassets */; };
+		D828F6202B87BEA10056FEC4 /* AssetConstants.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D828F61F2B87BEA10056FEC4 /* AssetConstants.generated.swift */; };
 		D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = D829AC312A6D124900A38F6E /* .swiftlint.yml */; };
 		D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC342A7D52B000A38F6E /* Backgroungs.swift */; };
 		D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D829AC392A86747000A38F6E /* GamesModels.swift */; };
@@ -119,7 +121,6 @@
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D826CF092A10C69000263CEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D826CF0B2A10C69000263CEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D826CF122A10C69200263CEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D826CF152A10C69200263CEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D826CF172A10C69200263CEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D826CF1E2A10C6DA00263CEB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -127,6 +128,9 @@
 		D826CF292A10CAA000263CEB /* BullCowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewController.swift; sourceTree = "<group>"; };
 		D826CF2D2A10F84300263CEB /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D826CF302A11282F00263CEB /* BullCowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowViewModel.swift; sourceTree = "<group>"; };
+		D828F6182B87BCFB0056FEC4 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		D828F61D2B87BD420056FEC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D828F61F2B87BEA10056FEC4 /* AssetConstants.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetConstants.generated.swift; sourceTree = "<group>"; };
 		D829AC312A6D124900A38F6E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		D829AC342A7D52B000A38F6E /* Backgroungs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backgroungs.swift; sourceTree = "<group>"; };
 		D829AC392A86747000A38F6E /* GamesModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesModels.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 		D826CEFD2A10C69000263CEB = {
 			isa = PBXGroup;
 			children = (
+				D828F6172B87BC430056FEC4 /* Core */,
 				D84BCAA12AC7723A00967444 /* Localizable.strings */,
 				D829AC312A6D124900A38F6E /* .swiftlint.yml */,
 				D826CF2D2A10F84300263CEB /* Podfile */,
@@ -290,7 +295,6 @@
 				D826CF202A10C71700263CEB /* View */,
 				D826CF1D2A10C6B500263CEB /* Extensions */,
 				D81A44D12B40638F00DC0C49 /* Delegate */,
-				D826CF122A10C69200263CEB /* Assets.xcassets */,
 				D826CF172A10C69200263CEB /* Info.plist */,
 			);
 			path = MindMarathon;
@@ -378,6 +382,40 @@
 				D83161972A1A584F00087769 /* UserMistakeView.xib */,
 			);
 			path = AlertView;
+			sourceTree = "<group>";
+		};
+		D828F6172B87BC430056FEC4 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D828F61A2B87BD040056FEC4 /* UIKit */,
+				D828F6182B87BCFB0056FEC4 /* swiftgen.yml */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D828F61A2B87BD040056FEC4 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D828F61C2B87BD1F0056FEC4 /* Generated */,
+				D828F61B2B87BD130056FEC4 /* Resources */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		D828F61B2B87BD130056FEC4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D828F61D2B87BD420056FEC4 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D828F61C2B87BD1F0056FEC4 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				D828F61F2B87BEA10056FEC4 /* AssetConstants.generated.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		D829AC332A7D527E00A38F6E /* Settings */ = {
@@ -792,6 +830,7 @@
 				D86EADD52AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				D86EADCF2AE549B400FB19B6 /* SF-Pro-Text-Medium.otf in Resources */,
 				D826CF162A10C69200263CEB /* LaunchScreen.storyboard in Resources */,
+				D828F6192B87BCFB0056FEC4 /* swiftgen.yml in Resources */,
 				D86EADD42AE549B400FB19B6 /* SF-Pro-Text-Regular.otf in Resources */,
 				D86D0A792A28A62800AB6789 /* singular in Resources */,
 				D86EADD12AE549B400FB19B6 /* SF-Pro-Text-Semibold.otf in Resources */,
@@ -802,8 +841,8 @@
 				D86EADD32AE549B400FB19B6 /* SF-Pro-Text-MediumItalic.otf in Resources */,
 				D80FE4252B44A151008292BD /* GoogleService-Info.plist in Resources */,
 				D86EADCD2AE549B400FB19B6 /* SF-Pro-Text-BoldItalic.otf in Resources */,
-				D826CF132A10C69200263CEB /* Assets.xcassets in Resources */,
 				D86EADCE2AE549B400FB19B6 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
+				D828F61E2B87BD420056FEC4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,6 +976,7 @@
 				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
+				D828F6202B87BEA10056FEC4 /* AssetConstants.generated.swift in Sources */,
 				D86602812B4C3C43001A913D /* EditUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
