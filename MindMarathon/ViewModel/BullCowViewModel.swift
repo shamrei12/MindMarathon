@@ -8,17 +8,13 @@
 import Foundation
 
 class BullCowViewModel {
-    let game: Game
     var isStartGame = false
     var isContinueGame = false
     var stepList = [BullCowProtocol]()
     var countStep = 0
     var bull = 0
     var cow = 0
-    
-    init(game: Game) {
-        self.game = game
-    }
+
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
         var result: [Int] = []

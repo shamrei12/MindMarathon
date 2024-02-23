@@ -10,6 +10,9 @@
 		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
 		D80A6FA22B87D404007B030B /* Fonts.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA12B87D404007B030B /* Fonts.generated.swift */; };
+		D80A6FA52B87D88F007B030B /* SteperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA42B87D88F007B030B /* SteperView.swift */; };
+		D80A6FA72B87DC29007B030B /* GameControlBullCowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA62B87DC29007B030B /* GameControlBullCowView.swift */; };
+		D80A6FA92B87DDF7007B030B /* KeyboardBullCowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA82B87DDF7007B030B /* KeyboardBullCowView.swift */; };
 		D80FE4202B44A007008292BD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE41F2B44A007008292BD /* Realm */; };
 		D80FE4222B44A007008292BD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D80FE4212B44A007008292BD /* RealmSwift */; };
 		D80FE4252B44A151008292BD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80FE4242B44A151008292BD /* GoogleService-Info.plist */; };
@@ -81,6 +84,8 @@
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
+		D88CD68F2B888DB2009171C9 /* BullCowGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88CD68E2B888DB2009171C9 /* BullCowGameView.swift */; };
+		D88CD6912B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88CD6902B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift */; };
 		D898EFB32B73971800D10EA0 /* ChangeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D898EFB22B73971800D10EA0 /* ChangeImageView.swift */; };
 		D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */; };
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
@@ -112,6 +117,9 @@
 		96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
 		D80A6FA12B87D404007B030B /* Fonts.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.generated.swift; sourceTree = "<group>"; };
+		D80A6FA42B87D88F007B030B /* SteperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteperView.swift; sourceTree = "<group>"; };
+		D80A6FA62B87DC29007B030B /* GameControlBullCowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlBullCowView.swift; sourceTree = "<group>"; };
+		D80A6FA82B87DDF7007B030B /* KeyboardBullCowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBullCowView.swift; sourceTree = "<group>"; };
 		D80FE4242B44A151008292BD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D81C72E52ABF479A00B8D4F0 /* NumberCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCollectionViewController.swift; sourceTree = "<group>"; };
 		D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -182,6 +190,8 @@
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
+		D88CD68E2B888DB2009171C9 /* BullCowGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowGameView.swift; sourceTree = "<group>"; };
+		D88CD6902B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuesHistoryStepsBullCowView.swift; sourceTree = "<group>"; };
 		D898EFB22B73971800D10EA0 /* ChangeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeImageView.swift; sourceTree = "<group>"; };
 		D8B108BC2B03AA9C00CD09A1 /* TaskTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableView.swift; sourceTree = "<group>"; };
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
@@ -250,6 +260,18 @@
 				D86EADC62AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D80A6FA32B87D87B007B030B /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				D80A6FA42B87D88F007B030B /* SteperView.swift */,
+				D80A6FA62B87DC29007B030B /* GameControlBullCowView.swift */,
+				D80A6FA82B87DDF7007B030B /* KeyboardBullCowView.swift */,
+				D88CD68E2B888DB2009171C9 /* BullCowGameView.swift */,
+				D88CD6902B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift */,
+			);
+			path = TestView;
 			sourceTree = "<group>";
 		};
 		D81A44D12B40638F00DC0C49 /* Delegate */ = {
@@ -672,6 +694,7 @@
 		D8E321162B00A60C00674541 /* BullCowGame */ = {
 			isa = PBXGroup;
 			children = (
+				D80A6FA32B87D87B007B030B /* TestView */,
 				D8E321172B00A69900674541 /* Cell */,
 				D826CF292A10CAA000263CEB /* BullCowViewController.swift */,
 			);
@@ -932,6 +955,7 @@
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
+				D80A6FA72B87DC29007B030B /* GameControlBullCowView.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
@@ -944,7 +968,9 @@
 				D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */,
 				D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */,
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
+				D80A6FA52B87D88F007B030B /* SteperView.swift in Sources */,
 				D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */,
+				D88CD6912B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
 				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
@@ -990,6 +1016,8 @@
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
 				D828F6202B87BEA10056FEC4 /* AssetConstants.generated.swift in Sources */,
 				D86602812B4C3C43001A913D /* EditUserView.swift in Sources */,
+				D80A6FA92B87DDF7007B030B /* KeyboardBullCowView.swift in Sources */,
+				D88CD68F2B888DB2009171C9 /* BullCowGameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

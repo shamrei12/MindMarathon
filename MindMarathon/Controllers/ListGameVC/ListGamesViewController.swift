@@ -139,8 +139,11 @@ class ListGamesViewController: UIViewController {
         let viewController: UIViewController
         switch game.title {
         case "bullcow".localize():
-            let viewModel = BullCowViewModel(game: game)
-            viewController = BullCowViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: BullCowGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         case "slovus".localize():
             let viewModel = SlovusViewModel(game: game)
             viewController = SlovusGameViewController(viewModel: viewModel)

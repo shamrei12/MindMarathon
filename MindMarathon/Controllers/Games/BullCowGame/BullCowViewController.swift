@@ -45,7 +45,7 @@ class BullCowViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = CustomColor.viewColor.color
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
         userDiggitLabel.text = ""
         settingTableView()
         createUIElements()
@@ -266,12 +266,12 @@ class BullCowViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    @objc
-    func rulesTapped() {
-        let rulesVC = CurrentRulesViewController(game: viewModel.game)
-        rulesVC.modalPresentationStyle = .formSheet
-        present(rulesVC, animated: true)
-    }
+//    @objc
+//    func rulesTapped() {
+//        let rulesVC = CurrentRulesViewController(game: viewModel.game)
+//        rulesVC.modalPresentationStyle = .formSheet
+//        present(rulesVC, animated: true)
+//    }
     
     @objc
     func selectMaxLenghtTapped(_ sender: UIButton) {
