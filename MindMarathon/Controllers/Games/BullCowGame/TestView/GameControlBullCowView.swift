@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct GameControlBullCowView: View {
+    @Binding var viewModel: BullCowViewModelNew
     @Binding var sizeDigit: Int
-    @Binding var isStartGame: Bool
+    @State var isStartGame: Bool = false
+    @Binding var secretDigit: [Int]
     var body: some View {
         HStack {
             SteperView(level: $sizeDigit)
@@ -19,6 +21,10 @@ struct GameControlBullCowView: View {
             Spacer()
             Button(action: {
                 isStartGame.toggle()
+                isStartGame ? viewModel.statusStarGame() : viewModel.statusFinishGame()
+                viewModel.sizeDigits = sizeDigit
+                secretDigit = viewModel.makeNumber(maxLenght: viewModel.sizeDigits)
+                
             }) {
                 
                 Image(systemName: isStartGame ? "pause.fill" : "play.fill")

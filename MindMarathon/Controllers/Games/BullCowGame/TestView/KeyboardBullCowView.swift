@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct KeyboardBullCowView: View {
+    @Binding var viewModel: BullCowViewModelNew
     @Binding var sizeDigit: Int
     @Binding var massive: [String]
+    @Binding var secretDigits: [Int]
     @State var number: String = ""
     var massiveNumbers: [Int] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
@@ -34,6 +36,7 @@ struct KeyboardBullCowView: View {
                 }
                 
                 Button(action: {
+                    viewModel.nextuserMove(userDigits: number, secretDiggits: secretDigits)
                     massive.append(number)
                     number = ""
                 }) {

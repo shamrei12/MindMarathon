@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct GuesHistoryStepsBullCowView: View {
+    @ObservedObject var viewModel: BullCowViewModelNew
     @Binding var massiveUserStep: [String]
     var body: some View {
         ScrollView {
             VStack {
-                ForEach($massiveUserStep, id: \.self) { text in
-                    GuesUserStepsBullCowView(userGues: text)
+                ForEach(0..<viewModel.historyGame.count, id: \.self) { text in
+                    GuesUserStepsBullCowView(userGues: $viewModel.historyGame[text].userStep, bullCount: $viewModel.historyGame[text].bull, cowCount: $viewModel.historyGame[text].cow)
                         .padding(.horizontal, 10)
                         .background(.white)
                         .cornerRadius(10)
@@ -27,19 +28,22 @@ struct GuesHistoryStepsBullCowView: View {
 
 struct GuesUserStepsBullCowView: View {
     @Binding var userGues: String
+    @Binding var bullCount: Int
+    @Binding var cowCount: Int
     var body: some View {
         HStack {
             UserStepsBullCowView(userGues: $userGues)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Spacer()
-            ResultUserStepsBullCowView()
+            ResultUserStepsBullCowView(bullCount: $bullCount, cowCount: $cowCount)
         }
     }
 }
 
 
 struct UserStepsBullCowView: View {
+    
     @Binding var userGues: String
     var body: some View {
         HStack {
@@ -61,13 +65,16 @@ struct UserStepsBullCowView: View {
 
 
 struct ResultUserStepsBullCowView: View {
+    @Binding var bullCount: Int
+    @Binding var cowCount: Int
+    
     var body: some View {
         HStack {
             VStack {
                 Image(uiImage: PFAssets.cow.image)
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
-                Text("1")
+                Text(String(bullCount))
                     .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
             }
             VStack {
@@ -75,7 +82,7 @@ struct ResultUserStepsBullCowView: View {
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
 
-                Text("1")
+                Text(String(cowCount))
                     .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
 
             }
