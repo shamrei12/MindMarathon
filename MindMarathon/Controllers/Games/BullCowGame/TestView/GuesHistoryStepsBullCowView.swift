@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GuesHistoryStepsBullCowView: View {
     @ObservedObject var viewModel: BullCowViewModelNew
-    @Binding var massiveUserStep: [String]
     var body: some View {
         ScrollView {
             VStack {
@@ -22,6 +21,7 @@ struct GuesHistoryStepsBullCowView: View {
                         .shadow(color: .gray, radius: 1)
                 }
             }
+            .padding(.top, 5)
         }
     }
 }
@@ -74,7 +74,7 @@ struct ResultUserStepsBullCowView: View {
                 Image(uiImage: PFAssets.cow.image)
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
-                Text(String(bullCount))
+                Text(String(cowCount))
                     .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
             }
             VStack {
@@ -82,7 +82,7 @@ struct ResultUserStepsBullCowView: View {
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
 
-                Text(String(cowCount))
+                Text(String(bullCount))
                     .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
 
             }

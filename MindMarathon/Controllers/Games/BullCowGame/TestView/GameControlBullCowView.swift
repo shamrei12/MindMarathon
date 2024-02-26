@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameControlBullCowView: View {
-    @Binding var viewModel: BullCowViewModelNew
+    var viewModel: BullCowViewModelNew
     @Binding var sizeDigit: Int
     @State var isStartGame: Bool = false
     @Binding var secretDigit: [Int]

@@ -30,6 +30,10 @@ class BullCowViewModelNew: ObservableObject {
         let userMove = createMassive(userDiggit: userDigits)
         comparisonNumber(userMove, secretDiggits)
         historyGame.append(BullCowModel(size: sizeDigits, bull: bull, cow: cow, userStep: userDigits))
+        if historyGame.last?.bull == sizeDigits {
+            statusFinishGame()
+        }
+
     }
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
