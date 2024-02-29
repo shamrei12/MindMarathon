@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol KeyboardDelegate: AnyObject {
     func keyPressed(_ key: String)
@@ -20,7 +21,7 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         case finished
     }
     
-    private let keyboardView = KeyboardView()
+    private let keyboardView = UIHostingController(rootView: CustomKeyboardView()).view!
     private var messegeView: UserMistakeView!
     private var massLayer = [UIStackView]()
     private var contentViewStackView = UIStackView()
@@ -65,7 +66,8 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         navigationBarCreate()
         panelControlCreated()
         continerCreated()
-        keyboardView.delegate = self
+//        keyboardView.delegate = self
+        keyboardView.backgroundColor = .clear
         view.addSubview(keyboardView)
 
         keyboardViewCreated()
@@ -146,8 +148,8 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
         }
     }
     
-    private func keyboardViewCreated() /*-> UIView */{
-        keyboardView.keyboardCreated()
+    private func keyboardViewCreated() {
+//        keyboardView.keyboardCreated()
         keyboardView.snp.makeConstraints { maker in
             maker.top.equalTo(containerView.snp.bottom).inset(-5)
             maker.left.right.equalToSuperview().inset(5)
@@ -420,16 +422,16 @@ final class SlovusGameViewController: UIViewController, KeyboardDelegate {
     }
     
     func clearKeyboardButtons() {
-        keyboardView.clearColorButtons()
+//        keyboardView.clearColorButtons()
     }
     
     func coloringKeyboardButtons(letter: String, color: UIColor) {
         
-        for button in keyboardView.massiveKeyboardButtons {
-            if button.titleLabel?.text ?? "" == letter {
-                button.backgroundColor = color
-            }
-        }
+//        for button in keyboardView.massiveKeyboardButtons {
+//            if button.titleLabel?.text ?? "" == letter {
+//                button.backgroundColor = color
+//            }
+//        }
     }
                                          
     func coloringButtonsKeyboard(arrayColor: [Character: Int]) {

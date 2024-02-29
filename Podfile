@@ -12,5 +12,6 @@ target 'MindMarathon' do
   pod 'FirebaseFirestore'
   pod 'FirebaseStorage'
   pod 'FirebaseDatabase'
+  pod 'WrappingHStack'
   
 end
