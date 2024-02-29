@@ -1,20 +1,41 @@
 //
-//  BullCowViewModel.swift
+//  BullCowViewModelNew.swift
 //  MindMarathon
 //
-//  Created by Алексей Шамрей on 14.05.23.
+//  Created by Алексей Шамрей on 24.02.24.
 //
 
 import Foundation
 
-class BullCowViewModel {
-    var isStartGame = false
-    var isContinueGame = false
-    var stepList = [BullCowProtocol]()
-    var countStep = 0
-    var bull = 0
-    var cow = 0
+class BullCowViewModelNew: ObservableObject {
+    
+    @Published var isStartGame: Bool = false
+    @Published var isFinishGame: Bool = false
+    @Published var sizeDigits: Int = 0
+    @Published var historyGame = [BullCowProtocol]()
+    private var bull: Int = 0
+    private var cow: Int = 0
+    
+    func statusStarGame() {
+        isStartGame = true
+        isFinishGame = false
+        historyGame.removeAll()
+    }
+    
+    func statusFinishGame() {
+        isStartGame = false
+        isFinishGame = true
+    }
+    
+    func nextuserMove(userDigits: String, secretDiggits: [Int]) {
+        let userMove = createMassive(userDiggit: userDigits)
+        comparisonNumber(userMove, secretDiggits)
+        historyGame.append(BullCowModel(size: sizeDigits, bull: bull, cow: cow, userStep: userDigits))
+        if historyGame.last?.bull == sizeDigits {
+            statusFinishGame()
+        }
 
+    }
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры
         var result: [Int] = []
@@ -27,7 +48,7 @@ class BullCowViewModel {
         return result
     }
     
-    func  comparisonNumber(_ userDigg: [Int], _ computerNumber: [Int]) {
+    func comparisonNumber(_ userDigg: [Int], _ computerNumber: [Int]) {
         var bullCount = 0
         var cowCount = 0
         for i in 0..<userDigg.count {
@@ -62,20 +83,9 @@ class BullCowViewModel {
         return result
     }
     
-    func remakeComputerNumberForAlert(computerDigit: [Int]) -> String {
-        var result = String()
-        for i in computerDigit {
-            result += String(i)
-        }
-        return result
-    }
-    
-    func restartGame() {
+    func finishGame() {
+        historyGame.removeAll()
         bull = 0
         cow = 0
-        stepList.removeAll()
-        self.countStep = 0
-        isStartGame = false
-        isContinueGame = false
     }
 }
