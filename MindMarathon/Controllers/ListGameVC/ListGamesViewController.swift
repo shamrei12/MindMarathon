@@ -140,7 +140,9 @@ class ListGamesViewController: UIViewController {
         switch game.title {
         case "bullcow".localize():
             viewController = UIViewController()
-            let view = UIHostingController(rootView: BullCowGameView())
+            let view = UIHostingController(rootView: BullCowGameView(dismissAction: {
+                self.dismiss(animated: true)
+            }))
             view.view.backgroundColor = CustomColor.viewColor.color
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Combine
 
 class BullCowViewModelNew: ObservableObject {
+    
     @Published var isStartGame: Bool = false
     @Published var isFinishGame: Bool = false
     @Published var sizeDigits: Int = 0
@@ -19,6 +19,7 @@ class BullCowViewModelNew: ObservableObject {
     func statusStarGame() {
         isStartGame = true
         isFinishGame = false
+        historyGame.removeAll()
     }
     
     func statusFinishGame() {

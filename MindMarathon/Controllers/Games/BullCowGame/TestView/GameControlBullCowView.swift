@@ -18,6 +18,7 @@ struct GameControlBullCowView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.25)
                 .background(.gray)
                 .cornerRadius(25)
+                .disabled(viewModel.isStartGame)
             Spacer()
             Button(action: {
                 isStartGame.toggle()
