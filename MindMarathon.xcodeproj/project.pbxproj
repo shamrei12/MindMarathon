@@ -22,7 +22,6 @@
 		D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */; };
 		D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */; };
 		D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD12AB4CE79007A6597 /* IconsManager.swift */; };
-		D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DD42AB60F59007A6597 /* KeyboardView.swift */; };
 		D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DE42ABF12FB007A6597 /* NumbersViewController.swift */; };
 		D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81F8DE62ABF1573007A6597 /* NumbersViewModel.swift */; };
 		D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D826CF092A10C69000263CEB /* AppDelegate.swift */; };
@@ -83,7 +82,6 @@
 		D8716B1F2B90C27300097B0A /* GameControlSlovusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
-		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
 		D884F7432A8CE26000271263 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7422A8CE26000271263 /* GameSettings.swift */; };
 		D884F7512A9E3E1700271263 /* GameRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D884F7502A9E3E1700271263 /* GameRules.swift */; };
@@ -130,7 +128,6 @@
 		D81C72E72AC0586900B8D4F0 /* NumbersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersCollectionViewCell.swift; sourceTree = "<group>"; };
 		D81F8DCF2AB4CCFD007A6597 /* FontsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsManager.swift; sourceTree = "<group>"; };
 		D81F8DD12AB4CE79007A6597 /* IconsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsManager.swift; sourceTree = "<group>"; };
-		D81F8DD42AB60F59007A6597 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		D81F8DE42ABF12FB007A6597 /* NumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
 		D81F8DE62ABF1573007A6597 /* NumbersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewModel.swift; sourceTree = "<group>"; };
 		D826CF062A10C69000263CEB /* MindMarathon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindMarathon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +189,6 @@
 		D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlSlovusGameView.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
-		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
 		D884F7422A8CE26000271263 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		D884F7502A9E3E1700271263 /* GameRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRules.swift; sourceTree = "<group>"; };
@@ -276,16 +272,6 @@
 			path = KeyBoardView;
 			sourceTree = "<group>";
 		};
-		D811263A2B90836000651EAE /* NewSlovusGame */ = {
-			isa = PBXGroup;
-			children = (
-				D81126382B9081C500651EAE /* SlovusGameView.swift */,
-				D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */,
-				D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */,
-			);
-			path = NewSlovusGame;
-			sourceTree = "<group>";
-		};
 		D81A44D12B40638F00DC0C49 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,7 +293,6 @@
 		D81F8DD32AB60F36007A6597 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D81F8DD42AB60F59007A6597 /* KeyboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -711,9 +696,10 @@
 		D8E321182B00A6F600674541 /* SlovusGame */ = {
 			isa = PBXGroup;
 			children = (
-				D811263A2B90836000651EAE /* NewSlovusGame */,
+				D81126382B9081C500651EAE /* SlovusGameView.swift */,
+				D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */,
+				D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */,
 				D81126352B906E7300651EAE /* KeyBoardView */,
-				D882216A2A162A1E00531EED /* SlovusGameViewController.swift */,
 			);
 			path = SlovusGame;
 			sourceTree = "<group>";
@@ -1002,7 +988,6 @@
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,
-				D81F8DD52AB60F59007A6597 /* KeyboardView.swift in Sources */,
 				D81C72E92AC0586900B8D4F0 /* NumbersCollectionViewCell.swift in Sources */,
 				D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */,
 				D898EFB32B73971800D10EA0 /* ChangeImageView.swift in Sources */,
@@ -1012,7 +997,6 @@
 				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
 				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
-				D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */,
 				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,

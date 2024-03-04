@@ -38,7 +38,3 @@ struct GameControlSlovusGameView: View {
         .padding(.horizontal, 10)
     }
 }
-//
-//#Preview {
-//    GameControlSlovusGameView()
-//}
