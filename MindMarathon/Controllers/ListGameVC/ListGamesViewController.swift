@@ -147,8 +147,13 @@ class ListGamesViewController: UIViewController {
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
         case "slovus".localize():
-            let viewModel = SlovusViewModel(game: game)
-            viewController = SlovusGameViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: SlovusGameView(dismissAction: {
+                self.dismiss(animated: true)
+            }))
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         case "flood_fill".localize():
             let viewModel = FloodFillViewModel(game: game)
             viewController = FloodFillViewController(viewModel: viewModel)

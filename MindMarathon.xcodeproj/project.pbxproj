@@ -79,6 +79,8 @@
 		D86EADD42AE549B400FB19B6 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D86EADC82AE549B400FB19B6 /* SF-Pro-Text-Regular.otf */; };
 		D86EADD52AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D86EADC92AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf */; };
 		D86EADD72AE54D4100FB19B6 /* FontsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86EADD62AE54D4100FB19B6 /* FontsExtension.swift */; };
+		D8716B1D2B90C25000097B0A /* TopViewSlovusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */; };
+		D8716B1F2B90C27300097B0A /* GameControlSlovusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D882216C2A162A1E00531EED /* SlovusGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216A2A162A1E00531EED /* SlovusGameViewController.swift */; };
@@ -186,6 +188,8 @@
 		D86EADC82AE549B400FB19B6 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		D86EADC92AE549B400FB19B6 /* SF-Pro-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-RegularItalic.otf"; sourceTree = "<group>"; };
 		D86EADD62AE54D4100FB19B6 /* FontsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsExtension.swift; sourceTree = "<group>"; };
+		D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewSlovusGameView.swift; sourceTree = "<group>"; };
+		D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlSlovusGameView.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		D882216A2A162A1E00531EED /* SlovusGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusGameViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				D81126382B9081C500651EAE /* SlovusGameView.swift */,
+				D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */,
+				D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */,
 			);
 			path = NewSlovusGame;
 			sourceTree = "<group>";
@@ -944,6 +950,7 @@
 			files = (
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
+				D8716B1D2B90C25000097B0A /* TopViewSlovusGameView.swift in Sources */,
 				D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */,
 				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
@@ -1011,6 +1018,7 @@
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,
 				D828F6202B87BEA10056FEC4 /* AssetConstants.generated.swift in Sources */,
 				D81126372B906E9300651EAE /* CustomKeyboardView.swift in Sources */,
+				D8716B1F2B90C27300097B0A /* GameControlSlovusGameView.swift in Sources */,
 				D86602812B4C3C43001A913D /* EditUserView.swift in Sources */,
 				D80A6FA92B87DDF7007B030B /* KeyboardBullCowView.swift in Sources */,
 				D88CD68F2B888DB2009171C9 /* BullCowGameView.swift in Sources */,

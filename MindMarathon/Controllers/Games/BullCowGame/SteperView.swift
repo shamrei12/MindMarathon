@@ -28,8 +28,8 @@ struct ButtonSteperView: View {
     var body: some View {
         Button(action: {
                 level = systemName == "minus" ? level - 1 : level + 1
-            if level == 7 || level == 1 {
-                level = 2
+            if level == 10 || level == 4 {
+                level = 5
             }
         }) {
             Image(systemName: systemName)

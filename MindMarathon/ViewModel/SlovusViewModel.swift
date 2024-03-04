@@ -7,16 +7,18 @@
 
 import Foundation
 
-class SlovusViewModel {
-    let game: Game
+class SlovusViewModel: ObservableObject {
     let dictionary = loadDictionary()
     let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
-    var isstartGame: Bool = false
-    var iscontinuePlaying: Bool = false
-    var step: Int = .zero
-    
-    init(game: Game) {
-        self.game = game
+    @Published var isstartGame: Bool = false
+    @Published var isFinishGame: Bool = false
+    @Published var isCorrectWord: Bool = true
+    @Published var step: Int = .zero
+    @Published var historyUserMove: [String] = ["", "", "", "", "", ""]
+    @Published var historyAnswerMove: [([Int], [Character: Int])] = [([Int], [Character: Int])]()
+
+    func userMove(puzzleWord: String, userWord: String) {
+        historyAnswerMove.append(checkWord(puzzleWord: puzzleWord, userWord: userWord))
     }
     
     private static func loadDictionaryPuzzleWord() -> Set<String> {
@@ -71,6 +73,7 @@ class SlovusViewModel {
     }
 
     func checkWord(puzzleWord: String, userWord: String) -> ([Int], [Character: Int]) {
+
         var result = Array(repeating: 0, count: puzzleWord.count)
         var newUser = userWord
         var usedIndexes = Set<Int>()
@@ -119,6 +122,6 @@ class SlovusViewModel {
                     }
                 }
         }
-        return (result,arrayOfKeyboardLetterColors)
+        return (result, arrayOfKeyboardLetterColors)
     }
 }
