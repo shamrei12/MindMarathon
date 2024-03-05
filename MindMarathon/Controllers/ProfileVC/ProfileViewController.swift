@@ -219,7 +219,6 @@ class ProfileViewController: UIViewController {
         let progressValue: Float = Float(newExp) / Float(maxExp)
         progress.progress = progressValue
     }
-
     
     func getUserStatistics(massive: [ProfileManager]) {
         let timeInGame = String(massive[0].timeInGame)

@@ -21,9 +21,9 @@ struct GameControlSlovusGameView: View {
                 .disabled(viewModel.isstartGame)
             Spacer()
             Button(action: {
+                viewModel.loadDictionary()
                 viewModel.isstartGame.toggle()
                 secretWord = viewModel.choiceRandomWord(size: sizeDigit)
-                
             }) {
                 Image(systemName: viewModel.isstartGame ? "pause.fill" : "play.fill")
                     .tint(.white)

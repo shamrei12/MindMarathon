@@ -8,8 +8,13 @@
 import Foundation
 
 class SlovusViewModel: ObservableObject {
-    let dictionary = loadDictionary()
-    let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+    var dictionary: Set<String> = Set<String>()
+    var dictionaryPuzzleWord = Set<String>()
+    
+//    DispatchQueue.global().async {
+//        let dictionary = loadDictionary()
+//        let dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+//    }
     @Published var isstartGame: Bool = false
     @Published var isFinishGame: Bool = false
     @Published var isCorrectWord: Bool = true
@@ -21,8 +26,25 @@ class SlovusViewModel: ObservableObject {
         historyAnswerMove.append(checkWord(puzzleWord: puzzleWord, userWord: userWord))
     }
     
-    private static func loadDictionaryPuzzleWord() -> Set<String> {
+    func loadDictionary() {
+        if self.dictionary.isEmpty && self.dictionaryPuzzleWord.isEmpty {
+            self.dictionary = loadDictionary()
+            self.dictionaryPuzzleWord = loadDictionaryPuzzleWord()
+        }
+    }
+    
+    private func loadDictionaryPuzzleWord() -> Set<String> {
         if let path = Bundle.main.path(forResource: "singular", ofType: ""),
+            let contents = try? String(contentsOfFile: path) {
+            let words = contents.components(separatedBy: .newlines)
+                .compactMap { $0.lowercased() }
+            return Set(words)
+        }
+        return Set()
+    }
+    
+    private func loadDictionary() -> Set<String> {
+        if let path = Bundle.main.path(forResource: "ru_RU", ofType: ""),
             let contents = try? String(contentsOfFile: path) {
             let words = contents.components(separatedBy: .newlines)
                 .compactMap { $0.lowercased() }
@@ -40,15 +62,7 @@ class SlovusViewModel: ObservableObject {
         }
     }
     
-    private static func loadDictionary() -> Set<String> {
-        if let path = Bundle.main.path(forResource: "ru_RU", ofType: ""),
-            let contents = try? String(contentsOfFile: path) {
-            let words = contents.components(separatedBy: .newlines)
-                .compactMap { $0.lowercased() }
-            return Set(words)
-        }
-        return Set()
-    }
+  
     
     func choiceRandomWord(size: Int) -> String {
         var wordArray = [String]()

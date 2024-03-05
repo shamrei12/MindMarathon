@@ -52,7 +52,6 @@ struct SlovusGameView: View {
                     viewModel.historyAnswerMove.removeAll()
                     curentStep = 0
                 }
-                
                 Button("Выйти из игры", role: .destructive) {
                     saveResults()
                     dismissAction()
@@ -60,11 +59,9 @@ struct SlovusGameView: View {
             } message: {
                 Text(resultGame ? "congratulations_message".localize() + "puzzleWord_message".localize() + "\(secretWord). " + "time_message".localize() + "\(time)" : "The moves are over! We made a word \(secretWord). Will you try again?")
             }
-            
             VStack {
                 if !viewModel.isCorrectWord {
-                    AlertView(viewModel: viewModel)
-                    
+                    AlertView(viewModel: viewModel, text: "Данного слова нет в нашем словаре. Измените слово и повторите попытку")
                 }
                 Spacer()
             }
@@ -75,9 +72,10 @@ struct SlovusGameView: View {
 
 struct AlertView: View {
     @ObservedObject var viewModel: SlovusViewModel
+    @State var text: String
     var body: some View {
         VStack {
-            Text("Данного слова нет в нашем словаре. Измените слово и повторите попытку")
+            Text(text)
                 .padding()
                 .background(Color.blue)
                 .foregroundColor(.white)
@@ -135,14 +133,13 @@ struct GameFieldSlovusGameView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 1) {
             ForEach(0..<viewModel.historyUserMove.count, id: \.self) { row in
-                HStack(spacing: 5) {
+                HStack(spacing: 1) {
                     ForEach(0..<size, id: \.self) { column in
                         Text(getChar(row: row, column: column))
                             .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 45)))
                             .foregroundColor(.white)
-                        //                            .frame(width: UIScreen.main.bounds.width / CGFloat(size + 1), alignment: .center)
                             .frame(maxWidth: .infinity)
                             .frame(maxHeight: .infinity)
                             .background(Color(getColorBackground(row: row, column: column)))
