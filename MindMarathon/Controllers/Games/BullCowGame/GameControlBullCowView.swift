@@ -15,7 +15,7 @@ struct GameControlBullCowView: View {
     var body: some View {
         HStack {
             SteperView(level: $sizeDigit)
-                .frame(width: UIScreen.main.bounds.width * 0.25)
+                .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.05)
                 .background(.gray)
                 .cornerRadius(25)
                 .disabled(viewModel.isStartGame)
@@ -34,6 +34,7 @@ struct GameControlBullCowView: View {
                     .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
+            .frame(height: UIScreen.main.bounds.height * 0.05)
             .background(.blue)
             .cornerRadius(25)
             Spacer()
