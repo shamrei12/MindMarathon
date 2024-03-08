@@ -34,7 +34,6 @@ struct SlovusGameView: View {
             VStack {
                 TopViewSlovusGameView(dismissAction: dismissAction, viewModel: viewModel, time: $time)
                     .padding(.horizontal, 20)
-                
                 GameControlSlovusGameView(viewModel: viewModel, sizeDigit: $size, secretWord: $secretWord)
                 GameFieldSlovusGameView(viewModel: viewModel, curentWord: $curentWord, size: $size)
                     .padding(5)

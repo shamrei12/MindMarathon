@@ -7,13 +7,25 @@
 
 import Foundation
 
-class TicTacToeViewModel {
-    let game: Game
+class TicTacToeViewModel: ObservableObject {
     
-    init(game: Game) {
-        self.game = game
+    @Published var isStartGame: Bool = false
+    @Published var imageArray = [["", "", ""], ["", "", ""], ["", "", ""]]
+    @Published var move: Bool = true
+    @Published var userWin: Bool = false
+    @Published var botWin: Bool = false
+    @Published var finishGame: Bool = false
+    @Published var step = 0
+    
+    
+    func newGame() {
+        isStartGame = false
+        imageArray = [["", "", ""], ["", "", ""], ["", "", ""]]
+        move = true
+        userWin = false
+        botWin = false
+        finishGame = false
     }
-    
     // Функция для определения хода компьютера
     func computerMove(board: [[String]]) -> (Int, Int)? {
         // Проверяем, есть ли у компьютера возможность выиграть

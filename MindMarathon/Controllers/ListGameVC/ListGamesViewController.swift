@@ -158,8 +158,13 @@ class ListGamesViewController: UIViewController {
             let viewModel = FloodFillViewModel(game: game)
             viewController = FloodFillViewController(viewModel: viewModel)
         case "tictactoe".localize():
-            let viewModel = TicTacToeViewModel(game: game)
-            viewController = TicTacToeViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: TicTacToeViewGame(dismissAction: {
+                self.dismiss(animated: true)
+            }))
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         case "binario".localize():
             let viewModel = BinarioViewModel(game: game)
             viewController = BinarioViewController(viewModel: viewModel)

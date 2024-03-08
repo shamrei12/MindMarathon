@@ -109,6 +109,10 @@
 		D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E807282B11EAEB00D69D67 /* RulesViewController.swift */; };
 		D8E8072B2B12286100D69D67 /* DropToDownButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E8072A2B12286100D69D67 /* DropToDownButton.swift */; };
 		D8F1C54A2AE83D6E00CF365B /* FontAdaptation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */; };
+		D8F787FF2B99F9B200C3AD9E /* TicTacToeViewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F787FE2B99F9B200C3AD9E /* TicTacToeViewGame.swift */; };
+		D8F788012B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F788002B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift */; };
+		D8F788042B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F788032B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift */; };
+		D8F788062B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F788052B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift */; };
 		FBA0034C68F638FF75748FAE /* Pods_MindMarathon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +219,10 @@
 		D8E807282B11EAEB00D69D67 /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		D8E8072A2B12286100D69D67 /* DropToDownButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropToDownButton.swift; sourceTree = "<group>"; };
 		D8F1C5492AE83D6E00CF365B /* FontAdaptation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAdaptation.swift; sourceTree = "<group>"; };
+		D8F787FE2B99F9B200C3AD9E /* TicTacToeViewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewGame.swift; sourceTree = "<group>"; };
+		D8F788002B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewTicTacToeGameView.swift; sourceTree = "<group>"; };
+		D8F788032B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlTicTacToeGameView.swift; sourceTree = "<group>"; };
+		D8F788052B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeGameFieldsView.swift; sourceTree = "<group>"; };
 		F4ED023B005D71A12915380D /* Pods-MindMarathon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.release.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -707,6 +715,7 @@
 		D8E321192B00A71D00674541 /* TicTacToeGame */ = {
 			isa = PBXGroup;
 			children = (
+				D8F787FD2B99F99700C3AD9E /* newTicTacToe */,
 				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
 			);
 			path = TicTacToeGame;
@@ -757,6 +766,17 @@
 				D8E321202B028EBC00674541 /* CustomTabBarController.swift */,
 			);
 			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		D8F787FD2B99F99700C3AD9E /* newTicTacToe */ = {
+			isa = PBXGroup;
+			children = (
+				D8F787FE2B99F9B200C3AD9E /* TicTacToeViewGame.swift */,
+				D8F788002B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift */,
+				D8F788032B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift */,
+				D8F788052B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift */,
+			);
+			path = newTicTacToe;
 			sourceTree = "<group>";
 		};
 		DF30E2CD7811564FF0B9BAEA /* Frameworks */ = {
@@ -943,6 +963,7 @@
 				D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D80A6FA72B87DC29007B030B /* GameControlBullCowView.swift in Sources */,
+				D8F788042B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
@@ -961,9 +982,11 @@
 				D88CD6912B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
 				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
+				D8F788062B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift in Sources */,
 				D88221612A12A83800531EED /* TimeManager.swift in Sources */,
 				D81F8DD02AB4CCFD007A6597 /* FontsManager.swift in Sources */,
 				D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */,
+				D8F788012B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift in Sources */,
 				D8BB7B6B2B684BEE0034151C /* Preview.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */,
@@ -980,6 +1003,7 @@
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
 				D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */,
 				D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */,
+				D8F787FF2B99F9B200C3AD9E /* TicTacToeViewGame.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */,
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,

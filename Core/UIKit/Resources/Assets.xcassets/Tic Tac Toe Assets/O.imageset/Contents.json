@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "O.pdf",
+      "filename" : "empty-svgrepo-com.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "O 2.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
