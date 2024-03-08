@@ -28,13 +28,15 @@ struct TicTacToeGameFieldsView: View {
                                 if !viewModel.checkForWinner(board: viewModel.imageArray, symbol: viewModel.move ? "X" : "O") {
                                     viewModel.move.toggle()
                                     if let coputerMove = viewModel.computerMove(board: viewModel.imageArray) {
-                                        viewModel.imageArray[coputerMove.0][coputerMove.1] = viewModel.move ? "X" : "O"
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                            viewModel.imageArray[coputerMove.0][coputerMove.1] = viewModel.move ? "X" : "O"
+                                            viewModel.move.toggle()
+                                        }
                                         if viewModel.checkForWinner(board: viewModel.imageArray, symbol: viewModel.move ? "X" : "O") {
                                             viewModel.botWin = true
                                             viewModel.finishGame = true
                                             viewModel.isStartGame = false
                                         } else {
-                                            viewModel.move.toggle()
                                         }
                                     } else {
                                         viewModel.finishGame = true
