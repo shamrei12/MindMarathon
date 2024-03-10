@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */; };
 		1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */; };
 		D80A6FA22B87D404007B030B /* Fonts.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA12B87D404007B030B /* Fonts.generated.swift */; };
 		D80A6FA52B87D88F007B030B /* SteperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80A6FA42B87D88F007B030B /* SteperView.swift */; };
@@ -50,6 +49,10 @@
 		D84835A62A35C88E008D2AB4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D84835A52A35C88E008D2AB4 /* Realm */; };
 		D84835A82A35C88E008D2AB4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D84835A72A35C88E008D2AB4 /* RealmSwift */; };
 		D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */; };
+		D84888FC2B9C45C800C07F04 /* FloodFillGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84888FB2B9C45C800C07F04 /* FloodFillGameView.swift */; };
+		D84888FE2B9C48B100C07F04 /* TopViewFloodFillGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84888FD2B9C48B100C07F04 /* TopViewFloodFillGameView.swift */; };
+		D84889002B9C48DF00C07F04 /* GameControlFloodFillGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84888FF2B9C48DF00C07F04 /* GameControlFloodFillGameView.swift */; };
+		D84889022B9C4F9F00C07F04 /* FloodFillFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84889012B9C4F9F00C07F04 /* FloodFillFields.swift */; };
 		D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D84BCAA12AC7723A00967444 /* Localizable.strings */; };
 		D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84E51252B03645600CBA32F /* StatisticsModel.swift */; };
 		D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2A2B033DD000EA28D6 /* ProfileViewController.swift */; };
@@ -117,7 +120,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		1122D9D32A3BB24200913E01 /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		96A5753E36701F64F9FFCB37 /* Pods_MindMarathon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MindMarathon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D798D70845B9EB03F4FB1064 /* Pods-MindMarathon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MindMarathon.debug.xcconfig"; path = "Target Support Files/Pods-MindMarathon/Pods-MindMarathon.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,10 @@
 		D84835A02A35BA01008D2AB4 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		D84835A12A35BA01008D2AB4 /* GameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameTableViewCell.xib; sourceTree = "<group>"; };
 		D84835AC2A35CD5C008D2AB4 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		D84888FB2B9C45C800C07F04 /* FloodFillGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillGameView.swift; sourceTree = "<group>"; };
+		D84888FD2B9C48B100C07F04 /* TopViewFloodFillGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewFloodFillGameView.swift; sourceTree = "<group>"; };
+		D84888FF2B9C48DF00C07F04 /* GameControlFloodFillGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlFloodFillGameView.swift; sourceTree = "<group>"; };
+		D84889012B9C4F9F00C07F04 /* FloodFillFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillFields.swift; sourceTree = "<group>"; };
 		D84BCAA22AC772E600967444 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D84BCAA32AC772E600967444 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D84BCAA42AC7736900967444 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -518,6 +524,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D84888FA2B9C45B100C07F04 /* NewGame */ = {
+			isa = PBXGroup;
+			children = (
+				D84888FB2B9C45C800C07F04 /* FloodFillGameView.swift */,
+				D84888FD2B9C48B100C07F04 /* TopViewFloodFillGameView.swift */,
+				D84888FF2B9C48DF00C07F04 /* GameControlFloodFillGameView.swift */,
+				D84889012B9C4F9F00C07F04 /* FloodFillFields.swift */,
+			);
+			path = NewGame;
+			sourceTree = "<group>";
+		};
 		D84E51272B03A31E00CBA32F /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,6 +693,7 @@
 		D8E321142B00A59D00674541 /* FloodFillGame */ = {
 			isa = PBXGroup;
 			children = (
+				D84888FA2B9C45B100C07F04 /* NewGame */,
 				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
 			);
 			path = FloodFillGame;
@@ -715,8 +733,10 @@
 		D8E321192B00A71D00674541 /* TicTacToeGame */ = {
 			isa = PBXGroup;
 			children = (
-				D8F787FD2B99F99700C3AD9E /* newTicTacToe */,
-				1122D9CD2A3BAC1200913E01 /* TicTacToeViewController.swift */,
+				D8F787FE2B99F9B200C3AD9E /* TicTacToeViewGame.swift */,
+				D8F788002B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift */,
+				D8F788032B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift */,
+				D8F788052B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift */,
 			);
 			path = TicTacToeGame;
 			sourceTree = "<group>";
@@ -726,8 +746,8 @@
 			children = (
 				D8E321162B00A60C00674541 /* BullCowGame */,
 				D8E321182B00A6F600674541 /* SlovusGame */,
-				D8E321142B00A59D00674541 /* FloodFillGame */,
 				D8E321192B00A71D00674541 /* TicTacToeGame */,
+				D8E321142B00A59D00674541 /* FloodFillGame */,
 				D8E321152B00A5FE00674541 /* BinarioGame */,
 				D8E321112B00A0AF00674541 /* NumberGame */,
 			);
@@ -766,17 +786,6 @@
 				D8E321202B028EBC00674541 /* CustomTabBarController.swift */,
 			);
 			path = CustomTabBar;
-			sourceTree = "<group>";
-		};
-		D8F787FD2B99F99700C3AD9E /* newTicTacToe */ = {
-			isa = PBXGroup;
-			children = (
-				D8F787FE2B99F9B200C3AD9E /* TicTacToeViewGame.swift */,
-				D8F788002B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift */,
-				D8F788032B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift */,
-				D8F788052B9A482E00C3AD9E /* TicTacToeGameFieldsView.swift */,
-			);
-			path = newTicTacToe;
 			sourceTree = "<group>";
 		};
 		DF30E2CD7811564FF0B9BAEA /* Frameworks */ = {
@@ -964,6 +973,7 @@
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
 				D80A6FA72B87DC29007B030B /* GameControlBullCowView.swift in Sources */,
 				D8F788042B99FD8000C3AD9E /* GameControlTicTacToeGameView.swift in Sources */,
+				D84888FC2B9C45C800C07F04 /* FloodFillGameView.swift in Sources */,
 				D826CF312A11282F00263CEB /* BullCowViewModel.swift in Sources */,
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
@@ -971,6 +981,7 @@
 				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
+				D84889022B9C4F9F00C07F04 /* FloodFillFields.swift in Sources */,
 				D80A6FA22B87D404007B030B /* Fonts.generated.swift in Sources */,
 				D81126392B9081C500651EAE /* SlovusGameView.swift in Sources */,
 				D844C5942B63FE87007F397A /* ChangeCountryView.swift in Sources */,
@@ -979,6 +990,7 @@
 				D848359F2A35B78F008D2AB4 /* WhiteBoardModel.swift in Sources */,
 				D80A6FA52B87D88F007B030B /* SteperView.swift in Sources */,
 				D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */,
+				D84889002B9C48DF00C07F04 /* GameControlFloodFillGameView.swift in Sources */,
 				D88CD6912B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift in Sources */,
 				D81F8DE72ABF1573007A6597 /* NumbersViewModel.swift in Sources */,
 				D84509282B03D6F900C3C2E7 /* UserStatisticsModel.swift in Sources */,
@@ -999,6 +1011,7 @@
 				1122D9D42A3BB24200913E01 /* TicTacToeViewModel.swift in Sources */,
 				D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */,
 				D81F8DD22AB4CE79007A6597 /* IconsManager.swift in Sources */,
+				D84888FE2B9C48B100C07F04 /* TopViewFloodFillGameView.swift in Sources */,
 				D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */,
 				D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */,
 				D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */,
@@ -1018,7 +1031,6 @@
 				D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */,
 				D848359B2A35B542008D2AB4 /* WhiteboardViewController.swift in Sources */,
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
-				1122D9CE2A3BAC1200913E01 /* TicTacToeViewController.swift in Sources */,
 				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
 				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,

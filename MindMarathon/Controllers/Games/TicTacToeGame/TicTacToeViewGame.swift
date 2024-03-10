@@ -17,8 +17,10 @@ struct TicTacToeViewGame: View {
         var result: WhiteBoardModel
         if viewModel.botWin {
             result = WhiteBoardModel(nameGame: "tictactoe", resultGame: "lose", countStep: String(viewModel.step), timerGame: time)
+           
         } else if viewModel.userWin {
             result = WhiteBoardModel(nameGame: "tictactoe", resultGame: "win", countStep: String(viewModel.step), timerGame: time)
+            CheckTaskManager.shared.checkPlayGame(game: 5)
         } else {
             result =  WhiteBoardModel(nameGame: "tictactoe", resultGame: "draw", countStep: String(viewModel.step), timerGame: time)
         }
@@ -31,9 +33,9 @@ struct TicTacToeViewGame: View {
                 .padding(.horizontal, 20)
             GameControlTicTacToeGameView(viewModel: viewModel)
                 .padding(.top, 20)
+            Spacer()
             TicTacToeGameFieldsView(viewModel: viewModel)
                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.9)
-                .padding(.top, 50)
             Spacer()
         }
         .alert("End game".localize(), isPresented: $viewModel.finishGame) {

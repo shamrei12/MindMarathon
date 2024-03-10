@@ -155,8 +155,11 @@ class ListGamesViewController: UIViewController {
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
         case "flood_fill".localize():
-            let viewModel = FloodFillViewModel(game: game)
-            viewController = FloodFillViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: FloodFillGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         case "tictactoe".localize():
             viewController = UIViewController()
             let view = UIHostingController(rootView: TicTacToeViewGame(dismissAction: {

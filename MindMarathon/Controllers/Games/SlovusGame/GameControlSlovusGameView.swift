@@ -14,7 +14,7 @@ struct GameControlSlovusGameView: View {
     @Binding var secretWord: String
     var body: some View {
         HStack {
-            SteperView(level: $sizeDigit)
+            SteperView(level: $sizeDigit, max: 9, min: 5, step: 1)
                 .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.05)
                 .background(.gray)
                 .cornerRadius(25)

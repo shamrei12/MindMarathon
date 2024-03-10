@@ -14,7 +14,7 @@ struct GameControlBullCowView: View {
     @Binding var secretDigit: [Int]
     var body: some View {
         HStack {
-            SteperView(level: $sizeDigit)
+            SteperView(level: $sizeDigit, max: 6, min: 2, step: 1)
                 .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.05)
                 .background(.gray)
                 .cornerRadius(25)
@@ -25,7 +25,6 @@ struct GameControlBullCowView: View {
                 isStartGame ? viewModel.statusStarGame() : viewModel.statusFinishGame()
                 viewModel.sizeDigits = sizeDigit
                 secretDigit = viewModel.makeNumber(maxLenght: viewModel.sizeDigits)
-                
             }) {
                 
                 Image(systemName: isStartGame ? "pause.fill" : "play.fill")
