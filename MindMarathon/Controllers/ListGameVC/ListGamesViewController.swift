@@ -169,8 +169,11 @@ class ListGamesViewController: UIViewController {
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
         case "binario".localize():
-            let viewModel = BinarioViewModel(game: game)
-            viewController = BinarioViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: BinarioGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)       
         default:
             let viewModel = NumbersViewModel(game: game)
             viewController = NumbersViewController(viewModel: viewModel)

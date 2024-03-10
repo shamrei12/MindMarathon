@@ -64,7 +64,6 @@
 		D8662DB72B59816F00B54B06 /* CountryDropButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB62B59816F00B54B06 /* CountryDropButton.swift */; };
 		D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DB92B59820B00B54B06 /* CountryManager.swift */; };
 		D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8662DBB2B625F1300B54B06 /* EditUserDataView.swift */; };
-		D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */; };
 		D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */; };
 		D86D0A792A28A62800AB6789 /* singular in Resources */ = {isa = PBXBuildFile; fileRef = D86D0A782A28A62800AB6789 /* singular */; };
 		D86EA8562AD0786C00B8D961 /* ListGameCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86EA8552AD0786C00B8D961 /* ListGameCollectionViewCell.xib */; };
@@ -83,6 +82,11 @@
 		D86EADD72AE54D4100FB19B6 /* FontsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86EADD62AE54D4100FB19B6 /* FontsExtension.swift */; };
 		D8716B1D2B90C25000097B0A /* TopViewSlovusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */; };
 		D8716B1F2B90C27300097B0A /* GameControlSlovusGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */; };
+		D878C9372B9DFC3A003D15B4 /* BinarioGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878C9362B9DFC3A003D15B4 /* BinarioGameView.swift */; };
+		D878C9392B9DFDD6003D15B4 /* TopViewBinarioGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878C9382B9DFDD6003D15B4 /* TopViewBinarioGameView.swift */; };
+		D878C93C2B9DFDF4003D15B4 /* GameControlBinarioGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878C93B2B9DFDF4003D15B4 /* GameControlBinarioGameView.swift */; };
+		D878C93E2B9E2F21003D15B4 /* FieldBinarioGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878C93D2B9E2F21003D15B4 /* FieldBinarioGameView.swift */; };
+		D878C9412B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D878C9402B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift */; };
 		D88221612A12A83800531EED /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221602A12A83800531EED /* TimeManager.swift */; };
 		D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88221662A16042B00531EED /* ListGamesViewController.swift */; };
 		D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D882216E2A162DA700531EED /* SlovusViewModel.swift */; };
@@ -178,7 +182,6 @@
 		D8662DB62B59816F00B54B06 /* CountryDropButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDropButton.swift; sourceTree = "<group>"; };
 		D8662DB92B59820B00B54B06 /* CountryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryManager.swift; sourceTree = "<group>"; };
 		D8662DBB2B625F1300B54B06 /* EditUserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserDataView.swift; sourceTree = "<group>"; };
-		D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewController.swift; sourceTree = "<group>"; };
 		D86D0A732A23521A00AB6789 /* FloodFillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloodFillViewModel.swift; sourceTree = "<group>"; };
 		D86D0A782A28A62800AB6789 /* singular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = singular; sourceTree = "<group>"; };
 		D86EA8552AD0786C00B8D961 /* ListGameCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListGameCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -197,6 +200,11 @@
 		D86EADD62AE54D4100FB19B6 /* FontsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsExtension.swift; sourceTree = "<group>"; };
 		D8716B1C2B90C25000097B0A /* TopViewSlovusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewSlovusGameView.swift; sourceTree = "<group>"; };
 		D8716B1E2B90C27300097B0A /* GameControlSlovusGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlSlovusGameView.swift; sourceTree = "<group>"; };
+		D878C9362B9DFC3A003D15B4 /* BinarioGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioGameView.swift; sourceTree = "<group>"; };
+		D878C9382B9DFDD6003D15B4 /* TopViewBinarioGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewBinarioGameView.swift; sourceTree = "<group>"; };
+		D878C93B2B9DFDF4003D15B4 /* GameControlBinarioGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlBinarioGameView.swift; sourceTree = "<group>"; };
+		D878C93D2B9E2F21003D15B4 /* FieldBinarioGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldBinarioGameView.swift; sourceTree = "<group>"; };
+		D878C9402B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCheckClearBinarioGameView.swift; sourceTree = "<group>"; };
 		D88221602A12A83800531EED /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		D88221662A16042B00531EED /* ListGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		D882216E2A162DA700531EED /* SlovusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlovusViewModel.swift; sourceTree = "<group>"; };
@@ -524,17 +532,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D84888FA2B9C45B100C07F04 /* NewGame */ = {
-			isa = PBXGroup;
-			children = (
-				D84888FB2B9C45C800C07F04 /* FloodFillGameView.swift */,
-				D84888FD2B9C48B100C07F04 /* TopViewFloodFillGameView.swift */,
-				D84888FF2B9C48DF00C07F04 /* GameControlFloodFillGameView.swift */,
-				D84889012B9C4F9F00C07F04 /* FloodFillFields.swift */,
-			);
-			path = NewGame;
-			sourceTree = "<group>";
-		};
 		D84E51272B03A31E00CBA32F /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,6 +582,18 @@
 				D8662DB62B59816F00B54B06 /* CountryDropButton.swift */,
 			);
 			path = CountryDropButton;
+			sourceTree = "<group>";
+		};
+		D878C9352B9DFC15003D15B4 /* NewGame */ = {
+			isa = PBXGroup;
+			children = (
+				D878C9362B9DFC3A003D15B4 /* BinarioGameView.swift */,
+				D878C9382B9DFDD6003D15B4 /* TopViewBinarioGameView.swift */,
+				D878C93B2B9DFDF4003D15B4 /* GameControlBinarioGameView.swift */,
+				D878C93D2B9E2F21003D15B4 /* FieldBinarioGameView.swift */,
+				D878C9402B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift */,
+			);
+			path = NewGame;
 			sourceTree = "<group>";
 		};
 		D882215F2A12A81800531EED /* Manager */ = {
@@ -693,8 +702,10 @@
 		D8E321142B00A59D00674541 /* FloodFillGame */ = {
 			isa = PBXGroup;
 			children = (
-				D84888FA2B9C45B100C07F04 /* NewGame */,
-				D86D0A6D2A2155F900AB6789 /* FloodFillViewController.swift */,
+				D84888FB2B9C45C800C07F04 /* FloodFillGameView.swift */,
+				D84888FD2B9C48B100C07F04 /* TopViewFloodFillGameView.swift */,
+				D84888FF2B9C48DF00C07F04 /* GameControlFloodFillGameView.swift */,
+				D84889012B9C4F9F00C07F04 /* FloodFillFields.swift */,
 			);
 			path = FloodFillGame;
 			sourceTree = "<group>";
@@ -702,6 +713,7 @@
 		D8E321152B00A5FE00674541 /* BinarioGame */ = {
 			isa = PBXGroup;
 			children = (
+				D878C9352B9DFC15003D15B4 /* NewGame */,
 				D8C2244F2A5187F600F1E01A /* BinarioViewController.swift */,
 			);
 			path = BinarioGame;
@@ -966,8 +978,8 @@
 				D8D7884D2A4B49E80013FECC /* BullCowModel.swift in Sources */,
 				D88221682A16042B00531EED /* ListGamesViewController.swift in Sources */,
 				D8716B1D2B90C25000097B0A /* TopViewSlovusGameView.swift in Sources */,
+				D878C93C2B9DFDF4003D15B4 /* GameControlBinarioGameView.swift in Sources */,
 				D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */,
-				D86D0A6F2A2155F900AB6789 /* FloodFillViewController.swift in Sources */,
 				D826CF272A10C7DA00263CEB /* MenuViewController.swift in Sources */,
 				D8B108BD2B03AA9C00CD09A1 /* TaskTableView.swift in Sources */,
 				D826CF0A2A10C69000263CEB /* AppDelegate.swift in Sources */,
@@ -978,6 +990,7 @@
 				D884F7432A8CE26000271263 /* GameSettings.swift in Sources */,
 				D826CF0C2A10C69000263CEB /* SceneDelegate.swift in Sources */,
 				D86EADD72AE54D4100FB19B6 /* FontsExtension.swift in Sources */,
+				D878C9392B9DFDD6003D15B4 /* TopViewBinarioGameView.swift in Sources */,
 				D866027C2B49C49C001A913D /* RatingTableViewCell.swift in Sources */,
 				D83161962A1A583400087769 /* UserMistakeView.swift in Sources */,
 				D866027A2B49C43D001A913D /* RatingTableView.swift in Sources */,
@@ -1000,11 +1013,13 @@
 				D84E51262B03645600CBA32F /* StatisticsModel.swift in Sources */,
 				D8F788012B99FC8100C3AD9E /* TopViewTicTacToeGameView.swift in Sources */,
 				D8BB7B6B2B684BEE0034151C /* Preview.swift in Sources */,
+				D878C93E2B9E2F21003D15B4 /* FieldBinarioGameView.swift in Sources */,
 				D84835A22A35BA01008D2AB4 /* GameTableViewCell.swift in Sources */,
 				D8662DBC2B625F1300B54B06 /* EditUserDataView.swift in Sources */,
 				D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */,
 				D884F7512A9E3E1700271263 /* GameRules.swift in Sources */,
 				D8967AA52B89D08A0052E9A5 /* BullCowViewModelNew.swift in Sources */,
+				D878C9372B9DFC3A003D15B4 /* BinarioGameView.swift in Sources */,
 				D8E807292B11EAEB00D69D67 /* RulesViewController.swift in Sources */,
 				D81C72E62ABF479A00B8D4F0 /* NumberCollectionViewController.swift in Sources */,
 				D86D0A742A23521A00AB6789 /* FloodFillViewModel.swift in Sources */,
@@ -1022,6 +1037,7 @@
 				D81F8DE52ABF12FB007A6597 /* NumbersViewController.swift in Sources */,
 				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
 				D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */,
+				D878C9412B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift in Sources */,
 				D829AC352A7D52B000A38F6E /* Backgroungs.swift in Sources */,
 				D8C224502A5187F600F1E01A /* BinarioViewController.swift in Sources */,
 				D826CF1F2A10C6DA00263CEB /* Extension.swift in Sources */,

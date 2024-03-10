@@ -23,7 +23,7 @@ class FloodFillViewModel: ObservableObject {
             for _ in 0..<size {
                 row.append(Int.random(in: 0..<6))
             }
-            massive.append(row) // Добавляем вложенный массив в основной массив
+            massive.append(row)
         }
         self.field = massive
     }
