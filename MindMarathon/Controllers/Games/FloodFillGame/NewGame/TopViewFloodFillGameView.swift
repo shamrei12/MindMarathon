@@ -30,7 +30,9 @@ struct TopViewFloodFillGameView: View {
                 .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(fixedSize: 25)))
                 .onReceive(timer) { _ in
                     if viewModel.isStartGame {
-                        time += 1
+                        DispatchQueue.global().async {
+                                time += 1
+                        }
                     }
                 }
         }

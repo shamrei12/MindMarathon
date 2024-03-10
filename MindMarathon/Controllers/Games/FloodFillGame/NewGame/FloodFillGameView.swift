@@ -43,7 +43,7 @@ struct FloodFillGameView: View {
             }
             Button("Выйти из игры", role: .destructive) {
                 saveResult()
-                    dismiss()
+                dismiss()
             }
         } message: {
             Text("congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: time))")
@@ -76,18 +76,19 @@ struct ButtonColorFloodFillGameView: View {
             .frame(maxWidth: UIScreen.main.bounds.height * 0.065, maxHeight: UIScreen.main.bounds.height * 0.065)
             .cornerRadius(5)
             .onTapGesture {
+                
                 if viewModel.isStartGame {
                     viewModel.fillCell(row: 0, col: 0, color: tag, currentColor: viewModel.field[0][0])
                     viewModel.countStep += 1
-                    if viewModel.checkFinishGame() {
-                        viewModel.isFinishGame = true
-                        viewModel.isStartGame = false
-                    }
+                }
+                
+                if viewModel.checkFinishGame() {
+                    viewModel.isFinishGame = true
+                    viewModel.isStartGame = false
                 }
             }
     }
 }
-
 
 #Preview {
     FloodFillGameView()
