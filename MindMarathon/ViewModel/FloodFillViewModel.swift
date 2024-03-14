@@ -13,6 +13,7 @@ class FloodFillViewModel: ObservableObject {
     @Published var isStartGame: Bool = false
     @Published var isFinishGame: Bool = false
     @Published var field: [[Int]] = [[Int]]()
+    @Published var time = 0
     
     var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
     

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GameControlTicTacToeGameView: View {
     @ObservedObject var viewModel: TicTacToeViewModel
-    @State var isStartGame: Bool = false
     var body: some View {
         HStack {
             Button(action: {

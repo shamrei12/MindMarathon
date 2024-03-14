@@ -175,8 +175,11 @@ class ListGamesViewController: UIViewController {
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)       
         default:
-            let viewModel = NumbersViewModel(game: game)
-            viewController = NumbersViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: NumbersGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         }
         
         let navigationController = UINavigationController(rootViewController: viewController)

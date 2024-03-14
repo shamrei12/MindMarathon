@@ -324,6 +324,8 @@ extension NumberCollectionView: UICollectionViewDataSource {
         }
         return true
     }
+    
+    
 
 //    func testingIncrementsEight(min: Int, max: Int) -> Bool {
 //        for index in stride(from: min + 8, to: max - 1, by: 8) {

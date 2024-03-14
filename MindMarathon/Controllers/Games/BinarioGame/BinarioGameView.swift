@@ -29,7 +29,6 @@ struct BinarioGameView: View {
                     .padding(.bottom, 50)
                     .padding(.horizontal, 20)
             }
-            
             VStack {
                 if viewModel.showAlert {
                     BinarioAlertView(viewModel: viewModel, text: "Игровое поле заполнено не правильно. Проверьте и повтороно отправьте на проверку")
@@ -39,11 +38,12 @@ struct BinarioGameView: View {
         }
         .alert("End game".localize(), isPresented: $viewModel.isFinishGame) {
             Button("Сыграть еще раз", role: .cancel) {
+                saveResult()
                 viewModel.time = 0
                 viewModel.isStartGame = false
                 viewModel.isFinishGame = false
                 viewModel.massiveButtons.removeAll()
-                saveResult()
+                
             }
             Button("Выйти из игры", role: .destructive) {
                 saveResult()
@@ -51,7 +51,6 @@ struct BinarioGameView: View {
             }
         } message: {
             Text("congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: viewModel.time))")
-            
         }
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 enum CustomColor {
     case viewColor
     case gameElement
+    case numbersBackground
+    case numbersFieldBackground
     
     var color: UIColor {
         switch self {
@@ -17,6 +19,10 @@ enum CustomColor {
             return UIColor(named: "viewColor") ?? .clear
         case .gameElement:
             return UIColor(named: "gameElementColor") ?? .clear
+        case .numbersBackground:
+            return UIColor(named: "numbersBackground") ?? .clear
+        case .numbersFieldBackground:
+            return UIColor(named: "numbersFieldBackground") ?? .clear
         }
     }
 }

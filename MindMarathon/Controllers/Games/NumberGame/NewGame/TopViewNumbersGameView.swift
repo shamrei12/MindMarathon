@@ -1,16 +1,15 @@
 //
-//  TopViewFloodFillGameView.swift
+//  TopViewNumbersGameView.swift
 //  MindMarathon
 //
-//  Created by Алексей Шамрей on 9.03.24.
+//  Created by Алексей Шамрей on 11.03.24.
 //
 
 import SwiftUI
 
-struct TopViewFloodFillGameView: View {
+struct TopViewNumbersGameView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var viewModel: FloodFillViewModel
-    let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
+    @ObservedObject var viewModel: NumbersViewModel
     
     var body: some View {
         ZStack {
@@ -30,4 +29,3 @@ struct TopViewFloodFillGameView: View {
         }
     }
 }
-

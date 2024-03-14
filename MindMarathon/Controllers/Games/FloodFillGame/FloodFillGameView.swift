@@ -9,18 +9,16 @@ import SwiftUI
 
 struct FloodFillGameView: View {
     @ObservedObject private var viewModel = FloodFillViewModel()
-    @State var time = 0
     @Environment(\.dismiss) private var dismiss
-    
     func saveResult() {
-        let resultGame = WhiteBoardModel(nameGame: "flood_fill", resultGame: "win", countStep: "\(viewModel.countStep)", timerGame: time)
+        let resultGame = WhiteBoardModel(nameGame: "flood_fill", resultGame: "win", countStep: "\(viewModel.countStep)", timerGame: viewModel.time)
         RealmManager.shared.saveResult(result: resultGame)
         CheckTaskManager.shared.checkPlayGame(game: 5)
         
     }
     var body: some View {
         VStack {
-            TopViewFloodFillGameView(viewModel: viewModel, time: $time)
+            TopViewFloodFillGameView(viewModel: viewModel)
                 .padding(.horizontal, 20)
             GameControlFloodFillGameView(viewModel: viewModel, sizeField: $viewModel.sizeField)
                 .padding(.top, 20)
@@ -38,15 +36,15 @@ struct FloodFillGameView: View {
                 saveResult()
                 viewModel.field.removeAll()
                 viewModel.isFinishGame = false
-                time = 0
                 viewModel.countStep = 0
+                viewModel.time = 0
             }
             Button("Выйти из игры", role: .destructive) {
                 saveResult()
                 dismiss()
             }
         } message: {
-            Text("congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: time))")
+            Text("congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: viewModel.time))")
             
         }
     }

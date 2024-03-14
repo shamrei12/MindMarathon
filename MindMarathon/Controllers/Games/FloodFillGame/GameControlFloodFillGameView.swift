@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct GameControlFloodFillGameView: View {
     @ObservedObject var viewModel: FloodFillViewModel
     @Binding var sizeField: Int
+    @State private var timer: AnyCancellable?
+
     var body: some View {
         HStack {
             SteperView(level: $sizeField, max: 25, min: 5, step: 5)
@@ -27,6 +30,13 @@ struct GameControlFloodFillGameView: View {
                 if !viewModel.isStartGame {
                     viewModel.field.removeAll()
                 }
+            timer = Timer.publish(every: 1, on: .main, in: .common)
+                              .autoconnect()
+                              .sink(receiveValue: { _ in
+                                  if viewModel.isStartGame {
+                                      viewModel.time += 1
+                                  }
+                              })
             }) {
                 Image(systemName: viewModel.isStartGame ? "pause.fill" : "play.fill")
                     .tint(.white)

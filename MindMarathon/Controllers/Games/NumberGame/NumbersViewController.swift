@@ -168,7 +168,7 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
     
     private func navigationBarCreate() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(cancelTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Rules".localize(), style: .plain, target: self, action: #selector(rulesTapped))
     }
     
     private func createPlayButton() {
@@ -224,11 +224,11 @@ class NumbersViewController: UIViewController, FinishGameDelegate {
         self.dismiss(animated: true)
     }
     
-    @objc func rulesTapped() {
-        let rulesVC = CurrentRulesViewController(game: viewModel.game)
-        rulesVC.modalPresentationStyle = .formSheet
-        present(rulesVC, animated: true)
-    }
+//    @objc func rulesTapped() {
+//        let rulesVC = CurrentRulesViewController(game: viewModel.game)
+//        rulesVC.modalPresentationStyle = .formSheet
+//        present(rulesVC, animated: true)
+//    }
     
     @objc func startGameTapped(_ sender: UIButton) {
             let chekPartGame = (isstartGame, iscontinuePlaying)

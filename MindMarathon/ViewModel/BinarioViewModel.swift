@@ -101,6 +101,7 @@ class BinarioViewModel: ObservableObject {
     func checkResultGame() {
         if uniqueLines(line: massiveButtons) && uniqueRows(mass: massiveButtons) {
             isFinishGame = true
+            isStartGame = false
         } else {
             showAlert = true
         }
