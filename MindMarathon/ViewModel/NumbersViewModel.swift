@@ -133,17 +133,6 @@ class NumbersViewModel: ObservableObject {
         } else {
             return false
         }
-        
-//        let isOnFirstDiagonal = firstIndex % 9 == 0
-//        let isOnLastDiagonal = firstIndex % 9 == 8
-//
-//        if isOnFirstDiagonal {
-//            return firstIndex + 10 == secondIndex
-//        } else if isOnLastDiagonal {
-//            return firstIndex + 8 == secondIndex
-//        } else {
-//            
-//        }
     }
 
     

@@ -8,53 +8,59 @@
 import SwiftUI
 
 struct KeyboardBullCowView: View {
-    var viewModel: BullCowViewModelNew
-    @Binding var sizeDigit: Int
-//    @Binding var massive: [String]
+    @ObservedObject var viewModel: BullCowViewModelNew
     @Binding var secretDigits: [Int]
     @State var number: String = ""
     var massiveNumbers: [Int] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             InputGusesNumberBullCowView(number: $number)
                 .frame(maxWidth: .infinity)
                 .frame(height: UIScreen.main.bounds.height * 0.06)
-                .background(Color(UIColor.systemGray6))
-                .cornerRadius(25)
+                .background(Color(UIColor(hex: 0xfaf4ef, alpha: 1)))
+                .cornerRadius(10)
                 .padding(.horizontal, 5)
+                .shadow(color: Color(UIColor(hex: 0x86969f, alpha: 1)), radius: 1, x: 0, y: 5)
+                .shadow(color: Color(UIColor(hex: 0x395574, alpha: 1)), radius: 1, x: 0, y: 5)
+                .shadow(color: Color(UIColor(hex: 0x4b6a8b, alpha: 1)), radius: 1, x: 0, y: 5)
             VStack(spacing: 15) {
                 HStack {
                     ForEach(0..<5, id: \.self) { number in
-                        ButtonKeyboardBullCowView(sizeDigit: $sizeDigit, number: massiveNumbers[number], guesNumber: $number )
+                        ButtonKeyboardBullCowView(sizeDigit: $viewModel.sizeDigits, number: massiveNumbers[number], guesNumber: $number )
+                            .disabled(!viewModel.isStartGame)
                     }
                 }
+                .padding(.horizontal, 5)
                 HStack {
                     ForEach(5..<10, id: \.self) { number in
-                        ButtonKeyboardBullCowView(sizeDigit: $sizeDigit, number: massiveNumbers[number], guesNumber: $number)
+                        ButtonKeyboardBullCowView(sizeDigit: $viewModel.sizeDigits, number: massiveNumbers[number], guesNumber: $number)
+                            .disabled(!viewModel.isStartGame)
                     }
                 }
+                .padding(.horizontal, 5)
                 
                 Button(action: {
                     viewModel.nextuserMove(userDigits: number, secretDiggits: secretDigits)
-//                    massive.append(number)
                     number = ""
                 }) {
-                    Text("Отправить")
-                        .foregroundColor(.white)
-                        .font(.init(PFFontFamily.SFProText.semibold.swiftUIFont(size: 25)))
+                    Text("Отправить".uppercased())
+                        .foregroundColor(Color(UIColor(hex: 0x71889e, alpha: 1)))
+                        .font(.init(PFFontFamily.SFProText.heavy.swiftUIFont(size: FontAdaptation.addaptationFont(sizeFont: 35))))
                         .frame(maxWidth: .infinity)
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: UIScreen.main.bounds.height * 0.06)
-                .background(.gray)
-                .cornerRadius(25)
+                .background(Color(UIColor(hex: 0xfaf4ef, alpha: 1)))
+                .cornerRadius(10)
                 .padding(.horizontal, 5)
-                
+                .shadow(color: Color(UIColor(hex: 0x86969f, alpha: 1)), radius: 1, x: 0, y: 5)
+                .shadow(color: Color(UIColor(hex: 0x395574, alpha: 1)), radius: 1, x: 0, y: 5)
+                .shadow(color: Color(UIColor(hex: 0x4b6a8b, alpha: 1)), radius: 1, x: 0, y: 5)
+                .disabled(!viewModel.isStartGame)
             }
         }
         .background(.clear)
-        .padding(.horizontal, 10)
     }
 }
 
@@ -69,14 +75,19 @@ struct ButtonKeyboardBullCowView: View {
             }
         }) {
             Text(String(number))
-                .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 35)))
-                .foregroundColor(.white)
+                .font(.init(PFFontFamily.SFProText.heavy.swiftUIFont(size: FontAdaptation.addaptationFont(sizeFont: 35))))
+                .foregroundColor(Color(UIColor(hex: 0x71889e, alpha: 1)))
                 .frame(maxWidth: .infinity)
         }
         .frame(height: UIScreen.main.bounds.height * 0.06)
         .frame(maxWidth: .infinity)
-        .background(.gray)
+        .background(Color(UIColor(hex: 0xfaf4ef, alpha: 1)))
         .cornerRadius(10)
+//        .shadow(color: Color(UIColor(hex: 0xf4f4f4, alpha: 1)), radius: 1, x: 0, y: -5)
+        .shadow(color: Color(UIColor(hex: 0x86969f, alpha: 1)), radius: 1, x: 0, y: 5)
+        .shadow(color: Color(UIColor(hex: 0x395574, alpha: 1)), radius: 1, x: 0, y: 5)
+        .shadow(color: Color(UIColor(hex: 0x4b6a8b, alpha: 1)), radius: 1, x: 0, y: 5)
+        
     }
 }
 
@@ -94,9 +105,9 @@ struct InputGusesNumberBullCowView: View {
                         number.removeLast()
                     }
                 }) {
-                    Image(systemName: "delete.left.fill")
+                    Image(uiImage: PFAssets.backspace.image)
                         .resizable()
-                        .frame(width: 40, height: 35)
+                        .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.11)
                         .tint(.black)
                 }
                 .padding(.trailing, 15)

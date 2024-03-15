@@ -728,10 +728,10 @@
 		D8E321162B00A60C00674541 /* BullCowGame */ = {
 			isa = PBXGroup;
 			children = (
+				D88CD68E2B888DB2009171C9 /* BullCowGameView.swift */,
 				D80A6FA42B87D88F007B030B /* SteperView.swift */,
 				D80A6FA62B87DC29007B030B /* GameControlBullCowView.swift */,
 				D80A6FA82B87DDF7007B030B /* KeyboardBullCowView.swift */,
-				D88CD68E2B888DB2009171C9 /* BullCowGameView.swift */,
 				D88CD6902B8892CD009171C9 /* GuesHistoryStepsBullCowView.swift */,
 			);
 			path = BullCowGame;
