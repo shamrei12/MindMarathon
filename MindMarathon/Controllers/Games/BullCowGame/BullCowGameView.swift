@@ -7,17 +7,18 @@
 
 import SwiftUI
 import AudioToolbox
+import AVFoundation
 
 struct BullCowGameView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel = BullCowViewModelNew()
     @State private var secretDigit: [Int] = [Int]()
     @State private var showAlert: Bool = false
-
+    
     func saveResults() {
         let resultGame = WhiteBoardModel(nameGame: "bullcow", resultGame: "win", countStep: "\(viewModel.historyGame.count)", timerGame: viewModel.time)
-            RealmManager.shared.saveResult(result: resultGame)
-            CheckTaskManager.shared.checkPlayGame(game: 5)
+        RealmManager.shared.saveResult(result: resultGame)
+        CheckTaskManager.shared.checkPlayGame(game: 5)
     }
     
     var body: some View {
@@ -29,9 +30,10 @@ struct BullCowGameView: View {
                 .padding(.horizontal, 10)
             GuesHistoryStepsBullCowView(viewModel: viewModel)
                 .background(.clear)
+                .padding(.top, 10)
             Spacer()
             KeyboardBullCowView(viewModel: viewModel, secretDigits: $secretDigit)
-                .padding(.horizontal, 5)
+                .padding(.horizontal, 10)
         }
         .background(Color(UIColor(hex: 0x688dab)))
         .alert("Конец игры", isPresented: $viewModel.isFinishGame, actions: {
@@ -56,7 +58,29 @@ struct TopViewGameView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: BullCowViewModelNew
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var audioPlayerUP: AVAudioPlayer?
+    @State private var audioPlayerDown: AVAudioPlayer?
+    func playUp() {
+        if let soundURL = Bundle.main.url(forResource: "tapUp", withExtension: "mp3") {
+            do {
+                audioPlayerUP = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayerUP?.prepareToPlay()
+            } catch {
+                print("Ошибка при создании AVAudioPlayer: \(error)")
+            }
+        }
+    }
     
+    func playDown() {
+        if let soundURL = Bundle.main.url(forResource: "tapDown", withExtension: "mp3") {
+            do {
+                audioPlayerDown = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayerDown?.prepareToPlay()
+            } catch {
+                print("Ошибка при создании AVAudioPlayer: \(error)")
+            }
+        }
+    }
     var body: some View {
         ZStack {
             HStack {
@@ -79,7 +103,7 @@ struct TopViewGameView: View {
                         if viewModel.isStartGame  {
                             viewModel.time += 1
                         }
-                }
+                    }
             }
             
             HStack {
@@ -101,20 +125,27 @@ struct TopViewGameView: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
                             viewModel.selectedItem = 10
-                            AudioServicesPlaySystemSound(1109)
+                            audioPlayerDown?.play()
                         }
                         .onEnded { _ in
-                            AudioServicesPlaySystemSound(1105)
                             viewModel.selectedItem = nil
-                            viewModel.changeSizeDigit()
+                            if !viewModel.isStartGame {
+                                viewModel.changeSizeDigit()
+                            }
+                            audioPlayerUP?.play()
                         }
                 )
+            }
+        }
+        .onAppear {
+            DispatchQueue.global().async {
+                playUp()
+                playDown()
             }
         }
     }
 }
 
-#Preview{
+#Preview {
     BullCowGameView()
 }
-

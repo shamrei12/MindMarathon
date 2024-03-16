@@ -103,6 +103,8 @@
 		D8B108C02B03AB0800CD09A1 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */; };
 		D8B108C22B03AFA700CD09A1 /* TasksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B108C12B03AFA700CD09A1 /* TasksModel.swift */; };
 		D8B54D7A2B45DEA6008F2B46 /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */; };
+		D8B6C9EB2BA58CC30075B48F /* tapDown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D8B6C9E92BA58CC30075B48F /* tapDown.mp3 */; };
+		D8B6C9EC2BA58CC30075B48F /* tapUp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D8B6C9EA2BA58CC30075B48F /* tapUp.mp3 */; };
 		D8BB7B6B2B684BEE0034151C /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB7B6A2B684BEE0034151C /* Preview.swift */; };
 		D8BB84742A51C46700166091 /* BinarioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8BB84732A51C46700166091 /* BinarioViewModel.swift */; };
 		D8C11F282B029A1C00EA28D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */; };
@@ -223,6 +225,8 @@
 		D8B108BF2B03AB0800CD09A1 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		D8B108C12B03AFA700CD09A1 /* TasksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksModel.swift; sourceTree = "<group>"; };
 		D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		D8B6C9E92BA58CC30075B48F /* tapDown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tapDown.mp3; sourceTree = "<group>"; };
+		D8B6C9EA2BA58CC30075B48F /* tapUp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tapUp.mp3; sourceTree = "<group>"; };
 		D8BB7B6A2B684BEE0034151C /* Preview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		D8BB84732A51C46700166091 /* BinarioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarioViewModel.swift; sourceTree = "<group>"; };
 		D8C11F272B029A1C00EA28D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -453,6 +457,7 @@
 		D828F6172B87BC430056FEC4 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D8B6C9E72BA58BFF0075B48F /* Sounds */,
 				D828F61A2B87BD040056FEC4 /* UIKit */,
 				D828F6182B87BCFB0056FEC4 /* swiftgen.yml */,
 			);
@@ -634,6 +639,23 @@
 				D8B54D792B45DEA6008F2B46 /* FirebaseData.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		D8B6C9E72BA58BFF0075B48F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				D8B6C9E82BA58C100075B48F /* BullCow */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		D8B6C9E82BA58C100075B48F /* BullCow */ = {
+			isa = PBXGroup;
+			children = (
+				D8B6C9E92BA58CC30075B48F /* tapDown.mp3 */,
+				D8B6C9EA2BA58CC30075B48F /* tapUp.mp3 */,
+			);
+			path = BullCow;
 			sourceTree = "<group>";
 		};
 		D8BB7B692B684B190034151C /* PreviewView */ = {
@@ -891,6 +913,7 @@
 				D86EADCA2AE549B400FB19B6 /* SF-Pro-Text-Heavy.otf in Resources */,
 				D86EA8562AD0786C00B8D961 /* ListGameCollectionViewCell.xib in Resources */,
 				D829AC322A6D124900A38F6E /* .swiftlint.yml in Resources */,
+				D8B6C9EB2BA58CC30075B48F /* tapDown.mp3 in Resources */,
 				D86EADD22AE549B400FB19B6 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				D84BCA9F2AC7723A00967444 /* Localizable.strings in Resources */,
 				D83161982A1A584F00087769 /* UserMistakeView.xib in Resources */,
@@ -907,6 +930,7 @@
 				D84835A32A35BA01008D2AB4 /* GameTableViewCell.xib in Resources */,
 				D86EADCB2AE549B400FB19B6 /* SF-Pro-Text-Light.otf in Resources */,
 				D86EADD32AE549B400FB19B6 /* SF-Pro-Text-MediumItalic.otf in Resources */,
+				D8B6C9EC2BA58CC30075B48F /* tapUp.mp3 in Resources */,
 				D80FE4252B44A151008292BD /* GoogleService-Info.plist in Resources */,
 				D86EADCD2AE549B400FB19B6 /* SF-Pro-Text-BoldItalic.otf in Resources */,
 				D86EADCE2AE549B400FB19B6 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
