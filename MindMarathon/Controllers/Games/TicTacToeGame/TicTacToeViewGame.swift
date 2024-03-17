@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TicTacToeViewGame: View {
-    @State var dismissAction: (() -> Void)
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel = TicTacToeViewModel()
     @State private var time = 0
     @State private var size = 3
@@ -29,15 +29,17 @@ struct TicTacToeViewGame: View {
     
     var body: some View {
         VStack {
-            TopViewTicTacToeGameView(dismissAction: dismissAction, viewModel: viewModel, time: $time)
+            TopViewTicTacToeGameView(viewModel: viewModel, time: $time)
                 .padding(.horizontal, 20)
             GameControlTicTacToeGameView(viewModel: viewModel)
                 .padding(.top, 20)
+                
             Spacer()
             TicTacToeGameFieldsView(viewModel: viewModel)
                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.9)
             Spacer()
         }
+        .background(Color(UIColor(hex: 0xaacae3, alpha: 1)))
         .alert("End game".localize(), isPresented: $viewModel.finishGame) {
             Button("Сыграть еще раз", role: .cancel) {
                 saveResult()
@@ -48,7 +50,7 @@ struct TicTacToeViewGame: View {
             }
             Button("Выйти из игры", role: .destructive) {
                 saveResult()
-                dismissAction()
+                dismiss()
             }
         } message: {
             if viewModel.userWin {
@@ -63,6 +65,6 @@ struct TicTacToeViewGame: View {
     }
 }
 
-//#Preview {
-//    TicTacToeViewGame()
-//}
+#Preview {
+    TicTacToeViewGame()
+}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TopViewTicTacToeGameView: View {
-    @State var dismissAction: (() -> Void)
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject var viewModel: TicTacToeViewModel
     @Binding var time: Int
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -17,12 +17,12 @@ struct TopViewTicTacToeGameView: View {
         ZStack {
             HStack {
                 Button(action: {
-                    dismissAction()
+                    dismiss()
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
                         .frame(width: UIScreen.main.bounds.width * 0.065, height: UIScreen.main.bounds.width * 0.065)
-                        .tint(Color(UIColor.systemGray))
+                        .tint(.white)
                 }
                 Spacer()
             }

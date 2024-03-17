@@ -21,7 +21,7 @@ struct GameControlTicTacToeGameView: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height * 0.05)
-            .background(.blue)
+            .background(Color(UIColor(hex: 0x3d678b, alpha: 1)))
             .cornerRadius(25)
             Spacer()
         }

@@ -160,9 +160,7 @@ class ListGamesViewController: UIViewController {
             present(view, animated: true)
         case "tictactoe".localize():
             viewController = UIViewController()
-            let view = UIHostingController(rootView: TicTacToeViewGame(dismissAction: {
-                self.dismiss(animated: true)
-            }))
+            let view = UIHostingController(rootView: TicTacToeViewGame())
             view.view.backgroundColor = CustomColor.viewColor.color
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
