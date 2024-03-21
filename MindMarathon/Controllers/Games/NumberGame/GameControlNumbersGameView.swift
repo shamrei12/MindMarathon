@@ -31,7 +31,7 @@ struct GameControlNumbersGameView: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: UIScreen.main.bounds.height * 0.05)
-            .background(.blue)
+            .background(Color(UIColor(hex: 0x344b74, alpha: 1)))
             .cornerRadius(25)
             Spacer()
         }

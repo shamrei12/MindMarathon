@@ -32,7 +32,7 @@ struct NumbersGameView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
         }
-        .background(Color(CustomColor.viewColor.color))
+        .background(Color(UIColor(hex: 0x9bc6ce, alpha: 1)))
         .alert("End game".localize(), isPresented: $viewModel.isFinishGame) {
             Button("Сыграть еще раз", role: .cancel) {
                 saveResult()
@@ -71,11 +71,14 @@ struct ButtonAddNumbersGameView: View {
     var body: some View {
         ZStack {
             Button(action: {
-                if viewModel.addCount > 0 {
+                if viewModel.typeGame {
                     viewModel.addNewDigit()
-                    viewModel.addCount -= 1
+                } else {
+                    if viewModel.addCount > 0 {
+                        viewModel.addNewDigit()
+                        viewModel.addCount -= 1
+                    }
                 }
-                
             }) {
                 Image(uiImage: PFAssets.plusNumbers.image)
                     .resizable()
@@ -85,20 +88,24 @@ struct ButtonAddNumbersGameView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(5)
-            
             VStack {
-                HStack {
-                    Spacer()
-                    Text("\(viewModel.addCount)")
-                        .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 20)))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 1)
-                        .background(.gray)
-                        .clipShape(Circle())
+                if !viewModel.typeGame {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("\(viewModel.addCount)")
+                                .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 20)))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 1)
+                                .background(.gray)
+                                .clipShape(Circle())
+                        }
+                        Spacer()
+                    }
                 }
-                Spacer()
             }
+       
         }
     }
 }

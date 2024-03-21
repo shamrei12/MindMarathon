@@ -30,10 +30,12 @@ struct FieldBinarioGameView: View {
                 ForEach(0..<viewModel.size, id: \.self) { row in
                     HStack(spacing: 5) {
                         ForEach(0..<viewModel.size, id: \.self) { column in
-                            ElementFieldBinarioGameView(viewModel: viewModel, row: row, column: column)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .background(Color(backgroundColor(row: row, column: column)))
-                            .cornerRadius(10)
+                            ZStack {
+                                ElementFieldBinarioGameView(viewModel: viewModel, row: row, column: column)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                    .background(Color(backgroundColor(row: row, column: column)))
+                                    .cornerRadius(10)
+                            }
                             .onTapGesture {
                                 if viewModel.isStartGame {
                                     if column == viewModel.disableButtons[row] {
@@ -70,4 +72,8 @@ struct ElementFieldBinarioGameView: View {
             }
         }
     }
+}
+
+#Preview {
+    FieldBinarioGameView(viewModel: BinarioViewModel())
 }

@@ -20,17 +20,18 @@ struct FloodFillGameView: View {
         VStack {
             TopViewFloodFillGameView(viewModel: viewModel)
                 .padding(.horizontal, 20)
+                .padding(.top, 10)
             GameControlFloodFillGameView(viewModel: viewModel, sizeField: $viewModel.sizeField)
                 .padding(.top, 20)
             Spacer()
             FloodFillFields(viewModel: viewModel)
-                .background(.gray)
-                .padding(.top, 50)
-                .padding(.horizontal, 5)
+                .padding(5)
+            
             Spacer()
             ButtonsColorFloodFillGameView(viewModel: viewModel)
                 .padding(.bottom, 20)
         }
+        .background(Color(UIColor(hex: 0x759ab2, alpha: 1)))
         .alert("End game".localize(), isPresented: $viewModel.isFinishGame) {
             Button("Сыграть еще раз", role: .cancel) {
                 saveResult()
@@ -57,11 +58,27 @@ struct ButtonsColorFloodFillGameView: View {
         VStack {
             HStack(spacing: 10) {
                 ForEach(0..<6, id: \.self) { button in
-                    ButtonColorFloodFillGameView(color: $viewModel.colorMass[button], viewModel: viewModel, tag: button)
+                    VStack {
+                        ButtonColorFloodFillGameView(color: $viewModel.colorMass[button], viewModel: viewModel, tag: button)
+                            .onTapGesture {
+                                if viewModel.isStartGame {
+                                    viewModel.fillCell(row: 0, col: 0, color: button, currentColor: viewModel.field[0][0])
+                                    viewModel.countStep += 1
+                                }
+                                if viewModel.checkFinishGame() {
+                                    viewModel.isFinishGame = true
+                                    viewModel.isStartGame = false
+                                }
+
+                            }
+                    }
+                    
                 }
-                
             }
+            
         }
+        .frame(maxHeight: UIScreen.main.bounds.height * 0.065)
+        .padding(.horizontal, 10)
     }
 }
 
@@ -70,21 +87,20 @@ struct ButtonColorFloodFillGameView: View {
     @ObservedObject var viewModel: FloodFillViewModel
     var tag: Int
     var body: some View {
-        Color(color)
-            .frame(maxWidth: UIScreen.main.bounds.height * 0.065, maxHeight: UIScreen.main.bounds.height * 0.065)
-            .cornerRadius(5)
-            .onTapGesture {
-                
-                if viewModel.isStartGame {
-                    viewModel.fillCell(row: 0, col: 0, color: tag, currentColor: viewModel.field[0][0])
-                    viewModel.countStep += 1
-                }
-                
-                if viewModel.checkFinishGame() {
-                    viewModel.isFinishGame = true
-                    viewModel.isStartGame = false
+            VStack {
+                ZStack {
+                    VStack {
+                        Spacer()
+                        Color(UIColor.black)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 7)
+                            .opacity(0.1)
+                    }
                 }
             }
+            .background(Color(color))
+            .cornerRadius(5)
+
     }
 }
 

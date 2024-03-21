@@ -8,6 +8,7 @@
 import Foundation
 
 class NumbersViewModel: ObservableObject {
+    @Published var typeGame: Bool = false
     @Published var isStartGame: Bool = false
     @Published var isFinishGame: Bool = false
     @Published var isDeleteStatus: Bool = false
@@ -20,11 +21,24 @@ class NumbersViewModel: ObservableObject {
     @Published var hintArray: [Int] = [Int]()
     
     func createArray() {
-        var array = [(Int, Bool)]()
-        for _ in 0..<27 {
-            array.append((Int.random(in: 1...9), true))
+        if typeGame {
+            let digitsArray = Array(1..<10) + Array(11...18)
+            let digits = digitsArray.flatMap { String($0).compactMap { Int(String($0)) } }
+
+            var array = [(Int, Bool)]()
+            for i in digits {
+                array.append((i, true))
+            }
+            numberArray = digits.map { ($0, true) }
+            addCount = 1000
+            hintCount = 20
+        } else {
+            var array = [(Int, Bool)]()
+            for _ in 0..<27 {
+                array.append((Int.random(in: 1...9), true))
+            }
+            numberArray = array
         }
-        numberArray = array
     }
     
     func clearArray() {
@@ -70,15 +84,22 @@ class NumbersViewModel: ObservableObject {
     }
     
     func checkConditions(firstIndex: Int, secondIndex: Int) -> Bool {
-        return (checkEqualCondition(firstIndex: firstIndex, secondIndex: secondIndex) || checkSumTenCondition(firstIndex: firstIndex, secondIndex: secondIndex)) &&
-            (checkNextConditions(firstIndex: firstIndex, secondIndex: secondIndex) ||
-            checkUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
-            checkDisableBetwenCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
-            checkDisableUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
-            checkNextDiagonalCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
-            checkDiagonalCondition(firstIndex: firstIndex, secondIndex: secondIndex))
+        
+        if typeGame {
+           return (checkEqualCondition(firstIndex: firstIndex, secondIndex: secondIndex) || checkSumTenCondition(firstIndex: firstIndex, secondIndex: secondIndex)) && (checkNextConditions(firstIndex: firstIndex, secondIndex: secondIndex) ||
+               checkUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+               checkDisableBetwenCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+               checkDisableUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex))
+        } else {
+            return (checkEqualCondition(firstIndex: firstIndex, secondIndex: secondIndex) || checkSumTenCondition(firstIndex: firstIndex, secondIndex: secondIndex)) &&
+                (checkNextConditions(firstIndex: firstIndex, secondIndex: secondIndex) ||
+                checkUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+                checkDisableBetwenCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+                checkDisableUnderCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+                checkNextDiagonalCondition(firstIndex: firstIndex, secondIndex: secondIndex) ||
+                checkDiagonalCondition(firstIndex: firstIndex, secondIndex: secondIndex))
+        }
     }
-
     
     func checkEqualCondition(firstIndex: Int, secondIndex: Int) -> Bool {
         return numberArray[firstIndex].0 == numberArray[secondIndex].0

@@ -15,8 +15,8 @@ class FloodFillViewModel: ObservableObject {
     @Published var field: [[Int]] = [[Int]]()
     @Published var time = 0
     
-    var colorMass = [UIColor(hex: 0xff2b66), UIColor(hex: 0xfee069), UIColor(hex: 0x8ae596), UIColor(hex: 0x006fc5), UIColor(hex: 0xd596fa), UIColor(hex: 0xffb5a3)]
-    
+    var colorMass = [UIColor(hex: 0xdeecf2, alpha: 1), UIColor(hex: 0xeba967, alpha: 1), UIColor(hex: 0xdd6480, alpha: 1), UIColor(hex: 0x7bb39d, alpha: 1), UIColor(hex: 0x5a96c3, alpha: 1), UIColor(hex: 0x2f5f8f, alpha: 1)]
+
     func makeField(size: Int) {
         var massive = [[Int]]()
         for _ in 0..<size {
@@ -27,6 +27,14 @@ class FloodFillViewModel: ObservableObject {
             massive.append(row)
         }
         self.field = massive
+    }
+    
+    func changeLevel(level: Int) {
+        if level + 5 > 20 {
+            sizeField = 5
+        } else {
+            sizeField += 5
+        }
     }
     
         func fillCell(row: Int, col: Int, color: Int, currentColor: Int) {
