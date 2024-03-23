@@ -10,7 +10,7 @@ import SwiftUI
 struct SudokuViewGame: View {
     @ObservedObject private var viewModel = SudokuViewModel()
     var body: some View {
-        VStack{
+        VStack {
             Spacer()
             FieldSudokuViewGame(viewModel: viewModel)
                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.9)
@@ -43,10 +43,8 @@ struct ButtonGamePadSudokuViewGame: View {
     @State var number: Int
     var body: some View {
         Button(action: {
-            if !(viewModel.selectedElement.0 == nil) ||  !(viewModel.selectedElement.0 == nil) {
-                viewModel.field[viewModel.selectedElement.0!][viewModel.selectedElement.1!] = number
-                viewModel.isActivefield[viewModel.selectedElement.0!][viewModel.selectedElement.1!] = false
-                viewModel.selectedElement = (nil, nil)
+            if !(viewModel.selectedElement.0 == nil) || !(viewModel.selectedElement.0 == nil) {
+                viewModel.userMove(boxIndex: viewModel.selectedElement.0!, index: viewModel.selectedElement.1!, number: number)
             }
         }) {
             Text("\(number)")
