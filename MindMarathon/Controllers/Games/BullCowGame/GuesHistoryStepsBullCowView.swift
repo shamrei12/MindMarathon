@@ -15,10 +15,12 @@ struct GuesHistoryStepsBullCowView: View {
                 ForEach(0..<viewModel.historyGame.count, id: \.self) { text in
                     GuesUserStepsBullCowView(userGues: $viewModel.historyGame[text].userStep, bullCount: $viewModel.historyGame[text].bull, cowCount: $viewModel.historyGame[text].cow)
                         .padding(.horizontal, 10)
-                        .background(.white)
+                        .background(Color(UIColor(hex: 0xfaf4ef, alpha: 1)))
                         .cornerRadius(10)
                         .padding(.horizontal, 10)
-                        .shadow(color: .gray, radius: 1)
+                        .shadow(color: Color(UIColor(hex: 0x86969f, alpha: 1)), radius: 1, x: 0, y: 5)
+                        .shadow(color: Color(UIColor(hex: 0x395574, alpha: 1)), radius: 1, x: 0, y: 5)
+                        .shadow(color: Color(UIColor(hex: 0x4b6a8b, alpha: 1)), radius: 1, x: 0, y: 5)
                 }
             }
             .padding(.top, 5)
@@ -33,6 +35,7 @@ struct GuesUserStepsBullCowView: View {
     var body: some View {
         HStack {
             UserStepsBullCowView(userGues: $userGues)
+                .padding(.vertical, 5)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Spacer()
@@ -55,7 +58,7 @@ struct UserStepsBullCowView: View {
                         
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.15)
-                .background(Color(uiColor: .systemGray4))
+                .background(Color(UIColor(hex: 0x71889e, alpha: 1)))
                 .cornerRadius(10)
             }
           
@@ -69,24 +72,29 @@ struct ResultUserStepsBullCowView: View {
     @Binding var cowCount: Int
     
     var body: some View {
-        HStack {
+//        HStack {
             VStack {
-                Image(uiImage: PFAssets.cow.image)
-                    .resizable()
-                    .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
-                Text(String(cowCount))
-                    .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
+//                Image(uiImage: PFAssets.cow.image)
+//                    .resizable()
+//                    .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
+                Text("\(cowCount) коров")
+                    .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 20)))
+                    .foregroundColor(Color(UIColor(hex: 0x71889e, alpha: 1)))
+                Text("\(bullCount) быков")
+                    .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 20)))
+                    .foregroundColor(Color(UIColor(hex: 0x71889e, alpha: 1)))
             }
-            VStack {
-                Image(uiImage: PFAssets.bull.image)
-                    .resizable()
-                    .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
+//            VStack {
+//                Image(uiImage: PFAssets.bull.image)
+//                    .resizable()
+//                    .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
 
-                Text(String(bullCount))
-                    .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 20)))
-
-            }
-        }
+//                Text("\(bullCount) быков")
+//                    .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 20)))
+//                    .foregroundColor(Color(UIColor(hex: 0x71889e, alpha: 1)))
+//
+//            }
+//        }
     }
 }
 

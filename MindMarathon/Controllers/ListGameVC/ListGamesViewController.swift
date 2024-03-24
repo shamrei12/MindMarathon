@@ -140,9 +140,7 @@ class ListGamesViewController: UIViewController {
         switch game.title {
         case "bullcow".localize():
             viewController = UIViewController()
-            let view = UIHostingController(rootView: BullCowGameView(dismissAction: {
-                self.dismiss(animated: true)
-            }))
+            let view = UIHostingController(rootView: BullCowGameView())
             view.view.backgroundColor = CustomColor.viewColor.color
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
@@ -155,22 +153,29 @@ class ListGamesViewController: UIViewController {
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
         case "flood_fill".localize():
-            let viewModel = FloodFillViewModel(game: game)
-            viewController = FloodFillViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: FloodFillGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         case "tictactoe".localize():
             viewController = UIViewController()
-            let view = UIHostingController(rootView: TicTacToeViewGame(dismissAction: {
-                self.dismiss(animated: true)
-            }))
+            let view = UIHostingController(rootView: TicTacToeViewGame())
             view.view.backgroundColor = CustomColor.viewColor.color
             view.modalPresentationStyle = .fullScreen
             present(view, animated: true)
         case "binario".localize():
-            let viewModel = BinarioViewModel(game: game)
-            viewController = BinarioViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: BinarioGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)       
         default:
-            let viewModel = NumbersViewModel(game: game)
-            viewController = NumbersViewController(viewModel: viewModel)
+            viewController = UIViewController()
+            let view = UIHostingController(rootView: NumbersGameView())
+            view.view.backgroundColor = CustomColor.viewColor.color
+            view.modalPresentationStyle = .fullScreen
+            present(view, animated: true)
         }
         
         let navigationController = UINavigationController(rootViewController: viewController)

@@ -8,11 +8,12 @@
 import Foundation
 
 class BullCowViewModelNew: ObservableObject {
-    
     @Published var isStartGame: Bool = false
     @Published var isFinishGame: Bool = false
-    @Published var sizeDigits: Int = 0
+    @Published var sizeDigits: Int = 2
     @Published var historyGame = [BullCowProtocol]()
+    @Published var time = 0
+    @Published var selectedItem: Int? = nil
     private var bull: Int = 0
     private var cow: Int = 0
     
@@ -27,6 +28,13 @@ class BullCowViewModelNew: ObservableObject {
         isFinishGame = true
     }
     
+    func changeSizeDigit() {
+        self.sizeDigits += 1
+        if self.sizeDigits > 6 {
+            self.sizeDigits = 2
+        }
+    }
+    
     func nextuserMove(userDigits: String, secretDiggits: [Int]) {
         let userMove = createMassive(userDiggit: userDigits)
         comparisonNumber(userMove, secretDiggits)
@@ -34,7 +42,6 @@ class BullCowViewModelNew: ObservableObject {
         if historyGame.last?.bull == sizeDigits {
             statusFinishGame()
         }
-
     }
     
     func makeNumber(maxLenght: Int) -> [Int] { // создание числа для игры

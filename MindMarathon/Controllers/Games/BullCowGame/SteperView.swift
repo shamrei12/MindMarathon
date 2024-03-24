@@ -9,27 +9,33 @@ import SwiftUI
 
 struct SteperView: View {
     @Binding var level: Int
+    @State var max: Int
+    @State var min: Int
+    @State var step: Int
     var body: some View {
         HStack {
-            ButtonSteperView(level: $level, systemName: "minus")
+            ButtonSteperView( level: $level, max: max, min: min, step: step, systemName: "minus")
             Spacer()
             Text(String(level))
-                .font(.init(PFFontFamily.SFProText.semibold.swiftUIFont(size: 20)))
+                .font(.init(PFFontFamily.SFProText.semibold.swiftUIFont(size: 15)))
                 .foregroundColor(.white)
             Spacer()
-            ButtonSteperView(level: $level, systemName: "plus")
+            ButtonSteperView(level: $level, max: max, min: min, step: step, systemName: "plus")
         }
     }
 }
 
 struct ButtonSteperView: View {
     @Binding var level: Int
+    @State var max: Int
+    @State var min: Int
+    @State var step: Int
     @State var systemName: String
     var body: some View {
         Button(action: {
-                level = systemName == "minus" ? level - 1 : level + 1
-            if level == 10 || level == 4 {
-                level = 5
+                level = systemName == "minus" ? level - step : level + step
+            if level == max + step || level == min - step {
+                level = min
             }
         }) {
             Image(systemName: systemName)
@@ -41,6 +47,6 @@ struct ButtonSteperView: View {
     }
 }
 
-#Preview {
-    SteperView(level: .constant(2))
-}
+//#Preview {
+//    SteperView(level: .constant(2))
+//}
