@@ -15,8 +15,11 @@ struct FieldSudokuViewGame: View {
         if viewModel.uncorrectSelected == (row, column) {
             return UIColor.systemRed
         } else if viewModel.isActivefield[row][column] {
-            return UIColor.blue
-        } else  {
+            return UIColor(hex: 0x3d678b, alpha: 1)
+        } else if viewModel.isDiactive[row][column] == false {
+            let color = UIColor.systemGray6.withAlphaComponent(0.6)
+            return color
+        } else {
             return UIColor.clear
         }
     }
@@ -30,8 +33,8 @@ struct FieldSudokuViewGame: View {
                             .frame(width: UIScreen.main.bounds.width / 10, height: UIScreen.main.bounds.width / 10)
                             .border(Color(uiColor: .systemGray5))
                             .background(Color(getBackgroundColor(row: row, column: column)))
-                            .overlay(Rectangle().frame(width: 2, height: nil, alignment: .trailing).foregroundColor(column % 3 == 2 ? .black : .clear), alignment: .trailing)
-                            .overlay(Rectangle().frame(width: nil, height: 2, alignment: .top).foregroundColor(row % 3 == 2 ? .black : .clear), alignment: .bottom)
+                            .overlay(Rectangle().frame(width: 1, height: nil, alignment: .trailing).foregroundColor(column == 2 || column == 5 ? .black : .clear), alignment: .trailing)
+                            .overlay(Rectangle().frame(width: nil, height: 1, alignment: .top).foregroundColor(row == 2 || row == 5 ? .black : .clear), alignment: .bottom)
                             .disabled(!viewModel.isDiactive[row][column])
                             
                     }
@@ -39,6 +42,7 @@ struct FieldSudokuViewGame: View {
             }
         }
         .border(.black)
+        .background(.white)
     }
 }
 

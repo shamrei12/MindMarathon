@@ -111,6 +111,9 @@
 		D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */; };
 		D8C11F312B03613A00EA28D6 /* StatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */; };
 		D8C167AD2A1DF19D00FC887D /* CurrentRulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */; };
+		D8C957172BB009840004D737 /* TopViewSudokuGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C957162BB009840004D737 /* TopViewSudokuGameView.swift */; };
+		D8C957192BB009A00004D737 /* GameControlSudokuGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C957182BB009A00004D737 /* GameControlSudokuGameView.swift */; };
+		D8C9571B2BB009BB0004D737 /* NumbersGamePadSudokuViewGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C9571A2BB009BB0004D737 /* NumbersGamePadSudokuViewGame.swift */; };
 		D8D611592B45D9D800962A52 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D8D611582B45D9D800962A52 /* Realm */; };
 		D8D6115B2B45D9D800962A52 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8D6115A2B45D9D800962A52 /* RealmSwift */; };
 		D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */; };
@@ -234,6 +237,9 @@
 		D8C11F2E2B0360DE00EA28D6 /* StatiscticsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatiscticsCollectionView.swift; sourceTree = "<group>"; };
 		D8C11F302B03613A00EA28D6 /* StatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8C167AB2A1DF19D00FC887D /* CurrentRulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRulesViewController.swift; sourceTree = "<group>"; };
+		D8C957162BB009840004D737 /* TopViewSudokuGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewSudokuGameView.swift; sourceTree = "<group>"; };
+		D8C957182BB009A00004D737 /* GameControlSudokuGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControlSudokuGameView.swift; sourceTree = "<group>"; };
+		D8C9571A2BB009BB0004D737 /* NumbersGamePadSudokuViewGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersGamePadSudokuViewGame.swift; sourceTree = "<group>"; };
 		D8D7883F2A3F57A50013FECC /* ListGameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameCollectionViewCell.swift; sourceTree = "<group>"; };
 		D8D7884C2A4B49E80013FECC /* BullCowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullCowModel.swift; sourceTree = "<group>"; };
 		D8E321202B028EBC00674541 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
@@ -547,6 +553,9 @@
 			children = (
 				D85E210A2BAEB33700949AE7 /* SudokuViewGame.swift */,
 				D85E210E2BAECC4C00949AE7 /* FieldSudokuViewGame.swift */,
+				D8C957162BB009840004D737 /* TopViewSudokuGameView.swift */,
+				D8C957182BB009A00004D737 /* GameControlSudokuGameView.swift */,
+				D8C9571A2BB009BB0004D737 /* NumbersGamePadSudokuViewGame.swift */,
 			);
 			path = SudokuGame;
 			sourceTree = "<group>";
@@ -1048,10 +1057,12 @@
 				D866027E2B4B2F72001A913D /* ProfileModel.swift in Sources */,
 				D86602682B45F93B001A913D /* ProfileViewController.swift in Sources */,
 				D8F787FF2B99F9B200C3AD9E /* TicTacToeViewGame.swift in Sources */,
+				D8C957192BB009A00004D737 /* GameControlSudokuGameView.swift in Sources */,
 				D882216F2A162DA700531EED /* SlovusViewModel.swift in Sources */,
 				D8662DBA2B59820C00B54B06 /* CountryManager.swift in Sources */,
 				D845092D2B07C24900C3C2E7 /* UserDefaultsManager.swift in Sources */,
 				D8E807252B088F2D00D69D67 /* CheckTaskManager.swift in Sources */,
+				D8C9571B2BB009BB0004D737 /* NumbersGamePadSudokuViewGame.swift in Sources */,
 				D89E15B32B9F7065003BE345 /* TopViewNumbersGameView.swift in Sources */,
 				D89E15B12B9F6F2C003BE345 /* NumbersGameView.swift in Sources */,
 				D878C9412B9E3C62003D15B4 /* ButtonsCheckClearBinarioGameView.swift in Sources */,
@@ -1065,6 +1076,7 @@
 				D84835AD2A35CD5C008D2AB4 /* RealmManager.swift in Sources */,
 				D8C11F2F2B0360DE00EA28D6 /* StatiscticsCollectionView.swift in Sources */,
 				D829AC3A2A86747000A38F6E /* GamesModels.swift in Sources */,
+				D8C957172BB009840004D737 /* TopViewSudokuGameView.swift in Sources */,
 				D86602762B49B752001A913D /* RatingViewController.swift in Sources */,
 				D8D788412A3F57A50013FECC /* ListGameCollectionViewCell.swift in Sources */,
 				D8E321212B028EBC00674541 /* CustomTabBarController.swift in Sources */,

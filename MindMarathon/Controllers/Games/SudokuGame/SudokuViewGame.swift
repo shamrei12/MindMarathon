@@ -8,50 +8,65 @@
 import SwiftUI
 
 struct SudokuViewGame: View {
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel = SudokuViewModel()
+    
+    func saveResult() {
+        
+    }
     var body: some View {
         VStack {
+            TopViewSudokuGameView(viewModel: viewModel)
+                .padding(.horizontal, 20)
+            GameControlSudokuGameView(viewModel: viewModel)
+                .padding(.top, 20)
             Spacer()
             FieldSudokuViewGame(viewModel: viewModel)
                 .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.width * 0.9)
-                .onAppear {
-                    viewModel.makeSudokuField()
-                }
+                .padding(4)
+                .background(.black)
+            ButtonsSudokuViewGame(viewModel: viewModel)
             Spacer()
             NumbersGamePadSudokuViewGame(viewModel: viewModel)
                 .padding(.bottom, 10)
                 .padding(.horizontal, 5)
         }
+        .alert("End game".localize(), isPresented: $viewModel.isFinishGame) {
+            Button("Сыграть еще раз", role: .cancel) {
+//                saveResult()
+//                viewModel.newGame()
+                viewModel.time = 0
+                viewModel.isStartGame = true
+            }
+            Button("Выйти из игры", role: .destructive) {
+                saveResult()
+                dismiss()
+            }
+        } message: {
+            Text("congratulations_message".localize() + "time_message".localize() + "\(TimeManager.shared.convertToMinutes(seconds: viewModel.time))")
 
+        }
     }
 }
 
-struct NumbersGamePadSudokuViewGame: View {
+struct ButtonsSudokuViewGame: View {
     @ObservedObject var viewModel: SudokuViewModel
     var body: some View {
         HStack {
-                ForEach(1..<10, id: \.self) { number in
-                    ButtonGamePadSudokuViewGame(viewModel: viewModel, number: number)
-                        
+            Button(action: {
+                viewModel.clearElementField()
+            }) {
+                VStack {
+                    Image(uiImage: PFAssets.clearSudoku.image)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .tint(.white)
+                    Text("Очистить")
+                        .font(.init(PFFontFamily.SFProText.regular.swiftUIFont(size: 14)))
+                        .foregroundColor(.black)
+                }
             }
         }
-    }
-}
-
-struct ButtonGamePadSudokuViewGame: View {
-    @ObservedObject var viewModel: SudokuViewModel
-    @State var number: Int
-    var body: some View {
-        Button(action: {
-            if !(viewModel.selectedElement.0 == nil) || !(viewModel.selectedElement.0 == nil) {
-                viewModel.userMove(boxIndex: viewModel.selectedElement.0!, index: viewModel.selectedElement.1!, number: number)
-            }
-        }) {
-            Text("\(number)")
-                .font(.init(PFFontFamily.SFProText.bold.swiftUIFont(size: 30)))
-                .frame(maxWidth: .infinity)
-        }
-        .frame(maxWidth: .infinity)
     }
 }
 

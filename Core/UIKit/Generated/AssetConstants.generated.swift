@@ -43,6 +43,7 @@ public enum PFAssets {
   public static let bulbNumbers = ImageAsset(name: "bulbNumbers")
   public static let bull = ImageAsset(name: "bull")
   public static let bullCowImage = ImageAsset(name: "bullCowImage")
+  public static let clearSudoku = ImageAsset(name: "clearSudoku")
   public static let coin = ImageAsset(name: "coin")
   public static let cow = ImageAsset(name: "cow")
   public static let floodFillImage = ImageAsset(name: "floodFillImage")
